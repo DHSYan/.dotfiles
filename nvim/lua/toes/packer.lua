@@ -9,4 +9,35 @@ return require('packer').startup(function(use)
 	use 'folke/tokyonight.nvim'
 	use 'Pocco81/auto-save.nvim'
 	use 'ellisonleao/glow.nvim'
+	use 'ThePrimeagen/vim-be-good'
+  use 'ThePrimeagen/harpoon'
+
+
+	use 'nvim-lua/plenary.nvim' --need it for telescope
+	use 'nvim-telescope/telescope.nvim' --need plenary
+
+	use {
+		"AckslD/nvim-neoclip.lua",
+		requires = {
+			-- you'll need at least one of these
+			{'nvim-telescope/telescope.nvim'},
+			-- {'ibhagwan/fzf-lua'},
+		},
+		config = function()
+			require('neoclip').setup()
+		end,
+	}
+--	use 'frazrepo/vim-rainbow'
+
+
+	-- LSP?
+  use 'wbthomason/packer.nvim' -- Package manager
+  use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
+
+	-- Completion... Needs LSP?
+	use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+  use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+  use 'L3MON4D3/LuaSnip' -- Snippets plugin
+
 end)
