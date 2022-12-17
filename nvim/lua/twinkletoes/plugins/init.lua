@@ -1,3 +1,3 @@
 require("twinkletoes.plugins.packer")
 
-print("twinkletoes/plugins preest")
+print("/lua/twinkletoes/plugins/init present")

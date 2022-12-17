@@ -5,4 +5,4 @@ require("twinkletoes.plugins")
 -- These are files
 
 
-print("hello from the ./lua/twinkletoes/init.lua")
+print("/lua/twinkletoes/init present")
