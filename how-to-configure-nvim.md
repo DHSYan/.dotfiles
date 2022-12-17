@@ -72,5 +72,12 @@ can be found with
 - I think it's called after?
 - Anyway, right now it's has plugin dir, that holds the setting of the plugins
 
+- Added colors, using a function
+- I think I will have different funcitons for differnece colorscheme
+
+
+# Tree Sitter
+- Don't know what it does
+
 
 
