@@ -1,4 +1,6 @@
-require'lspconfig'.racket_langserver.setup{}
+require'lspconfig'.racket_langserver.setup{} -- racket
+
+require'lspconfig'.ltex.setup{} -- latex
 
 
 -- Mappings.
@@ -33,8 +35,14 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
-end
 
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['ltex'].setup {
+    capabilities = capabilities
+  }
+
+end
 --local lsp_flags = {
 --  -- This is the default in Nvim 0.7+
 --  debounce_text_changes = 150,
@@ -55,3 +63,4 @@ end
 --      ["rust-analyzer"] = {}
 --    }
 --}
+

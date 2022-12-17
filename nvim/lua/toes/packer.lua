@@ -6,9 +6,15 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+
+	-- ColorSchemes
 	use 'folke/tokyonight.nvim'
+	use 'marko-cerovac/material.nvim'
+
 	use 'Pocco81/auto-save.nvim'
+
 	use 'ellisonleao/glow.nvim'
+
 	use 'ThePrimeagen/vim-be-good'
   use 'ThePrimeagen/harpoon'
 
@@ -31,7 +37,6 @@ return require('packer').startup(function(use)
 
 
 	-- LSP?
-  use 'wbthomason/packer.nvim' -- Package manager
   use 'neovim/nvim-lspconfig' -- Configurations for Nvim LSP
 
 	-- Completion... Needs LSP?
@@ -39,5 +44,11 @@ return require('packer').startup(function(use)
 	use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use 'L3MON4D3/LuaSnip' -- Snippets plugin
+
+	use 'lervag/vimtex'
+
+
+	use "terrortylor/nvim-comment"
+  use	"nikvdp/neomux"
 
 end)
