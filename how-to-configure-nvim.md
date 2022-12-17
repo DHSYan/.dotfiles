@@ -68,11 +68,9 @@ can be found with
 
 
 
-
-
-
-
-
+# After Directory
+- I think it's called after?
+- Anyway, right now it's has plugin dir, that holds the setting of the plugins
 
 
 
