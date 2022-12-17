@@ -37,3 +37,10 @@ vim.g.rust_recommended_style = false
 
 
 -- vim.opt.formatoptions="cro"
+--
+
+vim.opt.scrolloff = 8 -- so you would never have less then 8 line below you
+
+vim.opt.colorcolumn = "80"
+
+

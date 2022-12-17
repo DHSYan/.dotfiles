@@ -1,9 +1,0 @@
--- THese are folders
-require("twinkletoes.folderinuser")
-require("twinkletoes.
-
--- These are files
-require("twinkletoes.remap")
-
-
-print("hello from the ./lua/twinkletoes/init.lua")
