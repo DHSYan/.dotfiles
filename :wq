@@ -1,9 +1,9 @@
 -- THese are folders
 require("twinkletoes.folderinuser")
-require("twinkletoes.keybinds")
-require("twinkletoes.plugins")
+require("twinkletoes.
 
 -- These are files
+require("twinkletoes.remap")
 
 
 print("hello from the ./lua/twinkletoes/init.lua")
