@@ -1,5 +1,4 @@
 -- THese are folders
-require("twinkletoes.folderinuser")
 require("twinkletoes.keybinds")
 require("twinkletoes.plugins")
 
