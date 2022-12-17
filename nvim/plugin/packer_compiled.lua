@@ -79,6 +79,11 @@ _G.packer_plugins = {
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["auto-save.nvim"] = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
+    url = "https://github.com/Pocco81/auto-save.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -109,6 +114,11 @@ _G.packer_plugins = {
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["glow.nvim"] = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/glow.nvim",
+    url = "https://github.com/ellisonleao/glow.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -133,6 +143,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
+  },
+  ["nvim-comment"] = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/nvim-comment",
+    url = "https://github.com/terrortylor/nvim-comment"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -175,10 +190,20 @@ _G.packer_plugins = {
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
   },
+  ["vim-be-good"] = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/vim-be-good",
+    url = "https://github.com/ThePrimeagen/vim-be-good"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  vimtex = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/vimtex",
+    url = "https://github.com/lervag/vimtex"
   }
 }
 

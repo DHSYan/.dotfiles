@@ -29,6 +29,7 @@ return require('packer').startup(function(use)
 	use ('nvim-treesitter/playground')
 
 	use('theprimeagen/harpoon')
+	use ('ThePrimeagen/vim-be-good')
 
 	use('mbbill/undotree')
 
@@ -55,4 +56,13 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'},
 		}
 	}
+
+	use 'Pocco81/auto-save.nvim'
+
+	use 'lervag/vimtex'
+
+	use 'ellisonleao/glow.nvim'
+
+	use "terrortylor/nvim-comment"
+
 end)

@@ -16,3 +16,4 @@ vim.keymap.set("n", "Q", "<nop>")
 vim.keymap.set("n", "q", "<nop>")
 
 
+vim.keymap.set("n", "<leader>nh", vim.cmd.noh)
