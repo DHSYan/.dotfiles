@@ -1,0 +1,6 @@
+# Remap nvim to vim.
+alias ll="ls"
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.6/bin:/Library/TeX/texbin/:/Library/ltex-ls/bin:/Users/twinkletoes/.cargo/bin
+alias v="nvim"
+alias CD="source ~/CD.sh"
+alias ..="cd .."
