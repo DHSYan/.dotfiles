@@ -22,7 +22,7 @@ ln -s ~/.dotfiles/Git/.gitconfig ~/.gitconfig &&
 
 
 ln -s ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf &&
-ln -s ~/.dotfiles/bin/ ~/local/bin &&
+ln -s ~/.dotfiles/bin/ ~/bin &&
 
 
 echo "Done"

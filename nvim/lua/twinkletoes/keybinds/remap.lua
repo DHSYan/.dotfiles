@@ -1,7 +1,7 @@
 vim.keymap.set("n", " ", "<nop>")
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
 
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -24,3 +24,7 @@ vim.keymap.set("n", "<leader>nh", vim.cmd.noh)
 vim.keymap.set('n', '<leader>t', ":!")
 vim.keymap.set('n', '<leader>T', vim.cmd.terminal)
 
+
+
+vim.keymap.set('n', '<leader>g', ":Git ")
+vim.keymap.set('n', '<leader>G', vim.cmd.Git)

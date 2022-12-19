@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+cd ~/throw-away-code 
+tmux new -s throw 
