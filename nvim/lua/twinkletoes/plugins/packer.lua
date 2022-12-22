@@ -5,10 +5,10 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+  use ('wbthomason/packer.nvim')
 
-  use 'nvim-lua/plenary.nvim'
-	use 'BurntSushi/ripgrep'
+  use ('nvim-lua/plenary.nvim')
+	use ('BurntSushi/ripgrep')
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	  -- or                            , branch = '0.1.x',
@@ -30,7 +30,7 @@ return require('packer').startup(function(use)
 
 	use ('nvim-treesitter/playground')
 
-	use('theprimeagen/harpoon')
+	use ('theprimeagen/harpoon')
 	use ('ThePrimeagen/vim-be-good')
 
 	use('mbbill/undotree')
@@ -59,12 +59,18 @@ return require('packer').startup(function(use)
 		}
 	}
 
-	use 'Pocco81/auto-save.nvim'
+	use ('Pocco81/auto-save.nvim')
 
-	use 'lervag/vimtex'
+	use ('lervag/vimtex') -- Latex
 
-	use 'ellisonleao/glow.nvim'
+	use ('ellisonleao/glow.nvim') -- markdown viewer
 
-	use "terrortylor/nvim-comment"
+	use ("terrortylor/nvim-comment")
+  
+  use ('nvim-lualine/lualine.nvim') -- Fancy Status bar
+
+  -- use ('lukas-reineke/indent-blankline.nvim') -- Indent line
+
+  
 
 end)
