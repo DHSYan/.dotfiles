@@ -1,7 +1,7 @@
 -- THese are folders
-require("twinkletoes.keybinds")
-require("twinkletoes.plugins")
-require("twinkletoes.Vim_Settings")
+pcall(require("twinkletoes.keybinds"))
+pcall(require("twinkletoes.plugins"))
+pcall(require("twinkletoes.Vim_Settings"))
 
 -- These are files
 
