@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+brew services restart yabai 
+brew services restart skhd 

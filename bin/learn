@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+open /Applications/Notion.app/
+open /Applications/Google\ Chrome.app/
+open /Applications/Anki.app/

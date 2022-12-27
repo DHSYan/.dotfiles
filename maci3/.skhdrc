@@ -30,6 +30,9 @@ cmd + alt - d : open ~/Downloads/
 cmd + alt - f : open ~/
 ## Terminal
 alt - return : open /Applications/iTerm.app 
-
+## [C]hrome 
+cmd + alt - c : open /Applications/Google\ Chrome.app/
+## learn
+cmd + alt - l : learn 
 
 
