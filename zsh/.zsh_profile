@@ -7,4 +7,5 @@ alias ..="cd .."
 alias tt="cd ~/throw-away-code"
 alias work="cd ~/Coding"
 alias icloud='cd "/Users/twinkletoes/Library/Mobile Documents/com~apple~CloudDocs/"'
+# alias 1B = 
 
