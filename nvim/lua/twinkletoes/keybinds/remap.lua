@@ -22,7 +22,7 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "<leader>nh", vim.cmd.noh)
 
 vim.keymap.set('n', '<leader>t', ":!")
-vim.keymap.set('n', '<leader>T', vim.cmd.terminal)
+vim.keymap.set('n', '<leader>T', vim.cmd.Telescope)
 
 
 

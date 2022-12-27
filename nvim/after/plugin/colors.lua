@@ -9,5 +9,5 @@ end
 	
 RosePine()
 
-
-
+vim.api.nvim_command('highlight clear SignColumn')
+vim.api.nvim_command('highlight CursorLine guibg=grey')
