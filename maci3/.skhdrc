@@ -1,0 +1,35 @@
+#!/bin/zsh
+
+### Window Commands
+alt - h : yabai -m window --focus west
+alt - l : yabai -m window --focus east
+alt - j : yabai -m window --focus south
+alt - k : yabai -m window --focus north
+
+alt + shift - h : yabai -m window --swap west
+alt + shift - l : yabai -m window --swap east
+alt + shift - j : yabai -m window --swap south
+alt + shift - k : yabai -m window --swap north
+
+alt + shift - 1 : yabai -m window --space 1
+alt + shift - 2 : yabai -m window --space 2
+alt + shift - 3 : yabai -m window --space 3
+alt + shift - 4 : yabai -m window --space 4
+alt + shift - 5 : yabai -m window --space 5
+alt + shift - 6 : yabai -m window --space 6
+alt + shift - 7 : yabai -m window --space 7
+alt + shift - 8 : yabai -m window --space 8
+alt + shift - 9 : yabai -m window --space 9
+
+
+alt - f : yabai -m window --toggle zoom-fullscreen
+
+### Interaction with System
+## Finder
+cmd + alt - d : open ~/Downloads/
+cmd + alt - f : open ~/
+## Terminal
+alt - return : open /Applications/iTerm.app 
+
+
+
