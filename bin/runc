@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# Check if a C file was provided as a command-line argument
+if [ $# -ne 1 ]
+then
+    echo "Error: No C file provided"
+    exit 1
+fi
+
+# Set the name of the C file and the executable file
+c_file=$1
+exe_file=${c_file%.*}
+
+# Compile the C file using clang
+clang $c_file -o $exe_file
+
+# Check if the compilation was successful
+if [ $? -ne 0 ]
+then
+    echo "Error: Compilation failed"
+    exit 1
+fi
+
+# Run the executable file
+./$exe_file
+
+rm $exe_file
+
+# This code was written by CHATGPT

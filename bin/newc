@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Create a new C file with the given filename
+filename=$1
+echo "Creating file $filename..."
+touch "$filename"
+
+# Add the necessary include statements
+echo "#include <stdio.h>" >> "$filename"
+echo "#include <stdlib.h>" >> "$filename"
+
+# Add the main function
+echo "" >> "$filename"
+echo "int main()" >> "$filename"
+echo "{" >> "$filename"
+echo "  return 0;" >> "$filename"
+echo "}" >> "$filename"
+
+echo "Done!"
