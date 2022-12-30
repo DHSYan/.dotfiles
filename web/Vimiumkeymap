@@ -1,0 +1,29 @@
+unmap d
+map <C-d> scrollPageDown
+
+unmap u
+map <C-u> scrollPageUp
+
+unmap f
+unmap F
+map <Space> LinkHints.activateMode
+map F LinkHints.activateModeToOpenInNewTab
+
+unmap x
+unmap X
+
+unmap p
+
+unmap <a-p>
+
+unmap <a-m>
+
+unmap P
+
+unmap J
+unmap gt
+unmap K
+unmap gT
+map w nextTab
+map b previousTab
+ 
