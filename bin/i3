@@ -1,4 +1,26 @@
 #!/bin/zsh
+echo "y: on, n: off, r: restart"
 
-brew services restart yabai 
-brew services restart skhd 
+read choices 
+
+if [ "$choices" = "y" ]
+then
+  brew services start spacebar
+  brew services start skhd 
+  brew services start yabai 
+elif [ "$choices" = "n" ]
+then
+  brew services stop spacebar
+  brew services stop skhd 
+  brew services stop yabai 
+elif [ "$choices" = "r" ]
+then
+  brew services restart spacebar
+  brew services restart skhd 
+  brew services restart yabai 
+elif [ "$choices" = "skhd" ]
+then
+  brew services restart skhd
+else
+  echo "Wrong command"
+fi 
