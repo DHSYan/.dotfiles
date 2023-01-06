@@ -35,6 +35,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 ## Finder
 cmd + alt - d : open ~/Downloads/
 cmd + alt - f : open ~/
+cmd + alt - s : open "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"
 ## Terminal
 alt - return : open /Applications/iTerm.app 
 ## [C]hrome 

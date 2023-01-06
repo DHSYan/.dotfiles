@@ -71,6 +71,6 @@ return require('packer').startup(function(use)
 
   -- use ('lukas-reineke/indent-blankline.nvim') -- Indent line
 
-  
+  -- maybe check out zen-mode plugin, check out Prime's dotfiles 
 
 end)
