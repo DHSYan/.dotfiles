@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# route = $1
+# method = $2
+# port = $3 
+
+echo "What port is the server on? (default is 3000)"
+read port
+
+function restful {
+  read -p "Method: " method
+
+  if [ "$method" = "quit" ]; then
+    exit 0
+  elif [ "$method" = "get" ]; then
+    read -p "Path: " path
+    curl "localhost:${port:=3000}/$path"
+  elif [ "$method" = "post" ]; then
+    read -p "Path: " path
+    curl "localhost:${port:=3000}/$path"
+  fi
+
+  restful
+
+}
+
+restful 
+
+# while true ; do
+#   read -p "METHOD: " method
+#
+#   if [ "$method" = "quit" ]; then
+#     exit 0
+#   elif [ "$method" = "get" ]; then
+#     read -p "PATH: " path
+#     curl "localhost:${port:=3000}/$path"
+#   elif [ "$method" = "post" ]; then
+#     read -p "PATH: " path
+#     curl "localhost:${port:=3000}/$path"
+#   fi
+# done
