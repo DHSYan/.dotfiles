@@ -1,0 +1,37 @@
+#!/bin/zsh
+
+number=$1
+
+
+
+cfile=lec$number.c
+
+racketfile=lec$number.rkt
+
+mdfile=lec-$number.md
+
+folderName=lec_$number
+
+
+echo "Creating \n$cfile \n$racketfile \n$mdfile \n and the folder $folderName \n is this ok? (y/n)"
+read confirm
+
+if [[ "$confirm" = "y" ]]; then
+
+  mkdir $folderName
+  cd $folderName
+
+  echo "# Lec $number\n" >> $mdfile
+  echo "#lang racket\n" >> $racketfile
+
+  newc $cfile
+
+  git init
+  git add .
+  git commit -m "Init lec $number"
+
+else
+  echo "exiting..."
+  exit 0
+fi
+
