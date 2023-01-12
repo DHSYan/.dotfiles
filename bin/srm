@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+thing=$1
+
+mv $thing ~/trash/

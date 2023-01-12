@@ -10,3 +10,5 @@ alias icloud='cd "/Users/twinkletoes/Library/Mobile Documents/com~apple~CloudDoc
 alias 1B='cd "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"'
 alias float="yabai -m config layout float"
 alias bsp="yabai -m config layout bsp"
+
+# alias srm="mv $1 ~/trash/"
