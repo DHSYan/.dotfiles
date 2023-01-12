@@ -1,10 +1,13 @@
 #!/bin/zsh
 
 company=$1
+deadline=$2
 
 echo $company
 echo "Comfirmed? (y/n)"
+echo $deadline
 read comfirm
+
 
 if [[ "$comfirm" = "y" ]]; then
   
@@ -17,6 +20,7 @@ if [[ "$comfirm" = "y" ]]; then
   pwd
   mkdir Resume
   mkdir CoverLetter
+  echo $deadline > deadline
 
   else
     echo "Ok abort..."
