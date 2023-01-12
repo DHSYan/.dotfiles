@@ -1,0 +1,27 @@
+#!/bin/zsh
+
+company=$1
+
+echo $company
+echo "Comfirmed? (y/n)"
+read comfirm
+
+if [[ "$comfirm" = "y" ]]; then
+  
+  cd "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWaterloo/2. Co-op/WT1 Summer 2023/Applications"
+  echo "cd to"
+  pwd
+
+  mkdir $company
+  cd $company
+  pwd
+  mkdir Resume
+  mkdir CoverLetter
+
+  else
+    echo "Ok abort..."
+    exit 0
+fi
+
+
+
