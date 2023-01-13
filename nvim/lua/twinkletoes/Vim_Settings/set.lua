@@ -13,6 +13,7 @@ vim.opt.showmode = true
 vim.opt.cmdheight = 0
 
 
+vim.opt.nu = true 
 vim.opt.relativenumber = true
 
 
