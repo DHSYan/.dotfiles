@@ -2,10 +2,13 @@
 
 company=$1
 deadline=$2
+cur=$3
 
 echo $company
-echo "Comfirmed? (y/n)"
 echo $deadline
+echo $cur
+
+echo "Comfirmed? (y/n)"
 read comfirm
 
 
@@ -21,6 +24,11 @@ if [[ "$comfirm" = "y" ]]; then
   mkdir Resume
   mkdir CoverLetter
   echo $deadline > deadline
+  echo $cur >> status
+  
+  zsh
+
+  source "cd '/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWaterloo/2. Co-op/WT1 Summer 2023/Applications/$company'"
 
   else
     echo "Ok abort..."
