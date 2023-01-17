@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+
+number=$1
+lang=$2
+due=$3
+
+echo $number
+echo $lang
+echo $due
+echo "Correct? (y/n)"
+read correct
+
+if [[ $correct = "y" ]]; then
+  cd "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B/CS 146/1. Homework"
+  mkdir Q$number
+  cd Q$number
+  echo $due >> due
+  if [[ $lang = "c" ]]; then
+    newc Q$number.c
+    newc testing.c
+  else
+    echo "#lang racket" >> Q$number.rkt
+    echo "(provide '...)" >> Q$number.rkt
+    echo "#lang racket" >> testing.rkt
+    echo "(require Q$number.rkt)" >> testing.rkt
+  fi
+
+fi
