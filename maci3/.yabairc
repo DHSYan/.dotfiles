@@ -22,7 +22,7 @@ yabai -m config window_shadow float
 
 ### Automation with some Apps
 yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
 yabai -m rule --add title='Preferences$' manage=off
 yabai -m rule --add title='Settings$' manage=off
 
@@ -31,3 +31,8 @@ SPACEBAR_HEIGHT=$(spacebar -m config height)
 yabai -m config external_bar all:0:$SPACEBAR_HEIGHT
 
 
+
+
+# if has-focus = off for finder, close it
+#
+#
