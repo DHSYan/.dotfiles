@@ -63,11 +63,17 @@ return require('packer').startup(function(use)
 
 	use ('lervag/vimtex') -- Latex
 
-	use ('ellisonleao/glow.nvim') -- markdown viewer
-
 	use ("terrortylor/nvim-comment")
   
   use ('nvim-lualine/lualine.nvim') -- Fancy Status bar
+
+  -- install without yarn or npm
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  })
+
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- use ('lukas-reineke/indent-blankline.nvim') -- Indent line
 
