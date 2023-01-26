@@ -11,18 +11,22 @@ fi
 c_file=$1
 exe_file=${c_file%.*}
 
+
+
 # Compile the C file using clang
-clang $c_file -o $exe_file
+# gcc $c_file -std=c99 -Wall -o $exe_file
+gcc $c_file -std=c99 -Wall -o $exe_file
 
 # Check if the compilation was successful
-if [ $? -ne 0 ]
-then
-    echo "Error: Compilation failed"
-    exit 1
-fi
+# if [ $? -ne 0 ]
+# then
+#     echo $dang
+#     exit 1
+# fi
 
 # Run the executable file
 ./$exe_file
+# ./last
 
 rm $exe_file
 
