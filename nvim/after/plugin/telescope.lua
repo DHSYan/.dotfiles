@@ -7,4 +7,4 @@ vim.keymap.set('n', '<leader>f', builtin.find_files, {})
 -- 	builtin.grep_string ({ search = vim.fn.input("Grep > ") }) ;
 -- end)
 
-
+vim.keymap.set('n', '<leader>gs', builtin.live_grep, {})
