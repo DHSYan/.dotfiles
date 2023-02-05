@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
     url = "https://github.com/Pocco81/auto-save.nvim"
   },
+  ["clipboard-image.nvim"] = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/clipboard-image.nvim",
+    url = "https://github.com/ekickx/clipboard-image.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/cmp-buffer",

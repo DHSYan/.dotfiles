@@ -76,6 +76,8 @@ return require('packer').startup(function(use)
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- use ('lukas-reineke/indent-blankline.nvim') -- Indent line
+  --
+  use ('ekickx/clipboard-image.nvim')
 
   -- maybe check out zen-mode plugin, check out Prime's dotfiles 
 

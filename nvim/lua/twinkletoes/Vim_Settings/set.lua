@@ -46,4 +46,4 @@ vim.opt.scrolloff = 10 -- so you would never have less then 8 line below you
 vim.opt.colorcolumn = "80"
 
 -- vim.g.autochdir = true
-vim.opt.autochdir = true
+-- vim.opt.autochdir = true
