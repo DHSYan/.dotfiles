@@ -1,8 +1,17 @@
+[core]
+  editor = vim
+
 [user]
 	email = 69187273+TwinkletoesZen@users.noreply.github.com
 	name = TwinkletoesZen
+
+[alias]
+  s = status
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
+
