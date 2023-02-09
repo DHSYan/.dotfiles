@@ -33,6 +33,8 @@ vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 
 
+vim.opt.undodir = os.getenv("HOME") .. "/nvim-undo"
+vim.opt.undofile = true
 
 -- Some rust bs
 vim.g.rust_recommended_style = false
