@@ -1,0 +1,7 @@
+#!/bin/bash
+
+brew install neovim
+brew install yabai
+brew install skhd
+brew install fzf
+brew install tmux
