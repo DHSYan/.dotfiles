@@ -1,0 +1,2 @@
+ln -s ~/.dotfiles/bin/.yabairc ~/.yabairc
+ln -s ~/.dotfiles/bin/.skhdrc ~/.skhdrc

@@ -1,0 +1,1 @@
+/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket v8.6/bin:/Library/TeX/texbin/:/Library/ltex-ls/bin:/Users/twinkletoes/.cargo/bin:/Users/tzen/bin
