@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# lang=$(echo "c cpp python racket" | tr ' ' '\n')
+# utils=$(echo "tmux nvim vim brew find grep" | tr ' ' '\n')
+# selected=`printf "$lang\n$utils" | fzf`
+
+# read -p "Query: " query
+
+# if printf $lang | grep -qs $selected; then
+#   echo "Lang"
+# else
+#   echo "utils"
+# fi
+#
+# echo "Selected: $selected"
+
+# selected=`cat ~/.tmux-cht-languages ~/.tmux-cht-command | fzf`
+selected=`cat ~/.tmux-cht-languages | fzf`
+#
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+read -p "Enter Query: " query
+
+if grep -qs "$selected" ~/.tmux-cht-languages; then
+# if grep -qs "$selected" $lang; then
+    # query=`echo $query | tr ' ' '+'`
+    tmux neww bash -c "echo \"curl cht.sh/$selected/$query/\" & curl cht.sh/$selected/$query & while [ : ]; do sleep 1; done"
+    # echo "lang"
+else
+    # echo "util"
+    tmux neww bash -c "curl -s cht.sh/$selected~$query | less"
+fi
