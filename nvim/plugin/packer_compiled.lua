@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/auto-save.nvim",
     url = "https://github.com/Pocco81/auto-save.nvim"
   },
+  ["clipboard-image.nvim"] = {
+    loaded = true,
+    path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/clipboard-image.nvim",
+    url = "https://github.com/ekickx/clipboard-image.nvim"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/cmp-buffer",
@@ -114,11 +119,6 @@ _G.packer_plugins = {
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
-  ["glow.nvim"] = {
-    loaded = true,
-    path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/glow.nvim",
-    url = "https://github.com/ellisonleao/glow.nvim"
-  },
   harpoon = {
     loaded = true,
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/harpoon",
@@ -133,6 +133,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
+  },
+  ["markdown-preview.nvim"] = {
+    loaded = true,
+    path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
+    url = "https://github.com/iamcco/markdown-preview.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -214,6 +219,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/vimtex",
     url = "https://github.com/lervag/vimtex"
+  },
+  ["zen-mode.nvim"] = {
+    loaded = true,
+    path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/zen-mode.nvim",
+    url = "https://github.com/folke/zen-mode.nvim"
   }
 }
 
