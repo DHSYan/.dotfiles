@@ -4,6 +4,7 @@
 [user]
 	email = 69187273+TwinkletoesZen@users.noreply.github.com
 	name = TwinkletoesZen
+	signingkey = /Users/twinkletoes/.ssh/id_rsa.pub
 
 [alias]
   s = status
@@ -17,3 +18,5 @@
 	required = true
 
 
+[gpg]
+	format = ssh
