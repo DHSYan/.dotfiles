@@ -1,6 +1,6 @@
 # Remap nvim to vim.
 alias ll="ls"
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.8/bin:/Library/TeX/texbin/:/Library/ltex-ls/bin:/Users/twinkletoes/.cargo/bin:$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.cargo/env:$HOME/.cargo/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.8/bin:/Library/TeX/texbin/:/Library/ltex-ls/bin:/Users/twinkletoes/.cargo/bin:$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.cargo/env:$HOME/.cargo/bin:/Applications/Racket\ v8.6/bin
 alias v="nvim"
 alias CD="source $HOME/bin/CD"
 alias ..="cd .."
@@ -12,4 +12,5 @@ alias float="yabai -m config layout float"
 alias bsp="yabai -m config layout bsp"
 alias app='cd "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWaterloo/2. Co-op/WT1 Summer 2023/Applications"'
 
+bindkey -v
 # alias srm="mv $1 ~/trash/"
