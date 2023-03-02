@@ -1,10 +1,10 @@
-#!/bin/zsh
+#!/bin/bash
 
 
 if [[ $# -eq 1 ]]; then
   selected=$1
 else
-  cd "$(find ~ -type d | fzf)"
+   cd "$(find ~ -type d | fzf)"
 fi
 
-cd "$(find "$selected" -type d | fzf)"
+cd "$(find $selected -type d | fzf)"
