@@ -31,6 +31,9 @@ alt + shift - 6 : yabai -m window --space 6
 alt + shift - 7 : yabai -m window --space 7
 alt + shift - 8 : yabai -m window --space 8
 alt + shift - 9 : yabai -m window --space 9
+alt + shift - 0 : yabai -m window --space 10
+# ctrl + shift - [ : yabai -m window --space 11
+# ctrl + shift - ] : yabai -m window --space 12
 
 
 alt - f : yabai -m window --toggle zoom-fullscreen
@@ -39,7 +42,7 @@ alt - f : yabai -m window --toggle zoom-fullscreen
 ## Finder
 cmd + alt - d : open ~/Downloads/
 cmd + alt - f : open ~/
-cmd + alt - s : open "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"
+cmd + alt - s : open "$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"
 ## Terminal
 alt - return : open /Applications/iTerm.app 
 ## [C]hrome 
