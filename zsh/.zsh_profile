@@ -2,7 +2,7 @@
 alias ll="ls"
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.8/bin:/Library/TeX/texbin/:/Library/ltex-ls/bin:/Users/twinkletoes/.cargo/bin:$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.cargo/env:$HOME/.cargo/bin:/Applications/Racket\ v8.6/bin
 alias v="nvim"
-alias CD="source $HOME/bin/CD"
+# alias CD="source $HOME/bin/CD"
 alias ..="cd .."
 alias tt="cd ~/throw-away-code"
 alias work="cd ~/Coding"

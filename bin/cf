@@ -7,4 +7,4 @@ else
   cd "$(find ~ -type d | fzf)"
 fi
 
-cd "$(find $selected -type d | fzf)"
+cd "$(find "$selected" -type d | fzf)"
