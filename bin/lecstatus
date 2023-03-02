@@ -1,0 +1,9 @@
+#!/bin/bash
+#Pre: Are in folders of lecutres
+
+lecNum=$1
+
+cd lec_${lecNum}
+git log --oneline | head -1 > out.log
+cat out.log
+rm out.log

@@ -26,7 +26,7 @@ gcc $c_file -std=c99 -Wall -o $exe_file
 if [ $? == 0 ]
 then
   ./$exe_file
-  rm $exe_file
+  # rm $exe_file
 fi
 
 # Run the executable file
