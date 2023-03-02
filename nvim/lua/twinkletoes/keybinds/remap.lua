@@ -32,3 +32,7 @@ vim.keymap.set('n', '<leader>G', vim.cmd.Git)
 vim.keymap.set('n', '<leader>md', ":!md-to-pdf *.md && open *.pdf<CR>")
 
 vim.keymap.set('n', '<leader>i', vim.cmd.PasteImg)
+
+
+-- Greatest remap ever???
+vim.keymap.set("x", "<leader>p", "\"_dP")
