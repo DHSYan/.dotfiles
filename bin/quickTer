@@ -1,0 +1,4 @@
+#!/bin/bash
+
+tmux neww while [ : ]; do sleep 1; done"
+
