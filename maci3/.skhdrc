@@ -44,7 +44,7 @@ cmd + alt - d : open ~/Downloads/
 cmd + alt - f : open ~/
 cmd + alt - s : open "$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"
 ## Terminal
-alt - return : open /Applications/iTerm.app 
+alt - return : open /Applications/kitty.app
 ## [C]hrome 
 cmd + alt - c : open /Applications/Google\ Chrome.app/
 ## learn
