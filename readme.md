@@ -29,3 +29,8 @@ and moving around the system.
 
 ## Other
 I am so sorry for all this terrible writing lol.
+
+#### To do
+Change Vim clipboard register?
+Better Remaps
+Fugititive learning
