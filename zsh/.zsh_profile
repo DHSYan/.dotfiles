@@ -6,7 +6,7 @@ alias cf="source $HOME/bin/cf"
 alias ..="cd .."
 alias tt="cd ~/throw-away-code"
 alias work="cd ~/Coding"
-alias icloud='cd "/Users/twinkletoes/Library/Mobile Documents/com~apple~CloudDocs/"'
+# alias icloud='cd "/Users/twinkletoes/Library/Mobile Documents/com~apple~CloudDocs/"'
 # alias 1B='cd "$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"'
 alias float="yabai -m config layout float"
 alias bsp="yabai -m config layout bsp"
@@ -15,5 +15,5 @@ alias app='cd "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWate
 bindkey -v
 
 export CUR=$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1.\ Academics/1B
-
+export icloud=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs/
 # alias srm="mv $1 ~/trash/"
