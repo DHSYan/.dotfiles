@@ -51,4 +51,5 @@ cmd + alt - c : open /Applications/Google\ Chrome.app/
 cmd + alt - l : learn 
 ## Brave
 cmd + alt - b : open /Applications/Brave\ Browser.app/
-
+## Spotify
+cmd + alt - m : open /Applications/Spotify.app/
