@@ -1,0 +1,8 @@
+#!/bin/bash
+
+echo "*.pdf" >> .gitignore
+echo "*.aux" >> .gitignore
+echo "*.fbd_latexmk" >> .gitignore
+echo "*.log" >> .gitignore
+echo "*.out" >> .gitignore
+
