@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sshfs School:/u9/s2yan/cs136l/ ~/mnt/cs136l -o allow_other,default_permissions
