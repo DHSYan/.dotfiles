@@ -12,14 +12,14 @@ vim.opt.hlsearch = true
 
 vim.opt.showcmd = true
 vim.opt.showmode = true
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 2
 
 
 vim.opt.nu = true 
 vim.opt.relativenumber = true
 
 
-vim.opt.updatetime = 50
+vim.opt.updatetime = 30
 
 vim.opt.swapfile = false
 vim.opt.backup = false
@@ -43,7 +43,7 @@ vim.g.rust_recommended_style = false
 -- vim.opt.formatoptions="cro"
 --
 
-vim.opt.scrolloff = 10 -- so you would never have less then 8 line below you
+vim.opt.scrolloff = 8 -- so you would never have less then 8 line below you
 
 vim.opt.colorcolumn = "80"
 
