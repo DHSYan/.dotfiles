@@ -22,9 +22,18 @@ yabai -m config window_shadow float
 
 ### Automation with some Apps
 yabai -m rule --add app="^System Settings$" manage=off
-yabai -m rule --add app="^Finder$" sticky=on layer=above manage=off
+yabai -m rule --add app="^Finder$" sticky=on layer=above
 yabai -m rule --add title='Preferences$' manage=off
 yabai -m rule --add title='Settings$' manage=off
+
+### Move the to the correct space
+yabai -m rule --add app="^Google Chrome$" space=1
+yabai -m rule --add app="^kitty$" space=2
+yabai -m rule --add app="^Notion$" space=3
+yabai -m rule --add app ="^Fantasical$" space=5
+yabai -m rule --add app="^Brave Browser$" space=7
+yabai -m rule --add app="^Spotify$" space=10
+
 
 ### Intergration with Spacebar
 SPACEBAR_HEIGHT=$(spacebar -m config height)
