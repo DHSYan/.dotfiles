@@ -12,7 +12,7 @@ vim.opt.hlsearch = true
 
 vim.opt.showcmd = true
 vim.opt.showmode = true
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 1
 
 
 vim.opt.nu = true 
