@@ -34,3 +34,5 @@ I am so sorry for all this terrible writing lol.
 Change Vim clipboard register?
 Better Remaps
 Fugititive learning
+Maybe do something about: "on mbp162022 the notch block text, maybe have something that 
+detects if the cursor is at row 0, and do something about when it hit column notch"
