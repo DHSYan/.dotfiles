@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# tmux_running=$(pgrep tmux)
+
+# if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+#   echo "tmux should be running"
+#   exit -1
+# else
+#   echo "dang"
+#   tmux new-session -ds "quick-htop" -c "htop"
+# fi
+#
+# if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+#   echo "tmux should be running"
+#   exit -1
+# else if ! tmux has-session -t="qu" 2> /dev/null; then
+#   tmux new-session -ds "$selected_name" -c "$selected"
+# fi
+  
+
+
+#!/usr/bin/env bash
+# selected=`cat ~/.tmux-cht-languages ~/.tmux-cht-command | fzf`
+# if [[ -z $selected ]]; then
+#     exit 0
+# fi
+
+# read -p "Enter Query: " query
+# tmux neww bash -c "htop & while [ : ]; do sleep 1; done"
+tmux neww bash -c "htop"
+
+# if grep -qs "$selected" ~/.tmux-cht-languages; then
+#     query=`echo $query | tr ' ' '+'`
+# else
+#     tmux neww bash -c "curl -s cht.sh/$selected~$query | less"
+# fi
