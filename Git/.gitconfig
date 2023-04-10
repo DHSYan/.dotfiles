@@ -1,6 +1,6 @@
 [core]
     editor = vim
-    excludesfile = $HOME/.globalgitignore
+    excludesfile = ~/.gitignore
 
 [user]
     email = 69187273+TwinkletoesZen@users.noreply.github.com
