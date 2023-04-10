@@ -30,6 +30,13 @@ and moving around the system.
 ## Other
 I am so sorry for all this terrible writing lol.
 
+## Git
+create a symlink from to the home dir, from the Git dir, it has the global gitignore file
+### To stop git asking for password
+- Add identitiy 
+    - `ssh-add ~/.ssh/id_rsa`
+
+
 #### To do
 Change Vim clipboard register?
 Better Remaps
