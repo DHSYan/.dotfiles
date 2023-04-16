@@ -6,7 +6,7 @@ function RosePine(color)
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" } )
 
 end
--- RosePine()
+RosePine()
 
 
 function cat(color)
@@ -20,7 +20,8 @@ function cat(color)
   vim.cmd.colorscheme(color)
 end
 	
-cat()
+
+-- cat()
 
 
 -- function vscode(color)
