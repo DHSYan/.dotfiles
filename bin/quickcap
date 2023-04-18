@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# thing=$1
+#
+# if [[ -z $1 ]]; then 
+#     echo "enter something broh"
+#     exit -1
+# fi
+
+# echo "# $(date)" >> $HOME/Personal/quickcapture.md
+# echo "  - $1" >> $HOME/Personal/quickcapture.md
+
+# cat $HOME/Personal/quickcapture.md
+
+
+
+
+read -p "QuickCap: " input
+
+# quickcap $(input)
+echo "# $(date)" >> $HOME/Personal/quickcapture.md
+echo "  - $input" >> $HOME/Personal/quickcapture.md
