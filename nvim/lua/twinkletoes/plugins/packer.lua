@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
   use ('wbthomason/packer.nvim')
 
   use ('nvim-lua/plenary.nvim')
-	use ('BurntSushi/ripgrep')
+  use ('BurntSushi/ripgrep')
   use {
 	  'nvim-telescope/telescope.nvim', tag = '0.1.0',
 	  -- or                            , branch = '0.1.x',
@@ -26,6 +26,8 @@ return require('packer').startup(function(use)
 
   use ( {"catppuccin/nvim", as = "catppuccin"} )
   use ( "Mofiqul/vscode.nvim" )
+  use ("rebelot/kanagawa.nvim")
+
   -- End of Colors
 
 	use( 
@@ -38,6 +40,7 @@ return require('packer').startup(function(use)
 
 	use ('theprimeagen/harpoon')
 	use ('ThePrimeagen/vim-be-good')
+    use ('ThePrimeagen/git-worktree.nvim')
 
 	use('mbbill/undotree')
 

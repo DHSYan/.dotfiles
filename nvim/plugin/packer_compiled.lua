@@ -124,10 +124,20 @@ _G.packer_plugins = {
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
   },
+  ["git-worktree.nvim"] = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
+    url = "https://github.com/ThePrimeagen/git-worktree.nvim"
+  },
   harpoon = {
     loaded = true,
     path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/theprimeagen/harpoon"
+  },
+  ["kanagawa.nvim"] = {
+    loaded = true,
+    path = "/Users/twinkletoes/.local/share/nvim/site/pack/packer/start/kanagawa.nvim",
+    url = "https://github.com/rebelot/kanagawa.nvim"
   },
   ["lsp-zero.nvim"] = {
     loaded = true,

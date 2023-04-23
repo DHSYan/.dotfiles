@@ -1,0 +1,7 @@
+#!/bin/bash
+
+nvim $HOME/Personal/quickcapture.md
+
+# read something
+
+
