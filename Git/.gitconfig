@@ -3,8 +3,8 @@
     excludesfile = ~/.gitignore_global
 
 [user]
-    email = 69187273+TwinkletoesZen@users.noreply.github.com
-    name = TwinkletoesZen
+    email = 69187273+dhsyan@users.noreply.github.com
+    name = dhsyan
     signingkey = ~/.ssh/id_rsa.pub
 
 [alias]
