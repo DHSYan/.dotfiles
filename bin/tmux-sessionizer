@@ -5,7 +5,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     # selected=$(find ~/ ~/throw-away-code $HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1.\ Academics/1B $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/ -mindepth 1 -maxdepth 3 -type d | fzf)
-    selected=$(find ~ $HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1.\ Academics/1B $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/ -mindepth 1 -maxdepth 3 -type d | fzf)
+    selected=$(find ~ $HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/ $HOME/Library/Mobile\ Documents/com~apple~CloudDocs/ -mindepth 1 -maxdepth 3 -type d | fzf)
 fi
 
 if [[ -z "$selected" ]]; then
