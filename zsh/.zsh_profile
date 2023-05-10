@@ -15,6 +15,7 @@ alias app='cd "/Users/twinkletoes/Library/CloudStorage/OneDrive-UniversityofWate
 
 bindkey -v
 
-export CUR=$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1.\ Academics/1B
+export CUR=$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1.Terms/WT1
+export SCHOOL=$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/
 export icloud=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs/
 # alias srm="mv $1 ~/trash/"
