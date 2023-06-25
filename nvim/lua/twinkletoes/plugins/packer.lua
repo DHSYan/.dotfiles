@@ -67,6 +67,7 @@ return require('packer').startup(function(use)
 			{'rafamadriz/friendly-snippets'},
 		}
 	}
+  use ('mfussenegger/nvim-jdtls')
 
 	use ('Pocco81/auto-save.nvim')
 
