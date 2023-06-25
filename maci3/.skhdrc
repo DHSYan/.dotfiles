@@ -53,3 +53,5 @@ cmd + alt - l : learn
 cmd + alt - b : open /Applications/Brave\ Browser.app/
 ## Spotify
 cmd + alt - m : open /Applications/Spotify.app/
+## Bitwarden
+cmd + alt - p : open /Applications/Bitwarden.app/
