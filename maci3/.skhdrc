@@ -1,10 +1,20 @@
 #!/bin/zsh
 
+# Enter Normal Human Being Mode
+
+
+
 ### Window Commands
-alt - h : yabai -m window --focus west || $(yabai -m display --focus west)
-alt - l : yabai -m window --focus east || $(yabai -m display --focus east)
-alt - j : yabai -m window --focus south || $(yabai -m display --focus south)
-alt - k : yabai -m window --focus north || $(yabai -m display --focus north)
+# alt - h : yabai -m window --focus west || $(yabai -m display --focus west)
+# alt - l : yabai -m window --focus east || $(yabai -m display --focus east)
+# alt - j : yabai -m window --focus south || $(yabai -m display --focus south)
+# alt - k : yabai -m window --focus north || $(yabai -m display --focus north)
+
+
+# alt - h : sh ~/.dotfiles/maci3/counterclockwise.sh
+# alt - l : sh ~/.dotfiles/maci3/clockwise.sh
+
+
 
 alt - space : yabai -m window --focus first
 alt - p : yabai -m window --focus prev
@@ -36,7 +46,7 @@ alt + shift - 0 : yabai -m window --space 10
 # ctrl + shift - ] : yabai -m window --space 12
 
 
-alt - f : yabai -m window --toggle zoom-fullscreen
+alt - f :  yabai -m window --grid 1:1:0:0:1:1 || yabai -m window --toggle zoom-fullscreen 
 
 ### Interaction with System
 ## Finder
@@ -55,3 +65,15 @@ cmd + alt - b : open /Applications/Brave\ Browser.app/
 cmd + alt - m : open /Applications/Spotify.app/
 ## Bitwarden
 cmd + alt - p : open /Applications/Bitwarden.app/
+
+# Enter TV Mode
+cmd + ctrl - f : yabai -m config layout float
+# Going back to human mode
+cmd + ctrl - b : yabai -m config layout bsp
+
+# Moving Stuff in the main 4 quad
+cmd + ctrl - m : yabai -m window --move abs:597:668 && yabai -m window --resize abs:2000:1132
+cmd + ctrl - t : yabai -m window --move abs:597:25 && yabai -m window --resize abs:2000:642
+cmd + ctrl - l : yabai -m window --move abs:0:25 && yabai -m window --resize abs:596:1775
+cmd + ctrl - r : yabai -m window --move abs:2595:25 && yabai -m window --resize abs:596:1775
+
