@@ -29,10 +29,13 @@ yabai -m rule --add title='Settings$' manage=off
 ### Move the to the correct space
 yabai -m rule --add app="^Google Chrome$" space=1
 yabai -m rule --add app="^kitty$" space=2
-yabai -m rule --add app="^Notion$" space=3
+yabai -m rule --add app="^Obsidian$" space=3
+yabai -m rule --add app="^Discord$" space=4
+yabai -m rule --add app="^Line$" space=4
 yabai -m rule --add app="^Fantasical$" space=5
 yabai -m rule --add app="Brave Browser" space=6
 yabai -m rule --add app="^Spotify$" space=10
+yabai -m rule --add app="^GarageBand$" space=10
 yabai -m rule --add app="^Mail$" space=11
 
 
