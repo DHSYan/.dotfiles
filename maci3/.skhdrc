@@ -71,6 +71,9 @@ cmd + ctrl - f : yabai -m config layout float
 # Going back to human mode
 cmd + ctrl - b : yabai -m config layout bsp
 
+cmd + ctrl + shift - f : yabai -m space --layout float
+cmd + ctrl + shift - b : yabai -m space --layout bsp
+
 # Moving Stuff in the main 4 quad
 # cmd + ctrl - m : yabai -m window --move abs:597:668 && yabai -m window --resize abs:2000:1132
 # cmd + ctrl - t : yabai -m window --move abs:597:25 && yabai -m window --resize abs:2000:642
