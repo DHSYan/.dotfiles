@@ -4,16 +4,17 @@ number=$1
 
 
 
-cfile=lec$number.c
+cfile=lec-$number.c
 
-racketfile=lec$number.rkt
+# racketfile=lec$number.rkt
 
 mdfile=lec-$number.md
 
-folderName=lec_$number
+folderName=lec-$number
 
 
-echo "Creating \n$cfile \n$racketfile \n$mdfile \n and the folder $folderName \n is this ok? (y/n)"
+# echo "Creating \n$cfile \n$racketfile \n$mdfile \n and the folder $folderName \n is this ok? (y/n)"
+echo "Creating \n$cfile \n$mdfile \n and the folder $folderName \n is this ok? (y/n)"
 read confirm
 
 if [[ "$confirm" = "y" ]]; then
@@ -22,7 +23,7 @@ if [[ "$confirm" = "y" ]]; then
   cd $folderName
 
   echo "# Lec $number\n" >> $mdfile
-  echo "#lang racket\n" >> $racketfile
+  # echo "#lang racket\n" >> $racketfile
 
   newc $cfile
 
