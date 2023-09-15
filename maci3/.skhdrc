@@ -79,8 +79,8 @@ cmd + ctrl + shift - b : yabai -m space --layout bsp
 # cmd + ctrl - t : yabai -m window --move abs:597:25 && yabai -m window --resize abs:2000:642
 # cmd + ctrl - l : yabai -m window --move abs:0:25 && yabai -m window --resize abs:596:1775
 # cmd + ctrl - r : yabai -m window --move abs:2595:25 && yabai -m window --resize abs:596:1775
-cmd + ctrl - w : yabai -m window --grid 9:16:3:3:10:6
-cmd + ctrl - t : yabai -m window --grid 9:16:3:0:10:3
+cmd + ctrl - w : yabai -m window --grid 9:16:3:4:10:5
+cmd + ctrl - t : yabai -m window --grid 9:16:3:0:10:4
 cmd + ctrl - m : yabai -m window --grid 9:16:0:0:3:16
 cmd + ctrl - v : yabai -m window --grid 9:16:13:0:3:16
 
@@ -91,3 +91,5 @@ cmd + ctrl - q : yabai -m window --grid 6:6:0:3:2:3
 cmd + ctrl - j : yabai -m window --grid 6:6:2:3:2:3
 cmd + ctrl - k : yabai -m window --grid 6:6:4:3:2:3
 
+
+cmd + alt + shift - t : ~/.dotfiles/bin/tv

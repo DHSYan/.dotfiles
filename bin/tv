@@ -1,0 +1,29 @@
+#!/bin/zsh
+
+
+yabai -m space --layout float
+
+yabai -m rule --add app="^Google Chrome$" space=2 grid=9:16:3:0:10:4
+
+yabai -m rule --add app="^kitty$" space=2 grid=9:16:3:4:10:5
+
+yabai -m rule --add app="^Obsidian$" space=2 grid=9:16:0:0:3:16
+
+# yabai -m window --grid 9:16:13:0:3:16 # LEft
+
+# yabai -m window --grid 6:6:0:0:2:3
+# yabai -m window --grid 6:6:2:0:2:3
+# yabai -m window --grid 6:6:4:0:2:3
+# yabai -m window --grid 6:6:0:3:2:3
+# yabai -m window --grid 6:6:2:3:2:3
+# yabai -m window --grid 6:6:4:3:2:3
+
+# yabai -m rule --add app="^Discord$" space=4
+# yabai -m rule --add app="^Line$" space=4
+# yabai -m rule --add app="^Fantasical$" space=5
+# yabai -m rule --add app="Brave Browser" space=6
+# yabai -m rule --add app="^Spotify$" space=10
+# yabai -m rule --add app="^GarageBand$" space=10
+# yabai -m rule --add app="^Mail$" space=11
+
+
