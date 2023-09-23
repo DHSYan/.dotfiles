@@ -31,8 +31,8 @@ yabai -m rule --add app="^Google Chrome$" space=1
 yabai -m rule --add app="^kitty$" space=2
 yabai -m rule --add app="^Obsidian$" space=3
 yabai -m rule --add app="^Discord$" space=7
-yabai -m rule --add app="^Line$" space=7
-yabai -m rule --add app="^Fantasical$" space=5
+yabai -m rule --add app="^LINE$" space=7
+yabai -m rule --add app="Fantastical" space=5
 yabai -m rule --add app="Brave Browser" space=6
 yabai -m rule --add app="^Spotify$" space=10
 yabai -m rule --add app="^GarageBand$" space=10

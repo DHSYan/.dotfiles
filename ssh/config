@@ -10,3 +10,7 @@ User s2yan
 Host git
 Hostname github.com
 User git
+
+Host unsw
+Hostname login.cse.unsw.edu.au
+User z5521807
