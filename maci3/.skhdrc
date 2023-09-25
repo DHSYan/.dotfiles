@@ -79,12 +79,17 @@ cmd + ctrl + shift - b : yabai -m space --layout bsp
 # cmd + ctrl - t : yabai -m window --move abs:597:25 && yabai -m window --resize abs:2000:642
 # cmd + ctrl - l : yabai -m window --move abs:0:25 && yabai -m window --resize abs:596:1775
 # cmd + ctrl - r : yabai -m window --move abs:2595:25 && yabai -m window --resize abs:596:1775
-cmd + ctrl - w : yabai -m window --grid 9:16:3:4:10:5
-cmd + ctrl - t : yabai -m window --grid 9:16:3:0:10:4
-cmd + ctrl - m : yabai -m window --grid 9:16:0:0:3:16
-cmd + ctrl - v : yabai -m window --grid 9:16:13:0:3:16
+cmd + ctrl - w : yabai -m window --grid 9:16:3:4:10:5 # Main Middle Bottom
+cmd + ctrl - c : yabai -m window --grid 9:16:3:0:10:4 # Main Middle Top
+cmd + ctrl - h : yabai -m window --grid 9:16:0:0:3:16 # Full Left 
+cmd + ctrl - n : yabai -m window --grid 9:16:13:0:3:16 # FUll Right
 
-cmd + ctrl - c : yabai -m window --grid 9:16:3:0:10:16
+cmd + ctrl - t : yabai -m window --grid 9:16:3:0:10:16 # Middle Full
+
+cmd + ctrl - v : yabai -m window --grid 9:16:13:4:10:5 # bottom right
+cmd + ctrl - m : yabai -m window --grid 9:16:0:4:3:5 # bottom left
+cmd + ctrl - g : yabai -m window --grid 9:16:0:0:3:4 # Top Lift
+cmd + ctrl - r : yabai -m window --grid 9:16:13:0:3:4 # Top right
 
 cmd + ctrl - o : yabai -m window --grid 6:6:0:0:2:3
 cmd + ctrl - e : yabai -m window --grid 6:6:2:0:2:3
