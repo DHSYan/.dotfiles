@@ -84,6 +84,8 @@ cmd + ctrl - t : yabai -m window --grid 9:16:3:0:10:4
 cmd + ctrl - m : yabai -m window --grid 9:16:0:0:3:16
 cmd + ctrl - v : yabai -m window --grid 9:16:13:0:3:16
 
+cmd + ctrl - c : yabai -m window --grid 9:16:3:0:10:16
+
 cmd + ctrl - o : yabai -m window --grid 6:6:0:0:2:3
 cmd + ctrl - e : yabai -m window --grid 6:6:2:0:2:3
 cmd + ctrl - u : yabai -m window --grid 6:6:4:0:2:3
