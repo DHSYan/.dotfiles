@@ -53,3 +53,6 @@ vim.keymap.set("v", "<leader>sp", '"+p')
 
 vim.keymap.set("n", "<leader>sy", '"+y')
 vim.keymap.set("v", "<leader>sy", '"+y')
+
+vim.keymap.set("n", "<leader>ss", ":w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> %<.pdf<CR>:!focusvim<CR><CR>")
+
