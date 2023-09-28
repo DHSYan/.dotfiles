@@ -90,7 +90,7 @@ return require('packer').startup(function(use)
   use ('ekickx/clipboard-image.nvim')
 
   -- maybe check out zen-mode plugin, check out Prime's dotfiles 
-  use("folke/zen-mode.nvim")
+  -- use("folke/zen-mode.nvim")
 
   -- use ('edluffy/hologram.nvim')
   -- use ('epwalsh/obsidian.nvim')

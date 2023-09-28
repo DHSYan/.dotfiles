@@ -1,0 +1,26 @@
+# Fdb version 4
+["pdflatex"] 1695708864 "Note-Temp-Type-1.tex" "Note-Temp-Type-1.pdf" "Note-Temp-Type-1" 1695708864 0
+  "/usr/local/texlive/2022basic/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
+  "/usr/local/texlive/2022basic/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
+  "/usr/local/texlive/2022basic/texmf-dist/fonts/tfm/public/cm/cmr17.tfm" 1136768653 1292 296a67155bdbfc32aa9c636f21e91433 ""
+  "/usr/local/texlive/2022basic/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
+  "/usr/local/texlive/2022basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/generic/iftex/iftex.sty" 1644112042 7237 bdd120a32c8fdb4b433cf9ca2e7cd98a ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/generic/iftex/ifvtex.sty" 1572645307 1057 525c2192b5febbd8c1f662c9468335bb ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/latex/base/exscale.sty" 1654720880 2581 a44c6c0f51707a5175042cbf68bd39cc ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/latex/extsizes/extarticle.cls" 1137110130 20602 3112294ba237d94ce4a1502cfef3594f ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/latex/extsizes/size20.clo" 1184601865 6196 c353d70618088c3532f0550963b53892 ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/latex/graphics/keyval.sty" 1654720880 2671 7e67d78d9b88c845599a85b2d41f2e39 ""
+  "/usr/local/texlive/2022basic/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1681935207 29940 9473d58112bc8a88f5505b823a053dde ""
+  "/usr/local/texlive/2022basic/texmf-dist/web2c/texmf.cnf" 1681165822 40967 d940221f8762fd5848760382d97d1226 ""
+  "/usr/local/texlive/2022basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1695348063 115615 40703ec474994a0993a67f9490dd1c04 ""
+  "/usr/local/texlive/2022basic/texmf-var/web2c/pdftex/pdflatex.fmt" 1683887892 7202439 2948e4ca6fa8fe4a72b41270218dece6 ""
+  "/usr/local/texlive/2022basic/texmf.cnf" 1647274000 628 5a32b7ea7dd5bed632a871bee125276d ""
+  "Note-Temp-Type-1.aux" 1695708864 32 c81c40425fbb5e93b90fba65da0b5e61 "pdflatex"
+  "Note-Temp-Type-1.tex" 1695708858 447 8b0c99815a5a0e235e486560d74d0203 ""
+  (generated)
+  "Note-Temp-Type-1.aux"
+  "Note-Temp-Type-1.log"
+  "Note-Temp-Type-1.pdf"
+  (rewritten before read)

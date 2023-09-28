@@ -1,7 +1,19 @@
 # Remap nvim to vim.
 alias ll="ls"
+# Homebrew setup
+
 # export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.8/bin:/Library/TeX/texbin/:/Library/ltex-ls/bin:/Users/twinkletoes/.cargo/bin:$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.cargo/env:$HOME/.cargo/bin:/Applications/Racket\ v8.6/bin
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.8/bin:/Library/TeX/texbin/:/Users/twinkletoes/.cargo/bin:$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.cargo/env:$HOME/.cargo/bin:/Applications/Racket\ v8.6/bin:/opt/local/bin
+# export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.8/bin:/Library/TeX/texbin/:/Users/twinkletoes/.cargo/bin:$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$HOME/.cargo/env:$HOME/.cargo/bin:/Applications/Racket\ v8.6/bin:/opt/local/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/Racket\ v8.8/bin:/Library/TeX/texbin/:/Users/twinkletoes/.cargo/bin:$HOME/bin:$HOME/.cargo/env:$HOME/.cargo/bin:/Applications/Racket\ v8.6/bin:/opt/local/bin
+
+if [[ $(uname -m) == 'arm64' ]]; then
+    BREWPATH=/opt/homebrew/bin
+else
+    BREWPATH=/usr/local/bin
+fi
+export PATH=$BREWPATH:$PATH
+
+
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$DBUS_LAUNCHD_SESSION_BUS_SOCKET"
 alias v="nvim"
 alias cf="source $HOME/bin/cf"
