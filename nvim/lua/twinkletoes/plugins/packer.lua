@@ -78,12 +78,12 @@ return require('packer').startup(function(use)
   use ('nvim-lualine/lualine.nvim') -- Fancy Status bar
 
   -- install without yarn or npm
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
-  })
-
-  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+  -- use({
+  --   "iamcco/markdown-preview.nvim",
+  --   run = function() vim.fn["mkdp#util#install"]() end,
+  -- })
+  --
+  -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
 
   -- use ('lukas-reineke/indent-blankline.nvim') -- Indent line
   --
@@ -93,6 +93,7 @@ return require('packer').startup(function(use)
   -- use("folke/zen-mode.nvim")
 
   -- use ('edluffy/hologram.nvim')
-  -- use ('epwalsh/obsidian.nvim')
+    use {'stevearc/vim-arduino'}
+ -- use ('epwalsh/obsidian.nvim')
 
 end)

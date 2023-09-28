@@ -149,11 +149,6 @@ _G.packer_plugins = {
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/lualine.nvim",
     url = "https://github.com/nvim-lualine/lualine.nvim"
   },
-  ["markdown-preview.nvim"] = {
-    loaded = true,
-    path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/markdown-preview.nvim",
-    url = "https://github.com/iamcco/markdown-preview.nvim"
-  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -228,6 +223,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/undotree",
     url = "https://github.com/mbbill/undotree"
+  },
+  ["vim-arduino"] = {
+    loaded = true,
+    path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/vim-arduino",
+    url = "https://github.com/stevearc/vim-arduino"
   },
   ["vim-be-good"] = {
     loaded = true,
