@@ -88,6 +88,7 @@ return require('packer').startup(function(use)
   -- use ('lukas-reineke/indent-blankline.nvim') -- Indent line
   --
   use ('ekickx/clipboard-image.nvim')
+  use ('nvim-lua/completion-nvim')
 
   -- maybe check out zen-mode plugin, check out Prime's dotfiles 
   -- use("folke/zen-mode.nvim")
