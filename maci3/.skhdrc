@@ -72,19 +72,15 @@ cmd + ctrl - v : open /Applications/VMware\ Fusion.app/
 
 
 #######################TV Layer##CMD+ALT LAYER##################################
-# Enter TV Mode
-cmd + alt - f : yabai -m config layout float
-# Going back to human mode
-cmd + alt - b : yabai -m config layout bsp
+# # Enter TV Mode
+# cmd + alt - f : yabai -m config layout float
+# # Going back to human mode
+# cmd + alt - b : yabai -m config layout bsp
 
 cmd + alt + shift - f : yabai -m space --layout float
 cmd + alt + shift - b : yabai -m space --layout bsp
 
 # Moving Stuff in the main 4 quad
-cmd + alt - m : yabai -m window --move abs:597:668 && yabai -m window --resize abs:2000:1132
-cmd + alt - t : yabai -m window --move abs:597:25 && yabai -m window --resize abs:2000:642
-cmd + alt - l : yabai -m window --move abs:0:25 && yabai -m window --resize abs:596:1775
-cmd + alt - r : yabai -m window --move abs:2595:25 && yabai -m window --resize abs:596:1775
 cmd + alt - w : yabai -m window --grid 9:16:3:4:10:5 # Main Middle Bottom
 cmd + alt - c : yabai -m window --grid 9:16:3:0:10:4 # Main Middle Top
 cmd + alt - h : yabai -m window --grid 9:16:0:0:3:16 # Full Left 
