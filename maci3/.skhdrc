@@ -48,55 +48,67 @@ alt + shift - 0 : yabai -m window --space 10
 
 alt - f :  yabai -m window --grid 1:1:0:0:1:1 || yabai -m window --toggle zoom-fullscreen 
 
+############################Application Layer#####CMD+CTRL######################
+# The idea is that since cmd+ctrl is how you get out of vmware
 ### Interaction with System
 ## Finder
-cmd + alt - d : open ~/Downloads/
-cmd + alt - f : open ~/
-cmd + alt - s : open "$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"
+cmd + ctrl - d : open ~/Downloads/
+cmd + ctrl - f : open ~/
+cmd + ctrl - s : open "$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1. Academics/1B"
 ## Terminal
-alt - return : open /Applications/kitty.app
+alt - return : open /Applications/kitty.app #Exception of the terminal
 ## [C]hrome 
-cmd + alt - c : open /Applications/Google\ Chrome.app/
+cmd + ctrl - c : open /Applications/Google\ Chrome.app/
 ## learn
-cmd + alt - l : learn 
 ## Brave
-cmd + alt - b : open /Applications/Brave\ Browser.app/
+cmd + ctrl - b : open /Applications/Brave\ Browser.app/
 ## Spotify
-cmd + alt - m : open /Applications/Spotify.app/
+cmd + ctrl - m : open /Applications/Spotify.app/
 ## Bitwarden
-cmd + alt - p : open /Applications/Bitwarden.app/
+cmd + ctrl - p : open /Applications/Bitwarden.app/
+# VMWARE
+cmd + ctrl - v : open /Applications/VMware\ Fusion.app/
+################################################################################
 
+
+#######################TV Layer##CMD+ALT LAYER##################################
 # Enter TV Mode
-cmd + ctrl - f : yabai -m config layout float
+cmd + alt - f : yabai -m config layout float
 # Going back to human mode
-cmd + ctrl - b : yabai -m config layout bsp
+cmd + alt - b : yabai -m config layout bsp
 
-cmd + ctrl + shift - f : yabai -m space --layout float
-cmd + ctrl + shift - b : yabai -m space --layout bsp
+cmd + alt + shift - f : yabai -m space --layout float
+cmd + alt + shift - b : yabai -m space --layout bsp
 
 # Moving Stuff in the main 4 quad
-# cmd + ctrl - m : yabai -m window --move abs:597:668 && yabai -m window --resize abs:2000:1132
-# cmd + ctrl - t : yabai -m window --move abs:597:25 && yabai -m window --resize abs:2000:642
-# cmd + ctrl - l : yabai -m window --move abs:0:25 && yabai -m window --resize abs:596:1775
-# cmd + ctrl - r : yabai -m window --move abs:2595:25 && yabai -m window --resize abs:596:1775
-cmd + ctrl - w : yabai -m window --grid 9:16:3:4:10:5 # Main Middle Bottom
-cmd + ctrl - c : yabai -m window --grid 9:16:3:0:10:4 # Main Middle Top
-cmd + ctrl - h : yabai -m window --grid 9:16:0:0:3:16 # Full Left 
-cmd + ctrl - n : yabai -m window --grid 9:16:13:0:3:16 # FUll Right
+cmd + alt - m : yabai -m window --move abs:597:668 && yabai -m window --resize abs:2000:1132
+cmd + alt - t : yabai -m window --move abs:597:25 && yabai -m window --resize abs:2000:642
+cmd + alt - l : yabai -m window --move abs:0:25 && yabai -m window --resize abs:596:1775
+cmd + alt - r : yabai -m window --move abs:2595:25 && yabai -m window --resize abs:596:1775
+cmd + alt - w : yabai -m window --grid 9:16:3:4:10:5 # Main Middle Bottom
+cmd + alt - c : yabai -m window --grid 9:16:3:0:10:4 # Main Middle Top
+cmd + alt - h : yabai -m window --grid 9:16:0:0:3:16 # Full Left 
+cmd + alt - n : yabai -m window --grid 9:16:13:0:3:16 # FUll Right
 
-cmd + ctrl - t : yabai -m window --grid 9:16:3:0:10:16 # Middle Full
+cmd + alt - 7 : yabai -m window --grid 9:16:3:0:5:16 # Full Vert, Half main, Right
+cmd + alt - 9 : yabai -m window --grid 9:16:8:0:5:16 # FUll Vert, Half main, left
 
-cmd + ctrl - v : yabai -m window --grid 9:16:13:4:10:5 # bottom right
-cmd + ctrl - m : yabai -m window --grid 9:16:0:4:3:5 # bottom left
-cmd + ctrl - g : yabai -m window --grid 9:16:0:0:3:4 # Top Lift
-cmd + ctrl - r : yabai -m window --grid 9:16:13:0:3:4 # Top right
+cmd + alt - t : yabai -m window --grid 9:16:3:0:10:16 # Middle Full
 
-cmd + ctrl - o : yabai -m window --grid 6:6:0:0:2:3
-cmd + ctrl - e : yabai -m window --grid 6:6:2:0:2:3
-cmd + ctrl - u : yabai -m window --grid 6:6:4:0:2:3
-cmd + ctrl - q : yabai -m window --grid 6:6:0:3:2:3
-cmd + ctrl - j : yabai -m window --grid 6:6:2:3:2:3
-cmd + ctrl - k : yabai -m window --grid 6:6:4:3:2:3
+cmd + alt - v : yabai -m window --grid 9:16:13:4:10:5 # bottom right
+cmd + alt - m : yabai -m window --grid 9:16:0:4:3:5 # bottom left
+cmd + alt - g : yabai -m window --grid 9:16:0:0:3:4 # Top Lift
+cmd + alt - r : yabai -m window --grid 9:16:13:0:3:4 # Top right
 
+cmd + alt - o : yabai -m window --grid 6:6:0:0:2:3
+cmd + alt - e : yabai -m window --grid 6:6:2:0:2:3
+cmd + alt - u : yabai -m window --grid 6:6:4:0:2:3
+cmd + alt - q : yabai -m window --grid 6:6:0:3:2:3
+cmd + alt - j : yabai -m window --grid 6:6:2:3:2:3
+cmd + alt - k : yabai -m window --grid 6:6:4:3:2:3
 
 cmd + alt + shift - t : ~/.dotfiles/bin/tv
+################################################################################
+
+
+

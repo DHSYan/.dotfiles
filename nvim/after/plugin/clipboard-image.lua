@@ -8,7 +8,7 @@ require'clipboard-image'.setup {
   tex = {
     img_dir = "img",
     img_name = function () return os.date('%Y-%m-%d-%H-%M-%S') end,
-    affix = "\\includegraphics{%s}"
+    affix = "\\begin{center}\n  \\includegraphics{%s}\\\\\n  \\caption{}\n\\end{center}"
   },
   -- You can create configuration for ceartain filetype by creating another field (markdown, in this case)
   -- If you're uncertain what to name your field to, you can run `lua print(vim.bo.filetype)`
