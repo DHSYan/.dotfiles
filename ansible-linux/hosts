@@ -1,2 +1,0 @@
-[local]
-localMachine ansible_host=localhost
