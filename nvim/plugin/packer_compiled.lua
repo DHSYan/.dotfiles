@@ -164,6 +164,11 @@ _G.packer_plugins = {
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
     url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
+  ["obsidian.nvim"] = {
+    loaded = true,
+    path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/obsidian.nvim",
+    url = "https://github.com/epwalsh/obsidian.nvim"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/tzen/.local/share/nvim/site/pack/packer/start/packer.nvim",
