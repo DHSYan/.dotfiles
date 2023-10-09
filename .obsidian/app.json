@@ -1,0 +1,10 @@
+{
+  "attachmentFolderPath": "./",
+  "showUnsupportedFiles": true,
+  "newFileLocation": "current",
+  "strictLineBreaks": true,
+  "showLineNumber": true,
+  "autoPairBrackets": false,
+  "useTab": false,
+  "vimMode": true
+}

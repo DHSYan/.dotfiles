@@ -67,7 +67,9 @@ cmd + ctrl - m : open /Applications/Spotify.app/
 ## Bitwarden
 cmd + ctrl - p : open /Applications/Bitwarden.app/
 # VMWARE
-cmd + ctrl - v : open /Applications/VMware\ Fusion.app/
+# cmd + ctrl - v : open /Applications/VMware\ Fusion.app/
+#UTM
+cmd + ctrl - u : open /Applications/UTM.app
 ################################################################################
 
 
