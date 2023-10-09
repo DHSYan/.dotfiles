@@ -1,1 +1,50 @@
-{}
+{
+  "global-search:open": [],
+  "obsidian-excalidraw-plugin:insert-link-to-element": [],
+  "markdown:add-metadata-property": [],
+  "workspace:close": [],
+  "workspace:close-window": [],
+  "command-palette:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "P"
+    }
+  ],
+  "file-explorer:new-file": [],
+  "file-explorer:new-file-in-new-pane": [],
+  "editor:delete-paragraph": [],
+  "obsidian-excalidraw-plugin:insert-link": [],
+  "obsidian-excalidraw-plugin:toggle-lock": [],
+  "editor:follow-link": [],
+  "workspace:goto-last-tab": [],
+  "workspace:next-tab": [],
+  "workspace:previous-tab": [],
+  "workspace:goto-tab-1": [],
+  "graph:open": [],
+  "workspace:goto-tab-8": [],
+  "workspace:goto-tab-7": [],
+  "workspace:goto-tab-6": [],
+  "workspace:goto-tab-5": [],
+  "workspace:goto-tab-4": [],
+  "workspace:goto-tab-3": [],
+  "workspace:goto-tab-2": [],
+  "app:go-back": [],
+  "app:go-forward": [],
+  "workspace:new-tab": [],
+  "editor:insert-link": [],
+  "editor:open-link-in-new-leaf": [],
+  "editor:open-link-in-new-window": [],
+  "editor:open-link-in-new-split": [],
+  "switcher:open": [],
+  "workspace:edit-file-title": [],
+  "editor:save-file": [],
+  "editor:open-search-replace": [],
+  "editor:open-search": [],
+  "editor:toggle-bold": [],
+  "editor:toggle-checklist-status": [],
+  "editor:toggle-comments": [],
+  "markdown:toggle-preview": [],
+  "workspace:undo-close-pane": []
+}

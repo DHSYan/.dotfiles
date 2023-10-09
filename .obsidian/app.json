@@ -1,10 +1,13 @@
 {
-  "attachmentFolderPath": "./",
-  "showUnsupportedFiles": true,
+  "attachmentFolderPath": "./attachments",
+  "showUnsupportedFiles": false,
   "newFileLocation": "current",
   "strictLineBreaks": true,
   "showLineNumber": true,
   "autoPairBrackets": false,
   "useTab": false,
-  "vimMode": true
+  "vimMode": true,
+  "newFileFolderPath": "",
+  "newLinkFormat": "relative",
+  "alwaysUpdateLinks": true
 }
