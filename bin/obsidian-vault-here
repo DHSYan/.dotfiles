@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+ln -s ~/.dotfiles/.obsidian .obsidian
