@@ -9,5 +9,8 @@
   "vimMode": true,
   "newFileFolderPath": "",
   "newLinkFormat": "relative",
-  "alwaysUpdateLinks": true
+  "alwaysUpdateLinks": true,
+  "defaultViewMode": "preview",
+  "livePreview": false,
+  "userIgnoreFilters": null
 }

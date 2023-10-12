@@ -1,14 +1,14 @@
 {
   "main": {
-    "id": "55cf5dbded7f6553",
+    "id": "afbf4639f13d99a0",
     "type": "split",
     "children": [
       {
-        "id": "7950e79d12e44c8f",
+        "id": "280bdb36435cb465",
         "type": "tabs",
         "children": [
           {
-            "id": "579429602749c5f1",
+            "id": "7a9a22c6381114f8",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -21,15 +21,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "69794ad20fe4170c",
+    "id": "d99d6564c2db857f",
     "type": "split",
     "children": [
       {
-        "id": "de66731c7e4dd921",
+        "id": "21dabe682c4c5eb3",
         "type": "tabs",
         "children": [
           {
-            "id": "2816c1cd79d73683",
+            "id": "48724598cb5f2dfe",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -39,7 +39,7 @@
             }
           },
           {
-            "id": "78b6dc9d93a1038c",
+            "id": "2caa346fe2eb3819",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -54,7 +54,7 @@
             }
           },
           {
-            "id": "cb260c265c717956",
+            "id": "b7cf9e9ed291fb62",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -65,18 +65,19 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
-    "id": "1b3f14dde9b6ba25",
+    "id": "f6d200892e44556d",
     "type": "split",
     "children": [
       {
-        "id": "13bff5af0290b922",
+        "id": "0818bb65273e21e1",
         "type": "tabs",
         "children": [
           {
-            "id": "02acba7c05d4a285",
+            "id": "ce23aea64d185085",
             "type": "leaf",
             "state": {
               "type": "backlink",
@@ -92,7 +93,7 @@
             }
           },
           {
-            "id": "2c26101b84eec513",
+            "id": "b68f972a64305b8f",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
@@ -103,7 +104,7 @@
             }
           },
           {
-            "id": "5e6ab83e0f813ad8",
+            "id": "c2a7b02c18278420",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -114,15 +115,14 @@
             }
           },
           {
-            "id": "9b83109d4149600f",
+            "id": "6f926a518e243d35",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {}
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "horizontal",
@@ -140,21 +140,14 @@
       "obsidian-excalidraw-plugin:Create new drawing": false
     }
   },
-  "active": "2816c1cd79d73683",
+  "active": "7a9a22c6381114f8",
   "lastOpenFiles": [
-    "Notes/Beej-Guide-to-Network-Programming/Notes on Beej's Guide.md",
-    "1696894960-NFLZ.md",
-    "labs/lab1/lab1.md",
-    "Notes/Beej-Guide-to-Network-Programming/lab1.pdf",
-    "Week3/lab1/img/2023-09-29-00-26-56.png",
-    "Notes/lec-1/lec-1.md",
-    "2023-10-09.md",
-    "Test/aoenst.md",
-    "Untitled",
-    "Test",
-    "Excalidraw/Drawing 2023-10-09 20.38.27.excalidraw.md",
-    "Untitled.canvas",
-    "Excalidraw/Drawing 2023-10-09 20.38.03.excalidraw.md",
-    "Excalidraw"
+    "week5/lab3/Lab3.tex",
+    "week5/lab3/lab2.tex",
+    "week5/lab3",
+    "week5/Arduino-intro-taubman.pptx",
+    "week5",
+    "Drawing 2023-10-12 15.11.17.excalidraw.md",
+    "MacOS.md"
   ]
 }

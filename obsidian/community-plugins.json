@@ -1,4 +1,6 @@
 [
   "obsidian-excalidraw-plugin",
-  "obsidian-relative-line-numbers"
+  "obsidian-relative-line-numbers",
+  "obsidian-hider",
+  "obsidian-hide-sidebars-when-narrow"
 ]

@@ -1,9 +1,10 @@
 local config = {
     -- dir = "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/COMP3331",
     workspaces = {
-        '/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/COMP3331',
-        '/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/COMP1511',
-        '/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/DESN1000'
+        "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/COMP3331",
+        "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/COMP1511",
+        "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/DESN1000",
+        "/Users/tzen/Library/Mobile Documents/com~apple~CloudDocs/Personal-icloud/Notes"
     },
     completion = {
         -- If using nvim-cmp, otherwise set to false
@@ -13,7 +14,8 @@ local config = {
         -- Where to put new notes created from completion. Valid options are
         --  * "current_dir" - put new notes in same directory as the current buffer.
         --  * "notes_subdir" - put new notes in the default notes subdirectory.
-        new_notes_location = "current_dir",
+        notes_subdir = "Notes",
+        new_notes_location = "notes_subdir",
 
         -- Whether to add the output of the node_id_func to new notes in autocompletion.
         -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
@@ -24,17 +26,28 @@ local config = {
 
 local setup_obsidian = function()
     for _, val in pairs(config.workspaces) do
+        -- cur_dir = vim.fn.getcwd()..""
+        -- print(cur_dir);
+        -- i, j = string.find(cur_dir, vim.fs.normalize(val).."")
+        -- print(i, j)
+        -- if string.sub(cur_dir, i, j) == vim.fs.normalize(val).."" then
         if vim.fs.normalize(val) == vim.fn.getcwd() then
+            -- print("I am matching", val);
             print("I matched", val);
             require("obsidian").setup(vim.tbl_extend('error', config, {dir = val}))
             break
         else
-            print("None Matched Up");
+            print("None Matched Up I have", val);
+            -- print("But I got", cur_dir);
         end
     end
 end
 
+vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>")
+vim.keymap.set("n", "<leader>ob", ":ObsidianBacklinks<CR>")
 setup_obsidian();
+
+
 
 
 -- local pickers = require "telescope.pickers"
