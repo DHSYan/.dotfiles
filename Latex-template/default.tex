@@ -1,0 +1,239 @@
+\documentclass[12pt]{article}
+\usepackage[top=0.5in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{fancyvrb}
+\usepackage{verbatim}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%Class Premble%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%Commands%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\lil}[1]{\lstinline{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\noindent
+\textbf{COMP3331\hfill UNSW\\Lab 3\hfill Sean Yan}
+
+\section*{Exercise 3}
+\begin{enumerate}
+
+    \item The IP of www.stanford.edu is 151.101.30.133. And the type of DNS query is 
+        the record type A. 
+
+    \item The canonical name for the Stanford webserver is 
+        pantheon-systems.map.fastly.net. For Stanford 
+        specifically, fastly.net is a web hosting provider.
+
+    \item From the other fields of the dig output. We can infer that 
+        a cookie ID was being returned. We are using the UDP protocol. 
+        Using DNS Version 0. There was no error in the status returned. We 
+        are using the Operation: "QUERY". And we are querying DNS-Record type
+        A. Lastly, our query took 40ms. The DNS Server that is used for 
+        this query is 129.94.242.2, which by doing a reverse DNS lookup,
+        we can see that this DNS Server belongs and is in the 
+        UNSW Network. We can also see a timestamp of this query and the size
+        of the query.
+
+    \item My local machine in my home has the DNS Server 192.168.0.1. \\
+        The machine in VLAB has the DNS Server 129.94.242.2. \\ 
+        These values where obtained through the \lstinline{dig} command.\\
+        \textbf{Output: }
+        \verbatiminput{output-files/q10-0}
+
+    \item argus.stanford.edu - 171.64.7.115 \\
+        ns7.dnsmadeeasy.com - 208.80.126.13 \\
+        ns5.dnsmadeeasy.com - 208.94.148.13 \\
+    	ns6.dnsmadeeasy.com - 208.80.124.13 \\
+        avallone.stanford.edu - 204.63.224.53 \\
+        atalante.stanford.edu - 171.64.7.61 \\ 
+        Are the name server for stanford.edu 
+
+        The DNS query type is \lstinline{NS}.\\
+        \textbf{Output: }
+        \verbatiminput{output-files/dig-output-stanford}
+        \verbatiminput{output-files/dig-output-stanford-type-ns}
+
+    \item ece.drexel.edu is the DNS Name associated with 129.25.60.56. The 
+          \lstinline{PTR} is used to obtain this information\\ 
+
+          \textbf{Output: }
+          \verbatiminput{output-files/dig-output-q6}
+
+    \item The mail server is \lstinline{smtp.google.com}. The output did not
+        give an authoritative answer. In the flags section given by 
+        \lstinline{dig} did not show the flag \lstinline{aa} and it
+        instead shows \lstinline{ra} which means recursive available. Moreover, 
+        the output states the answer to our query was responaded by the same
+        server we queried, which is the CSE UNSW Nameserver.
+ 
+        \textbf{Output: }
+        \verbatiminput{output-files/dig-output-q7}
+
+    \item The query did not get an answer. The recursion request was not 
+        available. And the server returned the REFUSED status.\\
+
+        \textbf{Output:}
+        \verbatiminput{output-files/dig-output-q8}
+
+    \item To get an authoritative answer, we should obtain google's 
+        authoritative Name server, by using \lstinline{dig} with the type 
+        \lstinline{NS}. And querying using the resulting name server, with 
+        thi \lstinline{MX} type. By looking at the flags returned by 
+        \lstinline{dig}, we see an \lstinline{aa} tag, which proves that 
+        the answer is an authoritative answer.
+
+        \textbf{Output: }
+        \verbatiminput{output-files/output-q9-1}
+        \verbatiminput{output-files/output-q9-2}
+
+    \item First, the IP Address of \lil{lyre00.cse.unsw.edu.au} is 
+        $129.94.210.20$. 
+        \verbatiminput{output-files/q10-0}
+        Next, we find the \lil{.} domain's Name Server. 
+        \verbatiminput{output-files/q10-1}
+        We will query \lil{a.root-servers.net.} to find \lil{au.}'s name server.
+        \verbatiminput{output-files/q10-2}
+        Querying \lil{q.au} to find \lil{edu.au.}'s Name Server.
+        \verbatiminput{output-files/q10-3}
+        Again, querying \lil{s.au} to find \lil{unsw.edu.au}'s Name Server.
+        \verbatiminput{output-files/q10-4}
+        Then, querying \lil{ns1.unsw.edu.au} to find \lil{cse.unsw.edu.au}'s 
+        name server.
+        \verbatiminput{output-files/q10-5}
+        Finally, querying \lil{beethoven.orchestra.cse.unsw.edu.au.}
+        to find \lil{lyre00.cse.unsw.edu.au}'s \lil{A} Record.\\ 
+        Giving us, 
+        \verbatiminput{output-files/q10-6}
+
+        It took 5 DNS servers to get this authoritative answer.
+
+    \item Yes, in the process of doing question 10 of exercise 3.
+      I found out that \lil{beethoven.orchestra.cse.unsw.edu.au} has 
+      at least 3 IP Associated with it. Therefore, one machine can definitely
+      have multiple IP Address. In terms of multiple names, inserting a 
+      \lil{CNAME} record into a DNS Servers, will accomplish this.
+      \verbatiminput{output-files/q10-5}
+\end{enumerate}
+
+\newpage
+
+\section*{Exercise 4}
+Result:
+\begin{center}
+    \includegraphics[scale=0.2]{img/2023-10-09-09-41-42.png}\\
+    \caption{}
+\end{center}
+\begin{center}
+    \includegraphics[scale=0.2]{img/2023-10-09-09-42-45.png}\\
+  \caption{}
+\end{center}
+\begin{center}
+    \includegraphics[scale=0.2]{img/2023-10-09-09-43-51.png}\\
+  \caption{}
+\end{center}
+The implementation of sending images over http was not sucessful.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\footnotetext{Lab was completed by Sean Yan on \today}
+
+
+\newpage
+
+\section*{References}
+% This lab report's work was inspired by the following resources,
+\newcommand{\link}[1]{\href{#1}{\lil{#1}}}
+\begin{enumerate}
+    \item [1] I searched wikipedia to get a general sense of why CNAME aliases 
+        are used in Networking. \\
+        \link{https://en.wikipedia.org/wiki/CNAME_record}
+
+    \item [2] I searched online for the meaning for the flags in a dig response. \\
+        \link{https://serverfault.com/questions/729025/what-are-all-the-flags-in-a-dig-response}
+
+    \item [3] For exercise 4: I have used Beej's guide to help me understand 
+        the library that is used to construct servers and other general
+        understanding of socket programming\\
+        \link{https://beej.us/guide/bgnet/html/}\\
+        \link{https://www.binarytides.com/socket-programming-c-linux-tutorial/}\\
+        \link{http://www.tutorialspoint.com/unix_sockets/index.htm}
+
+    \item [4] to answer the question: Why does "getaddrinfo()" return a LinkedList \\
+        \link{https://www.ibm.com/docs/en/zos/2.4.0?topic=functions-getaddrinfo-get-address-information}
+
+    \item [5] A YouTube video that help me understand the flow of the server's
+        behavior. \\
+        \link{https://youtu.be/esXw4bdaZkc?si=XgIewcOKpFbSvgAW}
+
+    \item [6] Referenced to contruct HTTP Response Message. \\
+        \link{https://developer.mozilla.org/en-US/docs/Web/HTTP/Messages}
+
+    \item [7] how to read a content of file into C string\\ 
+        \link{https://stackoverflow.com/questions/174531/how-to-read-the-content-of-a-file-to-a-string-in-c}\\
+        \link{https://www.tutorialspoint.com/cprogramming/c_file_io.htm}\\
+        \link{https://www.geeksforgeeks.org/c-program-to-read-contents-of-whole-file/}
+
+    \item [8] String Parsing Inspiration\\
+        \link{https://medium.com/@iiesbangalorebl1/how-to-implement-string-parsing-in-c-language-a-comprehensive-guide-6bf5a1c4a214}
+
+    \item [9] scanning current directory for files \\
+        \link{https://stackoverflow.com/questions/8149569/scan-a-directory-to-find-files-in-c}\\
+        \link{https://pubs.opengroup.org/onlinepubs/009604599/functions/readdir.html}\\
+        \link{https://en.wikibooks.org/wiki/C_Programming/POSIX_Reference/dirent.h}
+
+    \item [10] Researched \lil{restrict}'s semantics in C\\
+        \link{https://en.wikipedia.org/wiki/Restrict}
+
+    \item [11] Reference C Documentation.\\
+        \link{https://cplusplus.com/}\\
+        \link{https://pubs.opengroup.org/onlinepubs/007908799/xns/netdb.h.html}
+        \link{https://pubs.opengroup.org/onlinepubs/007908799/xns/netinetin.h.html}
+
+    \item [12] Referenced course code example on TCPServer in C \\
+        \link{https://webcms3.cse.unsw.edu.au/COMP3331/23T3/resources/90303}
+
+    \item [13] For the failed implementation of sending images.\\
+        \link{https://stackoverflow.com/a/24893435}\\
+        \link{https://www.w3schools.com/tags/tag_img.asp}
+
+
+
+
+
+\end{enumerate}
+
+\end{document}
+
+
+
