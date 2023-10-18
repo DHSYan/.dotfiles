@@ -4,7 +4,8 @@
 
 [user]
     ; email = 69187273+DHSYan@users.noreply.github.com
-    email = sean.yan@uwaterloo.ca
+    ; email = sean.yan@uwaterloo.ca
+    email = sean.yan@student.unsw.edu.au
     name = DHSYan
     signingkey = ~/.ssh/id_rsa.pub
 
