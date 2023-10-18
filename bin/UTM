@@ -1,0 +1,9 @@
+#!/bin/zsh
+
+brew services stop skhd
+
+open /Applications/UTM.app
+
+read
+
+brew services start skhd

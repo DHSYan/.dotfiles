@@ -69,7 +69,7 @@ cmd + ctrl - p : open /Applications/Bitwarden.app/
 # VMWARE
 # cmd + ctrl - v : open /Applications/VMware\ Fusion.app/
 #UTM
-cmd + ctrl - u : open /Applications/UTM.app
+cmd + ctrl - u : UTM
 ################################################################################
 
 

@@ -25,7 +25,7 @@
   "matchThemeAlways": true,
   "matchThemeTrigger": true,
   "defaultMode": "normal",
-  "defaultPenMode": "never",
+  "defaultPenMode": "always",
   "allowPinchZoom": false,
   "allowWheelZoom": false,
   "zoomToFitOnOpen": true,
