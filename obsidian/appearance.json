@@ -1,7 +1,7 @@
 {
   "accentColor": "#5ccef5",
-  "interfaceFontFamily": "",
-  "textFontFamily": "Times New Roman,JetBrainsMonoNL Nerd Font",
+  "interfaceFontFamily": "Iosevka",
+  "textFontFamily": "Iosevka Fixed,Times New Roman,JetBrainsMonoNL Nerd Font",
   "monospaceFontFamily": "JetBrainsMonoNL Nerd Font Mono",
   "showViewHeader": false,
   "nativeMenus": true,
