@@ -44,6 +44,13 @@
   "editor:toggle-bold": [],
   "editor:toggle-checklist-status": [],
   "editor:toggle-comments": [],
-  "markdown:toggle-preview": [],
-  "workspace:undo-close-pane": []
+  "workspace:undo-close-pane": [],
+  "markdown:toggle-preview": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "R"
+    }
+  ]
 }
