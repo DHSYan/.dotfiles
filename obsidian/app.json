@@ -12,5 +12,12 @@
   "alwaysUpdateLinks": true,
   "defaultViewMode": "preview",
   "livePreview": false,
-  "userIgnoreFilters": null
+  "userIgnoreFilters": null,
+  "pdfExportSettings": {
+    "includeName": false,
+    "pageSize": "A4",
+    "landscape": false,
+    "margin": "2",
+    "downscalePercent": 100
+  }
 }
