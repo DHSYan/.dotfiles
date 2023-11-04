@@ -25,16 +25,17 @@ yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Finder$" sticky=on layer=above
 yabai -m rule --add title='Preferences$' manage=off
 yabai -m rule --add title='Settings$' manage=off
+yabai -m rule --add title="Fantastical" manage=off
 
 ### Move the to the correct space
 yabai -m rule --add app="^Google Chrome$" space=1
 yabai -m rule --add app="^kitty$" space=2
 yabai -m rule --add app="^Alacritty$" space=2
 yabai -m rule --add app="^Zotero$" space=4
-yabai -m rule --add app="^Obsidian$" space=2
+# yabai -m rule --add app="^Obsidian$" space=2
 yabai -m rule --add app="^Discord$" space=7
 yabai -m rule --add app="^LINE$" space=7
-yabai -m rule --add app="Fantastical" space=5
+# yabai -m rule --add app="Fantastical" space=5
 yabai -m rule --add app="Brave Browser" space=6
 yabai -m rule --add app="^Spotify$" space=10
 yabai -m rule --add app="^GarageBand$" space=10

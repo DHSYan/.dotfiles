@@ -5,7 +5,8 @@ local config = {
         "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/COMP1511",
         "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/23T3/DESN1000",
         "/Users/tzen/Library/Mobile Documents/com~apple~CloudDocs/Personal-icloud/Notes",
-        "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
+        "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes",
+        "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
     },
     completion = {
         -- If using nvim-cmp, otherwise set to false

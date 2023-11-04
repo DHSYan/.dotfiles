@@ -10,8 +10,8 @@
   "newFileFolderPath": "",
   "newLinkFormat": "relative",
   "alwaysUpdateLinks": true,
-  "defaultViewMode": "preview",
-  "livePreview": false,
+  "defaultViewMode": "source",
+  "livePreview": true,
   "userIgnoreFilters": null,
   "pdfExportSettings": {
     "includeName": false,
@@ -19,5 +19,7 @@
     "landscape": false,
     "margin": "2",
     "downscalePercent": 100
-  }
+  },
+  "propertiesInDocument": "visible",
+  "readableLineLength": false
 }

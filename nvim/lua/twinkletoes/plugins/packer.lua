@@ -34,7 +34,7 @@ return require('packer').startup(function(use)
 		'nvim-treesitter/nvim-treesitter'
 		, { run = ':TSUpdate'})
 
-  use ('nvim-treesitter/nvim-treesitter-context')
+    use ('nvim-treesitter/nvim-treesitter-context')
 
 	use ('nvim-treesitter/playground')
 
@@ -84,9 +84,16 @@ return require('packer').startup(function(use)
     }
   }
 
-  use ('mfussenegger/nvim-jdtls')
+    use ('mfussenegger/nvim-jdtls')
 
-	use ('Pocco81/auto-save.nvim')
+	use {
+        'okuuva/auto-save.nvim', 
+        config = function() 
+            require("auto-save").setup({
+                debounce_delay = 1000, -- saves the file at most every `debounce_delay` milliseconds
+            })
+        end,
+    }
 
 	use ('lervag/vimtex') -- Latex
 
@@ -128,5 +135,4 @@ return require('packer').startup(function(use)
             })
         end,
     })
-
 end)
