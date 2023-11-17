@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-autoscroll",
+	"name": "Autoscroll",
+	"version": "0.1.3",
+	"minAppVersion": "0.15.0",
+	"description": "This plugin allows you to automatically scroll down the content with the provided speed",
+	"author": "Petr Nazarov",
+	"authorUrl": "https://github.com/petr-nazarov",
+	"isDesktopOnly": false
+}

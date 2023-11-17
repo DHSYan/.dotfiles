@@ -26,6 +26,7 @@ yabai -m rule --add app="^Finder$" sticky=on layer=above
 yabai -m rule --add title='Preferences$' manage=off
 yabai -m rule --add title='Settings$' manage=off
 yabai -m rule --add title="Fantastical" manage=off
+yabai -m rule --add title="FaceTime" manage=off
 
 ### Move the to the correct space
 yabai -m rule --add app="^Google Chrome$" space=1
