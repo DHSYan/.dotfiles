@@ -1,0 +1,20 @@
+function keymap()
+    -- Got the default from Github
+    local builtin = require('telescope.builtin')
+    local nmap = require('util.nmap')
+    nmap('<leader>ff', builtin.find_files, "[f]ind [f]iles")
+    nmap('<leader>ws', builtin.live_grep, "[W]ord [S]earch")
+    nmap('<leader>fb', builtin.buffers, "[f]ind [b]uffers")
+    nmap('<leader>km', builtin.keymaps, "[K]ey[m]ap")
+end
+
+return {
+    'nvim-telescope/telescope.nvim', tag = '0.1.4',
+    dependencies = { 
+        'nvim-lua/plenary.nvim',
+        'BurntSushi/ripgrep'
+    },
+    config = function()
+        keymap()
+    end
+}
