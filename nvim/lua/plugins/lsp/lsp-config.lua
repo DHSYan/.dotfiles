@@ -50,6 +50,7 @@ local on_attach = function(_, bufnr)
         print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, '[W]orkspace [L]ist Folders')
 
+
     -- Create a command `:Format` local to the LSP buffer
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()
@@ -63,6 +64,7 @@ return {
         'hrsh7th/cmp-nvim-lsp', -- LSP source for nvim-cmp
         'williamboman/mason-lspconfig.nvim',
         'williamboman/mason.nvim',
+        'L3MON4D3/LuaSnip',
     },
     config = function()
         -- local lspconfig = require("lspconfig")
@@ -73,23 +75,63 @@ return {
         mason_lspconfig.setup({
             ensure_installed = {},
         })
+
+
+        -- Taken from Kickstart (0 Idea what it does yet)
+        -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+        local capabilities = vim.lsp.protocol.make_client_capabilities()
+        capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
         mason_lspconfig.setup_handlers({
             function(server_name)
                 require('lspconfig')[server_name].setup({
-                    on_attach = on_attach
+                    capabilities = capabilities,
+                    on_attach = on_attach,
                 })
             end
         })
 
         -- Completion
         local cmp = require("cmp")
-        cmp.setup({
+        local luasnip = require('luasnip')
+        luasnip.config.setup({})
 
+        cmp.setup({
+            snippet = {
+                -- According to nvim-cmp, a snippnet engine is required
+                expand = function(args)
+                    luasnip.lsp_expand(args.body) -- 0??          
+                end
+            },
+            mapping = cmp.mapping.preset.insert({
+                ['<C-n>'] = cmp.mapping.select_next_item(),
+                ['<C-p>'] = cmp.mapping.select_prev_item(),
+                ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+                ['<C-f>'] = cmp.mapping.scroll_docs(4),
+                ['<CR>'] = cmp.mapping.confirm({
+                    behavior = cmp.ConfirmBehavior.Replace, -- 0??
+                    select = true                           -- 0??
+                })
+            }),
+            sources = cmp.config.sources(
+                {
+                    { name = 'nvim_lsp' },
+                    { name = 'luasnip'},
+                },
+
+                {
+                    { name = 'buffer'},
+                }
+            ),
         })
     end,
 }
-
--- This file is 99.99% from scratch
--- Not claiming that I came out with these,
 -- Just that that I go through line by line, and being very methiodically
 -- on what I write
+--
+
+-- [[ Questnion That I have ]]
+-- Say for example, I added LuaSnip to the dependencies, 
+-- then what if there's configuration that needs to be configured for that
+-- plugin?
+
