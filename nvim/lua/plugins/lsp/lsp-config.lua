@@ -161,6 +161,7 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
+                { name = 'orgmode' },
             }),
         })
     end,
@@ -168,7 +169,6 @@ return {
 -- Just that that I go through line by line, and being very methiodically
 -- on what I write
 --
-
 -- [[ Questnion That I have ]]
 -- Say for example, I added LuaSnip to the dependencies,
 -- then what if there's configuration that needs to be configured for that

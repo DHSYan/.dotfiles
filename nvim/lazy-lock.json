@@ -11,6 +11,7 @@
   "nvim-lspconfig": { "branch": "master", "commit": "addad5176dbbe8bcc82ef91c51c5f1bf6629ec2d" },
   "nvim-treesitter": { "branch": "master", "commit": "7da3cb6323d1e1fbfc4d7dc05cac74946458b8a0" },
   "obsidian.nvim": { "branch": "main", "commit": "5fa1ab80eeab116353f67e658c4924325b714b51" },
+  "orgmode": { "branch": "master", "commit": "e9c08d58c13372981815d207c78763e5beac32d4" },
   "plenary.nvim": { "branch": "master", "commit": "50012918b2fc8357b87cff2a7f7f0446e47da174" },
   "ripgrep": { "branch": "master", "commit": "082245dadb3854238e62b91aa95a46018cf16ef1" },
   "telescope.nvim": { "branch": "master", "commit": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a" }
