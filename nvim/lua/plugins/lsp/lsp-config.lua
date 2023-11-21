@@ -53,24 +53,30 @@ local luasnip_setup = function()
     luasnip.config.setup({})
     require('luasnip.loaders.from_vscode').lazy_load()
 
-    local next_choice = function()
-        if luasnip.choice_active() then
-            luasnip.change_choice(1)
-        else
-            print("not active")
-        end
-    end
-
-    vim.keymap.set({ "i" }, "<C-K>", function() luasnip.expand() end, { silent = false })
-    vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = false })
-    vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = false })
     vim.keymap.set(
         { "i", "s" }, -- insert mode and what is 's' mode?
-        "<C-e>",
-        next_choice,
+        "<c-k>",
+        function ()
+            if luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            end
+        end,
         {
             desc = "Snip: Next Choice",
             silent = false, -- what does thiss do?
+        }
+    )
+    vim.keymap.set(
+        {"i", "s"}, 
+        "<c-j>",
+        function ()
+            if luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            end
+        end,
+        {
+            desc = "Snip: Prev choice",
+            silent = false,
         }
     )
 
