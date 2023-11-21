@@ -1,7 +1,5 @@
 function keymaps()
     local nmap = require("util.nmap")
-    --  vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>")
-    --  vim.keymap.set("n", "<leader>ob", ":ObsidianBacklinks<CR>")
     nmap("<leader>oo", ":ObsidianOpen<CR>", "[O]bsidian [O]pen")
     nmap("<leader>ob", ":ObsidianBacklinks<CR>", "[O]bsidian [B]acklinks")
 end
@@ -22,6 +20,12 @@ local opts = {
         }
     },
 
+    backlinks = {
+        -- The default height of the backlinks pane.
+        height = 4,
+        -- Whether or not to wrap lines.
+        wrap = true,
+    },
 }
 
 return {
@@ -39,8 +43,9 @@ return {
     dependencies = {
         -- Required.
         "nvim-lua/plenary.nvim",
-
-        -- see below for full list of optional dependencies 👇
+        "nvim-treesitter/nvim-treesitter",
+        "hrsh7th/nvim-cmp",
+        "nvim-telescope/telescope.nvim"
     },
     config = function() 
         local obsidian = require("obsidian").setup(opts);

@@ -8,11 +8,8 @@ return {
                 "lua",
                 "vim",
                 "vimdoc",
-                "query",
-                "elixir",
-                "heex",
-                "javascript",
-                "html" 
+                "markdown",
+                "markdown_inline"
             },
             sync_install = false,
             highlight = { enable = true },
@@ -20,6 +17,7 @@ return {
         })
     end   
 }
+-- Not 100% from scratch, taken from github treesitter
 
 -- From what I know:
 -- Treesitter is a syntax parser that provides good features with 
