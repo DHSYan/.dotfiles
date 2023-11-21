@@ -53,6 +53,20 @@ local luasnip_setup = function()
     luasnip.config.setup({})
     require('luasnip.loaders.from_vscode').lazy_load()
 
+    -- Import my snippets
+    -- require("snippets.test") -- This doesn't work
+    local s = luasnip.s
+    local fmt = require("luasnip.extras.fmt").fmt
+    local i = luasnip.insert_node
+    local rep = require("luasnip.extras").rep
+    luasnip.snippets = {
+        lua = {
+            luasnip.parser.parse_snippet("epand", "-- this is test!"),
+            s("test", fmt("local {} = require('{}')", { i(1, "test"), rep(1)})),
+        }
+    }
+    luasnip.add_snippets(nil, luasnip.snippets, nil)
+
     vim.keymap.set(
         { "i", "s" }, -- insert mode and what is 's' mode?
         "<c-k>",
