@@ -49,7 +49,33 @@ local on_attach = function(_, bufnr)
 end
 
 local luasnip_setup = function()
+    local luasnip = require('luasnip')
+    luasnip.config.setup({})
+    require('luasnip.loaders.from_vscode').lazy_load()
 
+    local next_choice = function()
+        if luasnip.choice_active() then
+            luasnip.change_choice(1)
+        else
+            print("not active")
+        end
+    end
+
+    vim.keymap.set({ "i" }, "<C-K>", function() luasnip.expand() end, { silent = false })
+    vim.keymap.set({ "i", "s" }, "<C-L>", function() luasnip.jump(1) end, { silent = false })
+    vim.keymap.set({ "i", "s" }, "<C-J>", function() luasnip.jump(-1) end, { silent = false })
+    vim.keymap.set(
+        { "i", "s" }, -- insert mode and what is 's' mode?
+        "<C-e>",
+        next_choice,
+        {
+            desc = "Snip: Next Choice",
+            silent = false, -- what does thiss do?
+        }
+    )
+
+
+    return luasnip
 end
 
 return {
@@ -92,23 +118,23 @@ return {
 
         -- Completion
         local cmp = require("cmp")
-        local luasnip = require('luasnip')
-        require('luasnip.loaders.from_vscode').lazy_load()
-        luasnip.config.setup({})
+
+        -- Setup Luasnip & snippet related things
+        local luasnip = luasnip_setup()
 
         cmp.setup({
             snippet = {
                 -- According to nvim-cmp, a snippnet engine is required
                 expand = function(args)
-                    luasnip.lsp_expand(args.body) -- 0??          
+                    luasnip.lsp_expand(args.body) -- 0??
                 end
             },
-            -- window = {
-            --     -- I think these make the window bordered?
-            --     -- Which should make them easier to see if that's the case
-            --     completion = cmp.config.window.bordered(),
-            --     documentation = cmp.config.window.bordered(),
-            -- },
+            window = {
+                -- I think these make the window bordered?
+                -- Which should make them easier to see if that's the case
+                completion = cmp.config.window.bordered(),
+                documentation = cmp.config.window.bordered(),
+            },
             completion = {
                 completeopt = 'menu,menuone,noinsert'
             },
@@ -123,16 +149,10 @@ return {
                     select = true                           -- 0??
                 })
             }),
-            sources = cmp.config.sources(
-                {
-                    { name = 'nvim_lsp' },
-                    { name = 'luasnip'},
-                },
-
-                {
-                    { name = 'buffer'},
-                }
-            ),
+            sources = cmp.config.sources({
+                { name = 'nvim_lsp' },
+                { name = 'luasnip' },
+            }),
         })
     end,
 }
@@ -141,8 +161,6 @@ return {
 --
 
 -- [[ Questnion That I have ]]
--- Say for example, I added LuaSnip to the dependencies, 
+-- Say for example, I added LuaSnip to the dependencies,
 -- then what if there's configuration that needs to be configured for that
 -- plugin?
-
-
