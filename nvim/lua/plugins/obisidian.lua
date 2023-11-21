@@ -6,6 +6,24 @@ function keymaps()
     nmap("<leader>ob", ":ObsidianBacklinks<CR>", "[O]bsidian [B]acklinks")
 end
 
+local opts = {
+    workspaces = {
+        {
+            name = "Concept-Notes",
+            path = "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
+        },
+        {
+            name = "Personal-iCloud",
+            path = "/Users/tzen/Library/Mobile Documents/com~apple~CloudDocs/Personal-icloud/Notes"
+        },
+        {
+            name = "Daily-Notes",
+            path = "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
+        }
+    },
+
+}
+
 return {
     "epwalsh/obsidian.nvim",
     version = "*",  -- recommended, use latest release instead of latest commit
@@ -24,25 +42,9 @@ return {
 
         -- see below for full list of optional dependencies 👇
     },
-    opts = {
-        workspaces = {
-            {
-                name = "Concept-Notes",
-                path = "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
-            },
-            {
-                name = "Personal-iCloud",
-                path = "/Users/tzen/Library/Mobile Documents/com~apple~CloudDocs/Personal-icloud/Notes"
-            },
-            {
-                name = "Daily-Notes",
-                path = "/Users/tzen/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
-            }
-        },
-
-        -- see below for full list of options 👇
-    },
     config = function() 
+        local obsidian = require("obsidian").setup(opts);
+    
         keymaps();
 
     end 
