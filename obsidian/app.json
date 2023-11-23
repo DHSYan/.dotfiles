@@ -1,5 +1,5 @@
 {
-  "attachmentFolderPath": "./attachments",
+  "attachmentFolderPath": "./assets",
   "showUnsupportedFiles": false,
   "newFileLocation": "current",
   "strictLineBreaks": true,
