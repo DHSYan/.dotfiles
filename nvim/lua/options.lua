@@ -44,3 +44,4 @@ vim.opt.scrolloff = 8 -- so you would never have less then 8 line below you
 vim.opt.colorcolumn = "80" -- puts a color thingy at column 80
 
 vim.opt.cursorline = true
+
