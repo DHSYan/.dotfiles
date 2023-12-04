@@ -9,10 +9,12 @@ end
 local concept_note_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
 local personal_icloud_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
 local daily_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
+local youtube_notes_path = "/Library/Mobile Documents/com~apple~CloudDocs/Youtube-Life/Notes"
 
 local concept_note_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
 local personal_icloud_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
 local daily_notes_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
+local youtube_notes_path_half = "~/Library/Mobile Documents/com~apple~CloudDocs/Youtube-Life/Notes"
 
 local opts = {
     workspaces = {
@@ -33,7 +35,12 @@ local opts = {
             path = daily_notes_path_half,
             -- path = vim.fn.expand("~") .. daily_notes_path,
             -- path = "~" .. daily_notes_path,
-        }
+        },
+        {
+            name = "Youtube-Notes",
+            path = youtube_notes_path_half
+        },
+
     },
 
     detect_cwd = true,
@@ -70,7 +77,7 @@ local opts = {
         use_path_only = false,
     },
 
-    use_advanced_uri = true,
+    use_advanced_uri = false, -- this is a breaking change
 
     -- Specify how to handle attachments.
     attachments = { -- This was taken from the docs
@@ -116,6 +123,9 @@ return {
 
         "BufReadPre " .. vim.fn.expand("~") .. daily_notes_path .. "/**.md",
         "BufNewFile " .. vim.fn.expand("~") .. daily_notes_path .. "/**.md",
+
+        "BufReadPre " .. vim.fn.expand("~") .. youtube_notes_path .. "/**.md",
+        "BufNewFile " .. vim.fn.expand("~") .. youtube_notes_path .. "/**.md",
     },
     dependencies = {
         "nvim-lua/plenary.nvim",

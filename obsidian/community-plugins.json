@@ -1,11 +1,8 @@
 [
   "obsidian-excalidraw-plugin",
   "obsidian-relative-line-numbers",
-  "obsidian-hider",
-  "obsidian-hide-sidebars-when-narrow",
   "obsidian-kanban",
   "table-editor-obsidian",
   "highlightr-plugin",
-  "obsidian-autoscroll",
-  "obsidian-open-in-other-editor"
+  "obsidian-advanced-slides"
 ]

@@ -19,8 +19,9 @@ vim.opt.relativenumber = true
 
 -- vim.opt.updatetime = 30 -- Better to have high updatetime?
 
-vim.opt.swapfile = false
+vim.opt.swapfile = true
 vim.opt.backup = false
+vim.opt.writebackup = true
 
 vim.opt.mouse= nil
 

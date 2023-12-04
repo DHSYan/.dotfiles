@@ -3,7 +3,7 @@
   "interfaceFontFamily": "Iosevka",
   "textFontFamily": "Times New Roman,Iosevka Fixed,JetBrainsMono Nerd Font,JetBrainsMonoNL Nerd Font",
   "monospaceFontFamily": "JetBrainsMonoNL Nerd Font Mono",
-  "showViewHeader": false,
+  "showViewHeader": true,
   "nativeMenus": true,
   "translucency": false,
   "baseFontSize": 19

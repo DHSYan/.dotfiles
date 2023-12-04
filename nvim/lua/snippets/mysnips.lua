@@ -22,9 +22,17 @@ local lua = {
     s("hi", fmt("local {} = require('{}')", { i(1, "test"), rep(1)})),
 }
 
+local markdown = {
+    s("faq", fmt("> [!faq] {}\n> {}", {i(1, "title"), i(2, "body")})),
+
+    -- [ex]ternal [l]ink
+    s("exl", fmt("[{}]({})", {i(1, "name"), i(2, "link")})),
+}
+
 luasnip.snippets = {
     all = all,
-    lua = lua
+    lua = lua,
+    markdown = markdown,
 }
 
 -- Check :help luasnip
