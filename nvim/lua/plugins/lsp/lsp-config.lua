@@ -46,6 +46,7 @@ local on_attach = function(_, bufnr)
     vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
         vim.lsp.buf.format()
     end, { desc = 'Format current buffer with LSP' })
+
 end
 
 local luasnip_setup = function()
@@ -118,10 +119,24 @@ return {
 
         mason_lspconfig.setup_handlers({
             function(server_name)
-                require('lspconfig')[server_name].setup({
-                    capabilities = capabilities,
-                    on_attach = on_attach,
-                })
+                -- if server_name == "rust_analyzer" then
+                --     require('lspconfig').rust_analyzer.setup({
+                --         capabilities = capabilities,
+                --         settings = {
+                --             ['rust-analyzer'] = {
+                --                 diagnostics = {
+                --                     enable = false;
+                --                 }
+                --             }
+                --         },
+                --         on_attach = on_attach,
+                --     })
+                -- else
+                    require('lspconfig')[server_name].setup({
+                        capabilities = capabilities,
+                        on_attach = on_attach,
+                    })
+                -- end
             end
         })
 

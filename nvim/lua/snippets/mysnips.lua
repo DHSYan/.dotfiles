@@ -29,10 +29,15 @@ local markdown = {
     s("exl", fmt("[{}]({})", {i(1, "name"), i(2, "link")})),
 }
 
+local c = {
+    luasnip.parser.parse_snippet("stdio", "#include <stdio.h>"),
+}
+
 luasnip.snippets = {
     all = all,
     lua = lua,
     markdown = markdown,
+    c = c,
 }
 
 -- Check :help luasnip
