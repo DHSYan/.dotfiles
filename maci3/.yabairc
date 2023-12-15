@@ -32,6 +32,7 @@ yabai -m rule --add title="FaceTime" manage=off
 yabai -m rule --add app="^Google Chrome$" space=1
 yabai -m rule --add app="^kitty$" space=2
 yabai -m rule --add app="^Alacritty$" space=2
+yabai -m rule --add app="^WezTerm$" space=2
 yabai -m rule --add app="^Zotero$" space=4
 # yabai -m rule --add app="^Obsidian$" space=2
 yabai -m rule --add app="^Discord$" space=7

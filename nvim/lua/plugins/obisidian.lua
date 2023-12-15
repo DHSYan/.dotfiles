@@ -2,6 +2,9 @@ local function keymaps()
     local nmap = require("util.nmap")
     nmap("<leader>oo", ":ObsidianOpen<CR>", "[O]bsidian [O]pen")
     nmap("<leader>ob", ":ObsidianBacklinks<CR>", "[O]bsidian [B]acklinks")
+    nmap("<leader>otd", ":ObsidianToday<CR>", "[O]bsidian [T]o[m]orrow")
+    nmap("<leader>otm", ":ObsidianTomorrow<CR>", "[O]bsidian [T]o[d]ay")
+    nmap("<leader>oyd", ":ObsidianYesterday<CR>", "[O]bsidian [y]ester[d]ay")
 end
 
 
