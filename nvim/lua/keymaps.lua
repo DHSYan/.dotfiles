@@ -51,3 +51,7 @@ vim.keymap.set("n", "<leader>ss", ":w<CR>:silent !/Applications/Skim.app/Content
 
 
 vim.keymap.set("n", "<leader>v", ":VimtexView<CR>")
+
+
+vim.keymap.set("n", "<leader>ob", ":Lazy load obsidian.nvim<CR>")
+

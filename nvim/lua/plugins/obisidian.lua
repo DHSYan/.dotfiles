@@ -12,14 +12,15 @@ end
 local concept_note_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
 local personal_icloud_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
 local daily_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
-local youtube_notes_path = "/Library/Mobile Documents/com~apple~CloudDocs/Youtube-Life/Notes"
+local youtube_notes_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
 local presentation_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Presentation-Note"
+local degree_planning_path = "/Library/CloudStorage/OneDrive-UNSW/Degree-Plannig"
 
 
 local concept_note_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
 local personal_icloud_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
 local daily_notes_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
-local youtube_notes_path_half = "~/Library/Mobile Documents/com~apple~CloudDocs/Youtube-Life/Notes"
+local youtube_notes_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
 
 local opts = {
     workspaces = {
@@ -42,12 +43,16 @@ local opts = {
             -- path = "~" .. daily_notes_path,
         },
         {
-            name = "Youtube-Notes",
+            name = "Notes",
             path = youtube_notes_path_half
         },
         {
             name = "Presentation-Notes",
             path = "~" .. presentation_notes_path
+        },
+        {
+            name = "Degree-Planning",
+            path = "~" .. degree_planning_path
         },
 
     },
@@ -122,7 +127,7 @@ return {
     "epwalsh/obsidian.nvim",
     version = "*",
     lazy = true,
-    event = { -- this was taken from the docs
+    --[[ event = { -- this was taken from the docs
         -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
         -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
         "BufReadPre " .. vim.fn.expand("~") .. concept_note_path .. "/**.md",
@@ -139,7 +144,7 @@ return {
 
         "BufReadPre " .. vim.fn.expand("~") .. presentation_notes_path .. "/**.md",
         "BufNewFile " .. vim.fn.expand("~") .. presentation_notes_path .. "/**.md",
-    },
+    }, ]]
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
