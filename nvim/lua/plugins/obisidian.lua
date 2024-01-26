@@ -2,8 +2,8 @@ local function keymaps()
     local nmap = require("util.nmap")
     nmap("<leader>oo", ":ObsidianOpen<CR>", "[O]bsidian [O]pen")
     nmap("<leader>ob", ":ObsidianBacklinks<CR>", "[O]bsidian [B]acklinks")
-    nmap("<leader>otd", ":ObsidianToday<CR>", "[O]bsidian [T]o[m]orrow")
-    nmap("<leader>otm", ":ObsidianTomorrow<CR>", "[O]bsidian [T]o[d]ay")
+    -- nmap("<leader>otd", ":ObsidianToday<CR>", "[O]bsidian [T]o[d]ay")
+    nmap("<leader>otm", ":ObsidianTomorrow<CR>", "[O]bsidian [T]o[m]orrow")
     nmap("<leader>oyd", ":ObsidianYesterday<CR>", "[O]bsidian [y]ester[d]ay")
 end
 
@@ -126,6 +126,11 @@ local opts = {
 return {
     "epwalsh/obsidian.nvim",
     version = "*",
+    -- You can actually load a plugin when you press a key, and 
+    -- issue a command that is associated with that plugin.
+    keys = {
+      { "<leader>otd", "<cmd>ObsidianToday<cr>", desc = "[O]bsidian [t]o[d]ay" },
+    },
     lazy = true,
     --[[ event = { -- this was taken from the docs
         -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
