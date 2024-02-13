@@ -17,8 +17,13 @@ end
 -- For example, changing the color scheme:
 -- config.color_scheme = 'Teerb'
 
-config.font = wezterm.font 'Hermit'
-config.font_size = 19
+config.font = wezterm.font_with_fallback {
+    'Hermit',
+    'JetBrains Mono',
+    'Ubuntu Mono',
+}
+
+config.font_size = 14
 config.line_height = 0.8
 
 config.max_fps = 144
