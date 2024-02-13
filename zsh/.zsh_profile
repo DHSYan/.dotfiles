@@ -32,3 +32,7 @@ export CUR=$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/1.Terms/WT1
 export SCHOOL=$HOME/Library/CloudStorage/OneDrive-UniversityofWaterloo/
 export icloud=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs/
 # alias srm="mv $1 ~/trash/"
+#
+# Set the key repeat rate
+xset r rate 200 30
+

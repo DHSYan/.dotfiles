@@ -5,6 +5,8 @@ rm -rf ~/.config/nvim &&
 
 rm -rf ~/.zshrc && 
 rm -rf ~/.zsh_profile &&
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" &&
+
 # rm -rf ~/.oh-my-zsh &&
 
 rm -rf ~/.gitconfig &&
