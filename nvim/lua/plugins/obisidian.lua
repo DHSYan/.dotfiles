@@ -9,86 +9,72 @@ end
 
 
 -- TODO: These are Path on my Mac, need to make them more portable
-local concept_note_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
-local personal_icloud_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
-local daily_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
-local youtube_notes_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
-local presentation_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Presentation-Note"
-local degree_planning_path = "/Library/CloudStorage/OneDrive-UNSW/Degree-Plannig"
-
-
-local concept_note_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
-local personal_icloud_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
-local daily_notes_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
-local youtube_notes_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
+-- local concept_note_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
+-- local personal_icloud_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
+-- local daily_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
+-- local youtube_notes_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
+-- local presentation_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Presentation-Note"
+-- local degree_planning_path = "/Library/CloudStorage/OneDrive-UNSW/Degree-Plannig"
+--
+--
+-- local concept_note_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
+-- local personal_icloud_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
+-- local daily_notes_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
+-- local youtube_notes_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
 
 local opts = {
+    -- workspaces = {
+    --     {
+    --         name = "Concept-Notes",
+    --         path = concept_note_path_half,
+    --         -- path = vim.fn.expand("~") .. concept_note_path,
+    --         -- path = "~" .. concept_note_path,
+    --     },
+    --     {
+    --         name = "Notes",
+    --         path = personal_icloud_path_half,
+    --         -- path = vim.fn.expand("~") .. personal_icloud_path,
+    --         -- path = "~" .. personal_icloud_path,
+    --     },
+    --     {
+    --         name = "Daily-Notes",
+    --         path = daily_notes_path_half,
+    --         -- path = vim.fn.expand("~") .. daily_notes_path,
+    --         -- path = "~" .. daily_notes_path,
+    --     },
+    --     {
+    --         name = "Notes",
+    --         path = youtube_notes_path_half
+    --     },
+    --     {
+    --         name = "Presentation-Notes",
+    --         path = "~" .. presentation_notes_path
+    --     },
+    --     {
+    --         name = "Degree-Planning",
+    --         path = "~" .. degree_planning_path
+    --     },
+    --
+    -- },
     workspaces = {
         {
             name = "Concept-Notes",
-            path = concept_note_path_half,
-            -- path = vim.fn.expand("~") .. concept_note_path,
-            -- path = "~" .. concept_note_path,
+            path = "~/Concept-Notes",
         },
-        {
-            name = "Notes",
-            path = personal_icloud_path_half,
-            -- path = vim.fn.expand("~") .. personal_icloud_path,
-            -- path = "~" .. personal_icloud_path,
-        },
-        {
-            name = "Daily-Notes",
-            path = daily_notes_path_half,
-            -- path = vim.fn.expand("~") .. daily_notes_path,
-            -- path = "~" .. daily_notes_path,
-        },
-        {
-            name = "Notes",
-            path = youtube_notes_path_half
-        },
-        {
-            name = "Presentation-Notes",
-            path = "~" .. presentation_notes_path
-        },
-        {
-            name = "Degree-Planning",
-            path = "~" .. degree_planning_path
-        },
-
     },
-
-    detect_cwd = true,
 
     backlinks = {
         height = 4,
         wrap = true,
     },
+
+    new_notes_location = "current_dir",
+
     completion = { -- This was taken from the docs
         -- If using nvim-cmp, otherwise set to false
         nvim_cmp = true,
         -- Trigger completion at 2 chars
         min_chars = 2,
-        -- Where to put new notes created from completion. Valid options are
-        --  * "current_dir" - put new notes in same directory as the current buffer.
-        --  * "notes_subdir" - put new notes in the default notes subdirectory.
-        new_notes_location = "current_dir",
-
-        -- Control how wiki links are completed with these options:
-
-        -- Whether to add the note ID during completion.
-        -- E.g. "[[Foo" completes to "[[foo|Foo]]" assuming "foo" is the ID of the note.
-        -- Mutually exclusive with 'prepend_note_path' and 'use_path_only'.
-        prepend_note_id = true,
-
-        -- Whether to add the note path during completion.
-        -- E.g. "[[Foo" completes to "[[notes/foo|Foo]]" assuming "notes/foo.md" is the path of the note.
-        -- Mutually exclusive with 'prepend_note_id' and 'use_path_only'.
-        prepend_note_path = false,
-
-        -- Whether to only use paths during completion.
-        -- E.g. "[[Foo" completes to "[[notes/foo]]" assuming "notes/foo.md" is the path of the note.
-        -- Mutually exclusive with 'prepend_note_id' and 'prepend_note_path'.
-        use_path_only = false,
     },
 
     use_advanced_uri = false, -- this is a breaking change
@@ -130,6 +116,7 @@ return {
     -- issue a command that is associated with that plugin.
     keys = {
       { "<leader>otd", "<cmd>ObsidianToday<cr>", desc = "[O]bsidian [t]o[d]ay" },
+      { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "[O]bsidian [O]pen"},
     },
     lazy = true,
     --[[ event = { -- this was taken from the docs
