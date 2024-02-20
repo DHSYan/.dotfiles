@@ -29,3 +29,6 @@
 	gpgsign = true
 [pull]
 	rebase = false
+
+[safe]
+    directory = /home/tzen/.dotfiles
