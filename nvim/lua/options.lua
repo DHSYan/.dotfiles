@@ -46,3 +46,5 @@ vim.opt.colorcolumn = "80" -- puts a color thingy at column 80
 
 vim.opt.cursorline = true
 
+
+vim.opt.conceallevel = 1; -- for obsidian
