@@ -48,3 +48,4 @@ vim.opt.cursorline = true
 
 
 vim.opt.conceallevel = 2; -- for obsidian, see ":h conceallevel"
+-- vim.opt.concealcursor = "vi"
