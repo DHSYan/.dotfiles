@@ -9,7 +9,8 @@ return {
                 "vim",
                 "vimdoc",
                 "markdown",
-                "markdown_inline"
+                "markdown_inline",
+                "latex",
             },
             sync_install = false,
             highlight = { enable = true },

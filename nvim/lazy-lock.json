@@ -9,7 +9,7 @@
   "mason.nvim": { "branch": "main", "commit": "c43eeb5614a09dc17c03a7fb49de2e05de203924" },
   "nvim-cmp": { "branch": "main", "commit": "04e0ca376d6abdbfc8b52180f8ea236cbfddf782" },
   "nvim-lspconfig": { "branch": "master", "commit": "1699ce10c3aaf861cfa0c1303fcd19d2ed93e7ad" },
-  "nvim-treesitter": { "branch": "master", "commit": "d87074a06b3dfef0f8ed6bbf5953fca96abd312a" },
+  "nvim-treesitter": { "branch": "master", "commit": "6bd108a6f10aa01b854c3c673b6d9d61662a8c93" },
   "obsidian.nvim": { "branch": "main", "commit": "b5945fb94db35220b85c7e3ea7bc58a0b11c2ebc" },
   "orgmode": { "branch": "master", "commit": "c358d9506ff57ede31117a8cbe9040e6a0b7c8e4" },
   "plenary.nvim": { "branch": "master", "commit": "4f71c0c4a196ceb656c824a70792f3df3ce6bb6d" },

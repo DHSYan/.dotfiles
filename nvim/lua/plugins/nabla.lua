@@ -1,0 +1,16 @@
+-- return {
+--     "jbyuki/nabla.nvim",
+--     dependencies = {
+--         'nvim-treesitter/nvim-treesitter',
+--     },
+--     config = function()
+--         nabla = require("nabla")
+--         vim.api.nvim_create_autocmd("BufEnter", {
+--             pattern = "*", 
+--             callback = function()
+--                 nabla.enable_virt()
+--             end,
+--         })
+--     end,
+-- }
+return {}
