@@ -27,6 +27,8 @@ local markdown = {
 
     -- [ex]ternal [l]ink
     s("exl", fmt("[{}]({})", {i(1, "name"), i(2, "link")})),
+
+    s("vec", fmt("\\vec{{{}}}", {i(1, "letter")})),
 }
 
 local c = {
