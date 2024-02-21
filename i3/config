@@ -155,7 +155,12 @@ bindsym $mod+Shift+greater exec "i3-nagbar -t warning -m 'You pressed the exit s
 
 # Application Hotkeys
 bindsym Mod4+ctrl+m [class="(?i)spotify"] focus
+assign [class="(?i)spotify"] 8
+
+bindsym $mod+Mod4+Return [class="(?i)wezterm"] focus
+
 bindsym Mod4+ctrl+b [class="(?i)brave-browser"] focus
+assign [class="(?i)brave-browser"] 6
 
 
 # resize window (you can also use the mouse for that)
