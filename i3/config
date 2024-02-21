@@ -10,6 +10,8 @@
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod1
+# Mod4 - Meta Key
+# Mod1 - Alt Key
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -150,6 +152,12 @@ bindsym $mod+Shift+B restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+greater exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
+
+# Application Hotkeys
+bindsym Mod4+ctrl+m [class="(?i)spotify"] focus
+bindsym Mod4+ctrl+b [class="(?i)brave-browser"] focus
+
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -178,3 +186,5 @@ bar {
         status_command i3status
         font pango:DejaVu Sans Mono 32
 }
+
+
