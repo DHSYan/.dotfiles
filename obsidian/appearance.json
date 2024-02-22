@@ -6,6 +6,6 @@
   "showViewHeader": true,
   "nativeMenus": true,
   "translucency": false,
-  "baseFontSize": 19,
+  "baseFontSize": 23,
   "theme": "obsidian"
 }

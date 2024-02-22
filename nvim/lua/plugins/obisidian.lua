@@ -61,6 +61,10 @@ local opts = {
             name = "Concept-Notes",
             path = "~/Concept-Notes",
         },
+        {
+            name = "Concept-Notes on the cloud",
+            path = "/Users/twinkletoes/OneDrive - UNSW/1-Academics/Concept-Notes",
+        },
     },
 
     backlinks = {
