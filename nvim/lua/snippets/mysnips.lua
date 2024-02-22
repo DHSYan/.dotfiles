@@ -1,5 +1,3 @@
-local nmap = require("util.nmap")
-
 nmap('<leader>sr',
     "<cmd>source ~/.dotfiles/nvim/lua/snippets/mysnips.lua<CR>",
     "SNIP: [S]nip [R]eload")

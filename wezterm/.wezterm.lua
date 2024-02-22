@@ -18,8 +18,8 @@ end
 -- config.color_scheme = 'Teerb'
 
 config.font = wezterm.font_with_fallback {
-    'Hermit',
     'JetBrains Mono',
+    'Hermit',
     'Ubuntu Mono',
 }
 
