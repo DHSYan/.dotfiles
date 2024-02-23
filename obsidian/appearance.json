@@ -7,5 +7,6 @@
   "nativeMenus": true,
   "translucency": false,
   "baseFontSize": 23,
-  "theme": "obsidian"
+  "theme": "obsidian",
+  "cssTheme": "Things"
 }
