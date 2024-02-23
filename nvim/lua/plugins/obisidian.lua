@@ -65,6 +65,10 @@ local opts = {
             name = "Concept-Notes on the cloud",
             path = "/Users/twinkletoes/OneDrive - UNSW/1-Academics/Concept-Notes",
         },
+        {
+            name = "Remote-Vaults",
+            path = "~/Remote-Vaults",
+        },
     },
 
     backlinks = {
@@ -110,7 +114,7 @@ local opts = {
             -- Modified From the docs
         end,
     },
-    open_app_foreground = true,
+    open_app_foreground = false,
 }
 
 return {
