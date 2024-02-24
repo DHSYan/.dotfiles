@@ -85,8 +85,6 @@ local opts = {
         min_chars = 2,
     },
 
-    use_advanced_uri = false, -- this is a breaking change
-
     -- Specify how to handle attachments.
     attachments = { -- This was taken from the docs
         -- The default folder to place images in via `:ObsidianPasteImg`.
@@ -125,6 +123,7 @@ return {
     keys = {
       { "<leader>otd", "<cmd>ObsidianToday<cr>", desc = "[O]bsidian [t]o[d]ay" },
       { "<leader>oo", "<cmd>ObsidianOpen<cr>", desc = "[O]bsidian [O]pen"},
+      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "[O]bsidian [S]earch"},
     },
     lazy = true,
     --[[ event = { -- this was taken from the docs
