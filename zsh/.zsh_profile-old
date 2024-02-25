@@ -34,5 +34,5 @@ export icloud=$HOME/Library/Mobile\ Documents/com~apple~CloudDocs/
 # alias srm="mv $1 ~/trash/"
 #
 # Set the key repeat rate
-xset r rate 200 30
+# xset r rate 200 30
 
