@@ -1,6 +1,6 @@
 [core]
     editor = vim
-    excludesfile = ~/.gitignore_global
+    excludesfile = ~/.config/git/.gitignore_global
 
 [user]
     ; email = 69187273+DHSYan@users.noreply.github.com
