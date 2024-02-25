@@ -1,16 +1,17 @@
 Host School
-Hostname ubuntu2004-002.student.cs.uwaterloo.ca
-User s2yan
+    Hostname ubuntu2004-002.student.cs.uwaterloo.ca
+    User s2yan
 
 Host School1804
-Hostname ubuntu1804-002.student.cs.uwaterloo.ca
-User s2yan
+    Hostname ubuntu1804-002.student.cs.uwaterloo.ca
+    User s2yan
 
 
 Host git
-Hostname github.com
-User git
+    Hostname github.com
+    User git
+    IdentityFile ~/.ssh/main.pub
 
 Host unsw
-Hostname login.cse.unsw.edu.au
-User z5521807
+    Hostname login.cse.unsw.edu.au
+    User z5521807
