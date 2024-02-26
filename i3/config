@@ -52,6 +52,8 @@ exec --no-startup-id export ZDOTDIR=$HOME/.config/zsh
 # exec --no-startup-id xmodmap -e 'keycode 66 = Escape'
 exec --no-startup-id setxkbmap -option caps:escape
 
+exec --no-startup-id sxhkd
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
