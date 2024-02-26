@@ -1,0 +1,4 @@
+#/bin/zsh
+
+eval $(ssh-agent) 
+ssh-add ~/.ssh/main
