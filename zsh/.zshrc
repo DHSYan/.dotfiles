@@ -7,6 +7,7 @@ alias v="nvim"
 alias cf="source fuzzy_cd"
 alias ..="cd .."
 alias tt="cd ~/throw-away-code"
+alias ssh-login="source ssh-login"
 
 # My own scirpt Bin Path
 export PATH=$PATH:$HOME/.dotfiles/bin
