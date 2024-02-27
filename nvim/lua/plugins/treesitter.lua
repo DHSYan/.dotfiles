@@ -13,7 +13,10 @@ return {
                 "latex",
             },
             sync_install = false,
-            highlight = { enable = true },
+            highlight = {
+                enable = true,
+                disable = { "tex" , "latex"},
+            },
             indent = { enable = true },  
         })
     end   
