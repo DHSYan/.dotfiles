@@ -46,3 +46,4 @@ Maybe do something about: "on mbp162022 the notch block text, maybe have somethi
 detects if the cursor is at row 0, and do something about when it hit column notch"
 Try Programmers Dvorak??
 Change keyboard layout based on a shell? instead of the keyboard it self?
+- Obsidian.nvim when [[]] in notes, don't have it use id as filename.
