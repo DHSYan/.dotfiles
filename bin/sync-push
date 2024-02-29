@@ -1,0 +1,19 @@
+#!/bin/sh
+
+cd ~/Concept-Notes
+git status
+git add .
+git commit -m "Sync"
+git push origin main
+
+cd ~/Ansible-Linux
+git status
+git add .
+git commit -m "Sync"
+git push origin main
+
+cd ~/.dotfiles
+git status
+git add .
+git commit -m "Sync"
+git push origin main

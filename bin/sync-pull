@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cd ~/Concept-Notes
+git status
+git fetch
+git pull origin main
+
+cd ~/Ansible-Linux
+git status
+git fetch
+git pull origin main
+
+cd ~/.dotfiles
+git status
+git fetch
+git pull origin main
