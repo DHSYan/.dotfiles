@@ -5,7 +5,7 @@ git status
 git fetch
 git pull origin main
 
-cd ~/Ansible-Linux
+cd ~/Ansible-linux
 git status
 git fetch
 git pull origin main
