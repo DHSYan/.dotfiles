@@ -5,6 +5,6 @@ if [[ $# -eq 1 ]]; then
   selected=$1
   source cd $(find "$selected" -type d | fzf)
 else
-  source cd $(find . -type d | fzf)
+  source cd $(find ~ -type d | fzf)
 fi
 
