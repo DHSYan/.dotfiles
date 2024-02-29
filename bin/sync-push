@@ -6,7 +6,7 @@ git add .
 git commit -m "Sync"
 git push origin main
 
-cd ~/Ansible-Linux
+cd ~/Ansible-linux
 git status
 git add .
 git commit -m "Sync"
