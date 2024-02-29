@@ -16,4 +16,8 @@ export ZDOTDIR="$HOME/.config/zsh"
 
 source "$ZDOTDIR/zsh-functions"
 
+# History
+SAVEHIST=1000 #Saves 1000 recent lines
+HISTFILE="$ZDOTDIR/.zsh_history"
+
 source ssh-login
