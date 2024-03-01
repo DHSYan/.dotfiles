@@ -8,14 +8,14 @@
   "mason-lspconfig.nvim": { "branch": "main", "commit": "21d33d69a81f6351e5a5f49078b2e4f0075c8e73" },
   "mason.nvim": { "branch": "main", "commit": "3b5068f0fc565f337d67a2d315d935f574848ee7" },
   "nvim-cmp": { "branch": "main", "commit": "04e0ca376d6abdbfc8b52180f8ea236cbfddf782" },
-  "nvim-lspconfig": { "branch": "master", "commit": "ec7d51a619049c7c597f469f81ea199db6794651" },
-  "nvim-treesitter": { "branch": "master", "commit": "6e2b56cbe75ddf18e6efecee44bc3936d70b0b3e" },
-  "obsidian.nvim": { "branch": "main", "commit": "9ede6c86b1f47afe00442a6e84fa1f5b00153742" },
-  "orgmode": { "branch": "master", "commit": "5cc8e8594a7b2015ea27a97ffe4ebd6ab340c3c9" },
+  "nvim-lspconfig": { "branch": "master", "commit": "9553725789be682ecd945a527ec552e489ea8534" },
+  "nvim-treesitter": { "branch": "master", "commit": "62b0bb4f24ad09f535efe44cc9d088f90dcd2498" },
+  "obsidian.nvim": { "branch": "main", "commit": "b1f5eb198a6e8dffffc484e803f0b3de4e15f815" },
+  "orgmode": { "branch": "master", "commit": "3f572cad2983731c9fa4b9879aa4d40da9d68fee" },
   "plenary.nvim": { "branch": "master", "commit": "4f71c0c4a196ceb656c824a70792f3df3ce6bb6d" },
   "ripgrep": { "branch": "master", "commit": "6ebebb2aaa9991694aed10b944cf2e8196811e1c" },
   "telescope.nvim": { "branch": "master", "commit": "7011eaae0ac1afe036e30c95cf80200b8dc3f21a" },
   "tokyonight.nvim": { "branch": "main", "commit": "610179f7f12db3d08540b6cc61434db2eaecbcff" },
   "undotree": { "branch": "master", "commit": "9dbbf3b7d19dda0d22ceca461818e4739ad8154d" },
-  "vimtex": { "branch": "master", "commit": "88eca564017f98a48294c8e85cedf84e188e8dcc" }
+  "vimtex": { "branch": "master", "commit": "2bb7cdc17c0ac18266e4c96083290956169c1c38" }
 }

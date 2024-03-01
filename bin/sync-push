@@ -3,17 +3,23 @@
 cd ~/Concept-Notes
 git status
 git add .
-git commit -m "Sync"
+echo "Notes Commit Msg: "
+read -r notes
+git commit -m "{$notes}"
 git push origin main
 
 cd ~/Ansible-linux
 git status
 git add .
-git commit -m "Sync"
+echo "Ansible Commit Msg: "
+read -r Ansible
+git commit -m "{$Ansible}"
 git push origin main
 
 cd ~/.dotfiles
 git status
 git add .
-git commit -m "Sync"
+echo "Dotfiles Commit Msg: "
+read -r dotfiles
+git commit -m "{$dotfiles}"
 git push origin main
