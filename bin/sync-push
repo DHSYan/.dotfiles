@@ -5,7 +5,7 @@ git status
 git add .
 echo "Notes Commit Msg: "
 read -r notes
-git commit -m "{$notes}"
+git commit -m "$notes"
 git push origin main
 
 cd ~/Ansible-linux
@@ -13,7 +13,7 @@ git status
 git add .
 echo "Ansible Commit Msg: "
 read -r Ansible
-git commit -m "{$Ansible}"
+git commit -m "$Ansible"
 git push origin main
 
 cd ~/.dotfiles
@@ -21,5 +21,5 @@ git status
 git add .
 echo "Dotfiles Commit Msg: "
 read -r dotfiles
-git commit -m "{$dotfiles}"
+git commit -m "$dotfiles"
 git push origin main
