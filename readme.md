@@ -39,11 +39,13 @@ create a symlink from to the home dir, from the Git dir, it has the global gitig
   - better git pushing and commiting scritps
 
 #### To do
-Change Vim clipboard register?
-Better Remaps
-Fugititive learning
-Maybe do something about: "on mbp162022 the notch block text, maybe have something that 
-detects if the cursor is at row 0, and do something about when it hit column notch"
-Try Programmers Dvorak??
-Change keyboard layout based on a shell? instead of the keyboard it self?
-- Obsidian.nvim when [[]] in notes, don't have it use id as filename.
+- [x] Change Vim clipboard register?
+- [x] Better Remaps
+- [ ] Fugititive learning
+- [ ] Maybe do something about: "on mbp162022 the notch block text, maybe have something that 
+    detects if the cursor is at row 0, and do something about when it hit column notch"
+- [ ] Try Programmers Dvorak??
+- [ ] Change keyboard layout based on a shell? instead of the keyboard it self?
+- [x] Obsidian.nvim when [[]] in notes, don't have it use id as filename.
+
+- [ ] make window manager rules for wezterm, google browser.
