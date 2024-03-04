@@ -1,3 +1,3 @@
 #!/bin/zsh
 
-xrandr --output eDP --mode 2560x1600
+xrandr --output eDP-1 --mode 2560x1600
