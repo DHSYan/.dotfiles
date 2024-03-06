@@ -1,15 +1,18 @@
 #!/bin/sh
 
+printf "\n==========================CONCEPT NOTES============================\n"
 cd ~/Concept-Notes
 git status
 git fetch
 git pull origin main
 
+printf "\n\n========================ANSIBLE LINUX==============================\n"
 cd ~/Ansible-linux
 git status
 git fetch
 git pull origin main
 
+printf "\n\n========================DOTFILES===================================\n"
 cd ~/.dotfiles
 git status
 git fetch
