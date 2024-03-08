@@ -1,4 +1,4 @@
 #/bin/zsh
 
 eval $(ssh-agent) 
-ssh-add ~/.ssh/main
+ssh-add ~/.ssh/yubikey5c_ed25519_sk

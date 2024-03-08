@@ -10,7 +10,6 @@ Host School1804
 Host git
     Hostname github.com
     User git
-    IdentityFile ~/.ssh/main.pub
 
 Host unsw
     Hostname login.cse.unsw.edu.au
