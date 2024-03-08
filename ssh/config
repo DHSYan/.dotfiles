@@ -6,11 +6,11 @@ Host School1804
     Hostname ubuntu1804-002.student.cs.uwaterloo.ca
     User s2yan
 
-
 Host git
     Hostname github.com
     User git
     IdentityFile ~/.ssh/yubikey5c_ed25519_sk
+    IdentitiesOnly yes
 
 Host unsw
     Hostname login.cse.unsw.edu.au
