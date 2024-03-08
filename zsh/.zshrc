@@ -23,3 +23,14 @@ HISTFILE="$ZDOTDIR/.zsh_history"
 eval $(ssh-agent -s)
 
 # source ssh-login
+#
+#
+#
+
+current_arch=$(uname --machine)
+
+if [ current_arch = "aarch64" ]
+then 
+    alias wezterm="flatpak run org.wezfurlong.wezterm"
+fi
+
