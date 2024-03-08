@@ -28,8 +28,7 @@ eval $(ssh-agent -s)
 #
 
 current_arch=$(uname --machine)
-
-if [ current_arch = "aarch64" ]
+if [ "$current_arch" = "aarch64" ]
 then 
     alias wezterm="flatpak run org.wezfurlong.wezterm"
 fi
