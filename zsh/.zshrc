@@ -20,4 +20,6 @@ source "$ZDOTDIR/zsh-functions"
 SAVEHIST=1000 #Saves 1000 recent lines
 HISTFILE="$ZDOTDIR/.zsh_history"
 
+eval $(ssh-agent -s)
+
 # source ssh-login
