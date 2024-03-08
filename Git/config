@@ -7,8 +7,7 @@
     ; email = sean.yan@uwaterloo.ca
     email = sean.yan@student.unsw.edu.au
     name = DHSYan
-    signingkey = ~/.ssh/yubikey5c_ed25519_sk
-    ; sshCommand = "ssh -F ~/.ssh/config"
+    signingkey = ~/.ssh/id_ed25519_sk
 
 [alias]
     s = status

@@ -9,10 +9,7 @@ Host School1804
 Host git
     Hostname github.com
     User git
-    IdentityFile ~/.ssh/yubikey5c_ed25519_sk
-    IdentitiesOnly yes
 
 Host unsw
     Hostname login.cse.unsw.edu.au
     User z5521807
-    IdentityFile ~/.ssh/yubikey5c_ed25519_sk
