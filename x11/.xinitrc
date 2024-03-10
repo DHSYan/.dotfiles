@@ -1,2 +1,2 @@
-# exec dwm
+exec i3
 ibus-daemon
