@@ -49,3 +49,16 @@ vim.opt.cursorline = true
 
 vim.opt.conceallevel = 2; -- for obsidian, see ":h conceallevel"
 -- vim.opt.concealcursor = "vi"
+--
+--
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "asm",
+    callback = function()
+        vim.opt.tabstop = 8
+        vim.opt.softtabstop = 8
+        vim.opt.shiftwidth = 8
+        vim.opt.expandtab = false
+        vim.opt.smartindent = false
+    end,
+})
+

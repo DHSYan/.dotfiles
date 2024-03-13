@@ -31,4 +31,5 @@
 	rebase = false
 
 [safe]
-    directory = /home/tzen/.dotfiles
+	directory = /home/tzen/mnt/cs1521/railroad_runners
+	directory = /home/tzen/mnt/cs1521/railroad_runners_local
