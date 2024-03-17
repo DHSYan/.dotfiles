@@ -49,3 +49,7 @@ create a symlink from to the home dir, from the Git dir, it has the global gitig
 - [x] Obsidian.nvim when [[]] in notes, don't have it use id as filename.
 
 - [ ] make window manager rules for wezterm, google browser.
+
+
+# Notes
+I think Neovim is having trouble editing symlinks
