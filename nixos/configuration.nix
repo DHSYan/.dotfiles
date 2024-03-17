@@ -65,17 +65,32 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	neovim
+  	dmenu
 	git
-	dmenu
-	make
+	gcc
+	gnumake
 	google-chrome
+	neovim
+	wezterm
+	xorg.xorgserver
+	xorg.xf86inputevdev
+	xorg.xf86inputsynaptics
+	xorg.xf86inputlibinput
+	xorg.xf86videointel
+	xorg.xf86videoati
+	xorg.xf86videonouveau
 	xorg.libX11
 	xorg.libX11.dev
+	xorg.libxcb
+	xorg.libXft
+	xorg.libXinerama
+	xorg.xauth
 	xorg.xinit	
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+	xorg.xinput
   ];
+
+  hardware.opengl.enable = true;
+  hardware.opengl.driSupport = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -87,6 +102,10 @@
 
   # List services that you want to enable:
 
+  services.xserver.enable = true;
+  services.xserver.windowManager.dwm.enable = true;
+  services.xserver.displayManager.startx.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   # Open ports in the firewall.
@@ -94,6 +113,13 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  # Overlay
+  nixpkgs.overlays = [
+	(final: prev: {
+		dwm = prev.dwm.overrideAttrs (old: { src = /home/tzen/.dotfiles/dwm-stuff/dwm ;});
+	})
+  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
