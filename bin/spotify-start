@@ -1,0 +1,3 @@
+#!/bin/zsh
+
+snap run spotify
