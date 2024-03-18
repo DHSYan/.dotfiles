@@ -1,21 +1,35 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 10;        /* border pixel of windows */
+static const unsigned int borderpx  = 5;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=24" };
 static const char dmenufont[]       = "monospace:size=24";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#6600ff";
+static const char col_gray2[]       = "#ff0000";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#ff0000";
+static const char col_cyan[]        = "#003366";
+
+static const char demu_text_color[]        = "#ffffff"; // white
+static const char demu_text_bgcolor[]        = "#006633"; // Dark Green
+static const char demu_bgcolor[]        = "#1a1a1a"; // Dark Gray
+
+static const char selected_bg[]        = "#00ffff"; // Red // this is the background of seleceted stuff in the bar
+static const char selected_fg[]        = "#003300"; // Red // this is the text color of the seleceted stuff in the bar 
+static const char selected_border[]        = "#ff0000"; // Red // this is the bordor color of those window that are seleted
+
+
+static const char norm_bg[]        = "#ff00ff"; // blue // THis value will change the background of unselected bar
+static const char norm_fg[]        = "#cccc00"; // blue // this value will change the text color in the bar
+static const char norm_border[]        = "#0000ff"; // blue // This is the value of unselected window's border color
+
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { norm_fg, norm_bg, norm_border }, // Unfocused Window's Bordor Color
+	[SchemeSel]  = { selected_fg, selected_bg,  selected_border  }, // border here is 
 };
 
 /* tagging */
@@ -58,12 +72,12 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", demu_bgcolor, "-nf", demu_text_color, "-sb", demu_text_bgcolor, "-sf", demu_text_color, NULL };
 static const char *termcmd[]  = { "wezterm", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_e,      spawn,          {.v = dmenucmd } },
+	{ Mod4Mask,                     XK_e,      spawn,          {.v = dmenucmd } },
     { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
