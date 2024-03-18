@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 5;        /* border pixel of windows */
+static const unsigned int borderpx  = 7;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -17,14 +17,14 @@ static const char demu_text_color[]        = "#ffffff"; // white
 static const char demu_text_bgcolor[]        = "#006633"; // Dark Green
 static const char demu_bgcolor[]        = "#1a1a1a"; // Dark Gray
 
-static const char selected_bg[]        = "#00ffff"; // Red // this is the background of seleceted stuff in the bar
-static const char selected_fg[]        = "#003300"; // Red // this is the text color of the seleceted stuff in the bar 
-static const char selected_border[]        = "#ff0000"; // Red // this is the bordor color of those window that are seleted
+static const char selected_bg[]        = "#5C564F"; // Dark Gray // this is the background of seleceted stuff in the bar
+static const char selected_fg[]        = "#ffffff"; // White // this is the text color of the seleceted stuff in the bar 
+static const char selected_border[]        = "#DBA161"; // Dark Gold // this is the bordor color of those window that are seleted
 
 
-static const char norm_bg[]        = "#ff00ff"; // blue // THis value will change the background of unselected bar
-static const char norm_fg[]        = "#cccc00"; // blue // this value will change the text color in the bar
-static const char norm_border[]        = "#0000ff"; // blue // This is the value of unselected window's border color
+static const char norm_bg[]        = "#314766"; // blue // THis value will change the background of unselected bar
+static const char norm_fg[]        = "#ffffff"; // blue // this value will change the text color in the bar
+static const char norm_border[]        = "#5C564F"; // blue // This is the value of unselected window's border color
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
