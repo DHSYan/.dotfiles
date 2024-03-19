@@ -1,3 +1,6 @@
 #screen brightness half
 super + alt + 9
     xrandr --output eDP-1 --brightness .45
+
+super + alt + p
+    flameshot gui
