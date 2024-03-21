@@ -6,6 +6,8 @@
       ./hardware-configuration.nix
     ];
 
+  console.useXkbConfig = true;
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -36,6 +38,7 @@
   services.xserver.enable = true;
   services.xserver.autorun = false;
   services.xserver.displayManager.startx.enable = true;
+  services.xserver.dpi = 140;
 
   services.xserver.windowManager.dwm.enable = true;
   # DWM Overlay
@@ -45,6 +48,7 @@
 	})
   ];
 
+  # I hate that I have to put this here, because what if I am on system with different GPU..
   hardware.opengl = {
   	enable = true;
 	driSupport = true;
@@ -92,9 +96,14 @@
      wezterm
      google-chrome
      gcc
+     clang
      neovim 
+     ripgrep
+     unzip
      wget
      git
+     xclip
+     xorg.xdpyinfo
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
