@@ -38,7 +38,7 @@
   services.xserver.enable = true;
   services.xserver.autorun = false;
   services.xserver.displayManager.startx.enable = true;
-  services.xserver.dpi = 140;
+  services.xserver.dpi = 110;
 
   services.xserver.windowManager.dwm.enable = true;
   # DWM Overlay
@@ -74,7 +74,7 @@
 
   # Enable sound.
   sound.enable = true;
-  # hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -84,10 +84,12 @@
     isNormalUser = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      firefox
-      tree
     ];
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+	  "electron-25.9.0"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -99,11 +101,38 @@
      clang
      neovim 
      ripgrep
+     tldr
+     tmux
      unzip
      wget
      git
      xclip
      xorg.xdpyinfo
+     xorg.xinput
+     xorg.xev
+     feh
+     zsh
+     fzf
+     sxhkd
+     texliveSmall
+     racket
+     neofetch
+     libfido2
+     sshfs-fuse
+     xorg.xsetroot
+     spotify
+     discord
+     lua
+     luajit
+     gnumake
+     cmake
+     unzip
+     gnutar
+     curl
+     wget
+     obsidian # need to enable some electron package
+     localsend
+     xournalpp
    ];
 
   # Some programs need SUID wrappers, can be configured further or are
