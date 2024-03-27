@@ -1,0 +1,41 @@
+{
+  "callouts": {
+    "custom": [
+      "def",
+      "thm",
+      "notation"
+    ],
+    "settings": {
+      "def": [
+        {
+          "changes": {
+            "icon": "lucide-book-open-text",
+            "color": "0, 107, 7"
+          }
+        }
+      ],
+      "thm": [
+        {
+          "changes": {
+            "icon": "lucide-lightbulb",
+            "color": "255, 247, 0"
+          }
+        }
+      ],
+      "notation": [
+        {
+          "changes": {
+            "icon": "highlightr-pen-blue",
+            "color": "0, 51, 255"
+          }
+        }
+      ]
+    }
+  },
+  "calloutDetection": {
+    "obsidianFallbackForced": false,
+    "obsidian": true,
+    "theme": true,
+    "snippet": true
+  }
+}
