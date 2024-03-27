@@ -1,0 +1,9 @@
+#!/bin/sh
+
+sudo cp /etc/nixos/configuration.nix ~/.dotfiles/nixos/configuration.nix
+cd ~/.dotfiles
+git s
+git add .
+git commit -m "Nixos Update"
+
+

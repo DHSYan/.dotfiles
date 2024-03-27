@@ -137,6 +137,8 @@
      obsidian # need to enable some electron package
      localsend
      xournalpp
+     thunderbird
+     flameshot
    ];
 
    environment.variables = rec {
