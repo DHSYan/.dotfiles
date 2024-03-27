@@ -139,6 +139,11 @@
      xournalpp
    ];
 
+   environment.variables = rec {
+	XDG_CONFIG_HOME = "$HOME/.config";
+	ZDOTDIR = "$HOME/.config/zsh";
+   };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
