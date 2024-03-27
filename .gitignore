@@ -2,3 +2,5 @@
 *.un~
 obsidian/workspace.json
 *.o
+.zsh_history
+.zcompdump
