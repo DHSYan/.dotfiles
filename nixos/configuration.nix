@@ -146,6 +146,10 @@
 	ZDOTDIR = "$HOME/.config/zsh";
    };
 
+   fonts.packages = with pkgs; [
+     (nerdfonts.override { fonts = [ "Hermit" "Iosevka" "JetBrainsMono" "Terminus"];})
+   ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

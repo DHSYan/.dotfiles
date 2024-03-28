@@ -18,13 +18,13 @@ end
 -- config.color_scheme = 'Teerb'
 
 config.font = wezterm.font_with_fallback {
-    'HurmitNerdFontMono',
-    'Hermit',
-    'JetBrains Mono',
-    'Ubuntu Mono',
+    'Terminess Nerd Font',
+    'HurmitNerdFont',
+    'Jetbrains Mono Nerd Font',
+    'JetbrainsMonoNerdFont',
 }
 
-config.font_size = 14
+config.font_size = 20
 config.line_height = 0.8
 
 config.max_fps = 144

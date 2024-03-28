@@ -47,5 +47,7 @@ create a symlink from to the home dir, from the Git dir, it has the global gitig
 - [ ] better dwm bar or rice dwm in general
 - [ ] Update this readme
 
+### Nixos TODO
+- [x] fonts
 # Notes
 I think Neovim is having trouble editing symlinks
