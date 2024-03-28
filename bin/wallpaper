@@ -1,0 +1,5 @@
+#!/bin/sh
+
+selected=$(find ~/.dotfiles/wallpaper -type f | fzf)
+
+feh --bg-fill $selected
