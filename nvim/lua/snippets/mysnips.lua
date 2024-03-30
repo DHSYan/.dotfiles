@@ -21,12 +21,15 @@ local lua = {
 }
 
 local markdown = {
-    s("faq", fmt("> [!faq] {}\n> {}", {i(1, "title"), i(2, "body")})),
+    s("cal", fmt("> [!{}] {}\n> {}", {i(1, "type"), i(2, "title"), i(3, "body")})),
 
     -- [ex]ternal [l]ink
     s("exl", fmt("[{}]({})", {i(1, "name"), i(2, "link")})),
 
     s("vec", fmt("\\vec{{{}}}", {i(1, "letter")})),
+    s("O(", fmt("$O({})$", {i(1, "___")})),
+    luasnip.parser.parse_snippet("implies", "$\\implies$"),
+
 }
 
 local c = {
