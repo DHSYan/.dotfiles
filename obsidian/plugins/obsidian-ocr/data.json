@@ -1,0 +1,16 @@
+{
+  "ocrProviderName": "NoOp",
+  "ocrProviderSettings": {},
+  "fuzzySearch": true,
+  "caseSensitive": false,
+  "ocrImage": true,
+  "ocrPDF": false,
+  "concurrentIndexingProcesses": 1,
+  "additionalSearchPath": "",
+  "density": 300,
+  "quality": 98,
+  "additionalImagemagickArgs": "",
+  "showTips": true,
+  "logToFile": false,
+  "logLevel": "warn"
+}

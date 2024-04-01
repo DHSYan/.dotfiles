@@ -8,5 +8,8 @@
   "calendar",
   "obsidian-tasks-plugin",
   "obsidian-hider",
-  "callout-manager"
+  "callout-manager",
+  "obsidian-cursor-location-plugin",
+  "obsidian-autoscroll",
+  "obsidian-ocr"
 ]

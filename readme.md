@@ -43,11 +43,18 @@ create a symlink from to the home dir, from the Git dir, it has the global gitig
 - [V] Better Remaps
 - [ ] Fugititive learning
 - [x] Obsidian.nvim when [[]] in notes, don't have it use id as filename.
-- [ ] make window manager rules for wezterm, google browser.
-- [ ] better dwm bar or rice dwm in general
 - [ ] Update this readme
+- [ ] Have wezterm tab title show the current directory and process
+- [ ] Learn how to use wezterm properly
+
+### DWM TODO
+- [ ] better dwm bar or rice dwm in general
+- [ ] make window manager rules for wezterm, google browser.
 
 ### Nixos TODO
 - [x] fonts
+- [ ] Notification Daemon?
+- [ ] Media Key support?
+
 # Notes
 I think Neovim is having trouble editing symlinks
