@@ -28,7 +28,9 @@ local markdown = {
 
     s("vec", fmt("$\\vec{{{}}}$", {i(1, "letter")})),
     s("O(", fmt("$O({})$", {i(1, "___")})),
+    s("frac", fmt("$\\frac{{{}}}{{{}}}$", {i(1, "___"), i(2, "___")})),
     luasnip.parser.parse_snippet("implies", "$\\implies$"),
+    luasnip.parser.parse_snippet("alpha", "$\\alpha$"),
 
 }
 
