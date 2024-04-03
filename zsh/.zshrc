@@ -12,9 +12,9 @@ alias tt="cd ~/throw-away-code"
 # My own scirpt Bin Path
 export PATH=$PATH:$HOME/.dotfiles/bin
 
-export ZDOTDIR="$HOME/.config/zsh"
+# export ZDOTDIR="$HOME/.config/zsh"
 
-source "$ZDOTDIR/zsh-functions"
+# source "$ZDOTDIR/zsh-functions"
 
 # History
 SAVEHIST=1000 #Saves 1000 recent lines

@@ -3,4 +3,5 @@
 xrandr --output HDMI-0 --mode 3840x2160
 xset r rate 250 30
 # ~/dwm-bar/dwm_bar.sh
-exec startdwm
+# exec startdwm
+exec dwm

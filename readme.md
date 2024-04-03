@@ -46,6 +46,7 @@ create a symlink from to the home dir, from the Git dir, it has the global gitig
 - [ ] Update this readme
 - [ ] Have wezterm tab title show the current directory and process
 - [ ] Learn how to use wezterm properly
+- [ ] Check out what is Ly display manager
 
 ### DWM TODO
 - [ ] better dwm bar or rice dwm in general
@@ -58,3 +59,5 @@ create a symlink from to the home dir, from the Git dir, it has the global gitig
 
 # Notes
 I think Neovim is having trouble editing symlinks
+
+
