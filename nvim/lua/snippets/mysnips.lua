@@ -2,43 +2,79 @@ nmap('<leader>sr',
     "<cmd>source ~/.dotfiles/nvim/lua/snippets/mysnips.lua<CR>",
     "SNIP: [S]nip [R]eload")
 
-local luasnip = require("luasnip")
-
-local s = luasnip.s
+local ls = require("luasnip")
+local s = ls.snippet
+local sn = ls.snippet_node
+local isn = ls.indent_snippet_node
+local t = ls.text_node
+local i = ls.insert_node
+local f = ls.function_node
+local c = ls.choice_node
+local d = ls.dynamic_node
+local r = ls.restore_node
+local events = require("luasnip.util.events")
+local ai = require("luasnip.nodes.absolute_indexer")
+local extras = require("luasnip.extras")
+local l = extras.lambda
+local rep = extras.rep
+local p = extras.partial
+local m = extras.match
+local n = extras.nonempty
+local dl = extras.dynamic_lambda
 local fmt = require("luasnip.extras.fmt").fmt
-local i = luasnip.insert_node
-local rep = require("luasnip.extras").rep
+local fmta = require("luasnip.extras.fmt").fmta
+local conds = require("luasnip.extras.expand_conditions")
+local postfix = require("luasnip.extras.postfix").postfix
+local types = require("luasnip.util.types")
+local parse = require("luasnip.util.parser").parse_snippet
+local ms = ls.multi_snippet
+local k = require("luasnip.nodes.key_indexer").new_key
 
 local all = {
-    luasnip.parser.parse_snippet("test", "LUA SNIP IS WORKING"),
-    luasnip.parser.parse_snippet("another", "LOL"),
-    luasnip.parser.parse_snippet("KEKW", "LOL"),
 }
 
-local lua = {
-    luasnip.parser.parse_snippet("epand", "-- this is test!"),
-    s("hi", fmt("local {} = require('{}')", { i(1, "test"), rep(1)})),
-}
+local lua = {}
+
 
 local markdown = {
     s("cal", fmt("> [!{}] {}\n> {}", {i(1, "type"), i(2, "title"), i(3, "body")})),
 
-    -- [ex]ternal [l]ink
-    s("exl", fmt("[{}]({})", {i(1, "name"), i(2, "link")})),
+    s("vec", fmta("\\vec{<>}", {i(1, "letter")})),
+    s("O", fmta("O(<>)", {i(1, "___")})),
+    s("frac", fmta("\\frac{<>}{<>}", {i(1, "___"), i(2, "___")})),
+    s("ml", fmta("$<>$", {i(1, "INLINE")})),
+    s("mb", fmta("$$<>$$", {i(1, "BLOCK")})),
+    s({trig = "(%d)/(%d)", regTrig = true, snippetType="autosnippet"},
+        fmta("\\frac{<>}{<>}",
+            {
+                f(function(arg, snip) return snips.captures[1] end, {}),
+                f(function(arg, snip) return snips.captures[2] end, {}) 
+            }
 
-    s("vec", fmt("$\\vec{{{}}}$", {i(1, "letter")})),
-    s("O(", fmt("$O({})$", {i(1, "___")})),
-    s("frac", fmt("$\\frac{{{}}}{{{}}}$", {i(1, "___"), i(2, "___")})),
-    luasnip.parser.parse_snippet("implies", "$\\implies$"),
-    luasnip.parser.parse_snippet("alpha", "$\\alpha$"),
+        )
+    ),
+    s({trig = '([%a%)%]%}])00', regTrig = true, wordTrig = false, snippetType="autosnippet"},
+        fmta(
+            "<>_{<>}",
+            {
+                f( function(_, snip) return snip.captures[1] end ),
+                t("0")
+            }
+        )
+    ),
 
+    s("=>", t("\\implies ")),
+    s("a", t("\\alpha ")),
+    s("d", t("\\delta ")),
+    s("D", t("\\Delta ")),
+    s("+-", t( "\\pm ")),
 }
 
 local c = {
-    luasnip.parser.parse_snippet("stdio", "#include <stdio.h>"),
+    s("std", t("#include <stdio.h>\n#include <stdlib.h>")),
 }
 
-luasnip.snippets = {
+ls.snippets = {
     all = all,
     lua = lua,
     markdown = markdown,
@@ -47,4 +83,4 @@ luasnip.snippets = {
 
 -- Check :help luasnip
 -- for it's API
-luasnip.add_snippets(nil, luasnip.snippets, nil)
+ls.add_snippets(nil, ls.snippets, nil)
