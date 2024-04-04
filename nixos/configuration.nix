@@ -54,20 +54,20 @@
 	driSupport = true;
 	driSupport32Bit = true;
   };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-  	modesetting.enable = true;
-	powerManagement.enable = false;
-	powerManagement.finegrained = false;
-	open = false;
-	nvidiaSettings = true;
-	package = config.boot.kernelPackages.nvidiaPackages.stable;
-  };
+  #services.xserver.videoDrivers = [ "nvidia" ];
+  #hardware.nvidia = {
+  #	modesetting.enable = true;
+  #      powerManagement.enable = false;
+  #      powerManagement.finegrained = false;
+  #      open = false;
+  #      nvidiaSettings = true;
+  #      package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #};
 
   # Configure keymap in X11
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.variant = "dvorak";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
+  services.xserver.xkb.options = "caps:escape";
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
@@ -139,6 +139,7 @@
      xournalpp
      thunderbird
      flameshot
+     tlp
    ];
 
    environment.variables = rec {
@@ -191,6 +192,31 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "23.11"; # Did you read the comment?
+  
+  # Laptop Section
+  powerManagement = {
+  	enable = true;
+  };
+  services.tlp = {
+  	enable = true;
+	settings = {
+		CPU_SCALING_GOVERNOR_ON_AC = "performance";
+		CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+
+		CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+		CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+
+		CPU_MIN_PERF_ON_AC = 0;
+		CPU_MAN_PERF_ON_AC = 100;
+		CPU_MIN_PERF_ON_BAT = 0;
+		CPU_MAN_PERF_ON_BAT = 20;
+
+		START_CHARGE_THRESH_BAT0 = 40;
+		STOP_CHARGE_THRESH_BAT0 = 80;
+
+	};
+  };
+  services.thermald.enable = true;
 
 }
 
