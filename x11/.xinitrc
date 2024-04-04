@@ -8,5 +8,6 @@ sxhkd &
 flameshot &
 discord &
 localsend_app &
+slstatus &
 
 exec dwm
