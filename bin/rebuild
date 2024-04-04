@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd ~/nixos
+sudo nixos-rebuild switch --flake .#default --impure
+home-manager switch --flake .#tzen --impure
+
+echo "DONE"
+

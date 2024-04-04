@@ -6,13 +6,19 @@ git status
 git fetch
 git pull origin main
 
-printf "\n\n========================ANSIBLE LINUX==============================\n"
-cd ~/Ansible-linux
+printf "\n\n========================NIXOS====================================\n"
+cd ~/nixos
 git status
 git fetch
 git pull origin main
 
-printf "\n\n========================DOTFILES===================================\n"
+printf "\n\n=========================DWM=====================================\n"
+cd ~/dwm
+git status
+git fetch
+git pull origin main
+
+printf "\n\n========================DOTFILES=================================\n"
 cd ~/.dotfiles
 git status
 git fetch

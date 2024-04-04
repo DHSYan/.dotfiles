@@ -1,6 +1,6 @@
 #!/bin/sh
 
-printf "\n============================CONCEPT-NOTES==========================\n"
+printf "\n============================CONCEPT-NOTES===========================\n"
 cd ~/Concept-Notes
 git status
 git add .
@@ -9,8 +9,8 @@ read -r notes
 git commit -m "$notes"
 git push origin main
 
-printf "\n\n==========================ANSIBLE LINUX============================\n"
-cd ~/Ansible-linux
+printf "\n\n==========================NIXOS===================================\n"
+cd ~/nixos
 git status
 git add .
 echo "Ansible Commit Msg: "
@@ -18,11 +18,20 @@ read -r Ansible
 git commit -m "$Ansible"
 git push origin main
 
-printf "\n\n==========================DOTFILES=================================\n"
+printf "\n\n==========================DOTFILES================================\n"
 cd ~/.dotfiles
 git status
 git add .
 echo "Dotfiles Commit Msg: "
 read -r dotfiles
 git commit -m "$dotfiles"
+git push origin main
+
+printf "\n\n==========================DWM=====================================\n"
+cd ~/dwm
+git status
+git add .
+echo "dwm Commit Msg: "
+read -r dwm
+git commit -m "$dwm"
 git push origin main
