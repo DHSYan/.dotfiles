@@ -1,3 +1,8 @@
+Host *
+    ControlMaster auto
+    ControlPath ~/.ssh/S.%r@%h:%p
+    ControlPersist 5m
+
 Host School
     Hostname ubuntu2004-002.student.cs.uwaterloo.ca
     User s2yan
