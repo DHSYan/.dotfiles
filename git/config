@@ -13,6 +13,7 @@
     s = status
     co = checkout
     m = merge
+    ac = commit -am
     alllog = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
 
 
@@ -31,7 +32,4 @@
 	rebase = false
 
 [safe]
-	directory = /home/tzen/mnt/cs1521/railroad_runners
-	directory = /home/tzen/mnt/cs1521/railroad_runners_local
-	directory = /home/tzen/mnt/A1
 	directory = /home/tzen/mnt
