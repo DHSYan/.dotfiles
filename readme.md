@@ -47,6 +47,7 @@ create a symlink from to the home dir, from the Git dir, it has the global gitig
 - [ ] Have wezterm tab title show the current directory and process
 - [ ] Learn how to use wezterm properly
 - [ ] Check out what is Ly display manager
+- [ ] Get a script that runs git status on all directories that needs syncing
 
 ### DWM TODO
 - [ ] better dwm bar or rice dwm in general
