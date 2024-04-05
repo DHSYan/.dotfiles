@@ -1,8 +1,26 @@
 #!/bin/sh
 
+branch=$1
+mode=0
+mode=$2 # os for os only, home for home only
+
 cd ~/nixos
-sudo nixos-rebuild switch --flake .#default --impure
-home-manager switch --flake .#tzen --impure
+
+if [ ${mode} == 'os' ]
+then
+    sudo nixos-rebuild switch --flake .\#${branch} --impure
+    exit 0
+fi
+
+if [ ${mode} == 'home' ]
+then
+    home-manager switch --flake .\#tzen --impure
+    exit 0 
+fi
+
+sudo nixos-rebuild switch --flake .\#${branch} --impure
+home-manager switch --flake .\#tzen --impure
+
 
 echo "DONE"
 
