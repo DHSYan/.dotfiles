@@ -1,0 +1,5 @@
+#!/bin/sh
+xmodmap -e "keycode 64 = Control_L" # change left alt to left ctrl
+# xmodmap -e "keycode xx = keyname" // change right ctrl to super
+
+
