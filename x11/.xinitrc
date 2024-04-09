@@ -9,5 +9,6 @@ localsend_app &
 slstatus &
 xset dpms 180 &
 xss-lock -- slock & 
+feh --bg-fill ~/.dotfiles/wallpaper/appa0.jpeg
 
 exec dwm
