@@ -31,7 +31,7 @@ I crafted my NeoVim to cater what a Student might need.
 I didn't make any of the plugins that I used. They are all from github.
 
 ## ./obsidian
-I use ![obsidian to take notes](https://youtu.be/aIoEQC7w_UI?si=Eg_a7PG9J46pzIcw). 
+I use [obsidian to take notes](https://youtu.be/aIoEQC7w_UI?si=Eg_a7PG9J46pzIcw). 
 This is my obsidian config, everything from theme, to hotkeys and plugins are 
 here.
 
