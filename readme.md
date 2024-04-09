@@ -10,10 +10,10 @@ Workflow. This took alot of inspiration from people like Prime, TJ, Chris, and m
 # What this contains
 
 ## ./bin
-Many of my own script, notably rebuilding my nixos, changing directory via
+Many of my own script, notably rebuilding [my nixos](https://github.com/DHSYan/nixos), changing directory via
 fuzzy finding, establishing a new obsidian vault, running c files, 
 setting wallpaper via fuzzy find, sync-push and sync-pull from remote git 
-repos to sync folders like my notes, .dotfiles, dwm and nixos config.
+repos to sync folders like my notes, .dotfiles, [dwm](https://github.com/DHSYan/dwm) and nixos config.
 
 
 ## ./latex-template
