@@ -40,7 +40,7 @@ local markdown = {
     s("cal", fmt("> [!{}] {}\n> {}", {i(1, "type"), i(2, "title"), i(3, "body")})),
 
     s("vec", fmta("\\vec{<>}", {i(1, "letter")})),
-    s("O", fmta("O(<>)", {i(1, "___")})),
+    s("O(", fmta("O(<>)", {i(1, "___")})),
     s("frac", fmta("\\frac{<>}{<>}", {i(1, "___"), i(2, "___")})),
     s("ml", fmta("$<>$", {i(1, "INLINE")})),
     s("mb", fmta("$$<>$$", {i(1, "BLOCK")})),

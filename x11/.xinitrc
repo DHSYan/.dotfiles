@@ -7,5 +7,7 @@ flameshot &
 discord &
 localsend_app &
 slstatus &
+xset dpms 180 &
+xss-lock -- slock & 
 
 exec dwm
