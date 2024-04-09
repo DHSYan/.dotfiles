@@ -7,7 +7,7 @@ flameshot &
 discord &
 localsend_app &
 slstatus &
-xset dpms 180 &
+xset dpms 1800 &
 xss-lock -- slock & 
 feh --bg-fill ~/.dotfiles/wallpaper/appa0.jpeg
 
