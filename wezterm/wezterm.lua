@@ -18,10 +18,10 @@ end
 -- config.color_scheme = 'Teerb'
 
 config.font = wezterm.font_with_fallback {
-    'Iosevka Nerd Font',
-    'Terminess Nerd Font',
     'HurmitNerdFont',
     'Jetbrains Mono Nerd Font',
+    'Iosevka Nerd Font',
+    'Terminess Nerd Font',
     'JetbrainsMonoNerdFont',
 }
 
