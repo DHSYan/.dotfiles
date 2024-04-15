@@ -28,8 +28,14 @@
   "workspace:goto-tab-4": [],
   "workspace:goto-tab-3": [],
   "workspace:goto-tab-2": [],
-  "app:go-back": [],
-  "app:go-forward": [],
+  "app:go-forward": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "ArrowRight"
+    }
+  ],
   "workspace:new-tab": [],
   "editor:insert-link": [],
   "editor:open-link-in-new-leaf": [],
@@ -50,6 +56,14 @@
         "Mod"
       ],
       "key": "R"
+    }
+  ],
+  "app:go-back": [
+    {
+      "modifiers": [
+        "Alt"
+      ],
+      "key": "ArrowLeft"
     }
   ]
 }
