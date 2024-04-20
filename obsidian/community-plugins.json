@@ -11,7 +11,9 @@
   "callout-manager",
   "obsidian-cursor-location-plugin",
   "obsidian-autoscroll",
-  "obsidian-ocr",
+  "obsidian-latex-suite",
+  "cm-typewriter-scroll-obsidian",
   "tag-wrangler",
-  "obsidian-latex-suite"
+  "obsidian-hide-sidebars-when-narrow",
+  "obsidian-math-plus"
 ]
