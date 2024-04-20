@@ -10,7 +10,7 @@
   "newFileFolderPath": "",
   "newLinkFormat": "relative",
   "alwaysUpdateLinks": true,
-  "defaultViewMode": "source",
+  "defaultViewMode": "preview",
   "livePreview": true,
   "userIgnoreFilters": null,
   "pdfExportSettings": {
