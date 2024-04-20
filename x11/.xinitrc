@@ -1,7 +1,7 @@
 # ibus-daemon
 #
 xrandr --output HDMI-0 --mode 3840x2160
-xset r rate 250 30
+xset r rate 250 50
 sxhkd &
 flameshot &
 discord &
