@@ -6,57 +6,10 @@ local function keymaps()
     nmap("<leader>otm", ":ObsidianTomorrow<CR>", "[O]bsidian [T]o[m]orrow")
     nmap("<leader>oyd", ":ObsidianYesterday<CR>", "[O]bsidian [y]ester[d]ay")
     nmap("<leader>os", ":ObsidianSearch<CR>", "[O]bsidian [S]earch")
+    nmap("<leader>ff", ":ObsidianSearch<CR>", "[O]bsidian [S]earch")
 end
 
-
--- TODO: These are Path on my Mac, need to make them more portable
--- local concept_note_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
--- local personal_icloud_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
--- local daily_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
--- local youtube_notes_path = "/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
--- local presentation_notes_path = "/Library/CloudStorage/OneDrive-UNSW/1-Academics/Presentation-Note"
--- local degree_planning_path = "/Library/CloudStorage/OneDrive-UNSW/Degree-Plannig"
---
---
--- local concept_note_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Concept-Notes"
--- local personal_icloud_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Life-Life/Notes"
--- local daily_notes_path_half = "~/Library/CloudStorage/OneDrive-UNSW/1-Academics/Daily-Notes"
--- local youtube_notes_path_half = "~/Library/Mobile\\ Documents/com~apple~CloudDocs/Youtube-Life/Notes"
-
 local opts = {
-    -- workspaces = {
-    --     {
-    --         name = "Concept-Notes",
-    --         path = concept_note_path_half,
-    --         -- path = vim.fn.expand("~") .. concept_note_path,
-    --         -- path = "~" .. concept_note_path,
-    --     },
-    --     {
-    --         name = "Notes",
-    --         path = personal_icloud_path_half,
-    --         -- path = vim.fn.expand("~") .. personal_icloud_path,
-    --         -- path = "~" .. personal_icloud_path,
-    --     },
-    --     {
-    --         name = "Daily-Notes",
-    --         path = daily_notes_path_half,
-    --         -- path = vim.fn.expand("~") .. daily_notes_path,
-    --         -- path = "~" .. daily_notes_path,
-    --     },
-    --     {
-    --         name = "Notes",
-    --         path = youtube_notes_path_half
-    --     },
-    --     {
-    --         name = "Presentation-Notes",
-    --         path = "~" .. presentation_notes_path
-    --     },
-    --     {
-    --         name = "Degree-Planning",
-    --         path = "~" .. degree_planning_path
-    --     },
-    --
-    -- },
     workspaces = {
         {
             name = "Concept-Notes",
@@ -80,27 +33,11 @@ local opts = {
     new_notes_location = "current_dir",
 
     note_id_func = function(title)
-        -- Create note IDs in a Zettelkasten format with a timestamp and a suffix.
-        -- In this case a note with the title 'My new note' will be given an ID that looks
-        -- like '1657296016-my-new-note', and therefore the file name '1657296016-my-new-note.md'
-        -- local suffix = ""
-        -- if title ~= nil then
-        --     -- If title is given, transform it into valid file name.
-        --     suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-        -- else
-        --     -- If title is nil, just add 4 random uppercase letters to the suffix.
-        --     for _ = 1, 4 do
-        --         suffix = suffix .. string.char(math.random(65, 90))
-        --     end
-        -- end
-        -- return tostring(os.time()) .. "-" .. suffix
         return title
     end,
 
-    completion = { -- This was taken from the docs
-        -- If using nvim-cmp, otherwise set to false
+    completion = { 
         nvim_cmp = true,
-        -- Trigger completion at 2 chars
         min_chars = 2,
     },
 
@@ -132,7 +69,15 @@ local opts = {
         -- end,
     },
     open_app_foreground = false,
+
+    templates = {
+        subdir = "templates",
+        date_format = "%m-%d-%Y",
+        time_format = "%H:%M:%S",
+    },
 }
+
+local concept_note_name = "Concept-Notes";
 
 return {
     "epwalsh/obsidian.nvim",
@@ -145,24 +90,7 @@ return {
       { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "[O]bsidian [S]earch"},
     },
     lazy = true,
-    --[[ event = { -- this was taken from the docs
-        -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-        -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
-        "BufReadPre " .. vim.fn.expand("~") .. concept_note_path .. "/**.md",
-        "BufNewFile " .. vim.fn.expand("~") .. concept_note_path .. "/**.md",
-
-        "BufReadPre " .. vim.fn.expand("~") .. personal_icloud_path .. "/**.md",
-        "BufNewFile " .. vim.fn.expand("~") .. personal_icloud_path .. "/**.md",
-
-        "BufReadPre " .. vim.fn.expand("~") .. daily_notes_path .. "/**.md",
-        "BufNewFile " .. vim.fn.expand("~") .. daily_notes_path .. "/**.md",
-
-        "BufReadPre " .. vim.fn.expand("~") .. youtube_notes_path .. "/**.md",
-        "BufNewFile " .. vim.fn.expand("~") .. youtube_notes_path .. "/**.md",
-
-        "BufReadPre " .. vim.fn.expand("~") .. presentation_notes_path .. "/**.md",
-        "BufNewFile " .. vim.fn.expand("~") .. presentation_notes_path .. "/**.md",
-    }, ]]
+    ft = "markdown",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",

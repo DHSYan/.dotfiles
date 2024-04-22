@@ -10,10 +10,9 @@
   "obsidian-hider",
   "callout-manager",
   "obsidian-cursor-location-plugin",
-  "obsidian-autoscroll",
   "obsidian-latex-suite",
-  "cm-typewriter-scroll-obsidian",
   "tag-wrangler",
   "obsidian-hide-sidebars-when-narrow",
-  "obsidian-math-plus"
+  "obsidian-math-plus",
+  "templater-obsidian"
 ]

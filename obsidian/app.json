@@ -21,5 +21,6 @@
     "downscalePercent": 100
   },
   "propertiesInDocument": "visible",
-  "readableLineLength": true
+  "readableLineLength": true,
+  "trashOption": "local"
 }
