@@ -57,6 +57,7 @@ here.
 - [x] fonts
 - [ ] Notification Daemon?
 - [ ] Media Key support?
+- [ ] How to configure multiple screen with startx?
 
 # Other
 I am so sorry for all this terrible writing lol.

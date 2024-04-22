@@ -6,7 +6,6 @@ local function keymaps()
     nmap("<leader>otm", ":ObsidianTomorrow<CR>", "[O]bsidian [T]o[m]orrow")
     nmap("<leader>oyd", ":ObsidianYesterday<CR>", "[O]bsidian [y]ester[d]ay")
     nmap("<leader>os", ":ObsidianSearch<CR>", "[O]bsidian [S]earch")
-    nmap("<leader>ff", ":ObsidianSearch<CR>", "[O]bsidian [S]earch")
 end
 
 local opts = {
