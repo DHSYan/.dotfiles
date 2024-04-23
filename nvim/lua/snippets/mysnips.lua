@@ -68,6 +68,8 @@ local markdown = {
     s("d", t("\\delta ")),
     s("D", t("\\Delta ")),
     s("+-", t( "\\pm ")),
+    s("->", t( "\\rightarrow ")),
+    s("Rn", t( "\\mathbb{R}^n")),
 }
 
 local c = {
