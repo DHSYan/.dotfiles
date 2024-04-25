@@ -11,5 +11,8 @@ slstatus &
 # xss-lock -- slock & 
 feh --bg-fill ~/.dotfiles/wallpaper/appa0.jpeg
 sxhkd &
+# dbus-update-activation-enviroment &
+blueman-applet &
+blueman-manager &
 
 exec dwm

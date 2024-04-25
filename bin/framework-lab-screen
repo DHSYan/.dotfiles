@@ -1,0 +1,5 @@
+#!/bin/sh
+
+xrandr --output eDP-1 --panning 2256x1504+0+1080
+xrandr --output DP-3 --panning 1920x1080+0+0
+xrandr --output DP-3 --primary
