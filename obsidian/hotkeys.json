@@ -49,7 +49,6 @@
   "editor:toggle-bold": [],
   "editor:toggle-checklist-status": [],
   "editor:toggle-comments": [],
-  "workspace:undo-close-pane": [],
   "markdown:toggle-preview": [
     {
       "modifiers": [
