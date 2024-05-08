@@ -37,11 +37,11 @@ local lua = {}
 
 
 local markdown = {
-    s("cal", fmt("> [!{}] {}\n> {}", {i(1, "type"), i(2, "title"), i(3, "body")})),
+    s("cal", fmt("> [!{}] {}\n> {}", {i(1, "type"), i(2, "title"), i(3, "body")})), -- Callout
 
     s("vec", fmta("\\vec{<>}", {i(1, "letter")})),
     s("O(", fmta("O(<>)", {i(1, "___")})),
-    s("frac", fmta("\\frac{<>}{<>}", {i(1, "___"), i(2, "___")})),
+    s("frac", fmta("\\frac{<>}{<>}", {i(1, "___"), i(2, "___")})), -- I would love to trigger this when I type a number with a / and a number below it and it regex the numbers and put them where they belong
     s("ml", fmta("$<>$", {i(1, "INLINE")})),
     s("mb", fmta("$$<>$$", {i(1, "BLOCK")})),
     s({trig = "(%d)/(%d)", regTrig = true, snippetType="autosnippet"},
@@ -62,6 +62,11 @@ local markdown = {
             }
         )
     ),
+    s("int", fmta("\\int_{<>}^{<>} <> d<>", {i(1, "from"), i(2, "to"), i(3, "grand"), i(4, "var")})), -- integral
+    s("lim", fmta("\\lim_{<>\\rightarrow<>} <>", {i(1, "var"), i(2, "num"), i(3, "expr")})), -- limit
+
+    s("partial", fmta("\\frac{\\partial <>}{\\partial <>}", {i(1, "f"), i(2, "x")})), -- partial
+
 
     s("=>", t("\\implies ")),
     s("a", t("\\alpha ")),
@@ -69,7 +74,7 @@ local markdown = {
     s("D", t("\\Delta ")),
     s("+-", t( "\\pm ")),
     s("->", t( "\\rightarrow ")),
-    s("Rn", t( "\\mathbb{R}^n")),
+    s("Rn", t( "\\mathbb{R}^{n} ")),
 }
 
 local c = {

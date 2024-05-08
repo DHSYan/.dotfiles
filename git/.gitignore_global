@@ -1,3 +1,4 @@
 # global git ignore
 .DS_Store
 *.un~
+.obsidian

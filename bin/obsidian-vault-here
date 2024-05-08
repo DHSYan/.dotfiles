@@ -1,3 +1,4 @@
 #!/bin/sh
 
 ln -s ~/.dotfiles/obsidian .obsidian
+mkdir templates

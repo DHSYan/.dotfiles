@@ -15,8 +15,8 @@ local opts = {
             path = "~/Concept-Notes",
         },
         {
-            name = "Concept-Notes on the cloud",
-            path = "/Users/twinkletoes/OneDrive - UNSW/1-Academics/Concept-Notes",
+            name = "Youtube",
+            path = "~/youtube",
         },
         {
             name = "Remote-Vaults",

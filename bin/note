@@ -8,7 +8,7 @@ read -r title
 
 # cp templates/${template_name} ${title}.md
 touch ${title}.md
-nvim ${title}.md -c "ObsidianTemplate ${template_name}" -c "NoNeckPain"
+nvim ${title}.md -c "ObsidianTemplate ${template_name}" -c "ObsidianOpen" -c "NoNeckPain" -c "w"
 echo "Commit?"
 read -r iscommit
 if [[ ${iscommit} == "y" ]]; then
