@@ -1,0 +1,20 @@
+#!/bin/sh
+
+cd ~/Concept-Notes
+template_name=$(ls templates | fzf)
+
+printf "title: "
+read -r title
+
+# cp templates/${template_name} ${title}.md
+touch ${title}.md
+nvim ${title}.md -c "ObsidianTemplate ${template_name}" -c "NoNeckPain"
+echo "Commit?"
+read -r iscommit
+if [[ ${iscommit} == "y" ]]; then
+    printf "Message: "
+    read -r commit_msg
+    git add .
+    git commit -m "Date: $(echo date)\nClass: ${template_name}\n\t${title}:\n\t\t${commit_msg}"
+fi
+
