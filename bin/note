@@ -15,6 +15,9 @@ if [[ ${iscommit} == "y" ]]; then
     printf "Message: "
     read -r commit_msg
     git add .
-    git commit -m "Date: $(echo date)\nClass: ${template_name}\n\t${title}:\n\t\t${commit_msg}"
+    touch "commit_file_temp"
+    echo -e -n "Class: ${template_name}\nFile: ${title}\n\t${commit_msg}" > commit_file_temp
+    git commit -v -F "commit_file_temp"
+    rm "commit_file_temp"
 fi
 
