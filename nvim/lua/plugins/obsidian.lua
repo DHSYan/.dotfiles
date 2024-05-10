@@ -24,11 +24,6 @@ local opts = {
         },
     },
 
-    backlinks = {
-        height = 4,
-        wrap = true,
-    },
-
     new_notes_location = "current_dir",
 
     note_id_func = function(title)
