@@ -17,8 +17,11 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 
+local opts = {
+    lockfile = "/home/tzen/.dotfiles/nvim/lazy-lock.json", -- lockfile generated after running update.
+}
 -- "plugins" is requiring the lua module in /nvim/lua/plugins.lua
-require("lazy").setup("plugins");
+require("lazy").setup("plugins", opts);
 
 -- [[ Keymaps ]]
 require("keymaps");
