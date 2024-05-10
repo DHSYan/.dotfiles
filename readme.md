@@ -47,6 +47,8 @@ here.
 - [ ] Learn how to use wezterm properly
 - [ ] Check out what is Ly display manager
 - [ ] Get a script that runs git status on all directories that needs syncing
+- [ ] Have obsidian or obsidian.nvim automatically tag new docs when they are 
+      created inside a file. Basically, inherit backlink's tag
 
 #### DWM TODO
 - [x] better dwm bar or rice dwm in general?
