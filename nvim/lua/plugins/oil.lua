@@ -33,6 +33,6 @@ return {
         local nmap = require('util.nmap')
 
 
-        nmap("-", "<CMD>Oil<CR>", "Open Parent Directory")
+        nmap("<leader>e", "<CMD>Oil<CR>", "Open Parent Directory")
     end,
 }

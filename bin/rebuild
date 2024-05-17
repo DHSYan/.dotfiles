@@ -2,17 +2,19 @@
 
 commit ()
 {
-    iscommit=0
-    msg=0
     echo "Do you want to commit this?"
     read -r iscommit
     if [[ ${iscommit} == 'y' ]]; then
-        read -r msg
-        cd ~/nixos
+        printf "Message: "
+        read -r commit_msg
         git add .
-        git commit -m ${msg}
+        touch "commit_file_temp"
+        echo -e -n "${commit_msg}" > commit_file_temp
+        git commit -v -F "commit_file_temp"
+        rm "commit_file_temp"
     fi
 }
+
 
 branch=$1
 mode=0
@@ -30,14 +32,12 @@ fi
 if [ ${mode} == 'home' ]
 then
     home-manager switch --flake .\#tzen --impure
-    commit
     exit 0 
 fi
 
 sudo nixos-rebuild switch --flake .\#${branch} --impure
 home-manager switch --flake .\#tzen --impure
 commit
-
 
 echo "DONE"
 
