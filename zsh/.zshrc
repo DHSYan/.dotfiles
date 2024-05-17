@@ -43,10 +43,9 @@ zinit ice depth=1; zinit light romkatv/powerlevel10k
 zinit light Aloxaf/fzf-tab
 
 zinit snippet OMZP::sudo
-zinit snippet OMZP::git-prompt
 
 autoload -U compinit && compinit # what does this do?
-
+zinit cdreplay -q # recommend by the documentation
 
 # [[ Completion settings ]] 
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
