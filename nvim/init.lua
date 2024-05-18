@@ -34,3 +34,4 @@ require("netrw");
 
 -- [[ Featurs that I like from Kickstart ]]
 -- the function scope line on the left, that tells you what scope you are in
+
