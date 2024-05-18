@@ -1,5 +1,9 @@
 #!/bin/sh
 
 selected=$(find ~/.dotfiles/wallpaper -type f | fzf)
+#
+
+# wallpaper_array=()
+# wallpaper_count=$(ls ~/.dotfiles/wallpaper -1 | wc -l)
 
 feh --bg-fill $selected
