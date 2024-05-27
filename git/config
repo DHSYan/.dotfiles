@@ -5,8 +5,8 @@
 [user]
     ; email = 69187273+DHSYan@users.noreply.github.com
     ; email = sean.yan@uwaterloo.ca
-    email = sean.yan@student.unsw.edu.au
-    name = DHSYan
+    email = z5521807@ad.unsw.edu.au
+    name = Ding-Han Sean Yan
     signingkey = ~/.ssh/id_ed25519
 
 [alias]
@@ -30,6 +30,7 @@
 	gpgsign = true
 [pull]
 	rebase = false
-
+[push]
+    default = simple
 [safe]
 	directory = /home/tzen/mnt
