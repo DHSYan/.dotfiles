@@ -20,7 +20,7 @@
     "margin": "2",
     "downscalePercent": 100
   },
-  "propertiesInDocument": "visible",
+  "propertiesInDocument": "source",
   "readableLineLength": true,
   "trashOption": "local"
 }
