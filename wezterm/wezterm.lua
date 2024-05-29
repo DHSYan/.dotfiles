@@ -25,7 +25,7 @@ config.font = wezterm.font_with_fallback {
     'JetbrainsMonoNerdFont',
 }
 
-config.font_size = 14
+config.font_size = 18
 config.line_height = 0.8
 
 config.max_fps = 144
