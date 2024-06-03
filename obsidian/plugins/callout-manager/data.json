@@ -4,7 +4,8 @@
       "def",
       "thm",
       "notation",
-      "prop"
+      "prop",
+      "remark"
     ],
     "settings": {
       "def": [
@@ -43,6 +44,14 @@
         {
           "changes": {
             "color": "184, 247, 161"
+          }
+        }
+      ],
+      "remark": [
+        {
+          "changes": {
+            "icon": "lucide-flame",
+            "color": "28, 238, 253"
           }
         }
       ]
