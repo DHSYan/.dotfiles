@@ -69,7 +69,7 @@ local opts = {
         date_format = "%m-%d-%Y",
         time_format = "%H:%M:%S",
     },
-    disable_frontmatter = true,
+    disable_frontmatter = false,
 }
 
 local concept_note_name = "Concept-Notes";
