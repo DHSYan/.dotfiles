@@ -85,7 +85,7 @@ return {
       { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "[O]bsidian [S]earch"},
     },
     lazy = true,
-    ft = "markdown",
+    -- ft = "markdown",
     dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-treesitter/nvim-treesitter",
