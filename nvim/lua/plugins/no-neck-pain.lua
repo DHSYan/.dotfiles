@@ -13,7 +13,7 @@ return {
                   location = "~/throw-away-code/",
               },
               bo = {
-                  filetype = "md"
+                  filetype = "txt"
               },
             },           
         })
