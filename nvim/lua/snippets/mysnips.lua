@@ -40,6 +40,7 @@ local markdown = {
     s("cal", fmt("> [!{}] {}\n> {}", {i(1, "type"), i(2, "title"), i(3, "body")})), -- Callout
 
     s("vec", fmta("\\vec{<>}", {i(1, "letter")})),
+    s("set", fmta("\\{<>\\}", {i(1, "set")})),
     s("O(", fmta("O(<>)", {i(1, "___")})),
     s("frac", fmta("\\frac{<>}{<>}", {i(1, "___"), i(2, "___")})), -- I would love to trigger this when I type a number with a / and a number below it and it regex the numbers and put them where they belong
     s("ml", fmta("$<>$", {i(1, "INLINE")})),
@@ -66,6 +67,20 @@ local markdown = {
     s("lim", fmta("\\lim_{<>\\rightarrow<>} <>", {i(1, "var"), i(2, "num"), i(3, "expr")})), -- limit
 
     s("partial", fmta("\\frac{\\partial <>}{\\partial <>}", {i(1, "f"), i(2, "x")})), -- partial
+    s("piecewise",
+        fmta(
+            "<> = \\begin{cases} 
+             <> & <> \\\\
+             <> & <> 
+             \\end{cases}",
+
+            {i(1, "function"),
+                i(2, "output1"),
+                i(3, "output1_cond"),
+                i(4, "output2"),
+                i(5, "output2_cond"),}
+        )
+    ), -- piecewise function
 
 
     s("=>", t("\\implies ")),
@@ -75,6 +90,14 @@ local markdown = {
     s("+-", t( "\\pm ")),
     s("->", t( "\\rightarrow ")),
     s("Rn", t( "\\mathbb{R}^{n} ")),
+    s("R", t( "\\mathbb{R} ")), -- reals
+    s("Prob", t( "\\mathbb{P} ")), -- reals
+    s("eventspace", t( "\\mathcal{F} ")), -- reals
+
+    s("w", t( "\\omega ")),
+    s("~", t( "\\sim ")),
+
+    
 }
 
 local c = {
