@@ -14,5 +14,6 @@ sxhkd &
 # dbus-update-activation-enviroment &
 blueman-applet &
 blueman-manager &
+proton-mail &
 
 exec dwm
