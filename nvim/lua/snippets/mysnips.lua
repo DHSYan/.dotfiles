@@ -69,11 +69,7 @@ local markdown = {
     s("partial", fmta("\\frac{\\partial <>}{\\partial <>}", {i(1, "f"), i(2, "x")})), -- partial
     s("piecewise",
         fmta(
-            "<> = \\begin{cases} 
-             <> & <> \\\\
-             <> & <> 
-             \\end{cases}",
-
+            "<> = \\begin{cases}\n<> & <> \\\\\n<> & <>\n\\end{cases}",
             {i(1, "function"),
                 i(2, "output1"),
                 i(3, "output1_cond"),
