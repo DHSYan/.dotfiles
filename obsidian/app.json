@@ -1,5 +1,5 @@
 {
-  "attachmentFolderPath": "./assets",
+  "attachmentFolderPath": "assets",
   "showUnsupportedFiles": false,
   "newFileLocation": "current",
   "strictLineBreaks": true,
@@ -22,5 +22,6 @@
   },
   "propertiesInDocument": "source",
   "readableLineLength": true,
-  "trashOption": "local"
+  "trashOption": "local",
+  "useMarkdownLinks": false
 }
