@@ -1,7 +1,7 @@
 {
-  "attachmentFolderPath": "assets",
+  "attachmentFolderPath": "assets/matrix-of-linear-map",
   "showUnsupportedFiles": false,
-  "newFileLocation": "current",
+  "newFileLocation": "root",
   "strictLineBreaks": true,
   "showLineNumber": true,
   "autoPairBrackets": false,
@@ -11,7 +11,7 @@
   "newLinkFormat": "relative",
   "alwaysUpdateLinks": true,
   "defaultViewMode": "preview",
-  "livePreview": true,
+  "livePreview": false,
   "userIgnoreFilters": null,
   "pdfExportSettings": {
     "includeName": false,

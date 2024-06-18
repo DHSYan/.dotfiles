@@ -24,7 +24,7 @@ local opts = {
         },
     },
 
-    new_notes_location = "current_dir",
+    new_notes_location = "notes_subdir",
 
     note_id_func = function(title)
         return title
