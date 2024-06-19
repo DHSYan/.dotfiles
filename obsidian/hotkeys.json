@@ -1,14 +1,6 @@
 {
   "obsidian-excalidraw-plugin:insert-link-to-element": [],
   "markdown:add-metadata-property": [],
-  "command-palette:open": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "P"
-    }
-  ],
   "file-explorer:new-file": [],
   "file-explorer:new-file-in-new-pane": [],
   "editor:delete-paragraph": [],
@@ -40,11 +32,9 @@
   "editor:open-link-in-new-leaf": [],
   "editor:open-link-in-new-window": [],
   "editor:open-link-in-new-split": [],
-  "switcher:open": [],
   "workspace:edit-file-title": [],
   "editor:save-file": [],
   "editor:open-search-replace": [],
-  "editor:open-search": [],
   "editor:toggle-bold": [],
   "editor:toggle-checklist-status": [],
   "editor:toggle-comments": [],
@@ -80,6 +70,23 @@
         "Shift"
       ],
       "key": "L"
+    }
+  ],
+  "switcher:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "P"
+    }
+  ],
+  "command-palette:open": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "P"
     }
   ]
 }
