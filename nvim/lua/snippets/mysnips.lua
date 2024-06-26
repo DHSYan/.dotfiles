@@ -37,35 +37,44 @@ local lua = {}
 
 
 local markdown = {
+    -- Obsidian
     s("cal", fmt("> [!{}] {}\n> {}", {i(1, "type"), i(2, "title"), i(3, "body")})), -- Callout
-
-    s("vec", fmta("\\vec{<>}", {i(1, "letter")})),
-    s("set", fmta("\\{<>\\}", {i(1, "set")})),
-    s("O(", fmta("O(<>)", {i(1, "___")})),
-    s("frac", fmta("\\frac{<>}{<>}", {i(1, "___"), i(2, "___")})), -- I would love to trigger this when I type a number with a / and a number below it and it regex the numbers and put them where they belong
     s("ml", fmta("$<>$", {i(1, "INLINE")})),
     s("mb", fmta("$$<>$$", {i(1, "BLOCK")})),
-    s({trig = "(%d)/(%d)", regTrig = true, snippetType="autosnippet"},
-        fmta("\\frac{<>}{<>}",
-            {
-                f(function(arg, snip) return snips.captures[1] end, {}),
-                f(function(arg, snip) return snips.captures[2] end, {}) 
-            }
 
-        )
-    ),
-    s({trig = '([%a%)%]%}])00', regTrig = true, wordTrig = false, snippetType="autosnippet"},
-        fmta(
-            "<>_{<>}",
-            {
-                f( function(_, snip) return snip.captures[1] end ),
-                t("0")
-            }
-        )
-    ),
+    s("set", fmta("\\{<>\\}", {i(1, "set")})),
+
+    -- Theoretical Computer Science
+    s("O(", fmta("O(<>)", {i(1, "___")})),
+
+    -- Basic math Operators
+    s("frac", fmta("\\frac{<>}{<>}", {i(1, "___"), i(2, "___")})), -- I would love to trigger this when I type a number with a / and a number below it and it regex the numbers and put them where they belong
+    
+    -- Linear Algebra
+    s("vec", fmta("\\vec{<>}", {i(1, "letter")})),
+
+    -- s({trig = "(%d)/(%d)", regTrig = true, snippetType="autosnippet"},
+    --     fmta("\\frac{<>}{<>}",
+    --         {
+    --             f(function(arg, snip) return snips.captures[1] end, {}),
+    --             f(function(arg, snip) return snips.captures[2] end, {}) 
+    --         }
+    --
+    --     )
+    -- ),
+    -- s({trig = '([%a%)%]%}])00', regTrig = true, wordTrig = false, snippetType="autosnippet"},
+    --     fmta(
+    --         "<>_{<>}",
+    --         {
+    --             f( function(_, snip) return snip.captures[1] end ),
+    --             t("0")
+    --         }
+    --     )
+    -- ),
+
+    -- Calculus
     s("int", fmta("\\int_{<>}^{<>} <> d<>", {i(1, "from"), i(2, "to"), i(3, "grand"), i(4, "var")})), -- integral
     s("lim", fmta("\\lim_{<>\\rightarrow<>} <>", {i(1, "var"), i(2, "num"), i(3, "expr")})), -- limit
-
     s("partial", fmta("\\frac{\\partial <>}{\\partial <>}", {i(1, "f"), i(2, "x")})), -- partial
     s("piecewise",
         fmta(
@@ -76,24 +85,32 @@ local markdown = {
                 i(4, "output2"),
                 i(5, "output2_cond"),}
         )
-    ), -- piecewise function
+    ), 
+    s("inf", t("\\infty"));
 
+    --- Stats
+    s("Variance", fmta("\\mathbb{V}\\text{ar}(<>)", {i(1, "X")})),
+    s("Expectation", fmta("\\mathbb{E}(<>)", {i(1, "X")})), 
+    s("Probability", fmta("\\mathbb{P}(<>)", {i(1, "X")})),
+    s("eventspace", t( "\\mathcal{F}")), 
 
+    -- Math Proofs
     s("=>", t("\\implies ")),
+    s("->", t( "\\rightarrow ")),
+    s("Reals", t( "\\mathbb{R} ")), 
+
+    -- Math Symbols, Canonical Meaning
+    s("Rn", t( "\\mathbb{R}^{n} ")),
+    s("~", t( "\\sim ")),
+
+    -- Math Arthithmeic notation
+    s("+-", t( "\\pm ")),
+
+    -- Math Symbols, Variables
+    s("w", t( "\\omega ")),
     s("a", t("\\alpha ")),
     s("d", t("\\delta ")),
     s("D", t("\\Delta ")),
-    s("+-", t( "\\pm ")),
-    s("->", t( "\\rightarrow ")),
-    s("Rn", t( "\\mathbb{R}^{n} ")),
-    s("R", t( "\\mathbb{R} ")), -- reals
-    s("Prob", t( "\\mathbb{P} ")), -- reals
-    s("eventspace", t( "\\mathcal{F} ")), -- reals
-
-    s("w", t( "\\omega ")),
-    s("~", t( "\\sim ")),
-
-    
 }
 
 local c = {
