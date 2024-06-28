@@ -19,8 +19,8 @@ local opts = {
             path = "~/youtube-script",
         },
         {
-            name = "Remote-Vaults",
-            path = "~/Remote-Vaults",
+            name = "Remote-Vault-Sean",
+            path = "~/Remote-Vault-Sean",
         },
     },
 
