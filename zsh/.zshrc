@@ -10,6 +10,7 @@ alias v="nvim"
 alias cf="source fuzzy_cd"
 alias ..="cd .."
 alias tt="cd ~/throw-away-code"
+alias cat="bat"
 
 # [[ PATH ]]
 export PATH=$PATH:$HOME/.dotfiles/bin
