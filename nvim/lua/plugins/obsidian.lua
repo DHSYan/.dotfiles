@@ -15,12 +15,12 @@ local opts = {
             path = "~/Concept-Notes",
         },
         {
-            name = "Youtube",
-            path = "~/youtube-script",
-        },
-        {
             name = "Remote-Vault-Sean",
             path = "~/Remote-Vault-Sean",
+        },
+        {
+            name = "Youtube",
+            path = "~/youtube",
         },
     },
 

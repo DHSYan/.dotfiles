@@ -5,6 +5,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Make this zshrc config more portable
+if [[ -z "$ZDOTDIR" ]]; then
+  export ZDOTDIR="$HOME"
+fi
+
 # [[ Aliases ]]
 alias v="nvim"
 alias cf="source fuzzy_cd"
