@@ -13,10 +13,10 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 
 vim.keymap.set("x", "<leader>p", "\"_dP")
 
-vim.keymap.set("n", "Q", "<nop>") -- <nop> means nothing
-vim.keymap.set("n", "q", "<nop>")
-vim.keymap.set("v", "Q", "<nop>")
-vim.keymap.set("v", "q", "<nop>")
+-- vim.keymap.set("n", "Q", "<nop>") -- <nop> means nothing
+-- vim.keymap.set("n", "q", "<nop>")
+-- vim.keymap.set("v", "Q", "<nop>")
+-- vim.keymap.set("v", "q", "<nop>")
 
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
