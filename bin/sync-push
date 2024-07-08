@@ -10,10 +10,10 @@ git commit -m "$notes"
 git push origin main
 
 printf "\n\n==========================NIXOS===================================\n"
-cd ~/nixos
+cd ~/nix-config
 git status
 git add .
-echo "Ansible Commit Msg: "
+echo "nix-config Commit Msg: "
 read -r Ansible
 git commit -m "$Ansible"
 git push origin main
