@@ -12,6 +12,8 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+config.enable_wayland = false;
+
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
@@ -24,8 +26,9 @@ config.font = wezterm.font_with_fallback {
     'Terminess Nerd Font',
     'JetbrainsMonoNerdFont',
 }
+config.dpi = 192;
 
-config.font_size = 18
+config.font_size = 12
 config.line_height = 0.8
 
 config.max_fps = 144
