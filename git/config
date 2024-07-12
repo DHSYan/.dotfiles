@@ -3,11 +3,9 @@
     excludesfile = ~/.config/git/.gitignore_global
 
 [user]
-    ; email = 69187273+DHSYan@users.noreply.github.com
-    ; email = sean.yan@uwaterloo.ca
-    email = z5521807@ad.unsw.edu.au
-    name = Sean Yan
-    signingkey = ~/.ssh/id_ed25519
+    email = sean@dhsy.me
+    name = Ding-Han Sean Yan
+    signingkey = ~/.ssh/id_ed25519_sk
 
 [alias]
     s = status
