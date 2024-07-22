@@ -5,7 +5,7 @@
 [user]
     email = sean@dhsy.me
     name = Ding-Han Sean Yan
-    signingkey = ~/.ssh/id_ed25519_sk
+    signingkey = ~/.ssh/id_ed25519
 
 [alias]
     s = status

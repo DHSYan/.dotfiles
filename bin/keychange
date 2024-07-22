@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+cd ~/.ssh/
+for file in id_ed25519*; do
+  if [[ -f $file ]]; then
+    rm -i -- "$file"
+  fi
+done
+ssh-keygen -K
+
+for file in id_ed25519*; do
+  if [[ -f $file ]]; then
+      ext="${file##*.}"
+      if [[ ${ext} != "pub" ]]; then 
+          new_name="id_ed25519"
+      else 
+          new_name="id_ed25519.${ext}"
+
+      fi
+      read -p "Do you want to rename '$file' to '$new_name'? (y/n): " confirm
+      if [[ $confirm == [yY] ]]; then
+          mv -i "$file" "$new_name"
+          echo "Renamed '$file' to '$new_name'"
+      else
+          echo "Skipped renaming '$file'"
+      fi
+  fi
+done
+
