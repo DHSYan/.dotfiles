@@ -17,7 +17,7 @@ alias ..="cd .."
 alias tt="cd ~/throw-away-code"
 alias cat="bat"
 alias mv="mv -i"
-alias rv="rm -i"
+alias rm="srm"
 
 # [[ PATH ]]
 export PATH=$PATH:$HOME/.dotfiles/bin

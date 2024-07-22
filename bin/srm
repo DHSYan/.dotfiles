@@ -1,5 +1,5 @@
-#!/bin/zsh
+#!/usr/bin/env bash
 
 thing=$1
 
-mv $thing ~/trash/
+mv -i $thing ~/.trash/
