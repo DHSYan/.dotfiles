@@ -16,6 +16,8 @@ alias cf="source fuzzy_cd"
 alias ..="cd .."
 alias tt="cd ~/throw-away-code"
 alias cat="bat"
+alias mv="mv -i"
+alias rv="rm -i"
 
 # [[ PATH ]]
 export PATH=$PATH:$HOME/.dotfiles/bin
