@@ -43,24 +43,21 @@ here.
 - [ ] Fugititive learning
 - [x] Obsidian.nvim when [[]] in notes, don't have it use id as filename.
 - [x] Update this readme
-- [ ] Have wezterm tab title show the current directory and process
-- [ ] Learn how to use wezterm properly
-- [ ] Check out what is Ly display manager
-- [ ] Get a script that runs git status on all directories that needs syncing
 - [ ] Have obsidian or obsidian.nvim automatically tag new docs when they are 
       created inside a file. Basically, inherit backlink's tag
+- [ ] Create a better backup system
 
-#### DWM TODO
-- [x] better dwm bar or rice dwm in general?
-- [x] make window manager rules for wezterm, google browser.
-- [ ] Screen Lock?
+<!-- #### DWM TODO -->
+<!-- - [x] better dwm bar or rice dwm in general? -->
+<!-- - [x] make window manager rules for wezterm, google browser. -->
+<!-- - [ ] Screen Lock? -->
 
 #### Nixos TODO
 - [x] fonts
 - [ ] Notification Daemon?
 - [ ] Media Key support?
-- [ ] How to configure multiple screen with startx?
+<!-- - [ ] How to configure multiple screen with startx? -->
+- [ ] Learn how to setup a cron job in NIXOS
+
 
 # Other
-I am so sorry for all this terrible writing lol.
-

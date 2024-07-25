@@ -11,8 +11,8 @@ end
 local opts = {
     workspaces = {
         {
-            name = "Concept-Notes",
-            path = "~/Concept-Notes",
+            name = "second-brain",
+            path = "~/second-brain",
         },
         {
             name = "Remote-Vault-Sean",
