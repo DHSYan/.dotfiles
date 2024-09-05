@@ -18,3 +18,7 @@ Host git
 Host unsw
     Hostname login.cse.unsw.edu.au
     User z5521807
+
+Host ubc
+    Hostname remote.students.cs.ubc.ca
+    User dhsyan
