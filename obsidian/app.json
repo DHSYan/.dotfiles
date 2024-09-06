@@ -8,7 +8,7 @@
   "useTab": false,
   "vimMode": true,
   "newFileFolderPath": "",
-  "newLinkFormat": "relative",
+  "newLinkFormat": "shortest",
   "alwaysUpdateLinks": true,
   "defaultViewMode": "preview",
   "livePreview": false,
