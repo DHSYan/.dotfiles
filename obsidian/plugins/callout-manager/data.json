@@ -5,7 +5,9 @@
       "thm",
       "notation",
       "prop",
-      "remark"
+      "remark",
+      "self",
+      "q"
     ],
     "settings": {
       "def": [
@@ -52,6 +54,22 @@
           "changes": {
             "icon": "lucide-flame",
             "color": "28, 238, 253"
+          }
+        }
+      ],
+      "self": [
+        {
+          "changes": {
+            "icon": "question-mark-glyph",
+            "color": "255, 221, 0"
+          }
+        }
+      ],
+      "q": [
+        {
+          "changes": {
+            "icon": "question-mark-glyph",
+            "color": "255, 0, 0"
           }
         }
       ]

@@ -1,0 +1,14 @@
+{
+  "contextAwareMode": false,
+  "sourceSupport": false,
+  "codeHighlightSupport": false,
+  "inlineID": true,
+  "contextSeparator": " > ",
+  "deck": "Default",
+  "folderBasedDeck": true,
+  "flashcardsTag": "card",
+  "inlineSeparator": "::",
+  "inlineSeparatorReverse": ":::",
+  "defaultAnkiTag": "",
+  "ankiConnectPermission": true
+}
