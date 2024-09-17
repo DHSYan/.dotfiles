@@ -8,17 +8,7 @@
   "obsidian-excalidraw-plugin:toggle-lock": [],
   "editor:follow-link": [],
   "workspace:goto-last-tab": [],
-  "workspace:next-tab": [],
-  "workspace:previous-tab": [],
-  "workspace:goto-tab-1": [],
   "graph:open": [],
-  "workspace:goto-tab-8": [],
-  "workspace:goto-tab-7": [],
-  "workspace:goto-tab-6": [],
-  "workspace:goto-tab-5": [],
-  "workspace:goto-tab-4": [],
-  "workspace:goto-tab-3": [],
-  "workspace:goto-tab-2": [],
   "app:go-forward": [
     {
       "modifiers": [
@@ -27,7 +17,6 @@
       "key": "ArrowRight"
     }
   ],
-  "workspace:new-tab": [],
   "editor:insert-link": [],
   "editor:open-link-in-new-leaf": [],
   "editor:open-link-in-new-window": [],
@@ -87,6 +76,22 @@
         "Shift"
       ],
       "key": "P"
+    }
+  ],
+  "workspace:next-tab": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "ArrowRight"
+    }
+  ],
+  "workspace:previous-tab": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "ArrowLeft"
     }
   ]
 }
