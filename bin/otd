@@ -1,0 +1,23 @@
+#!/bin/sh
+
+cd ~/second-brain/
+# template_name=$(ls templates | fzf)
+
+# printf "title: "
+# read -r title
+
+# cp templates/${template_name} ${title}.md
+# touch ${title}.md
+nvim . -c "Lazy load obsidian.nvim" -c "ObsidianToday"
+# echo "Commit?"
+# read -r iscommit
+# if [[ ${iscommit} == "y" ]]; then
+#     printf "Message: "
+#     read -r commit_msg
+#     git add .
+#     touch "commit_file_temp"
+#     echo -e -n "Class: ${template_name}\nFile: ${title}\n\t${commit_msg}" > commit_file_temp
+#     git commit -v -F "commit_file_temp"
+#     rm "commit_file_temp"
+# fi
+
