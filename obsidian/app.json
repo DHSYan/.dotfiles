@@ -23,5 +23,8 @@
   "propertiesInDocument": "source",
   "readableLineLength": true,
   "trashOption": "local",
-  "useMarkdownLinks": false
+  "useMarkdownLinks": false,
+  "tabSize": 2,
+  "autoPairMarkdown": false,
+  "smartIndentList": false
 }
