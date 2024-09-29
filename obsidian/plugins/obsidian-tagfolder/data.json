@@ -1,6 +1,6 @@
 {
   "displayMethod": "NAME",
-  "alwaysOpen": true,
+  "alwaysOpen": false,
   "ignoreDocTags": "",
   "ignoreTags": "",
   "hideOnRootTags": "",

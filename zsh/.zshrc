@@ -20,6 +20,7 @@ alias mv="mv -i"
 alias cp="cp -i"
 alias rm="rm -i" 
 alias ls="ls --color"
+alias smv="mv -n"
 
 # [[ PATH ]]
 export PATH=$PATH:$HOME/.dotfiles/bin:/opt/homebrew

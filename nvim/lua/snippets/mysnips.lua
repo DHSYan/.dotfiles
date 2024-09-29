@@ -97,6 +97,8 @@ local markdown = {
     -- Math Proofs
     s("=>", t("\\implies ")),
     s("->", t( "\\rightarrow ")),
+    s("<->", t( "\\leftrightarrow ")),
+    s("assoc", t( "\\leftrightarrow ")),
     s("Reals", t( "\\mathbb{R} ")), 
 
     -- Math Symbols, Canonical Meaning
