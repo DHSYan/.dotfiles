@@ -21,6 +21,7 @@ alias cp="cp -i"
 alias rm="rm -i" 
 alias ls="ls --color"
 alias smv="mv -n"
+alias g="lazygit"
 
 # [[ PATH ]]
 export PATH=$PATH:$HOME/.dotfiles/bin:/opt/homebrew
