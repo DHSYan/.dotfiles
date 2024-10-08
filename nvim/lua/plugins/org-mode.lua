@@ -1,4 +1,4 @@
-return {
+local u =  {
   'nvim-orgmode/orgmode',
   -- dependencies = {
   --   { 'nvim-treesitter/nvim-treesitter', lazy = true },
@@ -26,3 +26,7 @@ return {
     })
   end,
 }
+
+local m = {}
+
+return m 
