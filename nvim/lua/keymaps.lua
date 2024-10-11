@@ -27,8 +27,8 @@ vim.keymap.set('n', '<leader>t', ":!")
 vim.keymap.set('n', '<leader>T', vim.cmd.Telescope)
 
 
-vim.keymap.set('n', '<leader>g', ":Git")
-vim.keymap.set('n', '<leader>G', vim.cmd.Git)
+-- vim.keymap.set('n', '<leader>g', ":Git")
+vim.keymap.set('n', '<leader>G', vim.cmd.LazyGit)
 
 -- vim.keymap.set('n', '<leader>md', ":!md-to-pdf *.md && open *.pdf<CR>")
 
