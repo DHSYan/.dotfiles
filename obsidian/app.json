@@ -11,7 +11,7 @@
   "newLinkFormat": "shortest",
   "alwaysUpdateLinks": true,
   "defaultViewMode": "preview",
-  "livePreview": false,
+  "livePreview": true,
   "userIgnoreFilters": null,
   "pdfExportSettings": {
     "includeName": false,
@@ -21,10 +21,11 @@
     "downscalePercent": 100
   },
   "propertiesInDocument": "source",
-  "readableLineLength": true,
+  "readableLineLength": false,
   "trashOption": "local",
   "useMarkdownLinks": false,
   "tabSize": 2,
   "autoPairMarkdown": false,
-  "smartIndentList": false
+  "smartIndentList": false,
+  "showRibbon": false
 }
