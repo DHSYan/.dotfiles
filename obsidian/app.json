@@ -11,7 +11,7 @@
   "newLinkFormat": "shortest",
   "alwaysUpdateLinks": true,
   "defaultViewMode": "preview",
-  "livePreview": true,
+  "livePreview": false,
   "userIgnoreFilters": null,
   "pdfExportSettings": {
     "includeName": false,
