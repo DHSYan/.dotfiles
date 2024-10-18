@@ -115,5 +115,14 @@
       ],
       "key": "H"
     }
+  ],
+  "tab-navigator:search-tabs": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "A"
+    }
   ]
 }
