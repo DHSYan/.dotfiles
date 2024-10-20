@@ -16,7 +16,7 @@ commit ()
 }
 
 
-branch=$1
+host=$1
 mode=0
 mode=$2 # os for os only, home for home only
 
@@ -24,20 +24,20 @@ cd ~/nix-config
 
 if [ ${mode} == 'os' ]
 then
-    sudo nixos-rebuild switch --flake .#${branch} --impure
-    commit
+    sudo nixos-rebuild switch --flake .\#${host} 
+    # commit
     exit 0
 fi
 
 if [ ${mode} == 'home' ]
 then
-    home-manager switch --flake .#tzen --impure
+    home-manager switch --flake .\#tzen --impure
     exit 0 
 fi
 
-sudo nixos-rebuild switch --flake .#${branch} --impure
+sudo nixos-rebuild switch --flake .#${host} --impure
 home-manager switch --flake .#tzen --impure
-commit
+# commit
 
-echo "DONE"
+# echo "DONE"
 
