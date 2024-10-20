@@ -4,7 +4,6 @@
   "obsidian-kanban",
   "table-editor-obsidian",
   "obsidian-tasks-plugin",
-  "obsidian-hider",
   "callout-manager",
   "obsidian-cursor-location-plugin",
   "tag-wrangler",
@@ -12,5 +11,5 @@
   "templater-obsidian",
   "obsidian-custom-attachment-location",
   "obsidian-latex-suite",
-  "tab-navigator"
+  "darlal-switcher-plus"
 ]
