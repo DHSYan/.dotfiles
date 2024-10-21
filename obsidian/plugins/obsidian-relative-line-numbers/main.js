@@ -53,51 +53,67 @@ __export(exports, {
 });
 var import_obsidian = __toModule(require("obsidian"));
 
-// node_modules/codemirror-line-numbers-relative/dist/index.js
+// extension.ts
 var import_view = __toModule(require("@codemirror/view"));
 var import_state = __toModule(require("@codemirror/state"));
-var import_gutter = __toModule(require("@codemirror/gutter"));
-var relativeLineNumberGutter = /* @__PURE__ */ new import_state.Compartment();
-var Marker = class extends import_gutter.GutterMarker {
+var import_language = __toModule(require("@codemirror/language"));
+var relativeLineNumberGutter = new import_state.Compartment();
+var Marker = class extends import_view.GutterMarker {
   constructor(text) {
     super();
     this.text = text;
+    this.elementClass = "relative-line-numbers-mono";
   }
   toDOM() {
     return document.createTextNode(this.text);
   }
 };
-var absoluteLineNumberGutter = /* @__PURE__ */ (0, import_gutter.gutter)({
+function linesCharLength(state) {
+  return state.doc.lines.toString().length;
+}
+var absoluteLineNumberGutter = (0, import_view.gutter)({
   lineMarker: (view, line) => {
     const lineNo = view.state.doc.lineAt(line.from).number;
-    const absoluteLineNo = new Marker(lineNo.toString());
+    const charLength = linesCharLength(view.state);
+    const absoluteLineNo = new Marker(lineNo.toString().padStart(charLength, " "));
     const cursorLine = view.state.doc.lineAt(view.state.selection.asSingle().ranges[0].to).number;
     if (lineNo === cursorLine) {
       return absoluteLineNo;
     }
     return null;
   },
-  initialSpacer: () => {
-    const spacer = new Marker("0");
+  initialSpacer: (view) => {
+    const spacer = new Marker("0".repeat(linesCharLength(view.state)));
     return spacer;
   }
 });
 function relativeLineNumbers(lineNo, state) {
+  const charLength = linesCharLength(state);
+  const blank = " ".padStart(charLength, " ");
   if (lineNo > state.doc.lines) {
-    return " ";
+    return blank;
   }
   const cursorLine = state.doc.lineAt(state.selection.asSingle().ranges[0].to).number;
+  const start = Math.min(state.doc.line(lineNo).from, state.selection.asSingle().ranges[0].to);
+  const stop = Math.max(state.doc.line(lineNo).from, state.selection.asSingle().ranges[0].to);
+  const folds = (0, import_language.foldedRanges)(state);
+  let foldedCount = 0;
+  folds.between(start, stop, (from, to) => {
+    let rangeStart = state.doc.lineAt(from).number;
+    let rangeStop = state.doc.lineAt(to).number;
+    foldedCount += rangeStop - rangeStart;
+  });
   if (lineNo === cursorLine) {
-    return " ";
+    return blank;
   } else {
-    return Math.abs(cursorLine - lineNo).toString();
+    return (Math.abs(cursorLine - lineNo) - foldedCount).toString().padStart(charLength, " ");
   }
 }
-var showLineNumbers = /* @__PURE__ */ relativeLineNumberGutter.of(/* @__PURE__ */ (0, import_gutter.lineNumbers)({ formatNumber: relativeLineNumbers }));
-var lineNumbersUpdateListener = /* @__PURE__ */ import_view.EditorView.updateListener.of((viewUpdate) => {
+var showLineNumbers = relativeLineNumberGutter.of((0, import_view.lineNumbers)({ formatNumber: relativeLineNumbers }));
+var lineNumbersUpdateListener = import_view.EditorView.updateListener.of((viewUpdate) => {
   if (viewUpdate.selectionSet) {
     viewUpdate.view.dispatch({
-      effects: relativeLineNumberGutter.reconfigure((0, import_gutter.lineNumbers)({ formatNumber: relativeLineNumbers }))
+      effects: relativeLineNumberGutter.reconfigure((0, import_view.lineNumbers)({ formatNumber: relativeLineNumbers }))
     });
   }
 });
@@ -174,3 +190,5 @@ var RelativeLineNumbers = class extends import_obsidian.Plugin {
     });
   }
 };
+
+/* nosourcemap */

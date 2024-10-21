@@ -1,14 +1,14 @@
 {
   "userAdmonitions": {
-    "test": {
-      "type": "test",
-      "color": "207, 38, 38",
+    "def": {
+      "type": "def",
+      "color": "8, 84, 3",
       "icon": {
-        "name": "angle-double-down",
+        "name": "book-open",
         "type": "font-awesome"
       },
       "command": false,
-      "title": "Test",
+      "title": "Definition",
       "injectColor": true,
       "noTitle": false
     }
@@ -31,7 +31,7 @@
   "icons": [],
   "useFontAwesome": true,
   "rpgDownloadedOnce": false,
-  "msDocConverted": false,
+  "msDocConverted": true,
   "useSnippet": false,
   "snippetPath": "custom-admonitions.c4945b"
 }

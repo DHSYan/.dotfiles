@@ -1,11 +1,15 @@
 {
   "folder": "excalidraw-drawing",
+  "cropFolder": "",
+  "annotateFolder": "",
   "embedUseExcalidrawFolder": true,
   "templateFilePath": "Excalidraw/Template.excalidraw",
   "scriptFolderPath": "Excalidraw/Scripts",
-  "compress": false,
+  "compress": true,
+  "decompressForMDView": false,
+  "onceOffCompressFlagReset": true,
+  "onceOffGPTVersionReset": false,
   "autosave": true,
-  "autosaveInterval": 15000,
   "autosaveIntervalDesktop": 15000,
   "autosaveIntervalMobile": 10000,
   "drawingFilenamePrefix": "Drawing_",
@@ -13,11 +17,16 @@
   "drawingFilnameEmbedPostfix": "_Drawing_",
   "drawingFilenameDateTime": "YYYY-MM-DD_HH.mm.ss",
   "useExcalidrawExtension": false,
+  "cropPrefix": "cropped_",
+  "annotatePrefix": "annotated_",
+  "annotatePreserveSize": false,
   "previewImageType": "SVGIMG",
   "allowImageCache": true,
+  "allowImageCacheInScene": true,
   "displayExportedImageIfAvailable": false,
   "previewMatchObsidianTheme": false,
   "width": "400",
+  "height": "",
   "dynamicStyling": "colorful",
   "isLeftHanded": false,
   "iframeMatchExcalidrawTheme": true,
@@ -26,7 +35,12 @@
   "matchThemeTrigger": true,
   "defaultMode": "normal",
   "defaultPenMode": "always",
-  "allowPinchZoom": false,
+  "penModeDoubleTapEraser": true,
+  "penModeCrosshairVisible": true,
+  "renderImageInMarkdownReadingMode": false,
+  "renderImageInHoverPreviewForMDNotes": false,
+  "renderImageInMarkdownToPDF": false,
+  "allowPinchZoom": true,
   "allowWheelZoom": false,
   "zoomToFitOnOpen": true,
   "zoomToFitOnResize": true,
@@ -39,6 +53,8 @@
   "hoverPreviewWithoutCTRL": false,
   "linkOpacity": 1,
   "openInAdjacentPane": false,
+  "showSecondOrderLinks": true,
+  "focusOnFileTab": true,
   "openInMainWorkspace": true,
   "showLinkBrackets": true,
   "allowCtrlClick": true,
@@ -51,19 +67,25 @@
   "exportWithTheme": true,
   "exportWithBackground": true,
   "exportPaddingSVG": 10,
+  "exportEmbedScene": false,
   "keepInSync": true,
   "autoexportSVG": true,
   "autoexportPNG": false,
   "autoExportLightAndDark": false,
   "autoexportExcalidraw": false,
   "embedType": "excalidraw",
+  "embedMarkdownCommentLinks": true,
   "embedWikiLink": true,
   "syncExcalidraw": false,
   "experimentalFileType": false,
   "experimentalFileTag": "✏️",
   "experimentalLivePreview": true,
+  "fadeOutExcalidrawMarkup": false,
+  "loadPropertySuggestions": true,
   "experimentalEnableFourthFont": false,
   "experimantalFourthFont": "Virgil",
+  "addDummyTextElement": false,
+  "zoteroCompatibility": false,
   "fieldSuggester": true,
   "compatibilityMode": false,
   "drawingOpenCount": 0,
@@ -83,10 +105,9 @@
   "mdCSS": "",
   "scriptEngineSettings": {},
   "defaultTrayMode": false,
-  "previousRelease": "1.9.23",
+  "previousRelease": "2.5.2",
   "showReleaseNotes": true,
   "showNewVersionNotification": true,
-  "mathjaxSourceURL": "https://cdn.jsdelivr.net/npm/mathjax@3.2.1/es5/tex-svg.js",
   "latexBoilerplate": "\\color{blue}",
   "taskboneEnabled": false,
   "taskboneAPIkey": "",
@@ -406,8 +427,357 @@
   "numberOfCustomPens": 0,
   "pdfScale": 4,
   "pdfBorderBox": true,
+  "pdfFrame": false,
   "pdfGapSize": 20,
+  "pdfGroupPages": false,
   "pdfLockAfterImport": true,
   "pdfNumColumns": 1,
-  "pdfImportScale": 0.3
+  "pdfNumRows": 1,
+  "pdfDirection": "right",
+  "pdfImportScale": 0.3,
+  "gridSettings": {
+    "DYNAMIC_COLOR": true,
+    "COLOR": "#000000",
+    "OPACITY": 50
+  },
+  "laserSettings": {
+    "DECAY_LENGTH": 50,
+    "DECAY_TIME": 1000,
+    "COLOR": "#ff0000"
+  },
+  "embeddableMarkdownDefaults": {
+    "useObsidianDefaults": false,
+    "backgroundMatchCanvas": false,
+    "backgroundMatchElement": true,
+    "backgroundColor": "#fff",
+    "backgroundOpacity": 60,
+    "borderMatchElement": true,
+    "borderColor": "#fff",
+    "borderOpacity": 0,
+    "filenameVisible": false
+  },
+  "markdownNodeOneClickEditing": false,
+  "canvasImmersiveEmbed": true,
+  "startupScriptPath": "",
+  "openAIAPIToken": "",
+  "openAIDefaultTextModel": "gpt-3.5-turbo-1106",
+  "openAIDefaultVisionModel": "gpt-4o",
+  "openAIDefaultImageGenerationModel": "dall-e-3",
+  "openAIURL": "https://api.openai.com/v1/chat/completions",
+  "openAIImageGenerationURL": "https://api.openai.com/v1/images/generations",
+  "openAIImageEditsURL": "https://api.openai.com/v1/images/edits",
+  "openAIImageVariationURL": "https://api.openai.com/v1/images/variations",
+  "modifierKeyConfig": {
+    "Mac": {
+      "LocalFileDragAction": {
+        "defaultAction": "image-import",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-import"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "link"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-url"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "embeddable"
+          }
+        ]
+      },
+      "WebBrowserDragAction": {
+        "defaultAction": "image-url",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-url"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "link"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "embeddable"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-import"
+          }
+        ]
+      },
+      "InternalDragAction": {
+        "defaultAction": "link",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "link"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": true,
+            "result": "embeddable"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": true,
+            "result": "image-fullsize"
+          }
+        ]
+      },
+      "LinkClickAction": {
+        "defaultAction": "new-tab",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "active-pane"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "new-tab"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "new-pane"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": true,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "popout-window"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": true,
+            "result": "md-properties"
+          }
+        ]
+      }
+    },
+    "Win": {
+      "LocalFileDragAction": {
+        "defaultAction": "image-import",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-import"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "link"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-url"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "embeddable"
+          }
+        ]
+      },
+      "WebBrowserDragAction": {
+        "defaultAction": "image-url",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-url"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "link"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "embeddable"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image-import"
+          }
+        ]
+      },
+      "InternalDragAction": {
+        "defaultAction": "link",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "link"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "embeddable"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "image"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "image-fullsize"
+          }
+        ]
+      },
+      "LinkClickAction": {
+        "defaultAction": "new-tab",
+        "rules": [
+          {
+            "shift": false,
+            "ctrl_cmd": false,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "active-pane"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": false,
+            "result": "new-tab"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "new-pane"
+          },
+          {
+            "shift": true,
+            "ctrl_cmd": true,
+            "alt_opt": true,
+            "meta_ctrl": false,
+            "result": "popout-window"
+          },
+          {
+            "shift": false,
+            "ctrl_cmd": true,
+            "alt_opt": false,
+            "meta_ctrl": true,
+            "result": "md-properties"
+          }
+        ]
+      }
+    }
+  },
+  "slidingPanesSupport": false,
+  "areaZoomLimit": 1,
+  "longPressDesktop": 500,
+  "longPressMobile": 500,
+  "isDebugMode": false,
+  "rank": "Bronze",
+  "modifierKeyOverrides": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "Enter"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "k"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "G"
+    }
+  ],
+  "showSplashscreen": true,
+  "autosaveInterval": 15000,
+  "mathjaxSourceURL": "https://cdn.jsdelivr.net/npm/mathjax@3.2.1/es5/tex-svg.js"
 }

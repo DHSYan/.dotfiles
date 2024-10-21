@@ -4,12 +4,18 @@
   "obsidian-kanban",
   "table-editor-obsidian",
   "obsidian-tasks-plugin",
-  "callout-manager",
   "obsidian-cursor-location-plugin",
   "tag-wrangler",
   "obsidian-hide-sidebars-when-narrow",
   "templater-obsidian",
   "obsidian-custom-attachment-location",
   "obsidian-latex-suite",
-  "darlal-switcher-plus"
+  "darlal-switcher-plus",
+  "calendar",
+  "obsidian-admonition",
+  "omnisearch",
+  "dataview",
+  "obsidian-footnotes",
+  "nldates-obsidian",
+  "remember-cursor-position"
 ]
