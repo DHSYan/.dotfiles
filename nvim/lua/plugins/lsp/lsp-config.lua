@@ -2,6 +2,19 @@
 
 function server_list()
     local lspconfig = require("lspconfig")
+    lspconfig.nixd.setup({
+        cmd = { "nixd" },
+        settings = {
+            nixd = {
+                nixpkgs = {
+                    expr = "import <nixpkgs> { }",
+                },
+                formatting = {
+                    command = { "nixfmt" }, 
+                },
+            },
+        },
+    })
 
     -- lspconfig.lua_ls.setup{
     --     capabilities = capabilities
@@ -202,6 +215,7 @@ return {
             matching = { disallow_symbol_nonprefix_matching = false }
         })
 
+        server_list()
     end,
 }
 -- Just that that I go through line by line, and being very methiodically
