@@ -1,7 +1,6 @@
 {
   "obsidian-excalidraw-plugin:insert-link-to-element": [],
   "markdown:add-metadata-property": [],
-  "file-explorer:new-file": [],
   "file-explorer:new-file-in-new-pane": [],
   "editor:delete-paragraph": [],
   "obsidian-excalidraw-plugin:insert-link": [],
@@ -157,6 +156,15 @@
         "Shift"
       ],
       "key": "E"
+    }
+  ],
+  "file-explorer:new-file": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "N"
     }
   ]
 }
