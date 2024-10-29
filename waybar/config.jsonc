@@ -13,9 +13,9 @@
         "hyprland/mode"
         // "hyprland/scratchpad",
     ],
-    "modules-center": [
-        "hyprland/window"
-    ],
+    // "modules-center": [
+    //     // "hyprland/window"
+    // ],
     "modules-right": [
         "mpd",
         // "idle_inhibitor",
