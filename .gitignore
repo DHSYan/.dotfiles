@@ -1,8 +1,11 @@
 .DS_Store
+
 *.un~
-obsidian/workspace.json
 *.o
+
 .zsh_history
 .zcompdump
+
 obsidian/bookmarks.json
+obsidian/workspace.json
 obsidian/plugins/remember-cursor-position/cursor-positions.json
