@@ -1,6 +1,7 @@
 {
   "obsidian-excalidraw-plugin:insert-link-to-element": [],
   "markdown:add-metadata-property": [],
+  "file-explorer:new-file": [],
   "file-explorer:new-file-in-new-pane": [],
   "editor:delete-paragraph": [],
   "obsidian-excalidraw-plugin:insert-link": [],
@@ -124,14 +125,6 @@
       "key": "A"
     }
   ],
-  "darlal-switcher-plus:switcher-plus:open": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "P"
-    }
-  ],
   "workspace:open-in-new-window": [
     {
       "modifiers": [
@@ -158,13 +151,12 @@
       "key": "E"
     }
   ],
-  "file-explorer:new-file": [
+  "omnisearch:show-modal": [
     {
       "modifiers": [
-        "Mod",
-        "Shift"
+        "Mod"
       ],
-      "key": "N"
+      "key": "P"
     }
   ]
 }
