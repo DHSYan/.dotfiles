@@ -1,16 +1,16 @@
 {
   "workspaces": {
-    "test": {
+    "main": {
       "main": {
         "id": "3df0f238366810d5",
         "type": "split",
         "children": [
           {
-            "id": "fa721ceeec3528d8",
+            "id": "7f0c180ba1433fb9",
             "type": "tabs",
             "children": [
               {
-                "id": "4d5d5dd17d44a4fb",
+                "id": "0316c631af8561a4",
                 "type": "leaf",
                 "state": {
                   "type": "empty",
@@ -70,16 +70,6 @@
                   "icon": "lucide-bookmark",
                   "title": "Bookmarks"
                 }
-              },
-              {
-                "id": "e853edbc13eda53d",
-                "type": "leaf",
-                "state": {
-                  "type": "tagfolder-view",
-                  "state": {},
-                  "icon": "lucide-file",
-                  "title": "Plugin no longer active"
-                }
               }
             ]
           }
@@ -96,64 +86,6 @@
             "type": "tabs",
             "children": [
               {
-                "id": "420d5a90bca7ecf7",
-                "type": "leaf",
-                "state": {
-                  "type": "backlink",
-                  "state": {
-                    "collapseAll": false,
-                    "extraContext": false,
-                    "sortOrder": "alphabetical",
-                    "showSearch": false,
-                    "searchQuery": "",
-                    "backlinkCollapsed": false,
-                    "unlinkedCollapsed": true
-                  },
-                  "icon": "links-coming-in",
-                  "title": "Backlinks"
-                }
-              },
-              {
-                "id": "8cba288c6d8eef42",
-                "type": "leaf",
-                "state": {
-                  "type": "outgoing-link",
-                  "state": {
-                    "linksCollapsed": false,
-                    "unlinkedCollapsed": true
-                  },
-                  "icon": "links-going-out",
-                  "title": "Outgoing links"
-                }
-              },
-              {
-                "id": "7d9e960952cd86ce",
-                "type": "leaf",
-                "state": {
-                  "type": "tag",
-                  "state": {
-                    "sortOrder": "frequency",
-                    "useHierarchy": true
-                  },
-                  "icon": "lucide-tags",
-                  "title": "Tags"
-                }
-              },
-              {
-                "id": "f2109fe57a796a30",
-                "type": "leaf",
-                "state": {
-                  "type": "all-properties",
-                  "state": {
-                    "sortOrder": "frequency",
-                    "showSearch": false,
-                    "searchQuery": ""
-                  },
-                  "icon": "lucide-archive",
-                  "title": "All properties"
-                }
-              },
-              {
                 "id": "54596dba58637dc5",
                 "type": "leaf",
                 "state": {
@@ -162,19 +94,8 @@
                   "icon": "lucide-info",
                   "title": "File properties"
                 }
-              },
-              {
-                "id": "8d57b1e461ca082c",
-                "type": "leaf",
-                "state": {
-                  "type": "calendar",
-                  "state": {},
-                  "icon": "calendar-with-checkmark",
-                  "title": "Calendar"
-                }
               }
-            ],
-            "currentTab": 4
+            ]
           },
           {
             "id": "cd2dccb9ec83ce00",
@@ -196,19 +117,6 @@
             "id": "b84af1f87f1fc027",
             "type": "tabs",
             "children": [
-              {
-                "id": "104bd87b4bf98bc5",
-                "type": "leaf",
-                "state": {
-                  "type": "outgoing-link",
-                  "state": {
-                    "linksCollapsed": false,
-                    "unlinkedCollapsed": true
-                  },
-                  "icon": "links-going-out",
-                  "title": "Outgoing links"
-                }
-              },
               {
                 "id": "caae681e5b43e71e",
                 "type": "leaf",
@@ -269,9 +177,9 @@
           "templater-obsidian:Templater": false
         }
       },
-      "active": "4d5d5dd17d44a4fb",
-      "mtime": "2024-11-01T11:36:27-07:00"
+      "active": "19fc81b122e980ac",
+      "mtime": "2024-11-01T11:51:07-07:00"
     }
   },
-  "active": "test"
+  "active": "main"
 }

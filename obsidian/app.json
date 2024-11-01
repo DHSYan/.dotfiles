@@ -27,5 +27,5 @@
   "tabSize": 2,
   "autoPairMarkdown": false,
   "smartIndentList": false,
-  "showRibbon": true
+  "showRibbon": false
 }
