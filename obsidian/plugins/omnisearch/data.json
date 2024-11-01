@@ -22,7 +22,7 @@
   "showPreviousQueryResults": true,
   "simpleSearch": false,
   "tokenizeUrls": false,
-  "fuzziness": "1",
+  "fuzziness": "2",
   "weightBasename": 3,
   "weightDirectory": 2,
   "weightH1": 1.5,
