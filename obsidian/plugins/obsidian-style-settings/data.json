@@ -1,5 +1,6 @@
 {
   "minimal-style@@italic-color@@dark": "#F7737D",
   "minimal-style@@bold-color@@dark": "#FF5AAA",
-  "minimal-style@@bold-weight": 800
+  "minimal-style@@bold-weight": 800,
+  "minimal-style@@file-header-visibility": "minimal-tab-title-visible"
 }
