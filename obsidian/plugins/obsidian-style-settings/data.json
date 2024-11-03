@@ -3,5 +3,6 @@
   "minimal-style@@bold-color@@dark": "#FF5AAA",
   "minimal-style@@bold-weight": 800,
   "minimal-style@@file-header-visibility": "minimal-tab-title-visible",
-  "minimal-style@@header-height": "30px"
+  "minimal-style@@header-height": "30px",
+  "minimal-style@@inline-title-size": "0"
 }

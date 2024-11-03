@@ -6,11 +6,11 @@
         "type": "split",
         "children": [
           {
-            "id": "7f0c180ba1433fb9",
+            "id": "0bed07fdd2fc2e57",
             "type": "tabs",
             "children": [
               {
-                "id": "0316c631af8561a4",
+                "id": "03fb0f2d8cb161b8",
                 "type": "leaf",
                 "state": {
                   "type": "empty",
@@ -50,7 +50,7 @@
                 "state": {
                   "type": "search",
                   "state": {
-                    "query": "tag:#idea",
+                    "query": "",
                     "matchingCase": false,
                     "explainSearch": false,
                     "collapseAll": false,
@@ -75,7 +75,8 @@
           }
         ],
         "direction": "horizontal",
-        "width": 300
+        "width": 300,
+        "collapsed": true
       },
       "right": {
         "id": "c857d6b33fcbda6f",
@@ -86,13 +87,26 @@
             "type": "tabs",
             "children": [
               {
-                "id": "54596dba58637dc5",
+                "id": "2fada9db7e036540",
                 "type": "leaf",
                 "state": {
                   "type": "file-properties",
                   "state": {},
                   "icon": "lucide-info",
                   "title": "File properties"
+                }
+              },
+              {
+                "id": "46041a1cfcc9b1c2",
+                "type": "leaf",
+                "state": {
+                  "type": "tag",
+                  "state": {
+                    "sortOrder": "frequency",
+                    "useHierarchy": true
+                  },
+                  "icon": "lucide-tags",
+                  "title": "Tags"
                 }
               }
             ]
@@ -145,7 +159,7 @@
                       "repelStrength": 10,
                       "linkStrength": 1,
                       "linkDistance": 250,
-                      "scale": 1,
+                      "scale": 0.7253820117944687,
                       "close": true
                     }
                   },
@@ -157,7 +171,7 @@
           }
         ],
         "direction": "horizontal",
-        "width": 300
+        "width": 389.5
       },
       "left-ribbon": {
         "hiddenItems": {
@@ -174,11 +188,12 @@
           "workspaces:Manage workspace layouts": false,
           "obsidian-excalidraw-plugin:Create new drawing": false,
           "table-editor-obsidian:Advanced Tables Toolbar": false,
-          "templater-obsidian:Templater": false
+          "templater-obsidian:Templater": false,
+          "obsidian-tomorrows-daily-note:Open tomorrow's daily note": false
         }
       },
-      "active": "19fc81b122e980ac",
-      "mtime": "2024-11-01T11:51:07-07:00"
+      "active": "03fb0f2d8cb161b8",
+      "mtime": "2024-11-02T16:07:06-07:00"
     }
   },
   "active": "main"
