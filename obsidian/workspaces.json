@@ -6,11 +6,11 @@
         "type": "split",
         "children": [
           {
-            "id": "0bed07fdd2fc2e57",
+            "id": "78dbb31b238b8b7c",
             "type": "tabs",
             "children": [
               {
-                "id": "03fb0f2d8cb161b8",
+                "id": "f2532cc269206f34",
                 "type": "leaf",
                 "state": {
                   "type": "empty",
@@ -50,7 +50,7 @@
                 "state": {
                   "type": "search",
                   "state": {
-                    "query": "",
+                    "query": "tag:#idea",
                     "matchingCase": false,
                     "explainSearch": false,
                     "collapseAll": false,
@@ -75,8 +75,7 @@
           }
         ],
         "direction": "horizontal",
-        "width": 300,
-        "collapsed": true
+        "width": 200
       },
       "right": {
         "id": "c857d6b33fcbda6f",
@@ -87,7 +86,7 @@
             "type": "tabs",
             "children": [
               {
-                "id": "2fada9db7e036540",
+                "id": "54596dba58637dc5",
                 "type": "leaf",
                 "state": {
                   "type": "file-properties",
@@ -97,7 +96,7 @@
                 }
               },
               {
-                "id": "46041a1cfcc9b1c2",
+                "id": "a8b471bc198a8f58",
                 "type": "leaf",
                 "state": {
                   "type": "tag",
@@ -159,7 +158,7 @@
                       "repelStrength": 10,
                       "linkStrength": 1,
                       "linkDistance": 250,
-                      "scale": 0.7253820117944687,
+                      "scale": 1,
                       "close": true
                     }
                   },
@@ -171,7 +170,7 @@
           }
         ],
         "direction": "horizontal",
-        "width": 389.5
+        "width": 352.5
       },
       "left-ribbon": {
         "hiddenItems": {
@@ -192,8 +191,8 @@
           "obsidian-tomorrows-daily-note:Open tomorrow's daily note": false
         }
       },
-      "active": "03fb0f2d8cb161b8",
-      "mtime": "2024-11-02T16:07:06-07:00"
+      "active": "f2532cc269206f34",
+      "mtime": "2024-11-03T12:46:31-08:00"
     }
   },
   "active": "main"
