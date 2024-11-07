@@ -1,6 +1,5 @@
 {
   "obsidian-excalidraw-plugin:insert-link-to-element": [],
-  "markdown:add-metadata-property": [],
   "file-explorer:new-file": [
     {
       "modifiers": [
@@ -177,6 +176,51 @@
         "Mod"
       ],
       "key": "]"
+    }
+  ],
+  "obsidian-footnotes:insert-autonumbered-footnote": [
+    {
+      "modifiers": [],
+      "key": "F12"
+    },
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": ";"
+    }
+  ],
+  "editor:open-search": [],
+  "darlal-switcher-plus:switcher-plus:open": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "F"
+    },
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "A"
+    }
+  ],
+  "obsidian-tomorrows-daily-note:create-tomorrows-daily-note": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "ArrowUp"
+    }
+  ],
+  "editor:toggle-source": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "L"
     }
   ]
 }
