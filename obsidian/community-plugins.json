@@ -11,7 +11,6 @@
   "obsidian-custom-attachment-location",
   "obsidian-latex-suite",
   "darlal-switcher-plus",
-  "calendar",
   "obsidian-admonition",
   "omnisearch",
   "dataview",
@@ -24,5 +23,6 @@
   "obsidian-icon-folder",
   "obsidian-tomorrows-daily-note",
   "obsidian-focus-plugin",
-  "music-code-blocks"
+  "music-code-blocks",
+  "readwise-official"
 ]

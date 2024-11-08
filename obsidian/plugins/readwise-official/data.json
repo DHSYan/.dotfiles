@@ -1,0 +1,20 @@
+{
+  "token": "as03MU2RfZp1VrLlR0cdAz3txqeiL7vwfZvZ1QNYGPyu1mYEea",
+  "readwiseDir": "resources/readwise",
+  "frequency": "60",
+  "triggerOnLoad": true,
+  "isSyncing": false,
+  "lastSyncFailed": false,
+  "lastSavedStatusID": 17047323,
+  "currentSyncStatusID": 0,
+  "refreshBooks": true,
+  "booksToRefresh": [],
+  "failedBooks": [],
+  "booksIDsMap": {
+    "resources/readwise/books/readwise-books-c-programming-language.md": "45714704",
+    "resources/readwise/books/readwise-books-exit-west.md": "45714703",
+    "resources/readwise/books/readwise-books-hillbilly-elegy.md": "45714702",
+    "resources/readwise/books/readwise-books-mere-christianity.md": "45714701"
+  },
+  "reimportShowConfirmation": true
+}
