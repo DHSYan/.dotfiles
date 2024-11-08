@@ -191,14 +191,15 @@
       "key": ";"
     }
   ],
-  "editor:open-search": [],
-  "darlal-switcher-plus:switcher-plus:open": [
+  "editor:open-search": [
     {
       "modifiers": [
         "Mod"
       ],
       "key": "F"
-    },
+    }
+  ],
+  "darlal-switcher-plus:switcher-plus:open": [
     {
       "modifiers": [
         "Mod",
