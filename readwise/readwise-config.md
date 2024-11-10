@@ -16,7 +16,7 @@ readwise-{{category}}-{{title|replace(" ", "-")|lower()}}
 {% endif -%}
 ## Metadata
 - Author: {% if author %}[[{{author|replace(".", "")|replace(" ", "-")|lower()}}]]{% endif %}
-- Full Title: {{full_title}}
+- Note: [[{{full_title|replace(" ", "-")|lower()}}|{{full_title}}]]
 - Category: #{{category}} #readwise-import
 {% if document_note -%}
 - Document Note: {{document_note}}
@@ -35,7 +35,7 @@ readwise-{{category}}-{{title|replace(" ", "-")|lower()}}
 # Highlight Header
 ```md
 {% if is_new_page %}
-## Highlights [[{{date|date('Y-m-d')}}]] at {{time}}
+## Highlights 
 {% elif has_new_highlights -%}
 ## New highlights added [[{{date|date('Y-m-d')}}]] at {{time}}
 {% endif -%}
