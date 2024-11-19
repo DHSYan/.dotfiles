@@ -6,11 +6,26 @@
         "type": "split",
         "children": [
           {
-            "id": "78dbb31b238b8b7c",
+            "id": "9de64abeeab7cc0b",
             "type": "tabs",
             "children": [
               {
-                "id": "f2532cc269206f34",
+                "id": "8ca6160242d1f0d4",
+                "type": "leaf",
+                "state": {
+                  "type": "markdown",
+                  "state": {
+                    "file": "daily-notes/2024-11-18.md",
+                    "mode": "preview",
+                    "backlinks": true,
+                    "source": true
+                  },
+                  "icon": "lucide-file",
+                  "title": "2024-11-18"
+                }
+              },
+              {
+                "id": "8a5bc547f67f612b",
                 "type": "leaf",
                 "state": {
                   "type": "empty",
@@ -19,7 +34,8 @@
                   "title": "New tab"
                 }
               }
-            ]
+            ],
+            "currentTab": 1
           }
         ],
         "direction": "vertical"
@@ -75,7 +91,8 @@
           }
         ],
         "direction": "horizontal",
-        "width": 200
+        "width": 200,
+        "collapsed": true
       },
       "right": {
         "id": "c857d6b33fcbda6f",
@@ -84,7 +101,7 @@
           {
             "id": "8fe8e59cb61de340",
             "type": "tabs",
-            "dimension": 18.779342723004692,
+            "dimension": 18.779342723004696,
             "children": [
               {
                 "id": "54596dba58637dc5",
@@ -114,7 +131,7 @@
           {
             "id": "cd2dccb9ec83ce00",
             "type": "tabs",
-            "dimension": 47.88732394366197,
+            "dimension": 47.887323943661976,
             "children": [
               {
                 "id": "8a757004e7b2e934",
@@ -131,7 +148,7 @@
           {
             "id": "b84af1f87f1fc027",
             "type": "tabs",
-            "dimension": 33.33333333333333,
+            "dimension": 33.333333333333336,
             "children": [
               {
                 "id": "caae681e5b43e71e",
@@ -177,6 +194,7 @@
       },
       "left-ribbon": {
         "hiddenItems": {
+          "homepage:Open homepage": false,
           "obsidian-to-anki-plugin:Obsidian_to_Anki - Scan Vault": false,
           "obsidian-kanban:Create new board": false,
           "darlal-switcher-plus:Open in Headings Mode": false,
@@ -194,8 +212,8 @@
           "obsidian-tomorrows-daily-note:Open tomorrow's daily note": false
         }
       },
-      "active": "f2532cc269206f34",
-      "mtime": "2024-11-04T16:18:54-08:00"
+      "active": "8a5bc547f67f612b",
+      "mtime": "2024-11-18T14:37:19-08:00"
     }
   },
   "active": "main"
