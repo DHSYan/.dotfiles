@@ -26,6 +26,7 @@ vim.keymap.set("n", "<leader>nh", vim.cmd.noh)
 vim.keymap.set('n', '<leader>t', ":!")
 vim.keymap.set('n', '<leader>T', vim.cmd.Telescope)
 
+vim.keymap.set('n', '<leader>J', ":Telescope jumplist<CR>")
 
 -- vim.keymap.set('n', '<leader>g', ":Git")
 vim.keymap.set('n', '<leader>G', vim.cmd.LazyGit)
