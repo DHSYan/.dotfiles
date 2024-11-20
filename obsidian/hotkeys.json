@@ -232,5 +232,13 @@
       ],
       "key": "S"
     }
+  ],
+  "editor:context-menu": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "K"
+    }
   ]
 }
