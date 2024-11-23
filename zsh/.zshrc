@@ -12,6 +12,8 @@ fi
 
 # [[ Aliases ]]
 alias v="nvim"
+alias ts="tmux-sessionizer"
+alias ta="tmux a"
 alias cf="source fuzzy_cd"
 alias ..="cd .."
 alias tt="cd ~/throw-away-code"
@@ -81,3 +83,4 @@ bindkey '^n' history-search-forward
 
 # [[ FZF Shell Integration ]]
 eval "$(fzf --zsh)"
+
