@@ -1,0 +1,11 @@
+[general]
+live_config_reload = true
+
+[window]
+blur = true
+opacity = 0.9
+
+[font]
+normal = { family = "Hurmit Nerd Font", style = "Regular" }
+size = 16
+
