@@ -2,7 +2,7 @@
   "userAdmonitions": {
     "def": {
       "type": "def",
-      "color": "8, 84, 3",
+      "color": "92, 245, 81",
       "icon": {
         "name": "book-open",
         "type": "font-awesome"
@@ -10,7 +10,8 @@
       "command": false,
       "title": "Definition",
       "injectColor": true,
-      "noTitle": false
+      "noTitle": false,
+      "copy": false
     }
   },
   "syntaxHighlight": false,
