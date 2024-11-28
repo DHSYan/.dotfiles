@@ -14,14 +14,14 @@ local opts = {
             name = "second-brain",
             path = "~/second-brain",
         },
-        {
-            name = "Remote-Vault-Sean",
-            path = "~/Remote-Vault-Sean",
-        },
-        {
-            name = "Youtube",
-            path = "~/youtube",
-        },
+        -- {
+        --     name = "Remote-Vault-Sean",
+        --     path = "~/Remote-Vault-Sean",
+        -- },
+        -- {
+        --     name = "Youtube",
+        --     path = "~/youtube",
+        -- },
     },
 
     daily_notes = {
@@ -83,7 +83,7 @@ local opts = {
         date_format = "%m-%d-%Y",
         time_format = "%H:%M:%S",
     },
-    disable_frontmatter = false,
+    disable_frontmatter = true,
 }
 
 local concept_note_name = "Concept-Notes";
