@@ -1,0 +1,16 @@
+#!/bin/env zsh
+
+cd ~/second-brain
+lazygit
+git push origin main
+git push ubc main
+
+cd ~/.dotfiles
+lazygit
+git push origin main
+
+cd ~/nix-config
+lazygit
+git push origin master
+
+poweroff
