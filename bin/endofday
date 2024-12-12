@@ -1,5 +1,8 @@
 #!/bin/env zsh
 
+eval $(ssh-agent)
+ssh-add -K
+
 cd ~/second-brain
 lazygit
 git push origin main
