@@ -14,11 +14,11 @@
       "copy": false
     }
   },
-  "syntaxHighlight": false,
+  "syntaxHighlight": true,
   "copyButton": false,
   "version": "10.3.2",
-  "autoCollapse": false,
-  "defaultCollapseType": "open",
+  "autoCollapse": true,
+  "defaultCollapseType": "closed",
   "injectColor": true,
   "parseTitles": true,
   "dropShadow": true,
@@ -27,7 +27,7 @@
     "admonitions": true,
     "icons": true,
     "other": true,
-    "advanced": false
+    "advanced": true
   },
   "icons": [],
   "useFontAwesome": true,
