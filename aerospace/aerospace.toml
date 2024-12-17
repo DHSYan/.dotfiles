@@ -14,6 +14,7 @@ after-login-command = []
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = []
 
+
 # Start AeroSpace at login
 start-at-login = true
 
@@ -34,16 +35,20 @@ default-root-container-layout = 'tiles'
 #               tall monitor (anything higher than wide) gets vertical orientation
 default-root-container-orientation = 'auto'
 
-# Possible values: (qwerty|dvorak)
-# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
-key-mapping.preset = 'dvorak'
-
 # Mouse follows focus when focused monitor changes
 # Drop it from your config, if you don't like this behavior
 # See https://nikitabobko.github.io/AeroSpace/guide#on-focus-changed-callbacks
 # See https://nikitabobko.github.io/AeroSpace/commands#move-mouse
 # on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+# Possible values: (qwerty|dvorak)
+# See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 on-focus-changed = ['move-mouse window-lazy-center'] # Mouse lazily follows any focus (window or workspace)
+
+#automatically-unhide-macos-hidden-apps = false
+
+[key-mapping]
+preset = 'dvorak'
+
 
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
@@ -65,6 +70,9 @@ outer.right =      0
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
 [mode.main.binding]
+
+cmd-h = [] # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
 
 # All possible keys:
 # - Letters.        a, b, c, ..., z
@@ -94,8 +102,8 @@ alt-h = 'focus left'
 alt-j = 'focus down'
 alt-k = 'focus up'
 alt-l = 'focus right'
-
 alt-f = 'fullscreen'
+alt-v = 'layout floating tiling'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -202,7 +210,7 @@ alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'chrome'
+if.app-name-regex-substring = 'Chrome'
 run = ['move-node-to-workspace 1']
 
 [[on-window-detected]]
@@ -210,17 +218,31 @@ if.app-name-regex-substring = 'kitty'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'obsidian'
+if.app-name-regex-substring = 'Obsidian'
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'discord'
+if.app-name-regex-substring = 'TickTick'
+run = ['move-node-to-workspace 6']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Zen'
+run = ['move-node-to-workspace 7']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'Discord'
 run = ['move-node-to-workspace 8']
 [[on-window-detected]]
 if.app-name-regex-substring = 'telegram'
 run = ['move-node-to-workspace 8']
 [[on-window-detected]]
-if.app-name-regex-substring = 'spotify'
+if.app-name-regex-substring = 'Messages'
+run = ['move-node-to-workspace 8']
+[[on-window-detected]]
+if.app-name-regex-substring = 'LINE'
+run = ['move-node-to-workspace 8']
+[[on-window-detected]]
+if.app-name-regex-substring = 'Spotify'
 run = ['move-node-to-workspace 9']
 
 
