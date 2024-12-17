@@ -233,7 +233,7 @@ run = ['move-node-to-workspace 7']
 if.app-name-regex-substring = 'Discord'
 run = ['move-node-to-workspace 8']
 [[on-window-detected]]
-if.app-name-regex-substring = 'telegram'
+if.app-name-regex-substring = 'Telegram'
 run = ['move-node-to-workspace 8']
 [[on-window-detected]]
 if.app-name-regex-substring = 'Messages'
