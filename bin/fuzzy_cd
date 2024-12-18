@@ -5,6 +5,6 @@ if [[ $# -eq 1 ]]; then
   selected=$1
   cd $(find "$selected" -type d | fzf)
 else
-  cd $(find ~ -type d -maxdepth 3 ! -path "*/.git/*" ! -path "*/Library/*" | fzf)
+  cd $(find ~ -maxdepth 3 -type d  ! -path "*/.git/*" ! -path "*/Library/*" | fzf)
 fi
 
