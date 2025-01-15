@@ -12,6 +12,18 @@
       "injectColor": true,
       "noTitle": false,
       "copy": false
+    },
+    "funfact": {
+      "type": "funfact",
+      "color": "236, 221, 141",
+      "icon": {
+        "name": "umbrella-beach",
+        "type": "font-awesome"
+      },
+      "command": false,
+      "title": "Fun Fact",
+      "injectColor": true,
+      "noTitle": false
     }
   },
   "syntaxHighlight": true,
