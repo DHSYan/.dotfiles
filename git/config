@@ -3,8 +3,8 @@
     excludesfile = ~/.config/git/.gitignore_global
 
 [user]
-    email = dhsyan@students.cs.ubc.ca
-    name = dhsyan
+    email = sean@dhsy.me
+    name = Ding-Han Sean Yan
     signingkey = ~/.ssh/id_ed25519
 
 [alias]
