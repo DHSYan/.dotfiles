@@ -1,6 +1,6 @@
 {
   "attachmentFolderPath": "assets",
-  "showUnsupportedFiles": false,
+  "showUnsupportedFiles": true,
   "newFileLocation": "root",
   "strictLineBreaks": true,
   "showLineNumber": true,
@@ -26,6 +26,5 @@
   "useMarkdownLinks": false,
   "tabSize": 2,
   "autoPairMarkdown": false,
-  "smartIndentList": false,
-  "showRibbon": false
+  "smartIndentList": false
 }

@@ -29,7 +29,7 @@
     "iconsBackgroundCheckEnabled": false,
     "iconsInNotesEnabled": true,
     "iconsInLinksEnabled": true,
-    "iconIdentifier": ":",
+    "iconIdentifier": "",
     "lucideIconPackType": "native",
     "debugMode": false
   },

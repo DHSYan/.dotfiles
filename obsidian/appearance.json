@@ -8,5 +8,6 @@
   "translucency": false,
   "baseFontSize": 18,
   "theme": "obsidian",
-  "cssTheme": "Minimal"
+  "cssTheme": "Minimal",
+  "showRibbon": false
 }

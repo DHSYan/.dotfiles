@@ -6,26 +6,11 @@
         "type": "split",
         "children": [
           {
-            "id": "9de64abeeab7cc0b",
+            "id": "802c3105184aeeb5",
             "type": "tabs",
             "children": [
               {
-                "id": "8ca6160242d1f0d4",
-                "type": "leaf",
-                "state": {
-                  "type": "markdown",
-                  "state": {
-                    "file": "daily-notes/2024-11-18.md",
-                    "mode": "preview",
-                    "backlinks": true,
-                    "source": true
-                  },
-                  "icon": "lucide-file",
-                  "title": "2024-11-18"
-                }
-              },
-              {
-                "id": "8a5bc547f67f612b",
+                "id": "dfbc523fe84275dc",
                 "type": "leaf",
                 "state": {
                   "type": "empty",
@@ -34,8 +19,7 @@
                   "title": "New tab"
                 }
               }
-            ],
-            "currentTab": 1
+            ]
           }
         ],
         "direction": "vertical"
@@ -54,7 +38,8 @@
                 "state": {
                   "type": "file-explorer",
                   "state": {
-                    "sortOrder": "alphabetical"
+                    "sortOrder": "alphabetical",
+                    "autoReveal": false
                   },
                   "icon": "lucide-folder-closed",
                   "title": "Files"
@@ -138,7 +123,11 @@
                 "type": "leaf",
                 "state": {
                   "type": "outline",
-                  "state": {},
+                  "state": {
+                    "followCursor": false,
+                    "showSearch": false,
+                    "searchQuery": ""
+                  },
                   "icon": "lucide-list",
                   "title": "Outline"
                 }
@@ -194,8 +183,8 @@
       },
       "left-ribbon": {
         "hiddenItems": {
+          "obsidian-bible-reference:Bible Verse Lookup": false,
           "homepage:Open homepage": false,
-          "obsidian-to-anki-plugin:Obsidian_to_Anki - Scan Vault": false,
           "obsidian-kanban:Create new board": false,
           "darlal-switcher-plus:Open in Headings Mode": false,
           "darlal-switcher-plus:Open Symbols for the active editor": false,
@@ -212,8 +201,8 @@
           "obsidian-tomorrows-daily-note:Open tomorrow's daily note": false
         }
       },
-      "active": "8a5bc547f67f612b",
-      "mtime": "2024-11-18T14:37:19-08:00"
+      "active": "dfbc523fe84275dc",
+      "mtime": "2025-02-11T14:39:51-08:00"
     }
   },
   "active": "main"
