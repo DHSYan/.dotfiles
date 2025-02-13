@@ -1,7 +1,7 @@
 -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 function server_list()
-    local lspconfig = require("lspconfig")
+    local lspconfig = require("lspconfig");
     lspconfig.nixd.setup({
         cmd = { "nixd" },
         settings = {
@@ -14,7 +14,11 @@ function server_list()
                 },
             },
         },
-    })
+    });
+    -- lspconfig.java_language_server.setup({
+    --     cmd = { "java-language-server" },
+    -- })
+
 
     -- lspconfig.lua_ls.setup{
     --     capabilities = capabilities
