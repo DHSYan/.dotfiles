@@ -14,9 +14,9 @@
   "livePreview": false,
   "userIgnoreFilters": null,
   "pdfExportSettings": {
-    "includeName": false,
+    "includeName": true,
     "pageSize": "A4",
-    "landscape": false,
+    "landscape": true,
     "margin": "2",
     "downscalePercent": 100
   },
