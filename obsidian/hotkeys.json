@@ -130,14 +130,6 @@
       "key": "A"
     }
   ],
-  "workspace:open-in-new-window": [
-    {
-      "modifiers": [
-        "Mod"
-      ],
-      "key": "N"
-    }
-  ],
   "file-explorer:move-file": [
     {
       "modifiers": [
