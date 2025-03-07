@@ -28,6 +28,7 @@ var path = require('path');
 var electron = require('electron');
 var fs = require('fs');
 var process$1 = require('process');
+var view = require('@codemirror/view');
 var child_process = require('child_process');
 
 function _interopNamespace(e) {
@@ -719,6 +720,13 @@ function isInteger(value, allow_minus) {
         return !!value.match(/^\d+$/u);
     }
 }
+function isScalar(value, allowNullAndUndefined) {
+    if (null === value || undefined === value) {
+        return allowNullAndUndefined;
+    }
+    const type = typeof value;
+    return type !== 'object' && type !== 'function';
+}
 /**
  * Converts a string input to a floating-point number with limited decimal places. Replaces a possible comma with a dot.
  *
@@ -941,6 +949,26 @@ function tryTo(act, fix, ...bust) {
         }
     }
 }
+/**
+ * Values are 1-indexed.
+ * @param viewUpdate
+ */
+function getCodeMirrorLineAndColumnNumbers(viewUpdate) {
+    const oldPosition = viewUpdate.startState.selection.main.head;
+    const newPosition = viewUpdate.state.selection.main.head;
+    const oldLine = viewUpdate.startState.doc.lineAt(oldPosition);
+    const newLine = viewUpdate.state.doc.lineAt(newPosition);
+    return {
+        old: {
+            line: oldLine.number,
+            column: oldPosition - oldLine.from + 1,
+        },
+        new: {
+            line: newLine.number,
+            column: newPosition - newLine.from + 1,
+        },
+    };
+}
 
 /**
  * Escapes a string that will be used as a pattern in a regular expression.
@@ -1000,6 +1028,7 @@ const Documentation = {
     outputHandling: {
         outputHandlingMode: "https://publish.obsidian.md/shellcommands/Output+handling/Realtime+output+handling",
         outputWrappers: "https://publish.obsidian.md/shellcommands/Output+handling/Output+wrappers",
+        ansiCode: "https://publish.obsidian.md/shellcommands/Output+handling/Styling+for+output+text+with+ANSI+code",
     },
     problems: {
         flatpakInstallation: "https://publish.obsidian.md/shellcommands/Problems/Flatpak+installation",
@@ -1463,35 +1492,6 @@ class Variable_Output extends Variable {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
-class Variable_Clipboard extends Variable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "clipboard";
-        this.help_text = "Gives the content you last copied to your clipboard.";
-    }
-    async generateValue() {
-        return electron.clipboard.readText();
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
 class EditorVariable extends Variable {
     constructor() {
         super(...arguments);
@@ -1537,6 +1537,41 @@ class EditorVariable extends Variable {
     }
     getAvailabilityText() {
         return "<strong>Only available</strong> when a note pane is open, not in graph view, nor when viewing non-text files.";
+    }
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_CaretParagraph extends EditorVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "caret_paragraph";
+        this.help_text = "Gives a text line at the current caret position.";
+    }
+    async generateValue() {
+        const editor = this.getEditorOrThrow();
+        this.requireViewModeSource();
+        const caretPosition = editor.getCursor('to');
+        return editor.getLine(caretPosition.line);
+    }
+    getAvailabilityText() {
+        return super.getAvailabilityText() + " Not available in preview mode.";
     }
 }
 
@@ -1667,6 +1702,35 @@ Variable_CaretPosition.parameters = {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
+class Variable_Clipboard extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "clipboard";
+        this.help_text = "Gives the content you last copied to your clipboard.";
+    }
+    async generateValue() {
+        return electron.clipboard.readText();
+    }
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
 class Variable_Date extends Variable {
     constructor() {
         super(...arguments);
@@ -1683,6 +1747,122 @@ Variable_Date.parameters = {
         required: true,
     },
 };
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_Environment extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "environment";
+        this.help_text = "Gives an environment variable's value. It's an original value received when Obsidian was started.";
+        this.always_available = false;
+    }
+    async generateValue(shell, castedArguments) {
+        // Check that the requested environment variable exists.
+        if (undefined !== process.env[castedArguments.variable]) {
+            // Yes, it exists.
+            return process.env[castedArguments.variable]; // as string: tells TypeScript compiler that the item exists, is not undefined.
+        }
+        else {
+            // It does not exist.
+            // Freak out.
+            this.throw(`Environment variable named '${castedArguments.variable}' does not exist.`);
+        }
+    }
+    getHelpName() {
+        return "<strong>{{environment:variable}}</strong>";
+    }
+    getAvailabilityText() {
+        return "<strong>Only available</strong> if the passed environment variable name exists.";
+    }
+}
+Variable_Environment.parameters = {
+    variable: {
+        type: "string",
+        required: true,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class FileVariable extends Variable {
+    constructor() {
+        super(...arguments);
+        this.always_available = false;
+    }
+    getFileOrThrow() {
+        const currentFile = this.app.workspace.getActiveFile();
+        if (!currentFile) {
+            this.throw("No file is active at the moment. Open a file or click a pane that has a file open.");
+        }
+        return currentFile;
+    }
+    getAvailabilityText() {
+        return "<strong>Only available</strong> when the active pane contains a file, not in graph view or other non-file view.";
+    }
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_FileContent extends FileVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "file_content";
+        this.help_text = "Gives the current file's content, including YAML frontmatter. If you need YAML excluded, use {{note_content}} instead.";
+    }
+    async generateValue() {
+        // Retrieve file content.
+        return await app.vault.read(this.getFileOrThrow());
+    }
+}
 
 /*
  * 'Shell commands' plugin for Obsidian.
@@ -1775,15 +1955,11 @@ function getFileTags(app, file) {
     });
     return tagsWithoutDuplicates;
 }
-/**
- * @param app
- * @param file
- * @param property_path
- * @return string|string[] Either a result string, or an array of error messages.
- */
-function getFileYAMLValue(app, file, property_path) {
+function getFileYAMLValue(app, file, property_path, multipleValuesRequirement) {
     const error_messages = [];
     const property_parts = property_path.split(".");
+    const acceptSingleValue = multipleValuesRequirement === false || multipleValuesRequirement === null;
+    const acceptMultipleValues = multipleValuesRequirement === true || multipleValuesRequirement === null;
     // Validate all property names along the path
     property_parts.forEach((property_name) => {
         if (0 === property_name.length) {
@@ -1792,14 +1968,20 @@ function getFileYAMLValue(app, file, property_path) {
     });
     if (error_messages.length > 0) {
         // Failure in property name(s).
-        return error_messages;
+        return {
+            success: false,
+            errorMessages: error_messages,
+        };
     }
     const frontmatter = app.metadataCache.getFileCache(file)?.frontmatter;
     // Check that a YAML section is available in the file
     if (undefined === frontmatter) {
         // No it ain't.
         error_messages.push("No YAML frontmatter section is defined for the current file.");
-        return error_messages;
+        return {
+            success: false,
+            errorMessages: error_messages,
+        };
     }
     else {
         // A YAML section is available.
@@ -1810,7 +1992,7 @@ function getFileYAMLValue(app, file, property_path) {
      * @param property_parts Property path split into parts (= property names). The deeper the nesting goes, the fewer values will be left in this array. This should always contain at least one part! If not, an Error is thrown.
      * @param property_path The original, whole property path string.
      * @param yaml_object
-     * @return string|string[] Either a result string, or an array of error messages.
+     * @return YAMLSingleValueResult | YAMLMultipleValuesResult
      */
     function nested_read(property_parts, property_path, yaml_object) {
         // Check that property_parts contains at least one part.
@@ -1848,7 +2030,10 @@ function getFileYAMLValue(app, file, property_path) {
         if (undefined === property_value) {
             // Property was not found.
             error_messages.push("YAML property '" + property_name + "' is not found.");
-            return error_messages;
+            return {
+                success: false,
+                errorMessages: error_messages,
+            };
         }
         else if (null === property_value) {
             // Property is found, but has an empty value. Example:
@@ -1859,22 +2044,60 @@ function getFileYAMLValue(app, file, property_path) {
             //   ---
             // Here `itemB` would have a null value.
             error_messages.push("YAML property '" + property_name + "' has a null value. Make sure the property is not accidentally left empty.");
-            return error_messages;
+            return {
+                success: false,
+                errorMessages: error_messages,
+            };
         }
         else if ("object" === typeof property_value) {
             // The value is an object.
             // Check if we have still dot notation parts left in the property path.
             if (0 === property_parts.length) {
                 // No dot notation parts are left.
-                // Freak out.
-                const nested_elements_keys = Object.getOwnPropertyNames(property_value);
-                if (nested_elements_keys.length > 0) {
-                    error_messages.push("YAML property '" + property_name + "' contains a nested element with keys: " + nested_elements_keys.join(", ") + ". Use e.g. '" + property_path + "." + nested_elements_keys[0] + "' to get its value.");
+                // Can the result contain multiple values?
+                if (acceptMultipleValues) {
+                    // Return multiple values - but only if they are all scalars, not nested objects.
+                    if (Array.isArray(property_value)) {
+                        if (isArrayOfScalars(property_value)) {
+                            // All the values are scalars that can be concatenated into a single string (but the concatenation won't be done here).
+                            return {
+                                success: true,
+                                multipleValues: property_value,
+                            };
+                        }
+                        else {
+                            // Some (or all) of the values are incompatible.
+                            error_messages.push("YAML property '" + property_name + "' contains (at least) one value that is not a single scalar value or that is empty. E.g. nested lists are not supported.");
+                            return {
+                                success: false,
+                                errorMessages: error_messages,
+                            };
+                        }
+                    }
+                    else {
+                        // The property is an object with key-value pairs. This is not supported at the moment.
+                        error_messages.push("YAML property '" + property_name + "' is a map object with key-value pairs. Reading multiple values from objects is not yet supported. Can the YAML be changed from \"key: value\" format to \"- list format\"?");
+                        return {
+                            success: false,
+                            errorMessages: error_messages,
+                        };
+                    }
                 }
                 else {
-                    error_messages.push("YAML property '" + property_name + "' contains a nested element. Use a property name that points to a literal value instead.");
+                    // Freak out - a single value is expected.
+                    const nested_elements_keys = Object.getOwnPropertyNames(property_value);
+                    const multipleValuesTip = Array.isArray(property_value) ? " Or use the plural variable {{yaml_values:" + property_path + ":,}} to get multiple values." : ""; // Array.isArray() check can be removed when support for key-value maps is added to {{yaml_values}}.
+                    if (nested_elements_keys.length > 0) {
+                        error_messages.push("YAML property '" + property_name + "' contains a nested element with keys: " + nested_elements_keys.join(", ") + ". Use e.g. '" + property_path + "." + nested_elements_keys[0] + "' to get its value." + multipleValuesTip);
+                    }
+                    else {
+                        error_messages.push("YAML property '" + property_name + "' contains a nested element. Use a property name that points to a literal value instead." + multipleValuesTip);
+                    }
+                    return {
+                        success: false,
+                        errorMessages: error_messages,
+                    };
                 }
-                return error_messages;
             }
             else {
                 // Dot notation path still has another property name left, so continue the hunt.
@@ -1885,48 +2108,33 @@ function getFileYAMLValue(app, file, property_path) {
             // The value is literal, i.e. a string or number.
             if (property_parts.length > 0) {
                 error_messages.push("YAML property '" + property_name + "' gives already a literal value '" + property_value.toString() + "', but the argument '" + property_path + "' assumes the property would contain a nested element with the key '" + property_parts[0] + "'.");
-                return error_messages;
+                return {
+                    success: false,
+                    errorMessages: error_messages,
+                };
             }
             else {
-                return property_value.toString();
+                if (acceptSingleValue) {
+                    // The caller accepts a single value result.
+                    return {
+                        success: true,
+                        singleValue: property_value.toString(),
+                    };
+                }
+                else {
+                    // The caller expects an array of values.
+                    error_messages.push("YAML property '" + property_name + "' gives a single value '" + property_value.toString() + "', but a list of values was expected. Use the singular variable {{yaml_value:" + property_path + "}} if a single value is wanted.");
+                    return {
+                        success: false,
+                        errorMessages: error_messages,
+                    };
+                }
             }
         }
     }
 }
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class FileVariable extends Variable {
-    constructor() {
-        super(...arguments);
-        this.always_available = false;
-    }
-    getFileOrThrow() {
-        const currentFile = this.app.workspace.getActiveFile();
-        if (!currentFile) {
-            this.throw("No file is active at the moment. Open a file or click a pane that has a file open.");
-        }
-        return currentFile;
-    }
-    getAvailabilityText() {
-        return "<strong>Only available</strong> when the active pane contains a file, not in graph view or other non-file view.";
-    }
+function isArrayOfScalars(object) {
+    return Array.isArray(object) && object.every(item => isScalar(item, false));
 }
 
 /*
@@ -2120,6 +2328,37 @@ Variable_FilePath.parameters = {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
+class Variable_FileURI extends FileVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "file_uri";
+        this.help_text = "Gives an Obsidian URI that opens the current file.";
+    }
+    async generateValue() {
+        return this.plugin.getObsidianURI("open", {
+            file: obsidian.normalizePath(this.getFileOrThrow().path), // Use normalizePath() instead of normalizePath2() because / should not be converted to \ on Windows because this is used as a URI, not as a file system path.
+        });
+    }
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
 class FolderVariable extends FileVariable {
     getFolderOrThrow() {
         // Get current file's parent folder.
@@ -2255,6 +2494,376 @@ Variable_FolderPath.parameters = {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
+class Variable_NewNoteFolderName extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "new_note_folder_name";
+        this.help_text = "Gives the folder name for \"Default location for new notes\" (a setting in Obsidian). No ancestor folders are included.";
+    }
+    async generateValue() {
+        const current_file = this.app.workspace.getActiveFile(); // Needed just in case new notes should be created in the same folder as the currently open file.
+        const folder = this.app.fileManager.getNewFileParent(current_file ? current_file.path : ""); // If no file is open, use an empty string as instructed in .getNewFileParent()'s documentation.
+        if (!folder) {
+            this.throw("Cannot determine a folder name for new notes. Please create a discussion in GitHub."); // I guess this never happens.
+        }
+        // If the folder is the vault's root folder, return "." instead of " " (a space character). I don't know why the name is " " when the folder is root.
+        return folder.isRoot()
+            ? "."
+            : folder.name;
+    }
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_NewNoteFolderPath extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "new_note_folder_path";
+        this.help_text = "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), either as absolute from the root of the file system, or as relative from the root of the Obsidian vault.";
+    }
+    async generateValue(shell, castedArguments) {
+        const current_file = this.app.workspace.getActiveFile(); // Needed just in case new notes should be created in the same folder as the currently open file.
+        const folder = this.app.fileManager.getNewFileParent(current_file ? current_file.path : ""); // If no file is open, use an empty string as instructed in .getNewFileParent()'s documentation.
+        if (folder) {
+            return getFolderPath(this.app, shell, folder, castedArguments.mode);
+        }
+        else {
+            this.throw("Cannot determine a folder path for new notes. Please create a discussion in GitHub."); // I guess this never happens.
+        }
+    }
+    getAutocompleteItems() {
+        return [
+            // Normal variables
+            {
+                value: "{{" + this.variable_name + ":absolute}}",
+                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), absolute from the root of the file system. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: "{{" + this.variable_name + ":relative}}",
+                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), relative from the root of the Obsidian vault. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            // Unescaped variables
+            {
+                value: "{{!" + this.variable_name + ":absolute}}",
+                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), absolute from the root of the file system. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "unescaped-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: "{{!" + this.variable_name + ":relative}}",
+                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), relative from the root of the Obsidian vault. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "unescaped-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+        ];
+    }
+    getHelpName() {
+        return "<strong>{{folder_path:relative}}</strong> or <strong>{{folder_path:absolute}}</strong>";
+    }
+}
+Variable_NewNoteFolderPath.parameters = {
+    mode: {
+        options: ["absolute", "relative"],
+        required: true,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_Newline extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "newline";
+        this.help_text = "Gives a \\n character. Used for testing line break escaping. An optional argument can be used to tell how many newlines are needed.";
+    }
+    async generateValue(shell, castedArguments) {
+        // Return \n, possibly repeating it
+        return "\n".repeat(castedArguments.count ?? 1);
+    }
+    getAvailabilityText() {
+        return "<strong>Only available</strong> in debug mode.";
+    }
+}
+Variable_Newline.parameters = {
+    count: {
+        type: "integer",
+        required: false,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_NoteContent extends FileVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "note_content";
+        this.help_text = "Gives the current note's content without YAML frontmatter. If you need YAML included, use {{file_content}} instead.";
+    }
+    async generateValue() {
+        return await getFileContentWithoutYAML(this.app, this.getFileOrThrow());
+    }
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_ObsidianAPIVersion extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "obsidian_api_version";
+        this.help_text = "Gives Obsidian's API version, which follows the release cycle of the desktop application.";
+    }
+    async generateValue(shell, castedArguments) {
+        if (undefined === castedArguments.part) {
+            // Return the whole version.
+            return obsidian.apiVersion;
+        }
+        // Return a part of the version.
+        const versionPart = getVersionPart(obsidian.apiVersion, castedArguments.part);
+        if (null === versionPart) {
+            throw new Error("Obsidian API version (" + obsidian.apiVersion + ") does not contain the part: " + castedArguments.part);
+        }
+        return versionPart;
+    }
+    getAutocompleteItems() {
+        const autocompleteItems = [
+            {
+                value: this.getFullName(),
+                help_text: this.help_text + " " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, "major"),
+                help_text: "Gives Obsidian's API version's first part, e.g. 1 from 1.5.3 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, "minor"),
+                help_text: "Gives Obsidian's API version's middle part, e.g. 5 from 1.5.3 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, "patch"),
+                help_text: "Gives Obsidian's API version's last part, e.g. 3 from 1.5.3 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+        ];
+        Variable.supplementAutocompleteItems(autocompleteItems);
+        return autocompleteItems;
+    }
+    getHelpName() {
+        return "<strong>{{obsidian_api_version}}</strong> or <strong>{{obsidian_api_version:major|minor|patch}}</strong>";
+    }
+}
+Variable_ObsidianAPIVersion.parameters = {
+    part: {
+        options: ["major", "minor", "patch"],
+        required: false,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_OperatingSystem extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "operating_system";
+        this.help_text = "Gives the current operating system's id code or human-readable name.";
+    }
+    async generateValue(shell, castedArguments) {
+        switch (castedArguments.property) {
+            case "id":
+                return getOperatingSystem();
+            case "name":
+                return getCurrentPlatformName();
+        }
+    }
+    getAutocompleteItems() {
+        const autocompleteItems = [
+            {
+                value: this.getFullName(false, "id"),
+                help_text: "Gives the current operating system's id code, i.e. \"darwin\" (= macOS), \"linux\", or \"win32\" (= Windows). Good for scripts as id comes from `navigator.platform` and is not likely to change. For a human-readable value, use :name instead." + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, "name"),
+                help_text: "Gives the current operating system's human-readable name. As the OS names are defined in the SC plugin's source code, they might change if they need improving. If you need non-changing names, use :id instead." + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+        ];
+        Variable.supplementAutocompleteItems(autocompleteItems);
+        return autocompleteItems;
+    }
+    getHelpName() {
+        return "<strong>{{operating_system:id}}</strong>, <strong>{{operating_system:name}}</strong>, <strong>{{operating_system:release}}</strong> or <strong>{{file_path:version}}</strong>";
+    }
+    getAvailabilityText() {
+        return "<strong>Only available</strong> in debug mode.";
+    }
+}
+Variable_OperatingSystem.parameters = {
+    property: {
+        options: ["id", "name"],
+        required: true,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_Passthrough extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "passthrough";
+        this.help_text = "Gives the same value that is passed as an argument. Used for testing special characters' escaping.";
+    }
+    async generateValue(shell, castedArguments) {
+        // Simply return the argument that was received.
+        return castedArguments.value;
+    }
+    getAvailabilityText() {
+        return "<strong>Only available</strong> in debug mode.";
+    }
+}
+Variable_Passthrough.parameters = {
+    value: {
+        type: "string",
+        required: true,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
 class Variable_Selection extends EditorVariable {
     constructor() {
         super(...arguments);
@@ -2276,6 +2885,128 @@ class Variable_Selection extends EditorVariable {
         return "<strong>Only available</strong> when something is selected in <em>Editing</em>/<em>Live preview</em> mode, <strong>not</strong> in <em>Reading</em> mode.";
     }
 }
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_ShellCommandsPluginVersion extends Variable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "shell_commands_plugin_version";
+        this.help_text = "Gives the plugin's version or settings structure version.";
+    }
+    async generateValue(shell, castedArguments) {
+        let version;
+        switch (castedArguments.subject) {
+            case "plugin":
+                version = this.plugin.getPluginVersion();
+                break;
+            case "settings":
+                version = SC_Plugin.SettingsVersion;
+                break;
+        }
+        if (undefined === castedArguments.part) {
+            // Return the whole version.
+            return version;
+        }
+        // Return a part of the version.
+        const versionPart = getVersionPart(version, castedArguments.part);
+        if (null === versionPart) {
+            throw new Error("Shell commands " + castedArguments.subject + " version (" + version + ") does not contain the part: " + castedArguments.part);
+        }
+        return versionPart;
+    }
+    getAutocompleteItems() {
+        const autocompleteItems = [
+            {
+                value: this.getFullName(false, ["plugin"]),
+                help_text: "Gives the Shell commands plugin's version.",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, ["plugin", "major"]),
+                help_text: "Gives the Shell commands plugin's version's first part, e.g. 0 from 0.22.1 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, ["plugin", "minor"]),
+                help_text: "Gives the Shell commands plugin's version's middle part, e.g. 22 from 0.22.1 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, ["plugin", "patch"]),
+                help_text: "Gives the Shell commands plugin's version's last part, e.g. 1 from 0.22.1 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, ["settings"]),
+                help_text: "Gives the Shell commands' settings structure version, which is not always increased with new plugin versions.",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, ["settings", "major"]),
+                help_text: "Gives the Shell commands' settings structure version's first part, e.g. 0 from 0.22.0 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, ["settings", "minor"]),
+                help_text: "Gives the Shell commands' settings structure version's middle part, e.g. 22 from 0.22.0 .",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: this.getFullName(false, ["settings", "patch"]),
+                help_text: "Gives the Shell commands' settings structure version's last part, e.g. 0 from 0.22.0 . It hardly ever differs from 0.",
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+        ];
+        Variable.supplementAutocompleteItems(autocompleteItems);
+        return autocompleteItems;
+    }
+    getHelpName() {
+        return "<strong>{{shell_commands_plugin_version:plugin}}</strong>, <strong>{{shell_commands_plugin_version:plugin:major|minor|patch}}</strong>, <strong>{{shell_commands_plugin_version:settings}}</strong> or <strong>{{shell_commands_plugin_version:settings:major|minor|patch}}</strong>";
+    }
+}
+Variable_ShellCommandsPluginVersion.parameters = {
+    subject: {
+        options: ["plugin", "settings"],
+        required: true,
+    },
+    part: {
+        options: ["major", "minor", "patch"],
+        required: false,
+    },
+};
 
 /*
  * 'Shell commands' plugin for Obsidian.
@@ -2435,22 +3166,133 @@ class Variable_Workspace extends Variable {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
-class Variable_Passthrough extends Variable {
+class Variable_YAMLContent extends FileVariable {
     constructor() {
         super(...arguments);
-        this.variable_name = "passthrough";
-        this.help_text = "Gives the same value that is passed as an argument. Used for testing special characters' escaping.";
+        this.variable_name = "yaml_content";
+        this.help_text = "Gives the current note's YAML frontmatter. Dashes --- can be included or excluded.";
     }
-    async generateValue(shell, castedArguments) {
-        // Simply return the argument that was received.
-        return castedArguments.value;
+    generateValue(shell, castedArguments) {
+        return new Promise((resolve, reject) => {
+            let file;
+            try {
+                file = this.getFileOrThrow();
+            }
+            catch (error) {
+                // Need to catch here, because Variable.getValue()'s .catch() block won't be able to catch thrown errors,
+                // it can only catch errors that were passed to reject().
+                reject(error);
+                return;
+            }
+            getFileYAML(this.app, file, "with-dashes" === castedArguments.withDashes).then((yamlContent) => {
+                if (null === yamlContent) {
+                    // No YAML frontmatter.
+                    this.reject("The current file does not contain a YAML frontmatter.", reject);
+                }
+                else {
+                    // Got a YAML frontmatter.
+                    resolve(yamlContent);
+                }
+            });
+        });
     }
     getAvailabilityText() {
-        return "<strong>Only available</strong> in debug mode.";
+        return super.getAvailabilityText() + " Also, a YAML frontmatter section needs to be present.";
+    }
+    getAutocompleteItems() {
+        return [
+            // Normal variables
+            {
+                value: "{{" + this.variable_name + ":with-dashes}}",
+                help_text: "Gives the current note's YAML frontmatter, wrapped between --- lines. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: "{{" + this.variable_name + ":no-dashes}}",
+                help_text: "Gives the current note's YAML frontmatter, excluding top and bottom --- lines. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            // Unescaped variables
+            {
+                value: "{{!" + this.variable_name + ":with-dashes}}",
+                help_text: "Gives the current note's YAML frontmatter, wrapped between --- lines." + this.getAvailabilityText(),
+                group: "Variables",
+                type: "unescaped-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: "{{!" + this.variable_name + ":no-dashes}}",
+                help_text: "Gives the current note's YAML frontmatter, excluding top and bottom --- lines. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "unescaped-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+        ];
+    }
+    getHelpName() {
+        return "<strong>{{yaml_content:with-dashes}}</strong> or <strong>{{yaml_content:no-dashes}}</strong>";
     }
 }
-Variable_Passthrough.parameters = {
-    value: {
+Variable_YAMLContent.parameters = {
+    withDashes: {
+        options: ["with-dashes", "no-dashes"],
+        required: true,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_YAMLValues extends FileVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "yaml_values";
+        this.help_text = "Reads a list of values from the current file's frontmatter. Takes a property name and separator as arguments. You can access nested properties with dot notation: property1.property2";
+    }
+    async generateValue(shell, castedArguments) {
+        // We do have an active file
+        const yamlResult = getFileYAMLValue(this.app, this.getFileOrThrow(), castedArguments.propertyName, true);
+        if (yamlResult.success) {
+            // The result is ok.
+            return yamlResult.multipleValues.join(castedArguments.separator);
+        }
+        else {
+            // The result contains error message(s).
+            this.throw(yamlResult.errorMessages.join(" "));
+        }
+    }
+    getAvailabilityText() {
+        return super.getAvailabilityText() + " Also, the given YAML property must exist in the file's frontmatter.";
+    }
+    getHelpName() {
+        return "<strong>{{yaml_values:property:separator}}</strong>";
+    }
+}
+Variable_YAMLValues.parameters = {
+    propertyName: {
+        type: "string",
+        required: true,
+    },
+    separator: {
         type: "string",
         required: true,
     },
@@ -2482,14 +3324,14 @@ class Variable_YAMLValue extends FileVariable {
     }
     async generateValue(shell, castedArguments) {
         // We do have an active file
-        const result = getFileYAMLValue(this.app, this.getFileOrThrow(), castedArguments.property_name);
-        if (Array.isArray(result)) {
-            // The result contains error message(s).
-            this.throw(result.join(" "));
+        const yamlResult = getFileYAMLValue(this.app, this.getFileOrThrow(), castedArguments.property_name, false);
+        if (yamlResult.success) {
+            // The result is ok.
+            return yamlResult.singleValue;
         }
         else {
-            // The result is ok, it's a string.
-            return result;
+            // The result contains error message(s).
+            this.throw(yamlResult.errorMessages.join(" "));
         }
     }
     getAvailabilityText() {
@@ -3279,6 +4121,126 @@ SC_Event_FileMoved.event_title = "File moved";
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
+class Variable_EventFileContent extends EventVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "event_file_content";
+        this.help_text = "Gives the event related file's content, including YAML frontmatter. If you need YAML excluded, use {{event_note_content}} instead.";
+        this.supported_sc_events = [
+            SC_Event_FileMenu,
+            SC_Event_FileCreated,
+            SC_Event_FileContentModified,
+            SC_Event_FileDeleted,
+            SC_Event_FileMoved,
+            SC_Event_FileRenamed,
+        ];
+    }
+    async generateValue(shell, argumentsAreNotUsed, sc_event) {
+        this.requireCorrectEvent(sc_event);
+        // Retrieve file content.
+        return await app.vault.read(sc_event.getFile());
+    }
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_EventFileExtension extends EventVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "event_file_extension";
+        this.help_text = "Gives the event related file name's ending. Use {{event_file_extension:with-dot}} to include a preceding dot. If the extension is empty, no dot is added. {{event_file_extension:no-dot}} never includes a dot.";
+        this.supported_sc_events = [
+            SC_Event_FileMenu,
+            SC_Event_FileCreated,
+            SC_Event_FileContentModified,
+            SC_Event_FileDeleted,
+            SC_Event_FileMoved,
+            SC_Event_FileRenamed,
+        ];
+    }
+    async generateValue(shell, castedArguments, sc_event) {
+        this.requireCorrectEvent(sc_event);
+        return getFileExtension(sc_event.getFile(), castedArguments.dot === "with-dot");
+    }
+    getAutocompleteItems() {
+        return [
+            // Normal variables
+            {
+                value: "{{" + this.variable_name + ":no-dot}}",
+                help_text: "Gives the event related file name's ending without a preceding dot. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: "{{" + this.variable_name + ":with-dot}}",
+                help_text: "Gives the event related file name's ending with a preceding dot. If the extension is empty, no dot is included. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "normal-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            // Unescaped variables
+            {
+                value: "{{!" + this.variable_name + ":no-dot}}",
+                help_text: "Gives the event related file name's ending without a preceding dot. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "unescaped-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+            {
+                value: "{{!" + this.variable_name + ":with-dot}}",
+                help_text: "Gives the event related file name's ending with a preceding dot. If the extension is empty, no dot is included. " + this.getAvailabilityText(),
+                group: "Variables",
+                type: "unescaped-variable",
+                documentationLink: this.getDocumentationLink(),
+            },
+        ];
+    }
+    getHelpName() {
+        return "<strong>{{event_file_extension:with-dot}}</strong> or <strong>{{event_file_extension:no-dot}}</strong>";
+    }
+}
+Variable_EventFileExtension.parameters = {
+    "dot": {
+        options: ["with-dot", "no-dot"],
+        required: true,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
 class Variable_EventFileName extends EventVariable {
     constructor() {
         super(...arguments);
@@ -3379,6 +4341,47 @@ Variable_EventFilePath.parameters = {
         required: true,
     },
 };
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_EventFileURI extends EventVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "event_file_uri";
+        this.help_text = "Gives an Obsidian URI that opens the event related file.";
+        this.supported_sc_events = [
+            SC_Event_FileMenu,
+            SC_Event_FileCreated,
+            SC_Event_FileContentModified,
+            SC_Event_FileDeleted,
+            SC_Event_FileMoved,
+            SC_Event_FileRenamed,
+        ];
+    }
+    async generateValue(shell, argumentsAreNotUsed, sc_event) {
+        this.requireCorrectEvent(sc_event);
+        const file = sc_event.getFile();
+        return this.plugin.getObsidianURI("open", {
+            file: obsidian.normalizePath(file.path), // Use normalizePath() instead of normalizePath2() because / should not be converted to \ on Windows because this is used as a URI, not as a file system path.
+        });
+    }
+}
 
 /*
  * 'Shell commands' plugin for Obsidian.
@@ -3688,11 +4691,11 @@ Variable_EventFolderPath.parameters = {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
-class Variable_EventTitle extends EventVariable {
+class Variable_EventNoteContent extends EventVariable {
     constructor() {
         super(...arguments);
-        this.variable_name = "event_title";
-        this.help_text = "Gives the event related file name without a file extension. If you need it with the extension, use {{event_file_name}} instead.";
+        this.variable_name = "event_note_content";
+        this.help_text = "Gives the event related file's content without YAML frontmatter. If you need YAML included, use {{event_file_content}} instead.";
         this.supported_sc_events = [
             SC_Event_FileMenu,
             SC_Event_FileCreated,
@@ -3704,244 +4707,9 @@ class Variable_EventTitle extends EventVariable {
     }
     async generateValue(shell, argumentsAreNotUsed, sc_event) {
         this.requireCorrectEvent(sc_event);
-        return sc_event.getFile().basename;
+        return await getFileContentWithoutYAML(this.app, sc_event.getFile());
     }
 }
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_EventFileExtension extends EventVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "event_file_extension";
-        this.help_text = "Gives the event related file name's ending. Use {{event_file_extension:with-dot}} to include a preceding dot. If the extension is empty, no dot is added. {{event_file_extension:no-dot}} never includes a dot.";
-        this.supported_sc_events = [
-            SC_Event_FileMenu,
-            SC_Event_FileCreated,
-            SC_Event_FileContentModified,
-            SC_Event_FileDeleted,
-            SC_Event_FileMoved,
-            SC_Event_FileRenamed,
-        ];
-    }
-    async generateValue(shell, castedArguments, sc_event) {
-        this.requireCorrectEvent(sc_event);
-        return getFileExtension(sc_event.getFile(), castedArguments.dot === "with-dot");
-    }
-    getAutocompleteItems() {
-        return [
-            // Normal variables
-            {
-                value: "{{" + this.variable_name + ":no-dot}}",
-                help_text: "Gives the event related file name's ending without a preceding dot. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: "{{" + this.variable_name + ":with-dot}}",
-                help_text: "Gives the event related file name's ending with a preceding dot. If the extension is empty, no dot is included. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            // Unescaped variables
-            {
-                value: "{{!" + this.variable_name + ":no-dot}}",
-                help_text: "Gives the event related file name's ending without a preceding dot. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "unescaped-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: "{{!" + this.variable_name + ":with-dot}}",
-                help_text: "Gives the event related file name's ending with a preceding dot. If the extension is empty, no dot is included. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "unescaped-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-        ];
-    }
-    getHelpName() {
-        return "<strong>{{event_file_extension:with-dot}}</strong> or <strong>{{event_file_extension:no-dot}}</strong>";
-    }
-}
-Variable_EventFileExtension.parameters = {
-    "dot": {
-        options: ["with-dot", "no-dot"],
-        required: true,
-    },
-};
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_EventTags extends EventVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "event_tags";
-        this.help_text = "Gives all tags defined in the event related note. Replace the \"separator\" part with a comma, space or whatever characters you want to use as a separator between tags. A separator is always needed to be defined.";
-        this.supported_sc_events = [
-            SC_Event_FileMenu,
-            SC_Event_FileCreated,
-            SC_Event_FileContentModified,
-            SC_Event_FileDeleted,
-            SC_Event_FileMoved,
-            SC_Event_FileRenamed,
-        ];
-    }
-    async generateValue(shell, castedArguments, sc_event) {
-        this.requireCorrectEvent(sc_event);
-        const file = sc_event.getFile();
-        return getFileTags(this.app, file).join(castedArguments.separator);
-    }
-}
-Variable_EventTags.parameters = {
-    separator: {
-        type: "string",
-        required: true,
-    },
-};
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_EventYAMLValue extends EventVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "event_yaml_value";
-        this.help_text = "Reads a single value from the event related file's frontmatter. Takes a property name as an argument. You can access nested properties with dot notation: property1.property2";
-        this.supported_sc_events = [
-            SC_Event_FileMenu,
-            SC_Event_FileCreated,
-            SC_Event_FileContentModified,
-            SC_Event_FileDeleted,
-            SC_Event_FileMoved,
-            SC_Event_FileRenamed,
-        ];
-    }
-    async generateValue(shell, castedArguments, sc_event) {
-        this.requireCorrectEvent(sc_event);
-        const result = getFileYAMLValue(this.app, sc_event.getFile(), castedArguments.property_name);
-        if (Array.isArray(result)) {
-            // The result contains error message(s).
-            this.throw(result.join(" "));
-        }
-        else {
-            // The result is ok, it's a string.
-            return result;
-        }
-    }
-    getAvailabilityText() {
-        return super.getAvailabilityText() + " Also, the given YAML property must exist in the file's frontmatter.";
-    }
-    getHelpName() {
-        return "<strong>{{event_yaml_value:property}}</strong>";
-    }
-}
-Variable_EventYAMLValue.parameters = {
-    property_name: {
-        type: "string",
-        required: true,
-    },
-};
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_Environment extends Variable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "environment";
-        this.help_text = "Gives an environment variable's value. It's an original value received when Obsidian was started.";
-        this.always_available = false;
-    }
-    async generateValue(shell, castedArguments) {
-        // Check that the requested environment variable exists.
-        if (undefined !== process.env[castedArguments.variable]) {
-            // Yes, it exists.
-            return process.env[castedArguments.variable]; // as string: tells TypeScript compiler that the item exists, is not undefined.
-        }
-        else {
-            // It does not exist.
-            // Freak out.
-            this.throw(`Environment variable named '${castedArguments.variable}' does not exist.`);
-        }
-    }
-    getHelpName() {
-        return "<strong>{{environment:variable}}</strong>";
-    }
-    getAvailabilityText() {
-        return "<strong>Only available</strong> if the passed environment variable name exists.";
-    }
-}
-Variable_Environment.parameters = {
-    variable: {
-        type: "string",
-        required: true,
-    },
-};
 
 /*
  * 'Shell commands' plugin for Obsidian.
@@ -4230,158 +4998,11 @@ class Variable_EventOldTitle extends EventVariable {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
-class Variable_NewNoteFolderName extends Variable {
+class Variable_EventTags extends EventVariable {
     constructor() {
         super(...arguments);
-        this.variable_name = "new_note_folder_name";
-        this.help_text = "Gives the folder name for \"Default location for new notes\" (a setting in Obsidian). No ancestor folders are included.";
-    }
-    async generateValue() {
-        const current_file = this.app.workspace.getActiveFile(); // Needed just in case new notes should be created in the same folder as the currently open file.
-        const folder = this.app.fileManager.getNewFileParent(current_file ? current_file.path : ""); // If no file is open, use an empty string as instructed in .getNewFileParent()'s documentation.
-        if (!folder) {
-            this.throw("Cannot determine a folder name for new notes. Please create a discussion in GitHub."); // I guess this never happens.
-        }
-        // If the folder is the vault's root folder, return "." instead of " " (a space character). I don't know why the name is " " when the folder is root.
-        return folder.isRoot()
-            ? "."
-            : folder.name;
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_NewNoteFolderPath extends Variable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "new_note_folder_path";
-        this.help_text = "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), either as absolute from the root of the file system, or as relative from the root of the Obsidian vault.";
-    }
-    async generateValue(shell, castedArguments) {
-        const current_file = this.app.workspace.getActiveFile(); // Needed just in case new notes should be created in the same folder as the currently open file.
-        const folder = this.app.fileManager.getNewFileParent(current_file ? current_file.path : ""); // If no file is open, use an empty string as instructed in .getNewFileParent()'s documentation.
-        if (folder) {
-            return getFolderPath(this.app, shell, folder, castedArguments.mode);
-        }
-        else {
-            this.throw("Cannot determine a folder path for new notes. Please create a discussion in GitHub."); // I guess this never happens.
-        }
-    }
-    getAutocompleteItems() {
-        return [
-            // Normal variables
-            {
-                value: "{{" + this.variable_name + ":absolute}}",
-                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), absolute from the root of the file system. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: "{{" + this.variable_name + ":relative}}",
-                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), relative from the root of the Obsidian vault. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            // Unescaped variables
-            {
-                value: "{{!" + this.variable_name + ":absolute}}",
-                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), absolute from the root of the file system. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "unescaped-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: "{{!" + this.variable_name + ":relative}}",
-                help_text: "Gives path to the \"Default location for new notes\" folder (a setting in Obsidian), relative from the root of the Obsidian vault. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "unescaped-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-        ];
-    }
-    getHelpName() {
-        return "<strong>{{folder_path:relative}}</strong> or <strong>{{folder_path:absolute}}</strong>";
-    }
-}
-Variable_NewNoteFolderPath.parameters = {
-    mode: {
-        options: ["absolute", "relative"],
-        required: true,
-    },
-};
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_FileURI extends FileVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "file_uri";
-        this.help_text = "Gives an Obsidian URI that opens the current file.";
-    }
-    async generateValue() {
-        return this.plugin.getObsidianURI("open", {
-            file: obsidian.normalizePath(this.getFileOrThrow().path), // Use normalizePath() instead of normalizePath2() because / should not be converted to \ on Windows because this is used as a URI, not as a file system path.
-        });
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_EventFileURI extends EventVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "event_file_uri";
-        this.help_text = "Gives an Obsidian URI that opens the event related file.";
+        this.variable_name = "event_tags";
+        this.help_text = "Gives all tags defined in the event related note. Replace the \"separator\" part with a comma, space or whatever characters you want to use as a separator between tags. A separator is always needed to be defined.";
         this.supported_sc_events = [
             SC_Event_FileMenu,
             SC_Event_FileCreated,
@@ -4391,222 +5012,16 @@ class Variable_EventFileURI extends EventVariable {
             SC_Event_FileRenamed,
         ];
     }
-    async generateValue(shell, argumentsAreNotUsed, sc_event) {
+    async generateValue(shell, castedArguments, sc_event) {
         this.requireCorrectEvent(sc_event);
         const file = sc_event.getFile();
-        return this.plugin.getObsidianURI("open", {
-            file: obsidian.normalizePath(file.path), // Use normalizePath() instead of normalizePath2() because / should not be converted to \ on Windows because this is used as a URI, not as a file system path.
-        });
+        return getFileTags(this.app, file).join(castedArguments.separator);
     }
 }
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_NoteContent extends FileVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "note_content";
-        this.help_text = "Gives the current note's content without YAML frontmatter. If you need YAML included, use {{file_content}} instead.";
-    }
-    async generateValue() {
-        return await getFileContentWithoutYAML(this.app, this.getFileOrThrow());
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_EventNoteContent extends EventVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "event_note_content";
-        this.help_text = "Gives the event related file's content without YAML frontmatter. If you need YAML included, use {{event_file_content}} instead.";
-        this.supported_sc_events = [
-            SC_Event_FileMenu,
-            SC_Event_FileCreated,
-            SC_Event_FileContentModified,
-            SC_Event_FileDeleted,
-            SC_Event_FileMoved,
-            SC_Event_FileRenamed,
-        ];
-    }
-    async generateValue(shell, argumentsAreNotUsed, sc_event) {
-        this.requireCorrectEvent(sc_event);
-        return await getFileContentWithoutYAML(this.app, sc_event.getFile());
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_FileContent extends FileVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "file_content";
-        this.help_text = "Gives the current file's content, including YAML frontmatter. If you need YAML excluded, use {{note_content}} instead.";
-    }
-    async generateValue() {
-        // Retrieve file content.
-        return await app.vault.read(this.getFileOrThrow());
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_EventFileContent extends EventVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "event_file_content";
-        this.help_text = "Gives the event related file's content, including YAML frontmatter. If you need YAML excluded, use {{event_note_content}} instead.";
-        this.supported_sc_events = [
-            SC_Event_FileMenu,
-            SC_Event_FileCreated,
-            SC_Event_FileContentModified,
-            SC_Event_FileDeleted,
-            SC_Event_FileMoved,
-            SC_Event_FileRenamed,
-        ];
-    }
-    async generateValue(shell, argumentsAreNotUsed, sc_event) {
-        this.requireCorrectEvent(sc_event);
-        // Retrieve file content.
-        return await app.vault.read(sc_event.getFile());
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_CaretParagraph extends EditorVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "caret_paragraph";
-        this.help_text = "Gives a text line at the current caret position.";
-    }
-    async generateValue() {
-        const editor = this.getEditorOrThrow();
-        this.requireViewModeSource();
-        const caretPosition = editor.getCursor('to');
-        return editor.getLine(caretPosition.line);
-    }
-    getAvailabilityText() {
-        return super.getAvailabilityText() + " Not available in preview mode.";
-    }
-}
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_Newline extends Variable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "newline";
-        this.help_text = "Gives a \\n character. Used for testing line break escaping. An optional argument can be used to tell how many newlines are needed.";
-    }
-    async generateValue(shell, castedArguments) {
-        // Return \n, possibly repeating it
-        return "\n".repeat(castedArguments.count ?? 1);
-    }
-    getAvailabilityText() {
-        return "<strong>Only available</strong> in debug mode.";
-    }
-}
-Variable_Newline.parameters = {
-    count: {
-        type: "integer",
-        required: false,
+Variable_EventTags.parameters = {
+    separator: {
+        type: "string",
+        required: true,
     },
 };
 
@@ -4628,81 +5043,98 @@ Variable_Newline.parameters = {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
-class Variable_YAMLContent extends FileVariable {
+class Variable_EventTitle extends EventVariable {
     constructor() {
         super(...arguments);
-        this.variable_name = "yaml_content";
-        this.help_text = "Gives the current note's YAML frontmatter. Dashes --- can be included or excluded.";
+        this.variable_name = "event_title";
+        this.help_text = "Gives the event related file name without a file extension. If you need it with the extension, use {{event_file_name}} instead.";
+        this.supported_sc_events = [
+            SC_Event_FileMenu,
+            SC_Event_FileCreated,
+            SC_Event_FileContentModified,
+            SC_Event_FileDeleted,
+            SC_Event_FileMoved,
+            SC_Event_FileRenamed,
+        ];
     }
-    generateValue(shell, castedArguments) {
-        return new Promise((resolve, reject) => {
-            let file;
-            try {
-                file = this.getFileOrThrow();
-            }
-            catch (error) {
-                // Need to catch here, because Variable.getValue()'s .catch() block won't be able to catch thrown errors,
-                // it can only catch errors that were passed to reject().
-                reject(error);
-                return;
-            }
-            getFileYAML(this.app, file, "with-dashes" === castedArguments.withDashes).then((yamlContent) => {
-                if (null === yamlContent) {
-                    // No YAML frontmatter.
-                    this.reject("The current file does not contain a YAML frontmatter.", reject);
-                }
-                else {
-                    // Got a YAML frontmatter.
-                    resolve(yamlContent);
-                }
-            });
-        });
+    async generateValue(shell, argumentsAreNotUsed, sc_event) {
+        this.requireCorrectEvent(sc_event);
+        return sc_event.getFile().basename;
     }
-    getAvailabilityText() {
-        return super.getAvailabilityText() + " Also, a YAML frontmatter section needs to be present.";
+}
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+class Variable_EventType extends EventVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "event_type";
+        this.help_text = "Tells which event was triggered.";
+        /**
+         * This variable is available in all events.
+         * @protected
+         */
+        this.supported_sc_events = true;
+    }
+    async generateValue(shell, castedArguments, sc_event) {
+        // Check that an event was triggered, i.e. the execution does not happen via command palette or any other non-event way.
+        this.requireCorrectEvent(sc_event);
+        if (castedArguments.mode === "category") {
+            // Get event category.
+            return sc_event.getCategory();
+        }
+        else {
+            // Get event type.
+            return sc_event.getType();
+        }
     }
     getAutocompleteItems() {
-        return [
-            // Normal variables
+        const autocompleteItems = [
             {
-                value: "{{" + this.variable_name + ":with-dashes}}",
-                help_text: "Gives the current note's YAML frontmatter, wrapped between --- lines. " + this.getAvailabilityText(),
+                value: "{{" + this.variable_name + "}}",
+                help_text: "Gives a name of the triggered event. Possible values: <code>" + EventTypes.join("</code> , <code>") + "</code>. " + this.getAvailabilityText(),
                 group: "Variables",
                 type: "normal-variable",
                 documentationLink: this.getDocumentationLink(),
             },
             {
-                value: "{{" + this.variable_name + ":no-dashes}}",
-                help_text: "Gives the current note's YAML frontmatter, excluding top and bottom --- lines. " + this.getAvailabilityText(),
+                value: "{{" + this.variable_name + ":category}}",
+                help_text: "Gives a category of the triggered event. Multiple events can share the same category. Possible values: <code>" + EventCategories.join("</code> , <code>") + "</code>. " + this.getAvailabilityText(),
                 group: "Variables",
                 type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            // Unescaped variables
-            {
-                value: "{{!" + this.variable_name + ":with-dashes}}",
-                help_text: "Gives the current note's YAML frontmatter, wrapped between --- lines." + this.getAvailabilityText(),
-                group: "Variables",
-                type: "unescaped-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: "{{!" + this.variable_name + ":no-dashes}}",
-                help_text: "Gives the current note's YAML frontmatter, excluding top and bottom --- lines. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "unescaped-variable",
                 documentationLink: this.getDocumentationLink(),
             },
         ];
+        Variable.supplementAutocompleteItems(autocompleteItems);
+        return autocompleteItems;
+    }
+    getAvailabilityText() {
+        return "<strong>Only available</strong> in any event.";
     }
     getHelpName() {
-        return "<strong>{{yaml_content:with-dashes}}</strong> or <strong>{{yaml_content:no-dashes}}</strong>";
+        return "<strong>{{event_type}}</strong> or <strong>{{event_type:category}}</strong>";
     }
 }
-Variable_YAMLContent.parameters = {
-    withDashes: {
-        options: ["with-dashes", "no-dashes"],
-        required: true,
+Variable_EventType.parameters = {
+    mode: {
+        options: ["category"],
+        required: false,
     },
 };
 
@@ -4827,329 +5259,47 @@ Variable_EventYAMLContent.parameters = {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
-class Variable_OperatingSystem extends Variable {
+class Variable_EventYAMLValues extends EventVariable {
     constructor() {
         super(...arguments);
-        this.variable_name = "operating_system";
-        this.help_text = "Gives the current operating system's id code or human-readable name.";
-    }
-    async generateValue(shell, castedArguments) {
-        switch (castedArguments.property) {
-            case "id":
-                return getOperatingSystem();
-            case "name":
-                return getCurrentPlatformName();
-        }
-    }
-    getAutocompleteItems() {
-        const autocompleteItems = [
-            {
-                value: this.getFullName(false, "id"),
-                help_text: "Gives the current operating system's id code, i.e. \"darwin\" (= macOS), \"linux\", or \"win32\" (= Windows). Good for scripts as id comes from `navigator.platform` and is not likely to change. For a human-readable value, use :name instead." + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, "name"),
-                help_text: "Gives the current operating system's human-readable name. As the OS names are defined in the SC plugin's source code, they might change if they need improving. If you need non-changing names, use :id instead." + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
+        this.variable_name = "event_yaml_values";
+        this.help_text = "Reads a list of values from the event related file's frontmatter. Takes a property name and separator as arguments. You can access nested properties with dot notation: property1.property2";
+        this.supported_sc_events = [
+            SC_Event_FileMenu,
+            SC_Event_FileCreated,
+            SC_Event_FileContentModified,
+            SC_Event_FileDeleted,
+            SC_Event_FileMoved,
+            SC_Event_FileRenamed,
         ];
-        Variable.supplementAutocompleteItems(autocompleteItems);
-        return autocompleteItems;
-    }
-    getHelpName() {
-        return "<strong>{{operating_system:id}}</strong>, <strong>{{operating_system:name}}</strong>, <strong>{{operating_system:release}}</strong> or <strong>{{file_path:version}}</strong>";
-    }
-    getAvailabilityText() {
-        return "<strong>Only available</strong> in debug mode.";
-    }
-}
-Variable_OperatingSystem.parameters = {
-    property: {
-        options: ["id", "name"],
-        required: true,
-    },
-};
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_ObsidianAPIVersion extends Variable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "obsidian_api_version";
-        this.help_text = "Gives Obsidian's API version, which follows the release cycle of the desktop application.";
-    }
-    async generateValue(shell, castedArguments) {
-        if (undefined === castedArguments.part) {
-            // Return the whole version.
-            return obsidian.apiVersion;
-        }
-        // Return a part of the version.
-        const versionPart = getVersionPart(obsidian.apiVersion, castedArguments.part);
-        if (null === versionPart) {
-            throw new Error("Obsidian API version (" + obsidian.apiVersion + ") does not contain the part: " + castedArguments.part);
-        }
-        return versionPart;
-    }
-    getAutocompleteItems() {
-        const autocompleteItems = [
-            {
-                value: this.getFullName(),
-                help_text: this.help_text + " " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, "major"),
-                help_text: "Gives Obsidian's API version's first part, e.g. 1 from 1.5.3 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, "minor"),
-                help_text: "Gives Obsidian's API version's middle part, e.g. 5 from 1.5.3 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, "patch"),
-                help_text: "Gives Obsidian's API version's last part, e.g. 3 from 1.5.3 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-        ];
-        Variable.supplementAutocompleteItems(autocompleteItems);
-        return autocompleteItems;
-    }
-    getHelpName() {
-        return "<strong>{{obsidian_api_version}}</strong> or <strong>{{obsidian_api_version:major|minor|patch}}</strong>";
-    }
-}
-Variable_ObsidianAPIVersion.parameters = {
-    part: {
-        options: ["major", "minor", "patch"],
-        required: false,
-    },
-};
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_ShellCommandsPluginVersion extends Variable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "shell_commands_plugin_version";
-        this.help_text = "Gives the plugin's version or settings structure version.";
-    }
-    async generateValue(shell, castedArguments) {
-        let version;
-        switch (castedArguments.subject) {
-            case "plugin":
-                version = this.plugin.getPluginVersion();
-                break;
-            case "settings":
-                version = SC_Plugin.SettingsVersion;
-                break;
-        }
-        if (undefined === castedArguments.part) {
-            // Return the whole version.
-            return version;
-        }
-        // Return a part of the version.
-        const versionPart = getVersionPart(version, castedArguments.part);
-        if (null === versionPart) {
-            throw new Error("Shell commands " + castedArguments.subject + " version (" + version + ") does not contain the part: " + castedArguments.part);
-        }
-        return versionPart;
-    }
-    getAutocompleteItems() {
-        const autocompleteItems = [
-            {
-                value: this.getFullName(false, ["plugin"]),
-                help_text: "Gives the Shell commands plugin's version.",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, ["plugin", "major"]),
-                help_text: "Gives the Shell commands plugin's version's first part, e.g. 0 from 0.22.1 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, ["plugin", "minor"]),
-                help_text: "Gives the Shell commands plugin's version's middle part, e.g. 22 from 0.22.1 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, ["plugin", "patch"]),
-                help_text: "Gives the Shell commands plugin's version's last part, e.g. 1 from 0.22.1 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, ["settings"]),
-                help_text: "Gives the Shell commands' settings structure version, which is not always increased with new plugin versions.",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, ["settings", "major"]),
-                help_text: "Gives the Shell commands' settings structure version's first part, e.g. 0 from 0.22.0 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, ["settings", "minor"]),
-                help_text: "Gives the Shell commands' settings structure version's middle part, e.g. 22 from 0.22.0 .",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: this.getFullName(false, ["settings", "patch"]),
-                help_text: "Gives the Shell commands' settings structure version's last part, e.g. 0 from 0.22.0 . It hardly ever differs from 0.",
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-        ];
-        Variable.supplementAutocompleteItems(autocompleteItems);
-        return autocompleteItems;
-    }
-    getHelpName() {
-        return "<strong>{{shell_commands_plugin_version:plugin}}</strong>, <strong>{{shell_commands_plugin_version:plugin:major|minor|patch}}</strong>, <strong>{{shell_commands_plugin_version:settings}}</strong> or <strong>{{shell_commands_plugin_version:settings:major|minor|patch}}</strong>";
-    }
-}
-Variable_ShellCommandsPluginVersion.parameters = {
-    subject: {
-        options: ["plugin", "settings"],
-        required: true,
-    },
-    part: {
-        options: ["major", "minor", "patch"],
-        required: false,
-    },
-};
-
-/*
- * 'Shell commands' plugin for Obsidian.
- * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.0 of the License.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program. If not, see <https://www.gnu.org/licenses/>.
- *
- * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
- */
-class Variable_EventType extends EventVariable {
-    constructor() {
-        super(...arguments);
-        this.variable_name = "event_type";
-        this.help_text = "Tells which event was triggered.";
-        /**
-         * This variable is available in all events.
-         * @protected
-         */
-        this.supported_sc_events = true;
     }
     async generateValue(shell, castedArguments, sc_event) {
-        // Check that an event was triggered, i.e. the execution does not happen via command palette or any other non-event way.
         this.requireCorrectEvent(sc_event);
-        if (castedArguments.mode === "category") {
-            // Get event category.
-            return sc_event.getCategory();
+        const yamlResult = getFileYAMLValue(this.app, sc_event.getFile(), castedArguments.propertyName, true);
+        if (yamlResult.success) {
+            // The result is ok.
+            return yamlResult.multipleValues.join(castedArguments.separator);
         }
         else {
-            // Get event type.
-            return sc_event.getType();
+            // The result contains error message(s).
+            this.throw(yamlResult.errorMessages.join(" "));
         }
     }
-    getAutocompleteItems() {
-        const autocompleteItems = [
-            {
-                value: "{{" + this.variable_name + "}}",
-                help_text: "Gives a name of the triggered event. Possible values: <code>" + EventTypes.join("</code> , <code>") + "</code>. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-            {
-                value: "{{" + this.variable_name + ":category}}",
-                help_text: "Gives a category of the triggered event. Multiple events can share the same category. Possible values: <code>" + EventCategories.join("</code> , <code>") + "</code>. " + this.getAvailabilityText(),
-                group: "Variables",
-                type: "normal-variable",
-                documentationLink: this.getDocumentationLink(),
-            },
-        ];
-        Variable.supplementAutocompleteItems(autocompleteItems);
-        return autocompleteItems;
-    }
     getAvailabilityText() {
-        return "<strong>Only available</strong> in any event.";
+        return super.getAvailabilityText() + " Also, the given YAML property must exist in the file's frontmatter.";
     }
     getHelpName() {
-        return "<strong>{{event_type}}</strong> or <strong>{{event_type:category}}</strong>";
+        return "<strong>{{event_yaml_values:property:separator}}</strong>";
     }
 }
-Variable_EventType.parameters = {
-    mode: {
-        options: ["category"],
-        required: false,
+Variable_EventYAMLValues.parameters = {
+    propertyName: {
+        type: "string",
+        required: true,
+    },
+    separator: {
+        type: "string",
+        required: true,
     },
 };
 
@@ -5171,6 +5321,65 @@ Variable_EventType.parameters = {
  *
  * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
  */
+class Variable_EventYAMLValue extends EventVariable {
+    constructor() {
+        super(...arguments);
+        this.variable_name = "event_yaml_value";
+        this.help_text = "Reads a single value from the event related file's frontmatter. Takes a property name as an argument. You can access nested properties with dot notation: property1.property2";
+        this.supported_sc_events = [
+            SC_Event_FileMenu,
+            SC_Event_FileCreated,
+            SC_Event_FileContentModified,
+            SC_Event_FileDeleted,
+            SC_Event_FileMoved,
+            SC_Event_FileRenamed,
+        ];
+    }
+    async generateValue(shell, castedArguments, sc_event) {
+        this.requireCorrectEvent(sc_event);
+        const yamlResult = getFileYAMLValue(this.app, sc_event.getFile(), castedArguments.property_name, false);
+        if (yamlResult.success) {
+            // The result is ok.
+            return yamlResult.singleValue;
+        }
+        else {
+            // The result contains error message(s).
+            this.throw(yamlResult.errorMessages.join(" "));
+        }
+    }
+    getAvailabilityText() {
+        return super.getAvailabilityText() + " Also, the given YAML property must exist in the file's frontmatter.";
+    }
+    getHelpName() {
+        return "<strong>{{event_yaml_value:property}}</strong>";
+    }
+}
+Variable_EventYAMLValue.parameters = {
+    property_name: {
+        type: "string",
+        required: true,
+    },
+};
+
+/*
+ * 'Shell commands' plugin for Obsidian.
+ * Copyright (C) 2021 - 2024 Jarkko Linnanvirta
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.0 of the License.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <https://www.gnu.org/licenses/>.
+ *
+ * Contact the author (Jarkko Linnanvirta): https://github.com/Taitava/
+ */
+// Event variables above. Keep in alphabetic order.
 function loadVariables(plugin) {
     const variables = new VariableSet([]);
     // Load CustomVariables
@@ -5206,6 +5415,7 @@ function loadVariables(plugin) {
         new Variable_Workspace(plugin),
         new Variable_YAMLContent(plugin),
         new Variable_YAMLValue(plugin),
+        new Variable_YAMLValues(plugin),
         // Event variables
         new Variable_EventFileContent(plugin),
         new Variable_EventFileExtension(plugin),
@@ -5225,6 +5435,7 @@ function loadVariables(plugin) {
         new Variable_EventType(plugin),
         new Variable_EventYAMLContent(plugin),
         new Variable_EventYAMLValue(plugin),
+        new Variable_EventYAMLValues(plugin),
     ];
     if (DEBUG_ON) {
         // Variables that are only designed for 'Shell commands test suite'.
@@ -6434,7 +6645,7 @@ class OutputChannel_Notification extends OutputChannel {
                 break;
         }
         return obsidian.sanitizeHTMLToDom(canDecorate
-            ? "<code>" + outputContent + "</code>" // Use <code> instead of <pre> to allow line wrapping.
+            ? "<code class=\"SC-output-channel-notification-monospace\">" + outputContent + "</code>" // Use <code> instead of <pre> to allow line wrapping.
             : outputContent);
     }
 }
@@ -8119,25 +8330,37 @@ class SC_CodeMirrorEvent extends SC_Event {
          *
          * @private
          */
-        this.tShellCommandTriggers = new Map();
+        this.registeredShellCommands = new Map();
+        /**
+         * As multiple shell commands can enable an event, this property indicates whether a CodeMirror extension is already registered or not.
+         * @private
+         */
+        this.isCodeMirrorExtensionRegistered = false;
     }
     _register(tShellCommand) {
-        const trigger = () => this.trigger(tShellCommand);
-        this.tShellCommandTriggers.set(tShellCommand.getId(), trigger);
-        // Register the trigger for all current CodeMirror instances created by Obsidian.
-        this.app.workspace.iterateCodeMirrors((codeMirror) => {
-            codeMirror.on(this.codeMirrorEvent, trigger);
-        });
+        this.registeredShellCommands.set(tShellCommand.getId(), tShellCommand);
+        if (!this.isCodeMirrorExtensionRegistered) {
+            // Need to register the CodeMirror extension. Only need to do this once per event, not for every shell command using the same event.
+            this.plugin.addEditorExtension(this.getCodeMirrorExtension());
+            this.isCodeMirrorExtensionRegistered = true;
+        }
         return false; // No event reference.
     }
     _unregister(tShellCommand) {
-        // Unregister the trigger for all current CodeMirror instances created by Obsidian.
-        this.app.workspace.iterateCodeMirrors((codeMirror) => {
-            const trigger = this.tShellCommandTriggers.get(tShellCommand.getId());
-            if (undefined !== trigger) {
-                codeMirror.off(this.codeMirrorEvent, trigger);
+        this.registeredShellCommands.delete(tShellCommand.getId());
+        // No need to unregister the CodeMirror extension. It might be used by other shell commands, and even if it's not, leaving it registered causes no harm.
+    }
+    /**
+     * Subclasses of SC_CodeMirrorEvent should call this when their event occurs.
+     * @param condition Can be used to filter which shell commands should be executed and which not. If omitted, all shell
+     * commands (that enable this event) will be executed.
+     */
+    triggerRegisteredShellCommands(condition) {
+        for (const tShellCommand of this.registeredShellCommands.values()) {
+            if (!condition || condition(tShellCommand)) {
+                this.trigger(tShellCommand).then();
             }
-        });
+        }
     }
     getCategory() {
         return "editor";
@@ -8165,13 +8388,64 @@ class SC_CodeMirrorEvent extends SC_Event {
 class SC_Event_CaretMoved extends SC_CodeMirrorEvent {
     constructor() {
         super(...arguments);
-        // @ts-ignore This event does not work anyway. FIXME
-        this.codeMirrorEvent = "cursorActivity";
+        this.default_configuration = {
+            enabled: false,
+            lineOrColumn: "any",
+        };
     }
-    createExtraSettingsFields(extraSettingsContainer) {
+    getCodeMirrorExtension() {
+        return view.EditorView.updateListener.of((update) => {
+            if (update.selectionSet) {
+                // Selection/caret position has changed.
+                if (!update.state.selection.eq(update.startState.selection)) { // Prevent double triggering when clicking with mouse. This discards mouse button RELEASE.
+                    // What has changed: line, column, or both?
+                    const lineAndColumnNumbers = getCodeMirrorLineAndColumnNumbers(update);
+                    const lineChanged = lineAndColumnNumbers.old.line !== lineAndColumnNumbers.new.line;
+                    const columnChanged = lineAndColumnNumbers.old.column !== lineAndColumnNumbers.new.column;
+                    // Execute shell commands - but with filtering.
+                    this.triggerRegisteredShellCommands((tShellCommand) => {
+                        // Check which kind of change the shell command requires.
+                        const lineOrColumn = this.getConfiguration(tShellCommand).lineOrColumn;
+                        switch (lineOrColumn) {
+                            case "any":
+                                return columnChanged || lineChanged;
+                            case "column":
+                                return columnChanged;
+                            case "line":
+                                return lineChanged;
+                            default:
+                                // There might be some < 0.22.0 configurations out there that does have `caret-moved` event enabled (even though the event does not work before version 0.22.0), but have no `lineOrColumn` property defined.
+                                // TODO: Create a migration in Migrations.ts that adds the lineOrColumn property to possibly existing caret moved event configurations. The migration could be generalised in a way that it could insert properties to any events that might be missing properties.
+                                return columnChanged || lineChanged;
+                        }
+                    });
+                }
+            }
+        });
+    }
+    createExtraSettingsFields(extraSettingsContainer, tShellCommand) {
+        // Line or column mode.
         new obsidian.Setting(extraSettingsContainer)
-            .setName("This event does not work yet!")
-            .setDesc("Incomplete code for this event was accidentally released in SC 0.20.0. Enabling the event does not do anything. The event will be finished in some future version.");
+            .setName("React to line or column changes")
+            .addDropdown(lineOrColumnDropdown => lineOrColumnDropdown
+            .addOptions({
+            any: "Any changes",
+            line: "Line changes only",
+            column: "Column changes only",
+        })
+            .setValue(this.getConfiguration(tShellCommand).lineOrColumn)
+            .onChange(async (newMode) => {
+            this.getConfiguration(tShellCommand).lineOrColumn = newMode;
+            await this.plugin.saveSettings();
+        }));
+    }
+    /**
+     * Overridden only to change the return type.
+     * @param tShellCommand
+     * @protected
+     */
+    getConfiguration(tShellCommand) {
+        return super.getConfiguration(tShellCommand);
     }
     getType() {
         // TODO: Change all event_code properties to be the same as event types, and then make the parent method SC_Event.getType() return event_code. Then all sub-methods of getType() can be removed.
@@ -8239,32 +8513,732 @@ function getIconHTML(icon_id) {
     icon_container.remove();
     return icon_html;
 }
+const unsortedIconList = obsidian.getIconIds().map((iconId) => {
+    const icon = {
+        iconId: iconId,
+        displayName: iconId,
+    };
+    if (iconId.match(/^lucide-/)) {
+        // Remove the `lucide-` prefix from `displayValue`.
+        icon.displayName = iconId.replace(/^lucide-/, '');
+    }
+    return icon;
+});
+const SORTED_ICON_LIST = unsortedIconList.sort((iconA, iconB) => {
+    if (iconA.displayName === iconB.displayName) {
+        return 0;
+    }
+    else if (iconA.displayName > iconB.displayName) {
+        return 1;
+    }
+    else {
+        return -1;
+    }
+});
 /**
- * @author The list is provided by phibr0.
- * @link https://discord.com/channels/686053708261228577/840286264964022302/968248588641665075
- * @description phibr0: "Updated Icon List for Obsidian v0.14.7+ (lucide icons v0.30.0 + obsidians own)"
- * @copyright The copyright statement at the top of this file does not affect this list of icons.
- * The list seems to miss some icons, so I've made an additional list below.
- * Modifications:
- *  - Removed icons that show up empty: search-large
+ * The SC plugin up to version 0.22.0 used old style icon names. Those are still usable in Obsidian, but from SC 0.23.0 onwards the plugin migrates the icon names so that they can be found from the list returned by Obsidian's `getIconIds()`.
+ *
+ * Some icon names have only changed so that their name is prefixed with `lucide-`, but there are a few whose names have changed completely, e.g. `any-key` --> `lucide-plus-circle`.
+ *
+ * The following script was used to compile the migration list. You'll have to dig `AUGMENTED_ICON_LIST` from the history of this Git repository, as it was removed by the same commit that created this migration.
+ * ```TypeScript
+ *         const iconComparison: string[] = [];
+ *         for (const oldIcon of AUGMENTED_ICON_LIST) {
+ *             if (getIconIds().contains(oldIcon)) {
+ *                 iconComparison.push(oldIcon + " = OK");
+ *             }
+ *             else {
+ *                 const oldIconHTML = getIconHTML(oldIcon);
+ *                 let foundWithAnotherName = false;
+ *                 for (const newIcon of getIconIds()) {
+ *                     const newIconHTML = getIconHTML(newIcon);
+ *                     if (newIconHTML === oldIconHTML) {
+ *                         iconComparison.push(oldIcon + " = Found as " + newIcon);
+ *                         foundWithAnotherName = true;
+ *                         break;
+ *                     }
+ *                 }
+ *                 if (!foundWithAnotherName) {
+ *                     iconComparison.push(oldIcon + " = NOT FOUND!");
+ *                 }
+ *             }
+ *         }
+ * ```
  */
-const ICON_LIST = ["activity", "airplay", "alarm-check", "alarm-clock-off", "alarm-clock", "alarm-minus", "alarm-plus", "album", "alert-circle", "alert-octagon", "alert-triangle", "align-center-horizontal", "align-center-vertical", "align-center", "align-end-horizontal", "align-end-vertical", "align-horizontal-distribute-center", "align-horizontal-distribute-end", "align-horizontal-distribute-start", "align-horizontal-justify-center", "align-horizontal-justify-end", "align-horizontal-justify-start", "align-horizontal-space-around", "align-horizontal-space-between", "align-justify", "align-left", "align-right", "align-start-horizontal", "align-start-vertical", "align-vertical-distribute-center", "align-vertical-distribute-end", "align-vertical-distribute-start", "align-vertical-justify-center", "align-vertical-justify-end", "align-vertical-justify-start", "align-vertical-space-around", "align-vertical-space-between", "anchor", "aperture", "archive", "arrow-big-down", "arrow-big-left", "arrow-big-right", "arrow-big-up", "arrow-down-circle", "arrow-down-left", "arrow-down-right", "arrow-down", "arrow-left-circle", "arrow-left-right", "arrow-left", "arrow-right-circle", "arrow-right", "arrow-up-circle", "arrow-up-left", "arrow-up-right", "arrow-up", "asterisk", "at-sign", "award", "axe", "banknote", "bar-chart-2", "bar-chart", "baseline", "battery-charging", "battery-full", "battery-low", "battery-medium", "battery", "beaker", "bell-minus", "bell-off", "bell-plus", "bell-ring", "bell", "bike", "binary", "bitcoin", "bluetooth-connected", "bluetooth-off", "bluetooth-searching", "bluetooth", "bold", "book-open", "book", "bookmark-minus", "bookmark-plus", "bookmark", "bot", "box-select", "box", "briefcase", "brush", "bug", "building-2", "building", "bus", "calculator", "calendar", "camera-off", "camera", "car", "carrot", "cast", "check-circle-2", "check-circle", "check-square", "check", "chevron-down", "chevron-first", "chevron-last", "chevron-left", "chevron-right", "chevron-up", "chevrons-down-up", "chevrons-down", "chevrons-left", "chevrons-right", "chevrons-up-down", "chevrons-up", "chrome", "circle-slashed", "circle", "clipboard-check", "clipboard-copy", "clipboard-list", "clipboard-x", "clipboard", "clock-1", "clock-10", "clock-11", "clock-12", "clock-2", "clock-3", "clock-4", "clock-5", "clock-6", "clock-7", "clock-8", "clock-9", "clock", "cloud-drizzle", "cloud-fog", "cloud-hail", "cloud-lightning", "cloud-moon", "cloud-off", "cloud-rain-wind", "cloud-rain", "cloud-snow", "cloud-sun", "cloud", "cloudy", "clover", "code-2", "code", "codepen", "codesandbox", "coffee", "coins", "columns", "command", "compass", "contact", "contrast", "cookie", "copy", "copyleft", "copyright", "corner-down-left", "corner-down-right", "corner-left-down", "corner-left-up", "corner-right-down", "corner-right-up", "corner-up-left", "corner-up-right", "cpu", "credit-card", "crop", "cross", "crosshair", "crown", "currency", "database", "delete", "dice-1", "dice-2", "dice-3", "dice-4", "dice-5", "dice-6", "disc", "divide-circle", "divide-square", "divide", "dollar-sign", "download-cloud", "download", "dribbble", "droplet", "droplets", "drumstick", "edit-2", "edit-3", "edit", "egg", "equal-not", "equal", "eraser", "euro", "expand", "external-link", "eye-off", "eye", "facebook", "fast-forward", "feather", "figma", "file-check-2", "file-check", "file-code", "file-digit", "file-input", "file-minus-2", "file-minus", "file-output", "file-plus-2", "file-plus", "file-search", "file-text", "file-x-2", "file-x", "file", "files", "film", "filter", "flag-off", "flag-triangle-left", "flag-triangle-right", "flag", "flame", "flashlight-off", "flashlight", "flask-conical", "flask-round", "folder-minus", "folder-open", "folder-plus", "folder", "form-input", "forward", "frame", "framer", "frown", "function-square", "gamepad-2", "gamepad", "gauge", "gavel", "gem", "ghost", "gift", "git-branch-plus", "git-branch", "git-commit", "git-fork", "git-merge", "git-pull-request", "github", "gitlab", "glasses", "globe-2", "globe", "grab", "graduation-cap", "grid", "grip-horizontal", "grip-vertical", "hammer", "hand-metal", "hand", "hard-drive", "hard-hat", "hash", "haze", "headphones", "heart", "help-circle", "hexagon", "highlighter", "history", "home", "image-minus", "image-off", "image-plus", "image", "import", "inbox", "indent", "indian-rupee", "infinity", "info", "inspect", "instagram", "italic", "japanese-yen", "key", "keyboard", "landmark", "languages", "laptop-2", "laptop", "lasso-select", "lasso", "layers", "layout-dashboard", "layout-grid", "layout-list", "layout-template", "layout", "library", "life-buoy", "lightbulb-off", "lightbulb", "link-2-off", "link-2", "link", "linkedin", "list-checks", "list-minus", "list-ordered", "list-plus", "list-x", "list", "loader-2", "loader", "locate-fixed", "locate-off", "locate", "lock", "log-in", "log-out", "mail", "map-pin", "map", "maximize-2", "maximize", "megaphone", "meh", "menu", "message-circle", "message-square", "mic-off", "mic", "minimize-2", "minimize", "minus-circle", "minus-square", "minus", "monitor-off", "monitor-speaker", "monitor", "moon", "more-horizontal", "more-vertical", "mountain-snow", "mountain", "mouse-pointer-2", "mouse-pointer-click", "mouse-pointer", "mouse", "move-diagonal-2", "move-diagonal", "move-horizontal", "move-vertical", "move", "music", "navigation-2", "navigation", "network", "octagon", "option", "outdent", "package-check", "package-minus", "package-plus", "package-search", "package-x", "package", "palette", "palmtree", "paperclip", "pause-circle", "pause-octagon", "pause", "pen-tool", "pencil", "percent", "person-standing", "phone-call", "phone-forwarded", "phone-incoming", "phone-missed", "phone-off", "phone-outgoing", "phone", "pie-chart", "piggy-bank", "pin", "pipette", "plane", "play-circle", "play", "plug-zap", "plus-circle", "plus-square", "plus", "pocket", "podcast", "pointer", "pound-sterling", "power-off", "power", "printer", "qr-code", "quote", "radio-receiver", "radio", "redo", "refresh-ccw", "refresh-cw", "regex", "repeat-1", "repeat", "reply-all", "reply", "rewind", "rocket", "rocking-chair", "rotate-ccw", "rotate-cw", "rss", "ruler", "russian-ruble", "save", "scale", "scan-line", "scan", "scissors", "screen-share-off", "screen-share", "search", "send", "separator-horizontal", "separator-vertical", "server-crash", "server-off", "server", "settings-2", "settings", "share-2", "share", "sheet", "shield-alert", "shield-check", "shield-close", "shield-off", "shield", "shirt", "shopping-bag", "shopping-cart", "shovel", "shrink", "shuffle", "sidebar-close", "sidebar-open", "sidebar", "sigma", "signal-high", "signal-low", "signal-medium", "signal-zero", "signal", "skip-back", "skip-forward", "skull", "slack", "slash", "sliders", "smartphone-charging", "smartphone", "smile", "snowflake", "sort-asc", "sort-desc", "speaker", "sprout", "square", "star-half", "star", "stop-circle", "stretch-horizontal", "stretch-vertical", "strikethrough", "subscript", "sun", "sunrise", "sunset", "superscript", "swiss-franc", "switch-camera", "table", "tablet", "tag", "target", "tent", "terminal-square", "terminal", "text-cursor-input", "text-cursor", "thermometer-snowflake", "thermometer-sun", "thermometer", "thumbs-down", "thumbs-up", "ticket", "timer-off", "timer-reset", "timer", "toggle-left", "toggle-right", "tornado", "trash-2", "trash", "trello", "trending-down", "trending-up", "triangle", "truck", "tv-2", "tv", "twitch", "twitter", "type", "umbrella", "underline", "undo", "unlink-2", "unlink", "unlock", "upload-cloud", "upload", "user-check", "user-minus", "user-plus", "user-x", "user", "users", "verified", "vibrate", "video-off", "video", "view", "voicemail", "volume-1", "volume-2", "volume-x", "volume", "wallet", "wand", "watch", "waves", "webcam", "wifi-off", "wifi", "wind", "wrap-text", "wrench", "x-circle", "x-octagon", "x-square", "x", "youtube", "zap-off", "zap", "zoom-in", "zoom-out", "search", "activity", "airplay", "alarm-check", "alarm-clock-off", "alarm-clock", "alarm-minus", "alarm-plus", "album", "alert-circle", "alert-octagon", "alert-triangle", "align-center-horizontal", "align-center-vertical", "align-center", "align-end-horizontal", "align-end-vertical", "align-horizontal-distribute-center", "align-horizontal-distribute-end", "align-horizontal-distribute-start", "align-horizontal-justify-center", "align-horizontal-justify-end", "align-horizontal-justify-start", "align-horizontal-space-around", "align-horizontal-space-between", "align-justify", "align-left", "align-right", "align-start-horizontal", "align-start-vertical", "align-vertical-distribute-center", "align-vertical-distribute-end", "align-vertical-distribute-start", "align-vertical-justify-center", "align-vertical-justify-end", "align-vertical-justify-start", "align-vertical-space-around", "align-vertical-space-between", "anchor", "aperture", "archive", "arrow-big-down", "arrow-big-left", "arrow-big-right", "arrow-big-up", "arrow-down-circle", "arrow-down-left", "arrow-down-right", "arrow-down", "arrow-left-circle", "arrow-left-right", "arrow-left", "arrow-right-circle", "arrow-right", "arrow-up-circle", "arrow-up-left", "arrow-up-right", "arrow-up", "asterisk", "at-sign", "award", "axe", "banknote", "bar-chart-2", "bar-chart", "baseline", "battery-charging", "battery-full", "battery-low", "battery-medium", "battery", "beaker", "bell-minus", "bell-off", "bell-plus", "bell-ring", "bell", "bike", "binary", "bitcoin", "bluetooth-connected", "bluetooth-off", "bluetooth-searching", "bluetooth", "bold", "book-open", "book", "bookmark-minus", "bookmark-plus", "bookmark", "bot", "box-select", "box", "briefcase", "brush", "bug", "building-2", "building", "bus", "calculator", "calendar", "camera-off", "camera", "car", "carrot", "cast", "check-circle-2", "check-circle", "check-square", "check", "chevron-down", "chevron-first", "chevron-last", "chevron-left", "chevron-right", "chevron-up", "chevrons-down-up", "chevrons-down", "chevrons-left", "chevrons-right", "chevrons-up-down", "chevrons-up", "chrome", "circle-slashed", "circle", "clipboard-check", "clipboard-copy", "clipboard-list", "clipboard-x", "clipboard", "clock-1", "clock-10", "clock-11", "clock-12", "clock-2", "clock-3", "clock-4", "clock-5", "clock-6", "clock-7", "clock-8", "clock-9", "lucide-clock", "cloud-drizzle", "cloud-fog", "cloud-hail", "cloud-lightning", "cloud-moon", "cloud-off", "cloud-rain-wind", "cloud-rain", "cloud-snow", "cloud-sun", "lucide-cloud", "cloudy", "clover", "code-2", "code", "codepen", "codesandbox", "coffee", "coins", "columns", "command", "compass", "contact", "contrast", "cookie", "copy", "copyleft", "copyright", "corner-down-left", "corner-down-right", "corner-left-down", "corner-left-up", "corner-right-down", "corner-right-up", "corner-up-left", "corner-up-right", "cpu", "credit-card", "crop", "lucide-cross", "crosshair", "crown", "currency", "database", "delete", "dice-1", "dice-2", "dice-3", "dice-4", "dice-5", "dice-6", "disc", "divide-circle", "divide-square", "divide", "dollar-sign", "download-cloud", "download", "dribbble", "droplet", "droplets", "drumstick", "edit-2", "edit-3", "edit", "egg", "equal-not", "equal", "eraser", "euro", "expand", "external-link", "eye-off", "eye", "facebook", "fast-forward", "feather", "figma", "file-check-2", "file-check", "file-code", "file-digit", "file-input", "file-minus-2", "file-minus", "file-output", "file-plus-2", "file-plus", "file-search", "file-text", "file-x-2", "file-x", "file", "files", "film", "filter", "flag-off", "flag-triangle-left", "flag-triangle-right", "flag", "flame", "flashlight-off", "flashlight", "flask-conical", "flask-round", "folder-minus", "folder-open", "folder-plus", "lucide-folder", "form-input", "forward", "frame", "framer", "frown", "function-square", "gamepad-2", "gamepad", "gauge", "gavel", "gem", "ghost", "gift", "git-branch-plus", "git-branch", "git-commit", "git-fork", "git-merge", "git-pull-request", "github", "gitlab", "glasses", "globe-2", "globe", "grab", "graduation-cap", "grid", "grip-horizontal", "grip-vertical", "hammer", "hand-metal", "hand", "hard-drive", "hard-hat", "hash", "haze", "headphones", "heart", "help-circle", "hexagon", "highlighter", "history", "home", "image-minus", "image-off", "image-plus", "image", "import", "inbox", "indent", "indian-rupee", "infinity", "lucide-info", "inspect", "instagram", "italic", "japanese-yen", "key", "keyboard", "landmark", "lucide-languages", "laptop-2", "laptop", "lasso-select", "lasso", "layers", "layout-dashboard", "layout-grid", "layout-list", "layout-template", "layout", "library", "life-buoy", "lightbulb-off", "lightbulb", "link-2-off", "link-2", "lucide-link", "linkedin", "list-checks", "list-minus", "list-ordered", "list-plus", "list-x", "list", "loader-2", "loader", "locate-fixed", "locate-off", "locate", "lock", "log-in", "log-out", "mail", "map-pin", "map", "maximize-2", "maximize", "megaphone", "meh", "menu", "message-circle", "message-square", "mic-off", "mic", "minimize-2", "minimize", "minus-circle", "minus-square", "minus", "monitor-off", "monitor-speaker", "monitor", "moon", "more-horizontal", "more-vertical", "mountain-snow", "mountain", "mouse-pointer-2", "mouse-pointer-click", "mouse-pointer", "mouse", "move-diagonal-2", "move-diagonal", "move-horizontal", "move-vertical", "move", "music", "navigation-2", "navigation", "network", "octagon", "option", "outdent", "package-check", "package-minus", "package-plus", "package-search", "package-x", "package", "palette", "palmtree", "paperclip", "pause-circle", "pause-octagon", "pause", "pen-tool", "lucide-pencil", "percent", "person-standing", "phone-call", "phone-forwarded", "phone-incoming", "phone-missed", "phone-off", "phone-outgoing", "phone", "pie-chart", "piggy-bank", "lucide-pin", "pipette", "plane", "play-circle", "play", "plug-zap", "plus-circle", "plus-square", "plus", "pocket", "podcast", "pointer", "pound-sterling", "power-off", "power", "printer", "qr-code", "quote", "radio-receiver", "radio", "redo", "refresh-ccw", "refresh-cw", "regex", "repeat-1", "repeat", "reply-all", "reply", "rewind", "rocket", "rocking-chair", "rotate-ccw", "rotate-cw", "rss", "ruler", "russian-ruble", "save", "scale", "scan-line", "scan", "scissors", "screen-share-off", "screen-share", "lucide-search", "send", "separator-horizontal", "separator-vertical", "server-crash", "server-off", "server", "settings-2", "settings", "share-2", "share", "sheet", "shield-alert", "shield-check", "shield-close", "shield-off", "shield", "shirt", "shopping-bag", "shopping-cart", "shovel", "shrink", "shuffle", "sidebar-close", "sidebar-open", "sidebar", "sigma", "signal-high", "signal-low", "signal-medium", "signal-zero", "signal", "skip-back", "skip-forward", "skull", "slack", "slash", "sliders", "smartphone-charging", "smartphone", "smile", "snowflake", "sort-asc", "sort-desc", "speaker", "sprout", "square", "star-half", "lucide-star", "stop-circle", "stretch-horizontal", "stretch-vertical", "strikethrough", "subscript", "sun", "sunrise", "sunset", "superscript", "swiss-franc", "switch-camera", "table", "tablet", "tag", "target", "tent", "terminal-square", "terminal", "text-cursor-input", "text-cursor", "thermometer-snowflake", "thermometer-sun", "thermometer", "thumbs-down", "thumbs-up", "ticket", "timer-off", "timer-reset", "timer", "toggle-left", "toggle-right", "tornado", "trash-2", "lucide-trash", "trello", "trending-down", "trending-up", "triangle", "truck", "tv-2", "tv", "twitch", "twitter", "type", "umbrella", "underline", "undo", "unlink-2", "unlink", "unlock", "upload-cloud", "upload", "user-check", "user-minus", "user-plus", "user-x", "user", "users", "verified", "vibrate", "video-off", "video", "view", "voicemail", "volume-1", "volume-2", "volume-x", "volume", "wallet", "wand", "watch", "waves", "webcam", "wifi-off", "wifi", "wind", "wrap-text", "wrench", "x-circle", "x-octagon", "x-square", "x", "youtube", "zap-off", "zap", "zoom-in", "zoom-out", "lucide-search"];
-/**
- * The original ICON_LIST lacks some icons, so I've added them to this separate list. Use AUGMENTED_ICON_LIST to access all the icons together.
- * This is copied 2022-07-18 from https://forum.obsidian.md/t/list-of-available-icons-for-component-seticon/16332/4?u=jare (it's the "New list (from 2021.04.11, user SV on Discord)").
- * Modifications:
- * - Formatted into a JavaScript array.
- * - Removed icons that can be found from ICON_LIST: clock, cloud, cross, folder, info, languages, link, pencil, pin, search, star
- * - Removed icons that do not seem to work: csv, deleteColumn, deleteRow, formula, insertColumn, insertRow, moveColumnLeft, moveColumnRight, moveRowDown, moveRowUp, spreadsheet
- */
-const MISSING_ICONS = [
-    "any-key", "audio-file", "blocks", "bold-glyph", "bracket-glyph", "broken-link", "bullet-list", "bullet-list-glyph", "calendar-with-checkmark", "check-in-circle", "check-small", "checkbox-glyph", "checkmark", "code-glyph", "create-new", "cross-in-box", "crossed-star", "dice", "document", "documents", "dot-network", "double-down-arrow-glyph", "double-up-arrow-glyph", "down-arrow-with-tail", "down-chevron-glyph", "enter", "exit-fullscreen", "expand-vertically", "filled-pin", "forward-arrow", "fullscreen", "gear", "go-to-file", "hashtag", "heading-glyph", "help", "highlight-glyph", "horizontal-split", "image-file", "image-glyph", "indent-glyph", "install", "italic-glyph", "keyboard-glyph", "left-arrow", "left-arrow-with-tail", "left-chevron-glyph", "lines-of-text", "link-glyph", "logo-crystal", "magnifying-glass", "microphone", "microphone-filled", "minus-with-circle", "note-glyph", "number-list-glyph", "open-vault", "pane-layout", "paper-plane", "paused", "pdf-file", "percent-sign-glyph", "plus-with-circle", "popup-open", "presentation", "price-tag-glyph", "quote-glyph", "redo-glyph", "reset", "right-arrow", "right-arrow-with-tail", "right-chevron-glyph", "right-triangle", "run-command", "sheets-in-box", "sortAsc", "sortDesc", "stacked-levels", "star-list", "strikethrough-glyph", "switch", "sync", "sync-small", "tag-glyph", "three-horizontal-bars", "undo-glyph", "unindent-glyph", "up-and-down-arrows", "up-arrow-with-tail", "up-chevron-glyph", "uppercase-lowercase-a", "vault", "vertical-split", "vertical-three-dots", "wrench-screwdriver-glyph",
-];
-/**
- * The original ICON_LIST contains duplicate entries (e.g. two "activity" items) and is not in alphabetical order. This list improves it.
- * ICON_LIST also doesn't contain all traditional Obsidian icons. This list includes them.
- */
-const AUGMENTED_ICON_LIST = uniqueArray(ICON_LIST).concat(MISSING_ICONS).sort();
+const ICON_MIGRATIONS = {
+    /* These icons do not need to be renamed, as they exist in the list returned by `getIconIds()`:
+    bracket-glyph, broken-link, check-small, dice, heading-glyph, help, left-arrow, link, link-glyph, lucide-clock, lucide-cloud,
+    lucide-cross, lucide-folder, lucide-info, lucide-languages, lucide-link, lucide-pencil, lucide-pin, lucide-search, lucide-star,
+    lucide-trash, open-vault, paused, right-arrow, right-triangle, sheets-in-box, star-list, stretch-horizontal, stretch-vertical,
+    sync-small, uppercase-lowercase-a, vault
+    */
+    // Icon names that were contained in SC 0.22.0 icon list, but that never worked. Disable any occurrences of these.
+    'file-x-2': null,
+    'link-2-off': null,
+    'logo-crystal': null,
+    'sortAsc': null,
+    'sortDesc': null,
+    // Icons that are present in the `getIconIds()` list with another name:
+    'activity': 'lucide-activity',
+    'airplay': 'lucide-airplay',
+    'alarm-check': 'lucide-alarm-check',
+    'alarm-clock': 'lucide-alarm-clock',
+    'alarm-clock-off': 'lucide-alarm-clock-off',
+    'alarm-minus': 'lucide-alarm-minus',
+    'alarm-plus': 'lucide-alarm-plus',
+    'album': 'lucide-album',
+    'alert-circle': 'lucide-alert-circle',
+    'alert-octagon': 'lucide-alert-octagon',
+    'alert-triangle': 'lucide-alert-triangle',
+    'align-center': 'lucide-align-center',
+    'align-center-horizontal': 'lucide-align-center-horizontal',
+    'align-center-vertical': 'lucide-align-center-vertical',
+    'align-end-horizontal': 'lucide-align-end-horizontal',
+    'align-end-vertical': 'lucide-align-end-vertical',
+    'align-horizontal-distribute-center': 'lucide-align-horizontal-distribute-center',
+    'align-horizontal-distribute-end': 'lucide-align-horizontal-distribute-end',
+    'align-horizontal-distribute-start': 'lucide-align-horizontal-distribute-start',
+    'align-horizontal-justify-center': 'lucide-align-horizontal-justify-center',
+    'align-horizontal-justify-end': 'lucide-align-horizontal-justify-end',
+    'align-horizontal-justify-start': 'lucide-align-horizontal-justify-start',
+    'align-horizontal-space-around': 'lucide-align-horizontal-space-around',
+    'align-horizontal-space-between': 'lucide-align-horizontal-space-between',
+    'align-justify': 'lucide-align-justify',
+    'align-left': 'lucide-align-left',
+    'align-right': 'lucide-align-right',
+    'align-start-horizontal': 'lucide-align-start-horizontal',
+    'align-start-vertical': 'lucide-align-start-vertical',
+    'align-vertical-distribute-center': 'lucide-align-vertical-distribute-center',
+    'align-vertical-distribute-end': 'lucide-align-vertical-distribute-end',
+    'align-vertical-distribute-start': 'lucide-align-vertical-distribute-start',
+    'align-vertical-justify-center': 'lucide-align-vertical-justify-center',
+    'align-vertical-justify-end': 'lucide-align-vertical-justify-end',
+    'align-vertical-justify-start': 'lucide-align-vertical-justify-start',
+    'align-vertical-space-around': 'lucide-align-vertical-space-around',
+    'align-vertical-space-between': 'lucide-align-vertical-space-between',
+    'anchor': 'lucide-anchor',
+    'any-key': 'lucide-plus-circle',
+    'aperture': 'lucide-aperture',
+    'archive': 'lucide-archive',
+    'arrow-big-down': 'lucide-arrow-big-down',
+    'arrow-big-left': 'lucide-arrow-big-left',
+    'arrow-big-right': 'lucide-arrow-big-right',
+    'arrow-big-up': 'lucide-arrow-big-up',
+    'arrow-down': 'lucide-arrow-down',
+    'arrow-down-circle': 'lucide-arrow-down-circle',
+    'arrow-down-left': 'lucide-arrow-down-left',
+    'arrow-down-right': 'lucide-arrow-down-right',
+    'arrow-left': 'lucide-arrow-left',
+    'arrow-left-circle': 'lucide-arrow-left-circle',
+    'arrow-left-right': 'lucide-arrow-left-right',
+    'arrow-right': 'lucide-arrow-right',
+    'arrow-right-circle': 'lucide-arrow-right-circle',
+    'arrow-up': 'lucide-arrow-up',
+    'arrow-up-circle': 'lucide-arrow-up-circle',
+    'arrow-up-left': 'lucide-arrow-up-left',
+    'arrow-up-right': 'lucide-arrow-up-right',
+    'asterisk': 'lucide-asterisk',
+    'at-sign': 'lucide-at-sign',
+    'audio-file': 'lucide-file-audio',
+    'award': 'lucide-award',
+    'axe': 'lucide-axe',
+    'banknote': 'lucide-banknote',
+    'bar-chart': 'lucide-bar-chart',
+    'bar-chart-2': 'lucide-bar-chart-2',
+    'baseline': 'lucide-baseline',
+    'battery': 'lucide-battery',
+    'battery-charging': 'lucide-battery-charging',
+    'battery-full': 'lucide-battery-full',
+    'battery-low': 'lucide-battery-low',
+    'battery-medium': 'lucide-battery-medium',
+    'beaker': 'lucide-beaker',
+    'bell': 'lucide-bell',
+    'bell-minus': 'lucide-bell-minus',
+    'bell-off': 'lucide-bell-off',
+    'bell-plus': 'lucide-bell-plus',
+    'bell-ring': 'lucide-bell-ring',
+    'bike': 'lucide-bike',
+    'binary': 'lucide-binary',
+    'bitcoin': 'lucide-bitcoin',
+    'blocks': 'lucide-layout-list',
+    'bluetooth': 'lucide-bluetooth',
+    'bluetooth-connected': 'lucide-bluetooth-connected',
+    'bluetooth-off': 'lucide-bluetooth-off',
+    'bluetooth-searching': 'lucide-bluetooth-searching',
+    'bold': 'lucide-bold',
+    'bold-glyph': 'lucide-bold',
+    'book': 'lucide-book',
+    'book-open': 'lucide-book-open',
+    'bookmark': 'lucide-bookmark',
+    'bookmark-minus': 'lucide-bookmark-minus',
+    'bookmark-plus': 'lucide-bookmark-plus',
+    'bot': 'lucide-bot',
+    'box': 'lucide-box',
+    'box-select': 'lucide-box-select',
+    'briefcase': 'lucide-briefcase',
+    'brush': 'lucide-brush',
+    'bug': 'lucide-bug',
+    'building': 'lucide-building',
+    'building-2': 'lucide-building-2',
+    'bullet-list': 'lucide-list',
+    'bullet-list-glyph': 'lucide-list',
+    'bus': 'lucide-bus',
+    'calculator': 'lucide-calculator',
+    'calendar': 'lucide-calendar',
+    'calendar-with-checkmark': 'lucide-calendar-check',
+    'camera': 'lucide-camera',
+    'camera-off': 'lucide-camera-off',
+    'car': 'lucide-car',
+    'carrot': 'lucide-carrot',
+    'cast': 'lucide-cast',
+    'check': 'lucide-check',
+    'check-circle': 'lucide-check-circle',
+    'check-circle-2': 'lucide-check-circle-2',
+    'check-in-circle': 'lucide-check-circle-2',
+    'check-square': 'lucide-check-square',
+    'checkbox-glyph': 'lucide-check-square',
+    'checkmark': 'lucide-check',
+    'chevron-down': 'lucide-chevron-down',
+    'chevron-first': 'lucide-chevron-first',
+    'chevron-last': 'lucide-chevron-last',
+    'chevron-left': 'lucide-chevron-left',
+    'chevron-right': 'lucide-chevron-right',
+    'chevron-up': 'lucide-chevron-up',
+    'chevrons-down': 'lucide-chevrons-down',
+    'chevrons-down-up': 'lucide-chevrons-down-up',
+    'chevrons-left': 'lucide-chevrons-left',
+    'chevrons-right': 'lucide-chevrons-right',
+    'chevrons-up': 'lucide-chevrons-up',
+    'chevrons-up-down': 'lucide-chevrons-up-down',
+    'chrome': 'lucide-chrome',
+    'circle': 'lucide-circle',
+    'circle-slashed': 'lucide-circle-slashed',
+    'clipboard': 'lucide-clipboard',
+    'clipboard-check': 'lucide-clipboard-check',
+    'clipboard-copy': 'lucide-clipboard-copy',
+    'clipboard-list': 'lucide-clipboard-list',
+    'clipboard-x': 'lucide-clipboard-x',
+    'clock': 'lucide-clock',
+    'clock-1': 'lucide-clock-1',
+    'clock-10': 'lucide-clock-10',
+    'clock-11': 'lucide-clock-11',
+    'clock-12': 'lucide-clock-12',
+    'clock-2': 'lucide-clock-2',
+    'clock-3': 'lucide-clock-3',
+    'clock-4': 'lucide-clock-4',
+    'clock-5': 'lucide-clock-5',
+    'clock-6': 'lucide-clock-6',
+    'clock-7': 'lucide-clock-7',
+    'clock-8': 'lucide-clock-8',
+    'clock-9': 'lucide-clock-9',
+    'cloud': 'lucide-cloud',
+    'cloud-drizzle': 'lucide-cloud-drizzle',
+    'cloud-fog': 'lucide-cloud-fog',
+    'cloud-hail': 'lucide-cloud-hail',
+    'cloud-lightning': 'lucide-cloud-lightning',
+    'cloud-moon': 'lucide-cloud-moon',
+    'cloud-off': 'lucide-cloud-off',
+    'cloud-rain': 'lucide-cloud-rain',
+    'cloud-rain-wind': 'lucide-cloud-rain-wind',
+    'cloud-snow': 'lucide-cloud-snow',
+    'cloud-sun': 'lucide-cloud-sun',
+    'cloudy': 'lucide-cloudy',
+    'clover': 'lucide-clover',
+    'code': 'lucide-code',
+    'code-2': 'lucide-code-2',
+    'code-glyph': 'lucide-code-2',
+    'codepen': 'lucide-codepen',
+    'codesandbox': 'lucide-codesandbox',
+    'coffee': 'lucide-coffee',
+    'coins': 'lucide-coins',
+    'columns': 'lucide-columns',
+    'command': 'lucide-command',
+    'compass': 'lucide-compass',
+    'contact': 'lucide-contact',
+    'contrast': 'lucide-contrast',
+    'cookie': 'lucide-cookie',
+    'copy': 'lucide-copy',
+    'copyleft': 'lucide-copyleft',
+    'copyright': 'lucide-copyright',
+    'corner-down-left': 'lucide-corner-down-left',
+    'corner-down-right': 'lucide-corner-down-right',
+    'corner-left-down': 'lucide-corner-left-down',
+    'corner-left-up': 'lucide-corner-left-up',
+    'corner-right-down': 'lucide-corner-right-down',
+    'corner-right-up': 'lucide-corner-right-up',
+    'corner-up-left': 'lucide-corner-up-left',
+    'corner-up-right': 'lucide-corner-up-right',
+    'cpu': 'lucide-cpu',
+    'create-new': 'lucide-edit',
+    'credit-card': 'lucide-credit-card',
+    'crop': 'lucide-crop',
+    'cross': 'lucide-x',
+    'cross-in-box': 'lucide-x-square',
+    'crossed-star': 'lucide-star-off',
+    'crosshair': 'lucide-crosshair',
+    'crown': 'lucide-crown',
+    'currency': 'lucide-currency',
+    'database': 'lucide-database',
+    'delete': 'lucide-delete',
+    'dice-1': 'lucide-dice-1',
+    'dice-2': 'lucide-dice-2',
+    'dice-3': 'lucide-dice-3',
+    'dice-4': 'lucide-dice-4',
+    'dice-5': 'lucide-dice-5',
+    'dice-6': 'lucide-dice-6',
+    'disc': 'lucide-disc',
+    'divide': 'lucide-divide',
+    'divide-circle': 'lucide-divide-circle',
+    'divide-square': 'lucide-divide-square',
+    'document': 'lucide-file',
+    'documents': 'lucide-files',
+    'dollar-sign': 'lucide-dollar-sign',
+    'dot-network': 'lucide-git-fork',
+    'double-down-arrow-glyph': 'lucide-chevrons-down',
+    'double-up-arrow-glyph': 'lucide-chevrons-up',
+    'down-arrow-with-tail': 'lucide-arrow-down',
+    'down-chevron-glyph': 'lucide-chevron-down',
+    'download': 'lucide-download',
+    'download-cloud': 'lucide-download-cloud',
+    'dribbble': 'lucide-dribbble',
+    'droplet': 'lucide-droplet',
+    'droplets': 'lucide-droplets',
+    'drumstick': 'lucide-drumstick',
+    'edit': 'lucide-edit',
+    'edit-2': 'lucide-edit-2',
+    'edit-3': 'lucide-edit-3',
+    'egg': 'lucide-egg',
+    'enter': 'lucide-log-in',
+    'equal': 'lucide-equal',
+    'equal-not': 'lucide-equal-not',
+    'eraser': 'lucide-eraser',
+    'euro': 'lucide-euro',
+    'exit-fullscreen': 'lucide-minimize',
+    'expand': 'lucide-expand',
+    'expand-vertically': 'lucide-move-vertical',
+    'external-link': 'lucide-external-link',
+    'eye': 'lucide-eye',
+    'eye-off': 'lucide-eye-off',
+    'facebook': 'lucide-facebook',
+    'fast-forward': 'lucide-fast-forward',
+    'feather': 'lucide-feather',
+    'figma': 'lucide-figma',
+    'file': 'lucide-file',
+    'file-check': 'lucide-file-check',
+    'file-check-2': 'lucide-file-check-2',
+    'file-code': 'lucide-file-code',
+    'file-digit': 'lucide-file-digit',
+    'file-input': 'lucide-file-input',
+    'file-minus': 'lucide-file-minus',
+    'file-minus-2': 'lucide-file-minus-2',
+    'file-output': 'lucide-file-output',
+    'file-plus': 'lucide-file-plus',
+    'file-plus-2': 'lucide-file-plus-2',
+    'file-search': 'lucide-file-search',
+    'file-text': 'lucide-file-text',
+    'file-x': 'lucide-file-x',
+    'files': 'lucide-files',
+    'filled-pin': 'lucide-pin',
+    'film': 'lucide-film',
+    'filter': 'lucide-filter',
+    'flag': 'lucide-flag',
+    'flag-off': 'lucide-flag-off',
+    'flag-triangle-left': 'lucide-flag-triangle-left',
+    'flag-triangle-right': 'lucide-flag-triangle-right',
+    'flame': 'lucide-flame',
+    'flashlight': 'lucide-flashlight',
+    'flashlight-off': 'lucide-flashlight-off',
+    'flask-conical': 'lucide-flask-conical',
+    'flask-round': 'lucide-flask-round',
+    'folder': 'lucide-folder-open',
+    'folder-minus': 'lucide-folder-minus',
+    'folder-open': 'lucide-folder-open',
+    'folder-plus': 'lucide-folder-plus',
+    'form-input': 'lucide-form-input',
+    'forward': 'lucide-forward',
+    'forward-arrow': 'lucide-forward',
+    'frame': 'lucide-frame',
+    'framer': 'lucide-framer',
+    'frown': 'lucide-frown',
+    'fullscreen': 'lucide-maximize',
+    'function-square': 'lucide-function-square',
+    'gamepad': 'lucide-gamepad',
+    'gamepad-2': 'lucide-gamepad-2',
+    'gauge': 'lucide-gauge',
+    'gavel': 'lucide-gavel',
+    'gear': 'lucide-settings',
+    'gem': 'lucide-gem',
+    'ghost': 'lucide-ghost',
+    'gift': 'lucide-gift',
+    'git-branch': 'lucide-git-branch',
+    'git-branch-plus': 'lucide-git-branch-plus',
+    'git-commit': 'lucide-git-commit',
+    'git-fork': 'lucide-git-fork',
+    'git-merge': 'lucide-git-merge',
+    'git-pull-request': 'lucide-git-pull-request',
+    'github': 'lucide-github',
+    'gitlab': 'lucide-gitlab',
+    'glasses': 'lucide-glasses',
+    'globe': 'lucide-globe',
+    'globe-2': 'lucide-globe-2',
+    'go-to-file': 'lucide-file-input',
+    'grab': 'lucide-grab',
+    'graduation-cap': 'lucide-graduation-cap',
+    'grid': 'lucide-grid',
+    'grip-horizontal': 'lucide-grip-horizontal',
+    'grip-vertical': 'lucide-grip-vertical',
+    'hammer': 'lucide-hammer',
+    'hand': 'lucide-hand',
+    'hand-metal': 'lucide-hand-metal',
+    'hard-drive': 'lucide-hard-drive',
+    'hard-hat': 'lucide-hard-hat',
+    'hash': 'lucide-hash',
+    'hashtag': 'lucide-hash',
+    'haze': 'lucide-haze',
+    'headphones': 'lucide-headphones',
+    'heart': 'lucide-heart',
+    'help-circle': 'lucide-help-circle',
+    'hexagon': 'lucide-hexagon',
+    'highlight-glyph': 'lucide-highlighter',
+    'highlighter': 'lucide-highlighter',
+    'history': 'lucide-history',
+    'home': 'lucide-home',
+    'horizontal-split': 'lucide-separator-horizontal',
+    'image': 'lucide-image',
+    'image-file': 'lucide-image',
+    'image-glyph': 'lucide-paperclip',
+    'image-minus': 'lucide-image-minus',
+    'image-off': 'lucide-image-off',
+    'image-plus': 'lucide-image-plus',
+    'import': 'lucide-import',
+    'inbox': 'lucide-inbox',
+    'indent': 'lucide-indent',
+    'indent-glyph': 'lucide-indent',
+    'indian-rupee': 'lucide-indian-rupee',
+    'infinity': 'lucide-infinity',
+    'info': 'lucide-info',
+    'inspect': 'lucide-inspect',
+    'instagram': 'lucide-instagram',
+    'install': 'lucide-download-cloud',
+    'italic': 'lucide-italic',
+    'italic-glyph': 'lucide-italic',
+    'japanese-yen': 'lucide-japanese-yen',
+    'key': 'lucide-key',
+    'keyboard': 'lucide-keyboard',
+    'keyboard-glyph': 'lucide-keyboard',
+    'landmark': 'lucide-landmark',
+    'languages': 'lucide-languages',
+    'laptop': 'lucide-laptop',
+    'laptop-2': 'lucide-laptop-2',
+    'lasso': 'lucide-lasso',
+    'lasso-select': 'lucide-lasso-select',
+    'layers': 'lucide-layers',
+    'layout': 'lucide-layout',
+    'layout-dashboard': 'lucide-layout-dashboard',
+    'layout-grid': 'lucide-layout-grid',
+    'layout-list': 'lucide-layout-list',
+    'layout-template': 'lucide-layout-template',
+    'left-arrow-with-tail': 'lucide-arrow-left',
+    'left-chevron-glyph': 'lucide-chevron-left',
+    'library': 'lucide-library',
+    'life-buoy': 'lucide-life-buoy',
+    'lightbulb': 'lucide-lightbulb',
+    'lightbulb-off': 'lucide-lightbulb-off',
+    'lines-of-text': 'lucide-align-left',
+    'link-2': 'lucide-link-2',
+    'linkedin': 'lucide-linkedin',
+    'list': 'lucide-list',
+    'list-checks': 'lucide-list-checks',
+    'list-minus': 'lucide-list-minus',
+    'list-ordered': 'lucide-list-ordered',
+    'list-plus': 'lucide-list-plus',
+    'list-x': 'lucide-list-x',
+    'loader': 'lucide-loader',
+    'loader-2': 'lucide-loader-2',
+    'locate': 'lucide-locate',
+    'locate-fixed': 'lucide-locate-fixed',
+    'locate-off': 'lucide-locate-off',
+    'lock': 'lucide-lock',
+    'log-in': 'lucide-log-in',
+    'log-out': 'lucide-log-out',
+    'magnifying-glass': 'lucide-search',
+    'mail': 'lucide-mail',
+    'map': 'lucide-map',
+    'map-pin': 'lucide-map-pin',
+    'maximize': 'lucide-maximize',
+    'maximize-2': 'lucide-maximize-2',
+    'megaphone': 'lucide-megaphone',
+    'meh': 'lucide-meh',
+    'menu': 'lucide-menu',
+    'message-circle': 'lucide-message-circle',
+    'message-square': 'lucide-message-square',
+    'mic': 'lucide-mic',
+    'mic-off': 'lucide-mic-off',
+    'microphone': 'lucide-mic',
+    'microphone-filled': 'lucide-mic',
+    'minimize': 'lucide-minimize',
+    'minimize-2': 'lucide-minimize-2',
+    'minus': 'lucide-minus',
+    'minus-circle': 'lucide-minus-circle',
+    'minus-square': 'lucide-minus-square',
+    'minus-with-circle': 'lucide-minus-circle',
+    'monitor': 'lucide-monitor',
+    'monitor-off': 'lucide-monitor-off',
+    'monitor-speaker': 'lucide-monitor-speaker',
+    'moon': 'lucide-moon',
+    'more-horizontal': 'lucide-more-horizontal',
+    'more-vertical': 'lucide-more-vertical',
+    'mountain': 'lucide-mountain',
+    'mountain-snow': 'lucide-mountain-snow',
+    'mouse': 'lucide-mouse',
+    'mouse-pointer': 'lucide-mouse-pointer',
+    'mouse-pointer-2': 'lucide-mouse-pointer-2',
+    'mouse-pointer-click': 'lucide-mouse-pointer-click',
+    'move': 'lucide-move',
+    'move-diagonal': 'lucide-move-diagonal',
+    'move-diagonal-2': 'lucide-move-diagonal-2',
+    'move-horizontal': 'lucide-move-horizontal',
+    'move-vertical': 'lucide-move-vertical',
+    'music': 'lucide-music',
+    'navigation': 'lucide-navigation',
+    'navigation-2': 'lucide-navigation-2',
+    'network': 'lucide-network',
+    'note-glyph': 'lucide-sticky-note',
+    'number-list-glyph': 'lucide-list-ordered',
+    'octagon': 'lucide-octagon',
+    'option': 'lucide-option',
+    'outdent': 'lucide-outdent',
+    'package': 'lucide-package',
+    'package-check': 'lucide-package-check',
+    'package-minus': 'lucide-package-minus',
+    'package-plus': 'lucide-package-plus',
+    'package-search': 'lucide-package-search',
+    'package-x': 'lucide-package-x',
+    'palette': 'lucide-palette',
+    'palmtree': 'lucide-palmtree',
+    'pane-layout': 'lucide-layout',
+    'paper-plane': 'lucide-send',
+    'paperclip': 'lucide-paperclip',
+    'pause': 'lucide-pause',
+    'pause-circle': 'lucide-pause-circle',
+    'pause-octagon': 'lucide-pause-octagon',
+    'pdf-file': 'lucide-file-text',
+    'pen-tool': 'lucide-pen-tool',
+    'pencil': 'lucide-edit-3',
+    'percent': 'lucide-percent',
+    'percent-sign-glyph': 'lucide-percent',
+    'person-standing': 'lucide-person-standing',
+    'phone': 'lucide-phone',
+    'phone-call': 'lucide-phone-call',
+    'phone-forwarded': 'lucide-phone-forwarded',
+    'phone-incoming': 'lucide-phone-incoming',
+    'phone-missed': 'lucide-phone-missed',
+    'phone-off': 'lucide-phone-off',
+    'phone-outgoing': 'lucide-phone-outgoing',
+    'pie-chart': 'lucide-pie-chart',
+    'piggy-bank': 'lucide-piggy-bank',
+    'pin': 'lucide-pin',
+    'pipette': 'lucide-pipette',
+    'plane': 'lucide-plane',
+    'play': 'lucide-play',
+    'play-circle': 'lucide-play-circle',
+    'plug-zap': 'lucide-plug-zap',
+    'plus': 'lucide-plus',
+    'plus-circle': 'lucide-plus-circle',
+    'plus-square': 'lucide-plus-square',
+    'plus-with-circle': 'lucide-plus-circle',
+    'pocket': 'lucide-pocket',
+    'podcast': 'lucide-podcast',
+    'pointer': 'lucide-pointer',
+    'popup-open': 'lucide-arrow-up-right',
+    'pound-sterling': 'lucide-pound-sterling',
+    'power': 'lucide-power',
+    'power-off': 'lucide-power-off',
+    'presentation': 'lucide-monitor',
+    'price-tag-glyph': 'lucide-tag',
+    'printer': 'lucide-printer',
+    'qr-code': 'lucide-qr-code',
+    'quote': 'lucide-quote',
+    'quote-glyph': 'lucide-quote',
+    'radio': 'lucide-radio',
+    'radio-receiver': 'lucide-radio-receiver',
+    'redo': 'lucide-redo',
+    'redo-glyph': 'lucide-redo-2',
+    'refresh-ccw': 'lucide-refresh-ccw',
+    'refresh-cw': 'lucide-refresh-cw',
+    'regex': 'lucide-regex',
+    'repeat': 'lucide-repeat',
+    'repeat-1': 'lucide-repeat-1',
+    'reply': 'lucide-reply',
+    'reply-all': 'lucide-reply-all',
+    'reset': 'lucide-rotate-ccw',
+    'rewind': 'lucide-rewind',
+    'right-arrow-with-tail': 'lucide-arrow-right',
+    'right-chevron-glyph': 'lucide-chevron-right',
+    'rocket': 'lucide-rocket',
+    'rocking-chair': 'lucide-rocking-chair',
+    'rotate-ccw': 'lucide-rotate-ccw',
+    'rotate-cw': 'lucide-rotate-cw',
+    'rss': 'lucide-rss',
+    'ruler': 'lucide-ruler',
+    'run-command': 'lucide-terminal',
+    'russian-ruble': 'lucide-russian-ruble',
+    'save': 'lucide-save',
+    'scale': 'lucide-scale',
+    'scan': 'lucide-scan',
+    'scan-line': 'lucide-scan-line',
+    'scissors': 'lucide-scissors',
+    'screen-share': 'lucide-screen-share',
+    'screen-share-off': 'lucide-screen-share-off',
+    'search': 'lucide-search',
+    'send': 'lucide-send',
+    'separator-horizontal': 'lucide-separator-horizontal',
+    'separator-vertical': 'lucide-separator-vertical',
+    'server': 'lucide-server',
+    'server-crash': 'lucide-server-crash',
+    'server-off': 'lucide-server-off',
+    'settings': 'lucide-settings',
+    'settings-2': 'lucide-settings-2',
+    'share': 'lucide-share',
+    'share-2': 'lucide-share-2',
+    'sheet': 'lucide-sheet',
+    'shield': 'lucide-shield',
+    'shield-alert': 'lucide-shield-alert',
+    'shield-check': 'lucide-shield-check',
+    'shield-close': 'lucide-shield-close',
+    'shield-off': 'lucide-shield-off',
+    'shirt': 'lucide-shirt',
+    'shopping-bag': 'lucide-shopping-bag',
+    'shopping-cart': 'lucide-shopping-cart',
+    'shovel': 'lucide-shovel',
+    'shrink': 'lucide-shrink',
+    'shuffle': 'lucide-shuffle',
+    'sidebar': 'lucide-sidebar',
+    'sidebar-close': 'lucide-sidebar-close',
+    'sidebar-open': 'lucide-sidebar-open',
+    'sigma': 'lucide-sigma',
+    'signal': 'lucide-signal',
+    'signal-high': 'lucide-signal-high',
+    'signal-low': 'lucide-signal-low',
+    'signal-medium': 'lucide-signal-medium',
+    'signal-zero': 'lucide-signal-zero',
+    'skip-back': 'lucide-skip-back',
+    'skip-forward': 'lucide-skip-forward',
+    'skull': 'lucide-skull',
+    'slack': 'lucide-slack',
+    'slash': 'lucide-slash',
+    'sliders': 'lucide-sliders',
+    'smartphone': 'lucide-smartphone',
+    'smartphone-charging': 'lucide-smartphone-charging',
+    'smile': 'lucide-smile',
+    'snowflake': 'lucide-snowflake',
+    'sort-asc': 'lucide-sort-asc',
+    'sort-desc': 'lucide-sort-desc',
+    'speaker': 'lucide-speaker',
+    'sprout': 'lucide-sprout',
+    'square': 'lucide-square',
+    'stacked-levels': 'lucide-folder-tree',
+    'star': 'lucide-star',
+    'star-half': 'lucide-star-half',
+    'stop-circle': 'lucide-stop-circle',
+    'strikethrough': 'lucide-strikethrough',
+    'strikethrough-glyph': 'lucide-strikethrough',
+    'subscript': 'lucide-subscript',
+    'sun': 'lucide-sun',
+    'sunrise': 'lucide-sunrise',
+    'sunset': 'lucide-sunset',
+    'superscript': 'lucide-superscript',
+    'swiss-franc': 'lucide-swiss-franc',
+    'switch': 'lucide-repeat',
+    'switch-camera': 'lucide-switch-camera',
+    'sync': 'lucide-refresh-cw',
+    'table': 'lucide-table',
+    'tablet': 'lucide-tablet',
+    'tag': 'lucide-tag',
+    'tag-glyph': 'lucide-tag',
+    'target': 'lucide-target',
+    'tent': 'lucide-tent',
+    'terminal': 'lucide-terminal',
+    'terminal-square': 'lucide-terminal-square',
+    'text-cursor': 'lucide-text-cursor',
+    'text-cursor-input': 'lucide-text-cursor-input',
+    'thermometer': 'lucide-thermometer',
+    'thermometer-snowflake': 'lucide-thermometer-snowflake',
+    'thermometer-sun': 'lucide-thermometer-sun',
+    'three-horizontal-bars': 'lucide-menu',
+    'thumbs-down': 'lucide-thumbs-down',
+    'thumbs-up': 'lucide-thumbs-up',
+    'ticket': 'lucide-ticket',
+    'timer': 'lucide-timer',
+    'timer-off': 'lucide-timer-off',
+    'timer-reset': 'lucide-timer-reset',
+    'toggle-left': 'lucide-toggle-left',
+    'toggle-right': 'lucide-toggle-right',
+    'tornado': 'lucide-tornado',
+    'trash': 'lucide-trash-2',
+    'trash-2': 'lucide-trash-2',
+    'trello': 'lucide-trello',
+    'trending-down': 'lucide-trending-down',
+    'trending-up': 'lucide-trending-up',
+    'triangle': 'lucide-triangle',
+    'truck': 'lucide-truck',
+    'tv': 'lucide-tv',
+    'tv-2': 'lucide-tv-2',
+    'twitch': 'lucide-twitch',
+    'twitter': 'lucide-twitter',
+    'type': 'lucide-type',
+    'umbrella': 'lucide-umbrella',
+    'underline': 'lucide-underline',
+    'undo': 'lucide-undo',
+    'undo-glyph': 'lucide-undo-2',
+    'unindent-glyph': 'lucide-outdent',
+    'unlink': 'lucide-unlink',
+    'unlink-2': 'lucide-unlink-2',
+    'unlock': 'lucide-unlock',
+    'up-and-down-arrows': 'lucide-move-vertical',
+    'up-arrow-with-tail': 'lucide-arrow-up',
+    'up-chevron-glyph': 'lucide-chevron-up',
+    'upload': 'lucide-upload',
+    'upload-cloud': 'lucide-upload-cloud',
+    'user': 'lucide-user',
+    'user-check': 'lucide-user-check',
+    'user-minus': 'lucide-user-minus',
+    'user-plus': 'lucide-user-plus',
+    'user-x': 'lucide-user-x',
+    'users': 'lucide-users',
+    'verified': 'lucide-verified',
+    'vertical-split': 'lucide-separator-vertical',
+    'vertical-three-dots': 'lucide-more-vertical',
+    'vibrate': 'lucide-vibrate',
+    'video': 'lucide-video',
+    'video-off': 'lucide-video-off',
+    'view': 'lucide-view',
+    'voicemail': 'lucide-voicemail',
+    'volume': 'lucide-volume',
+    'volume-1': 'lucide-volume-1',
+    'volume-2': 'lucide-volume-2',
+    'volume-x': 'lucide-volume-x',
+    'wallet': 'lucide-wallet',
+    'wand': 'lucide-wand-2',
+    'watch': 'lucide-watch',
+    'waves': 'lucide-waves',
+    'webcam': 'lucide-webcam',
+    'wifi': 'lucide-wifi',
+    'wifi-off': 'lucide-wifi-off',
+    'wind': 'lucide-wind',
+    'wrap-text': 'lucide-wrap-text',
+    'wrench': 'lucide-wrench',
+    'wrench-screwdriver-glyph': 'lucide-wrench',
+    'x': 'lucide-x',
+    'x-circle': 'lucide-x-circle',
+    'x-octagon': 'lucide-x-octagon',
+    'x-square': 'lucide-x-square',
+    'youtube': 'lucide-youtube',
+    'zap': 'lucide-zap',
+    'zap-off': 'lucide-zap-off',
+    'zoom-in': 'lucide-zoom-in',
+    'zoom-out': 'lucide-zoom-out',
+};
 
 /*
  * 'Shell commands' plugin for Obsidian.
@@ -15902,7 +16876,8 @@ async function RunMigrations(plugin) {
         EnsureCustomVariablesHaveAllFields(plugin),
         EnsurePromptFieldsHaveAllFields(plugin),
         DeleteEmptyCommandsField(plugin),
-        MigrateDebouncingModes(plugin), // Temporary.
+        MigrateDebouncingModes(plugin),
+        MigrateOldIconNames(plugin),
     ];
     if (should_save.includes(true)) {
         // Only save if there were changes to configuration.
@@ -16200,6 +17175,26 @@ function DeleteEmptyCommandsField(plugin) {
         if (plugin.settings.commands.length === 0) {
             delete plugin.settings.commands;
             save = true;
+        }
+    }
+    return save;
+}
+function MigrateOldIconNames(plugin) {
+    let save = false;
+    for (const shellCommandConfiguration of plugin.settings.shell_commands) {
+        if (null !== shellCommandConfiguration.icon) {
+            if (ICON_MIGRATIONS.hasOwnProperty(shellCommandConfiguration.icon)) {
+                // This icon needs to be migrated. (It's still the same icon image).
+                const newIconIdOrNull = ICON_MIGRATIONS[shellCommandConfiguration.icon]; // If this is null, then it's one of five iconIds that existed in the icon list of SC <= 0.22.0, but that didn't actually work (= showed no icon). Just disable the icon.
+                if (null === newIconIdOrNull) {
+                    debugLog("Migrated shell command #" + shellCommandConfiguration.id + " icon: Old icon name " + shellCommandConfiguration.icon + " was faulty and never showed an icon image, so the icon is now removed.");
+                }
+                else {
+                    debugLog("Migrated shell command #" + shellCommandConfiguration.id + " icon: Old icon name: " + shellCommandConfiguration.icon + ". New icon name: " + newIconIdOrNull);
+                }
+                shellCommandConfiguration.icon = newIconIdOrNull;
+                save = true;
+            }
         }
     }
     return save;
@@ -16618,9 +17613,9 @@ class ShellCommandSettingsModal extends SC_Modal {
             .addOption("no-icon", "No icon") // Need to use a non-empty string like "no-icon", because if 'value' would be "" then it becomes the same as 'display' from some reason, i.e. "No icon".
             .then((dropdown) => {
             // Iterate all available icons.
-            for (const icon_id of AUGMENTED_ICON_LIST) {
+            for (const icon of SORTED_ICON_LIST) {
                 // Create an option for the icon.
-                dropdown.addOption(icon_id, icon_id);
+                dropdown.addOption(icon.iconId, icon.displayName);
             }
             dropdown.setValue(current_icon ?? "no-icon"); // "" == the 'No icon' option.
         })
@@ -17219,6 +18214,10 @@ class ShellCommandSettingsModal extends SC_Modal {
         };
         addAnsiCodeFieldForOutputStream("stdout");
         addAnsiCodeFieldForOutputStream("stderr");
+        ansiCodeSetting.addExtraButton(helpButton => helpButton
+            .setIcon("help")
+            .setTooltip("Documentation: Output text styling with ANSI code")
+            .onClick(() => gotoURL(Documentation.outputHandling.ansiCode)));
     }
     newDefaultShellCommandContentSetting(containerElement, onChange) {
         const settingGroup = CreateShellCommandFieldCore(this.plugin, containerElement, "Default shell command", this.t_shell_command.getPlatformSpecificShellCommands().default, this.t_shell_command.getShellForDefaultCommand() ?? this.plugin.getDefaultShell(), // If default shell command content is never used, just get some shell.
@@ -18082,6 +19081,39 @@ class SC_MainSettingsTab extends obsidian.PluginSettingTab {
                     throw new Error("Unrecognized decorationOption: " + decorationOption);
             }
             await this.plugin.saveSettings();
+        }))
+            .addExtraButton(fontButton => fontButton
+            .setIcon("type-outline")
+            .setTooltip("Manage Obsidian's Monospace font")
+            .onClick(() => {
+            // Go to Appearance -> "Monospace font" setting.
+            // @ts-ignore This is PRIVATE API access. Not good, but then again the feature is not crucial - if it breaks, it won't interrupt anything important.
+            const appearanceTabOpened = this.plugin.app.setting?.openTabById?.("appearance");
+            if (appearanceTabOpened) {
+                // Try to look for the monospace font setting. This is a bit quirky and might not work if Obsidian changes the setting's name (or if user has other display language than English).
+                let settingFound = false;
+                document.querySelectorAll("div.setting-item-name").forEach((divSettingItemName) => {
+                    if (divSettingItemName.innerHTML.match(/^\s*Monospace font\s*$/i) && !settingFound) { // !settingFound: Don't search anymore if an element was already scrolled into view.
+                        // Found the monospace font setting.
+                        // Ensure it's in the view and make it bold.
+                        divSettingItemName.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                            inline: "nearest", // Horizontal alignment. Doesn't matter, there should be no horizontal scrolling.
+                        });
+                        divSettingItemName.style.fontWeight = "bold"; // Highlight the setting.
+                        settingFound = true;
+                    }
+                });
+                if (!settingFound) {
+                    // No luck this time finding the setting.
+                    this.plugin.newNotification("Please look for \"Monospace font\" setting.");
+                }
+            }
+            else {
+                // "Appearance" tab opening failed.
+                this.plugin.newNotification("I'm not able to show the setting for you. Please look for \"Appearance\" -> \"Monospace font\".");
+            }
         }));
     }
     createNotificationDurationField(container_element, title, description, setting_name) {
@@ -18242,6 +19274,11 @@ class SC_Plugin extends obsidian.Plugin {
          * @private
          */
         this.lastTShellCommandExecutedFromCommandPalette = null;
+        /**
+         * Extensions can be added to this array, but do not replace the array with a new array.
+         * @private
+         */
+        this.editorExtensions = [];
     }
     async onload() {
         // debugLog('loading plugin'); // Wouldn't do anything, as DEBUG_ON is not set before settings are loaded.
@@ -18282,6 +19319,7 @@ class SC_Plugin extends obsidian.Plugin {
         if (this.settings.enable_events) {
             this.registerSC_Events(false);
         }
+        this.registerEditorExtension(this.editorExtensions);
         // Load a custom autocomplete list if it exists.
         this.loadCustomAutocompleteList();
         // Create a SettingsTab.
@@ -18510,6 +19548,19 @@ class SC_Plugin extends obsidian.Plugin {
                 sc_event.unregister(t_shell_command);
             }
         });
+    }
+    /**
+     * Introduces a custom extension to CodeMirror. Follows Obsidian's instructions about updating extensions so that it
+     * can be done outside SC_Plugin.onload(): https://docs.obsidian.md/Plugins/Releasing/Plugin+guidelines#Change+or+reconfigure+editor+extensions
+     *
+     * SC_CodeMirrorEvent should call this method instead of calling registerEditorExtension().
+     *
+     * @param extension
+     */
+    addEditorExtension(extension) {
+        // Do NOT create a new array to this.editorExtensions.
+        this.editorExtensions.push(extension);
+        this.app.workspace.updateOptions();
     }
     /**
      * Defines an Obsidian protocol handler that allows receiving requests via obsidian://shell-commands URI.
@@ -18786,7 +19837,10 @@ class SC_Plugin extends obsidian.Plugin {
      */
     async updateCustomVariableViews() {
         for (const leaf of this.app.workspace.getLeavesOfType(CustomVariableView.ViewType)) {
-            await leaf.view.updateContent();
+            if (leaf && leaf.view instanceof CustomVariableView) {
+                await leaf.view.updateContent();
+            }
+            // If leaf.view is not CustomVariableView, it's probably DeferredView, i.e. a custom variable view which has not yet been shown/opened up by user. See more: https://docs.obsidian.md/Plugins/Guides/Understanding+deferred+views#Accessing+%60leaf.view%60
         }
     }
     /**
@@ -18827,7 +19881,7 @@ class SC_Plugin extends obsidian.Plugin {
  *
  * This is NOT the plugin's version (although they are often coupled the same)! The plugin's version is defined in manifest.json.
  */
-SC_Plugin.SettingsVersion = "0.22.0";
+SC_Plugin.SettingsVersion = "0.23.0";
 SC_Plugin.SHELL_COMMANDS_URI_ACTION = "shell-commands";
 
 module.exports = SC_Plugin;

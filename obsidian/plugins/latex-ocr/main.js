@@ -4960,13 +4960,13 @@ var require_path = __commonJS({
         return /^(?:\/|\w+:)/.test(path6);
       }
     );
-    var normalize = (
+    var normalize2 = (
       /**
        * Normalizes the specified path.
        * @param {string} path Path to normalize
        * @returns {string} Normalized path
        */
-      path5.normalize = function normalize2(path6) {
+      path5.normalize = function normalize3(path6) {
         path6 = path6.replace(/\\/g, "/").replace(/\/{2,}/g, "/");
         var parts = path6.split("/"), absolute = isAbsolute(path6), prefix = "";
         if (absolute)
@@ -4989,12 +4989,12 @@ var require_path = __commonJS({
     );
     path5.resolve = function resolve2(originPath, includePath, alreadyNormalized) {
       if (!alreadyNormalized)
-        includePath = normalize(includePath);
+        includePath = normalize2(includePath);
       if (isAbsolute(includePath))
         return includePath;
       if (!alreadyNormalized)
-        originPath = normalize(originPath);
-      return (originPath = originPath.replace(/(?:\/|^)[^/]+$/, "")).length ? normalize(originPath + "/" + includePath) : includePath;
+        originPath = normalize2(originPath);
+      return (originPath = originPath.replace(/(?:\/|^)[^/]+$/, "")).length ? normalize2(originPath + "/" + includePath) : includePath;
     };
   }
 });
@@ -19189,7 +19189,7 @@ var StatusBar = class {
     switch (status.status) {
       case 0 /* Ready */:
         this.span.setText("LatexOCR \u2705");
-        return true;
+        break;
       case 2 /* Downloading */:
         this.span.setText("LatexOCR \u{1F310}");
         break;
@@ -19206,18 +19206,30 @@ var StatusBar = class {
         this.plugin.debug(status, true);
         break;
     }
-    return false;
+    return status;
   }
-  // Call `updateStatusBar` with an initial delay of `number`.
-  // After this, `updateStatusBar` based on invterval values
-  // Should only be called once.
+  // Call `updateStatusBar` periodically based on the returned status.
+  // This function halts when `this.stopped` is True.
+  //
+  // This function should only be called once.
   async startStatusBar() {
+    let prevStatus = { status: 1 /* Loading */, msg: "" };
+    let loadingSleepTime = this.plugin.model.statusCheckIntervalReady;
     while (!this.stopped) {
-      const ready = await this.updateStatusBar();
-      if (ready) {
+      const status = await this.updateStatusBar();
+      prevStatus = status;
+      if (status.status === 0 /* Ready */) {
         await sleep(this.plugin.model.statusCheckIntervalReady);
       } else {
-        await sleep(this.plugin.model.statusCheckIntervalLoading);
+        if (status.status === prevStatus.status && status.msg === prevStatus.msg) {
+          loadingSleepTime = Math.min(
+            loadingSleepTime * 2,
+            this.plugin.model.statusCheckIntervalReady * 2
+          );
+        } else {
+          loadingSleepTime = this.plugin.model.statusCheckIntervalLoading;
+        }
+        await sleep(loadingSleepTime);
       }
     }
   }
@@ -19629,12 +19641,12 @@ var LocalModel = class {
           if (code === 0) {
             resolve2();
           } else {
-            reject(new Error(`latex_ocr_server isnt't installed for ${this.plugin_settings.pythonPath}`));
+            reject(new Error(`latex_ocr_server isn't installed for ${this.plugin_settings.pythonPath}`));
           }
         });
         pythonProcess.on("error", (err) => {
           if (err.message.includes("ENOENT")) {
-            reject(new Error(`Couldn't locate python install "${this.plugin_settings.pythonPath}", please change it in the plugin settings`));
+            reject(new Error(`Couldn't locate python install, please change it in the plugin settings: ${this.plugin_settings.pythonPath}`));
           } else {
             reject(new Error(`${err}`));
           }
@@ -20622,6 +20634,7 @@ var ApiModel = class {
 
 // src/settings.ts
 var import_obsidian4 = require("obsidian");
+var import_path = require("path");
 var obfuscateApiKey = (apiKey = "") => apiKey.length > 0 ? apiKey.replace(/^(.{3})(.*)(.{4})$/, "$1****$3") : "";
 var LatexOCRSettingsTab = class extends import_obsidian4.PluginSettingTab {
   constructor(app, plugin) {
@@ -20723,10 +20736,10 @@ var LatexOCRSettingsTab = class extends import_obsidian4.PluginSettingTab {
     const pythonPath = new import_obsidian4.Setting(containerEl).setName("Python path").setDesc("Path to Python installation. You need to have the `latex_ocr_server` package installed, see the project's README for more information.			Note that changing the path requires a server restart in order to take effect.").addExtraButton((cb) => cb.setIcon("folder").setTooltip("Browse").onClick(async () => {
       const file = await picker("Open Python path", ["openFile"]);
       pythonPath.components[1].setValue(file);
-      this.plugin.settings.pythonPath = (0, import_obsidian4.normalizePath)(file);
+      this.plugin.settings.pythonPath = (0, import_path.normalize)(file);
       await this.plugin.saveSettings();
     })).addText((text) => text.setPlaceholder("path/to/python.exe").setValue(this.plugin.settings.pythonPath).onChange(async (value) => {
-      this.plugin.settings.pythonPath = (0, import_obsidian4.normalizePath)(value);
+      this.plugin.settings.pythonPath = (0, import_path.normalize)(value);
       await this.plugin.saveSettings();
     }));
     const serverStatus = new import_obsidian4.Setting(containerEl).setName("Server status").setDesc("LatexOCR runs a python script in the background that can process OCR requests. 				Use these settings to check it's status, or restart it. 				Note that restarting can take a few seconds. If the model isn't cached, it needs to be downloaded first (~1.4 GB).").addButton(
@@ -20750,10 +20763,10 @@ var LatexOCRSettingsTab = class extends import_obsidian4.PluginSettingTab {
     const cacheDir = new import_obsidian4.Setting(containerEl).setName("Cache dir").setDesc("The directory where the model is saved. By default this is in `Vault/.obsidian/plugins/obsidian-latex-ocr/model_cache`. 					Note that changing this will not delete the old cache, and require the model to be redownloaded. 					The server must be restarted for this to take effect.").addExtraButton((cb) => cb.setIcon("folder").setTooltip("Browse").onClick(async () => {
       const folder = await picker("Open cache directory", ["openDirectory"]);
       cacheDir.components[1].setValue(folder);
-      this.plugin.settings.cacheDirPath = (0, import_obsidian4.normalizePath)(folder);
+      this.plugin.settings.cacheDirPath = (0, import_path.normalize)(folder);
       await this.plugin.saveSettings();
     })).addText((text) => text.setValue(this.plugin.settings.cacheDirPath).onChange(async (value) => {
-      const path5 = (0, import_obsidian4.normalizePath)(value);
+      const path5 = (0, import_path.normalize)(value);
       if (path5 !== "") {
         this.plugin.settings.cacheDirPath = path5;
         await this.plugin.saveSettings();

@@ -2811,7 +2811,6 @@ function highlightMatches(key, text2, matches) {
   const match = matches.find((m) => m.key === key);
   if (!match)
     return text2;
-  console.log(match);
   let highlightedText = text2;
   match.indices.slice().reverse().forEach(([start, end]) => {
     const before = highlightedText.substring(0, start);
@@ -3073,7 +3072,8 @@ var DEFAULT_SETTINGS = {
   showFilePath: true,
   includeFileNameInPath: true,
   enableTagSearch: true,
-  enableAliasSearch: true
+  enableAliasSearch: true,
+  loadAllTabsOnStartup: false
 };
 var TabNavigatorSettingTab = class extends import_obsidian2.PluginSettingTab {
   constructor(app, plugin) {
@@ -3109,6 +3109,14 @@ var TabNavigatorSettingTab = class extends import_obsidian2.PluginSettingTab {
           this.plugin.saveSettings();
         })
       );
+      new import_obsidian2.Setting(containerEl).setName("Load all tabs on startup (Experimental)").setDesc(
+        "Automatically load all tabs when Obsidian starts. \u26A0\uFE0F This is an experimental feature that might impact startup performance. May not work correctly in all situations."
+      ).addToggle(
+        (toggle) => toggle.setValue(settings.loadAllTabsOnStartup).onChange(async (value) => {
+          settings.loadAllTabsOnStartup = value;
+          await this.plugin.saveSettings();
+        })
+      );
     }
   }
 };
@@ -3118,24 +3126,29 @@ var TabSwitcher = class extends import_obsidian3.Plugin {
   constructor() {
     super(...arguments);
     this.searchModelInstance = null;
-    // SearchModelのインスタンスを保持するためのプロパティ
     this.settings = null;
   }
   async onload() {
+    var _a;
     await this.loadSettings();
     this.addSettingTab(new TabNavigatorSettingTab(this.app, this));
+    if ((_a = this.settings) == null ? void 0 : _a.loadAllTabsOnStartup) {
+      this.app.workspace.onLayoutReady(() => {
+        this.loadAllTabsFromDOM();
+      });
+    }
     this.addCommand({
       id: "search-tabs",
       name: "Search tabs",
       callback: () => {
-        var _a;
+        var _a2;
         const { app } = this;
         if (this.searchModelInstance) {
           this.searchModelInstance.$destroy();
           this.searchModelInstance = null;
         }
         const activeView = app.workspace.getActiveViewOfType(import_obsidian3.View);
-        const currentWindow = (_a = activeView == null ? void 0 : activeView.containerEl.ownerDocument.defaultView) != null ? _a : window;
+        const currentWindow = (_a2 = activeView == null ? void 0 : activeView.containerEl.ownerDocument.defaultView) != null ? _a2 : window;
         this.searchModelInstance = new SearchModel_default({
           target: currentWindow.document.body,
           props: {
@@ -3160,6 +3173,13 @@ var TabSwitcher = class extends import_obsidian3.Plugin {
         this.removeDuplicateTabs();
       }
     });
+    this.addCommand({
+      id: "load-all-tabs",
+      name: "Load all tabs",
+      callback: () => {
+        this.loadAllTabsFromDOM();
+      }
+    });
   }
   async loadSettings() {
     this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
@@ -3167,7 +3187,7 @@ var TabSwitcher = class extends import_obsidian3.Plugin {
   async saveSettings() {
     await this.saveData(this.settings);
   }
-  // 重複するタブを削除するメソッド
+  // Method to remove duplicate tabs
   removeDuplicateTabs() {
     const seen = /* @__PURE__ */ new Set();
     const toRemove = [];
@@ -3185,30 +3205,25 @@ var TabSwitcher = class extends import_obsidian3.Plugin {
     });
     toRemove.forEach((leaf) => leaf.detach());
   }
-  openSearchModal() {
-    var _a;
-    const { app } = this;
-    if (this.searchModelInstance) {
-      this.searchModelInstance.$destroy();
-      this.searchModelInstance = null;
-    }
-    const activeView = app.workspace.getActiveViewOfType(import_obsidian3.View);
-    const currentWindow = (_a = activeView == null ? void 0 : activeView.containerEl.ownerDocument.defaultView) != null ? _a : window;
-    const modal = new SearchModel_default({
-      target: document.body,
-      props: {
-        app,
-        currentWindow,
-        removeDuplicateTabs: this.removeDuplicateTabs.bind(this),
-        settings: this.settings
-      }
-    });
-    modal.open();
-  }
-  // プラグインがアンロードされるときにコンポーネントを破棄
+  // Destroy component when plugin is unloaded
   onunload() {
     if (this.searchModelInstance) {
       this.searchModelInstance.$destroy();
+    }
+  }
+  // Method to load all tabs from DOM
+  async loadAllTabsFromDOM() {
+    const activeView = this.app.workspace.getActiveViewOfType(import_obsidian3.View);
+    const tabHeaders = document.querySelectorAll(".workspace-tab-header");
+    for (const header of Array.from(tabHeaders)) {
+      const type = header.getAttribute("data-type");
+      if (type === "markdown") {
+        header.click();
+        await new Promise((resolve) => setTimeout(resolve, 25));
+      }
+    }
+    if (activeView == null ? void 0 : activeView.leaf) {
+      this.app.workspace.setActiveLeaf(activeView.leaf, { focus: true });
     }
   }
 };
