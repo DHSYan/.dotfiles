@@ -1,9 +1,0 @@
-{
-  "clearMethod": "click-outside",
-  "contentBehavior": "none",
-  "focusScope": "content",
-  "enableList": false,
-  "focusSensitivity": 1600,
-  "indicator": true,
-  "isEnabled": false
-}
