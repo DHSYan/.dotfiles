@@ -5,14 +5,12 @@
   "deleteAttachmentsWithNote": false,
   "deleteEmptyFolders": false,
   "deleteExistFilesWhenMoveNote": false,
-  "ignoreFiles": [
-    ""
-  ],
-  "ignoreFolders": [
+  "moveAttachmentsWithNote": true,
+  "showBackupWarning": false,
+  "updateLinks": true,
+  "excludePaths": [
     ".git/",
     ".obsidian/"
   ],
-  "moveAttachmentsWithNote": false,
-  "showWarning": false,
-  "updateLinks": false
+  "includePaths": []
 }

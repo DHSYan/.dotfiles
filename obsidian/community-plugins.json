@@ -8,7 +8,6 @@
   "tag-wrangler",
   "obsidian-hide-sidebars-when-narrow",
   "templater-obsidian",
-  "obsidian-custom-attachment-location",
   "obsidian-latex-suite",
   "darlal-switcher-plus",
   "obsidian-admonition",
@@ -26,5 +25,8 @@
   "homepage",
   "code-styler",
   "obsidian-bible-reference",
-  "obsidian-hider"
+  "obsidian-hider",
+  "obsidian-custom-attachment-location",
+  "mononote",
+  "tab-limit"
 ]

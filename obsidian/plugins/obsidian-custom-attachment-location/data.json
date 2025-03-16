@@ -2,7 +2,7 @@
   "attachmentFolderPath": "assets/${filename}",
   "attachmentRenameMode": "All",
   "duplicateNameSeparator": "-",
-  "generatedAttachmentFilename": "assets-${filename}",
+  "generatedAttachmentFilename": "assets-${filename}-${originalCopiedFileExtension}-${uuid}",
   "jpegQuality": 1,
   "shouldConvertPastedImagesToJpeg": false,
   "shouldDeleteOrphanAttachments": false,

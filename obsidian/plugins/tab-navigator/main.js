@@ -2712,7 +2712,7 @@ function create_fragment(ctx) {
       attr(div3, "class", "prompt-results");
       attr(div9, "class", "prompt-instructions");
       attr(div9, "data-mode", "standard");
-      attr(div10, "class", "prompt");
+      attr(div10, "class", "prompt tab-navigator-modal");
       attr(div11, "class", "modal-container mod-dim");
     },
     m(target, anchor) {
@@ -2862,8 +2862,12 @@ function instance($$self, $$props, $$invalidate) {
     return __awaiter(this, void 0, void 0, function* () {
       allLeaves = [];
       app.workspace.iterateAllLeaves((leaf) => {
-        var _a, _b, _c, _d;
-        if (!(leaf.view instanceof import_obsidian.FileView && !["backlink", "outline", "tag", "outgoing-link"].includes(leaf.getViewState().type))) {
+        var _a, _b, _c, _d, _e;
+        const viewState = leaf.getViewState();
+        if (!(viewState.type === "markdown" || viewState.type === "pdf" || viewState.type === "canvas")) {
+          return;
+        }
+        if (["backlink", "outline", "tag", "outgoing-link"].includes(viewState.type)) {
           return;
         }
         let titleOrName;
@@ -2871,7 +2875,7 @@ function instance($$self, $$props, $$invalidate) {
         let aliases = "";
         let tags = "";
         let extention = null;
-        if (leaf.view instanceof import_obsidian.FileView) {
+        if (leaf.view instanceof import_obsidian.FileView && leaf.view.file) {
           const file = leaf.view.file;
           titleOrName = file.basename;
           if (settings === null || settings === void 0 ? void 0 : settings.includeFileNameInPath) {
@@ -2895,9 +2899,21 @@ function instance($$self, $$props, $$invalidate) {
               tags = "#" + fileCache.frontmatter.tags.join(" #");
             }
           }
+        } else if ((_e = viewState.state) === null || _e === void 0 ? void 0 : _e.file) {
+          const filePath = viewState.state.file;
+          const pathParts = filePath.split("/");
+          const fileName = pathParts.pop() || "";
+          const fileNameParts = fileName.split(".");
+          extention = fileNameParts.length > 1 ? fileNameParts.pop() || null : null;
+          titleOrName = extention ? fileNameParts.join(".") : fileName;
+          if (settings === null || settings === void 0 ? void 0 : settings.includeFileNameInPath) {
+            details = filePath;
+          } else {
+            details = pathParts.join("/");
+          }
         } else {
-          titleOrName = leaf.view.getViewType().replace(/_/g, " ").replace(/^\w/, (c) => c.toUpperCase());
-          details = ":" + leaf.view.getViewType();
+          titleOrName = viewState.title || "Unknown";
+          details = viewState.type;
         }
         allLeaves.push({
           leaf,
@@ -3072,8 +3088,7 @@ var DEFAULT_SETTINGS = {
   showFilePath: true,
   includeFileNameInPath: true,
   enableTagSearch: true,
-  enableAliasSearch: true,
-  loadAllTabsOnStartup: false
+  enableAliasSearch: true
 };
 var TabNavigatorSettingTab = class extends import_obsidian2.PluginSettingTab {
   constructor(app, plugin) {
@@ -3109,14 +3124,6 @@ var TabNavigatorSettingTab = class extends import_obsidian2.PluginSettingTab {
           this.plugin.saveSettings();
         })
       );
-      new import_obsidian2.Setting(containerEl).setName("Load all tabs on startup (Experimental)").setDesc(
-        "Automatically load all tabs when Obsidian starts. \u26A0\uFE0F This is an experimental feature that might impact startup performance. May not work correctly in all situations."
-      ).addToggle(
-        (toggle) => toggle.setValue(settings.loadAllTabsOnStartup).onChange(async (value) => {
-          settings.loadAllTabsOnStartup = value;
-          await this.plugin.saveSettings();
-        })
-      );
     }
   }
 };
@@ -3129,26 +3136,20 @@ var TabSwitcher = class extends import_obsidian3.Plugin {
     this.settings = null;
   }
   async onload() {
-    var _a;
     await this.loadSettings();
     this.addSettingTab(new TabNavigatorSettingTab(this.app, this));
-    if ((_a = this.settings) == null ? void 0 : _a.loadAllTabsOnStartup) {
-      this.app.workspace.onLayoutReady(() => {
-        this.loadAllTabsFromDOM();
-      });
-    }
     this.addCommand({
       id: "search-tabs",
       name: "Search tabs",
       callback: () => {
-        var _a2;
+        var _a;
         const { app } = this;
         if (this.searchModelInstance) {
           this.searchModelInstance.$destroy();
           this.searchModelInstance = null;
         }
         const activeView = app.workspace.getActiveViewOfType(import_obsidian3.View);
-        const currentWindow = (_a2 = activeView == null ? void 0 : activeView.containerEl.ownerDocument.defaultView) != null ? _a2 : window;
+        const currentWindow = (_a = activeView == null ? void 0 : activeView.containerEl.ownerDocument.defaultView) != null ? _a : window;
         this.searchModelInstance = new SearchModel_default({
           target: currentWindow.document.body,
           props: {
@@ -3177,7 +3178,7 @@ var TabSwitcher = class extends import_obsidian3.Plugin {
       id: "load-all-tabs",
       name: "Load all tabs",
       callback: () => {
-        this.loadAllTabsFromDOM();
+        this.populateTabsFromWorkspaceData();
       }
     });
   }
@@ -3211,19 +3212,11 @@ var TabSwitcher = class extends import_obsidian3.Plugin {
       this.searchModelInstance.$destroy();
     }
   }
-  // Method to load all tabs from DOM
-  async loadAllTabsFromDOM() {
-    const activeView = this.app.workspace.getActiveViewOfType(import_obsidian3.View);
-    const tabHeaders = document.querySelectorAll(".workspace-tab-header");
-    for (const header of Array.from(tabHeaders)) {
-      const type = header.getAttribute("data-type");
-      if (type === "markdown") {
-        header.click();
-        await new Promise((resolve) => setTimeout(resolve, 25));
-      }
-    }
-    if (activeView == null ? void 0 : activeView.leaf) {
-      this.app.workspace.setActiveLeaf(activeView.leaf, { focus: true });
+  // Method to populate tabs from workspace data without loading them
+  populateTabsFromWorkspaceData() {
+    if (this.searchModelInstance) {
+      this.searchModelInstance.$destroy();
+      this.searchModelInstance = null;
     }
   }
 };
