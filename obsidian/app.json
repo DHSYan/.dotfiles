@@ -26,5 +26,6 @@
   "useMarkdownLinks": false,
   "tabSize": 2,
   "autoPairMarkdown": false,
-  "smartIndentList": false
+  "smartIndentList": false,
+  "showInlineTitle": false
 }

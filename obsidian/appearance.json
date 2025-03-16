@@ -4,9 +4,9 @@
   "textFontFamily": "JetbrainsMono Nerd Font,Iosevka Nerd Font,Hurmit Nerd Font",
   "monospaceFontFamily": "Hurmit Nerd Font,JetBrainsMonoNL Nerd Font Mono",
   "showViewHeader": true,
-  "nativeMenus": true,
+  "nativeMenus": false,
   "translucency": false,
-  "baseFontSize": 18,
+  "baseFontSize": 16,
   "theme": "obsidian",
   "cssTheme": "Minimal",
   "showRibbon": false
