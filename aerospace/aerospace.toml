@@ -150,7 +150,8 @@ alt-0 = 'workspace 10'
 # alt-z = 'workspace Z'
 
 # exec-and-forget
-alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app/'
+# alt-enter = 'exec-and-forget open -n /Applications/Ghostty.app/'
+alt-enter = 'exec-and-forget open -n /Applications/Nix Apps/kitty.app'
 ctrl-shift-c= 'exec-and-forget open -n /Applications/Google\ Chrome.app'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
