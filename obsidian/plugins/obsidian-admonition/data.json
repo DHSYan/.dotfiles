@@ -24,6 +24,19 @@
       "title": "Fun Fact",
       "injectColor": true,
       "noTitle": false
+    },
+    "theorem": {
+      "type": "theorem",
+      "color": "168, 61, 255",
+      "icon": {
+        "name": "lucide-notebook-pen",
+        "type": "obsidian"
+      },
+      "command": false,
+      "title": "Theorem",
+      "injectColor": true,
+      "noTitle": false,
+      "copy": true
     }
   },
   "syntaxHighlight": true,
