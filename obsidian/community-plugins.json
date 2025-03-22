@@ -9,7 +9,6 @@
   "obsidian-hide-sidebars-when-narrow",
   "templater-obsidian",
   "obsidian-latex-suite",
-  "darlal-switcher-plus",
   "obsidian-admonition",
   "omnisearch",
   "dataview",
@@ -28,5 +27,6 @@
   "obsidian-hider",
   "obsidian-custom-attachment-location",
   "mononote",
-  "tab-limit"
+  "tab-limit",
+  "darlal-switcher-plus"
 ]
