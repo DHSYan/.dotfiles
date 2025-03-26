@@ -6,11 +6,11 @@
         "type": "split",
         "children": [
           {
-            "id": "802c3105184aeeb5",
+            "id": "1ebbd4014a33cfef",
             "type": "tabs",
             "children": [
               {
-                "id": "dfbc523fe84275dc",
+                "id": "a00a040b26df2364",
                 "type": "leaf",
                 "state": {
                   "type": "empty",
@@ -51,7 +51,7 @@
                 "state": {
                   "type": "search",
                   "state": {
-                    "query": "tag:#idea",
+                    "query": "",
                     "matchingCase": false,
                     "explainSearch": false,
                     "collapseAll": false,
@@ -76,7 +76,7 @@
           }
         ],
         "direction": "horizontal",
-        "width": 200,
+        "width": 1071.5,
         "collapsed": true
       },
       "right": {
@@ -89,26 +89,13 @@
             "dimension": 18.779342723004696,
             "children": [
               {
-                "id": "54596dba58637dc5",
+                "id": "66f4721069de9e2d",
                 "type": "leaf",
                 "state": {
                   "type": "file-properties",
                   "state": {},
                   "icon": "lucide-info",
                   "title": "File properties"
-                }
-              },
-              {
-                "id": "a8b471bc198a8f58",
-                "type": "leaf",
-                "state": {
-                  "type": "tag",
-                  "state": {
-                    "sortOrder": "frequency",
-                    "useHierarchy": true
-                  },
-                  "icon": "lucide-tags",
-                  "title": "Tags"
                 }
               }
             ]
@@ -118,6 +105,21 @@
             "type": "tabs",
             "dimension": 47.887323943661976,
             "children": [
+              {
+                "id": "a8b471bc198a8f58",
+                "type": "leaf",
+                "state": {
+                  "type": "tag",
+                  "state": {
+                    "sortOrder": "frequency",
+                    "useHierarchy": true,
+                    "showSearch": true,
+                    "searchQuery": ""
+                  },
+                  "icon": "lucide-tags",
+                  "title": "Tags"
+                }
+              },
               {
                 "id": "8a757004e7b2e934",
                 "type": "leaf",
@@ -132,7 +134,8 @@
                   "title": "Outline"
                 }
               }
-            ]
+            ],
+            "currentTab": 1
           },
           {
             "id": "b84af1f87f1fc027",
@@ -167,7 +170,7 @@
                       "repelStrength": 10,
                       "linkStrength": 1,
                       "linkDistance": 250,
-                      "scale": 1,
+                      "scale": 1.214506893560874,
                       "close": true
                     }
                   },
@@ -190,19 +193,17 @@
           "darlal-switcher-plus:Open Symbols for the active editor": false,
           "omnisearch:Omnisearch": false,
           "graph:Open graph view": false,
-          "canvas:Create new canvas": false,
           "daily-notes:Open today's daily note": false,
-          "templates:Insert template": false,
           "command-palette:Open command palette": false,
           "workspaces:Manage workspace layouts": false,
-          "obsidian-excalidraw-plugin:Create new drawing": false,
           "table-editor-obsidian:Advanced Tables Toolbar": false,
           "templater-obsidian:Templater": false,
-          "obsidian-tomorrows-daily-note:Open tomorrow's daily note": false
+          "obsidian-excalidraw-plugin:New drawing": false,
+          "random-note:Open random note": false
         }
       },
-      "active": "dfbc523fe84275dc",
-      "mtime": "2025-02-11T14:39:51-08:00"
+      "active": "a00a040b26df2364",
+      "mtime": "2025-03-26T12:54:28-07:00"
     }
   },
   "active": "main"
