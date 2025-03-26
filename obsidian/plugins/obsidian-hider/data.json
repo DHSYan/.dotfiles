@@ -1,6 +1,6 @@
 {
   "hideStatus": false,
-  "hideTabs": false,
+  "hideTabs": true,
   "hideScroll": true,
   "hideSidebarButtons": true,
   "hideTooltips": true,
