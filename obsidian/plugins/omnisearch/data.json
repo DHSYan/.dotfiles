@@ -31,7 +31,12 @@
   "weightH2": 7.5,
   "weightH3": 6.5,
   "weightUnmarkedTags": 4,
-  "weightCustomProperties": [],
+  "weightCustomProperties": [
+    {
+      "name": "aliases",
+      "weight": 3.6
+    }
+  ],
   "httpApiEnabled": false,
   "httpApiPort": "51361",
   "httpApiNotice": true,
