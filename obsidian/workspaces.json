@@ -6,11 +6,11 @@
         "type": "split",
         "children": [
           {
-            "id": "1ebbd4014a33cfef",
+            "id": "794e509c3c681896",
             "type": "tabs",
             "children": [
               {
-                "id": "a00a040b26df2364",
+                "id": "19183c91cde7edf2",
                 "type": "leaf",
                 "state": {
                   "type": "empty",
@@ -86,7 +86,7 @@
           {
             "id": "8fe8e59cb61de340",
             "type": "tabs",
-            "dimension": 18.779342723004696,
+            "dimension": 20.408163265306122,
             "children": [
               {
                 "id": "66f4721069de9e2d",
@@ -103,7 +103,7 @@
           {
             "id": "cd2dccb9ec83ce00",
             "type": "tabs",
-            "dimension": 47.887323943661976,
+            "dimension": 42.04081632653061,
             "children": [
               {
                 "id": "a8b471bc198a8f58",
@@ -140,7 +140,7 @@
           {
             "id": "b84af1f87f1fc027",
             "type": "tabs",
-            "dimension": 33.333333333333336,
+            "dimension": 37.55102040816327,
             "children": [
               {
                 "id": "caae681e5b43e71e",
@@ -149,19 +149,19 @@
                   "type": "localgraph",
                   "state": {
                     "options": {
-                      "collapse-filter": true,
+                      "collapse-filter": false,
                       "search": "",
-                      "localJumps": 1,
-                      "localBacklinks": true,
+                      "localJumps": 2,
+                      "localBacklinks": false,
                       "localForelinks": true,
-                      "localInterlinks": false,
-                      "showTags": false,
+                      "localInterlinks": true,
+                      "showTags": true,
                       "showAttachments": false,
                       "hideUnresolved": false,
                       "collapse-color-groups": true,
                       "colorGroups": [],
                       "collapse-display": true,
-                      "showArrow": false,
+                      "showArrow": true,
                       "textFadeMultiplier": 0,
                       "nodeSizeMultiplier": 1,
                       "lineSizeMultiplier": 1,
@@ -170,7 +170,7 @@
                       "repelStrength": 10,
                       "linkStrength": 1,
                       "linkDistance": 250,
-                      "scale": 1.214506893560874,
+                      "scale": 1.0539908221697811,
                       "close": true
                     }
                   },
@@ -182,10 +182,11 @@
           }
         ],
         "direction": "horizontal",
-        "width": 352.5
+        "width": 403.5
       },
       "left-ribbon": {
         "hiddenItems": {
+          "tag-page-md:Refresh tag page": false,
           "obsidian-bible-reference:Bible Verse Lookup": false,
           "homepage:Open homepage": false,
           "obsidian-kanban:Create new board": false,
@@ -202,8 +203,8 @@
           "random-note:Open random note": false
         }
       },
-      "active": "a00a040b26df2364",
-      "mtime": "2025-03-26T12:54:28-07:00"
+      "active": "caae681e5b43e71e",
+      "mtime": "2025-03-28T13:47:53-07:00"
     }
   },
   "active": "main"
