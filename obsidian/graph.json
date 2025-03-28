@@ -1,22 +1,37 @@
 {
-  "collapse-filter": false,
+  "collapse-filter": true,
   "search": "",
-  "showTags": false,
+  "showTags": true,
   "showAttachments": false,
   "hideUnresolved": false,
   "showOrphans": true,
-  "collapse-color-groups": false,
-  "colorGroups": [],
-  "collapse-display": false,
-  "showArrow": false,
+  "collapse-color-groups": true,
+  "colorGroups": [
+    {
+      "query": "tag:#theology  ",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "",
+      "color": {
+        "a": 1,
+        "rgb": 14725458
+      }
+    }
+  ],
+  "collapse-display": true,
+  "showArrow": true,
   "textFadeMultiplier": 0.1,
   "nodeSizeMultiplier": 1.34573567708333,
   "lineSizeMultiplier": 5,
-  "collapse-forces": false,
+  "collapse-forces": true,
   "centerStrength": 0,
   "repelStrength": 10.8561197916667,
   "linkStrength": 1,
   "linkDistance": 30,
-  "scale": 0.02795404083653144,
-  "close": true
+  "scale": 0.2717731208490609,
+  "close": false
 }
