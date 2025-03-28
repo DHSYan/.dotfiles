@@ -1,0 +1,11 @@
+{
+  "tagPageDir": "tags/",
+  "frontmatterQueryProperty": "tag-page-query",
+  "sortByDate": "desc",
+  "nestedSeparator": "-",
+  "tagPageTitleTemplate": "Tag Content for {{tag}}",
+  "bulletedSubItems": true,
+  "includeLines": true,
+  "autoRefresh": true,
+  "fullLinkName": false
+}
