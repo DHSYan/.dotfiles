@@ -31,7 +31,7 @@
       "modifiers": [
         "Mod"
       ],
-      "key": "R"
+      "key": "E"
     }
   ],
   "app:go-back": [
@@ -232,5 +232,6 @@
       ],
       "key": "K"
     }
-  ]
+  ],
+  "workspace:new-tab": []
 }
