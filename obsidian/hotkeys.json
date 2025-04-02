@@ -32,6 +32,12 @@
         "Mod"
       ],
       "key": "E"
+    },
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "E"
     }
   ],
   "app:go-back": [
