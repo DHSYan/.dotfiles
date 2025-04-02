@@ -3,7 +3,7 @@
   "homepages": {
     "Main Homepage": {
       "value": "main",
-      "kind": "Daily Note",
+      "kind": "Workspace",
       "openOnStartup": false,
       "openMode": "Keep open notes",
       "manualOpenMode": "Keep open notes",
