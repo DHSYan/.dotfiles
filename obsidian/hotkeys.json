@@ -52,6 +52,12 @@
         "Mod"
       ],
       "key": "["
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "O"
     }
   ],
   "switcher:open": [
@@ -174,6 +180,12 @@
         "Mod"
       ],
       "key": "]"
+    },
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "I"
     }
   ],
   "obsidian-footnotes:insert-autonumbered-footnote": [
@@ -239,5 +251,6 @@
       "key": "K"
     }
   ],
-  "workspace:new-tab": []
+  "workspace:new-tab": [],
+  "editor:toggle-italics": []
 }
