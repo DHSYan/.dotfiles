@@ -58,6 +58,12 @@
         "Mod"
       ],
       "key": "O"
+    },
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": "O"
     }
   ],
   "switcher:open": [
@@ -184,6 +190,12 @@
     {
       "modifiers": [
         "Mod"
+      ],
+      "key": "I"
+    },
+    {
+      "modifiers": [
+        "Ctrl"
       ],
       "key": "I"
     }
