@@ -3,13 +3,13 @@
   "homepages": {
     "Main Homepage": {
       "value": "main",
-      "kind": "Workspace",
-      "openOnStartup": true,
+      "kind": "Daily Note",
+      "openOnStartup": false,
       "openMode": "Keep open notes",
       "manualOpenMode": "Keep open notes",
       "view": "Default view",
       "revertView": true,
-      "openWhenEmpty": false,
+      "openWhenEmpty": true,
       "refreshDataview": false,
       "autoCreate": false,
       "autoScroll": false,
