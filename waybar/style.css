@@ -42,7 +42,8 @@
 #battery,
 #pulseaudio,
 #custom-lock,
-#custom-power {
+#custom-power,
+#network {
   background-color: @surface0;
   padding: 0.5rem 1rem;
   margin: 5px 0;
@@ -74,6 +75,11 @@
     border-radius: 0;
 }
 
+#network {
+  color: @white;
+  border-radius: 0;
+}
+
 #pulseaudio {
   color: @maroon;
   border-radius: 1rem 0px 0px 1rem;
@@ -100,3 +106,4 @@
   margin-right: 1rem;
   border-radius: 1rem;
 }
+
