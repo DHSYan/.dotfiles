@@ -249,15 +249,15 @@ run = ['move-node-to-workspace 9']
 
 
 [workspace-to-monitor-force-assignment]
-1 = 'built-in'           
-2 = 'built-in'
-3 = 'built-in'
-4 = 'built-in'
-5 = 'built-in'
-6 = 'built-in'
-7 = 'built-in'
-8 = 'built-in'
+1 = ['Optix', 'built-in']           
+2 = ['Optix', 'built-in']
+3 = ['Optix', 'built-in']
+4 = ['Optix', 'built-in']
+5 = ['Optix', 'built-in']
+6 = ['Optix', 'built-in']
+7 = ['Optix', 'built-in']
+8 = ['Optix', 'built-in']
 9 = ['VX1755', 'built-in']
-10 = ['TYPE C', 'built-in']
+10 = ['TYPE C', 'Acer', 'built-in']
 
 
