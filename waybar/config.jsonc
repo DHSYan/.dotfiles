@@ -27,7 +27,7 @@
         // "temperature",
         "backlight",
         // "keyboard-state",
-        "hyprland/language",
+        // "hyprland/language",
         "battery",
         "battery#bat2",
         "clock",
