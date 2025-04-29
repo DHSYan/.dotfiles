@@ -6,6 +6,7 @@ blur = true
 opacity = 0.9
 
 [font]
-normal = { family = "Hurmit Nerd Font", style = "Regular" }
+# normal = { family = "Hurmit Nerd Font", style = "Regular" }
+normal = { family = "ZedMono Nerd Font Mono", style = "Regular" }
 size = 16
 
