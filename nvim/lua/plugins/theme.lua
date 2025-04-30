@@ -1,29 +1,30 @@
 -- Captppuccin
--- return {
---   "catppuccin/nvim",
---   name = "catppuccin",
---   priority = 1000,
---   config = function()
---     require('catppuccin').setup({
---       flavour = "mocha"
---     })
---
---     vim.cmd.colorscheme 'catppuccin'
---   end,
--- }
+local catppuccin = {
+  "catppuccin/nvim",
+  name = "catppuccin",
+  priority = 1000,
+  config = function()
+    require('catppuccin').setup({
+      flavour = "mocha"
+    })
+
+    vim.cmd.colorscheme 'catppuccin'
+  end,
+}
 
 -- Kanagawa
--- return {
---     "rebelot/kanagawa.nvim",
---     priority = 1000,
---     config = function()
---         require('kanagawa').setup({
---             theme = "lotus"
---         })
---         vim.cmd.colorscheme 'kanagawa'
---     end
--- }
-return {
+local kanagawa = {
+    "rebelot/kanagawa.nvim",
+    priority = 1000,
+    config = function()
+        require('kanagawa').setup({
+            theme = "lotus"
+        })
+        vim.cmd.colorscheme 'kanagawa'
+    end
+}
+
+local tokyonight = {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
@@ -38,3 +39,5 @@ return {
         vim.cmd("hi ColorColumn guibg='grey'")
     end
 }
+
+return catppuccin

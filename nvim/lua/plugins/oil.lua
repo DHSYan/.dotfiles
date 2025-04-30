@@ -32,7 +32,6 @@ return {
 
         local nmap = require('util.nmap')
 
-
         nmap("<leader>e", "<CMD>Oil<CR>", "Open Parent Directory")
     end,
 }
