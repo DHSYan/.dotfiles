@@ -40,4 +40,16 @@ local tokyonight = {
     end
 }
 
-return catppuccin
+local flexoki = {
+    'kepano/flexoki-neovim',
+    name = 'flexoki',
+    config = function() 
+        require("flexoki").setup({
+        })
+        vim.cmd.colorscheme 'flexoki-dark'
+        vim.cmd("hi ColorColumn guibg='grey'")
+    end
+
+}
+
+return flexoki
