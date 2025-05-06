@@ -9,13 +9,13 @@
   "enableTimeBar": false,
   "theme": "black",
   "highlightTheme": "zenburn",
-  "transition": "slide",
-  "transitionSpeed": "default",
+  "transition": "none",
+  "transitionSpeed": "fast",
   "controls": true,
   "progress": true,
   "slideNumber": false,
   "showGrid": false,
   "autoComplete": "inPreview",
-  "paneMode": "split",
+  "paneMode": "tab",
   "motm": "2024-05-08T21:09:06.876Z"
 }
