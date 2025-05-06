@@ -1,13 +1,13 @@
 Host *
     ControlMaster auto
     ControlPath ~/.ssh/S.%r@%h:%p
-    ControlPersist 5m
+    ControlPersist 15m
 
-Host School
+Host waterloo
     Hostname ubuntu2004-002.student.cs.uwaterloo.ca
     User s2yan
 
-Host School1804
+Host waterloo1804
     Hostname ubuntu1804-002.student.cs.uwaterloo.ca
     User s2yan
 
