@@ -220,6 +220,14 @@ if.app-name-regex-substring = 'kitty'
 run = ['move-node-to-workspace 2']
 
 [[on-window-detected]]
+if.app-name-regex-substring = 'Alacritty'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'wezterm'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
 if.app-name-regex-substring = 'Obsidian'
 run = ['move-node-to-workspace 3']
 
