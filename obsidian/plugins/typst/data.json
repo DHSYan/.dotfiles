@@ -1,0 +1,16 @@
+{
+  "format": "svg",
+  "noFill": true,
+  "fill": "#ffffff",
+  "pixel_per_pt": 3,
+  "search_system": false,
+  "override_math": false,
+  "font_families": [],
+  "preamable": {
+    "shared": "#set text(fill: white, size: SIZE)\n#set page(width: WIDTH, height: HEIGHT)",
+    "math": "#set page(margin: 0pt)\n#set align(horizon)",
+    "code": "#set page(margin: (y: 1em, x: 0pt))"
+  },
+  "plugin_version": "0.10.0",
+  "autoDownloadPackages": true
+}
