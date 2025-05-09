@@ -232,7 +232,7 @@ if.app-name-regex-substring = 'Obsidian'
 run = ['move-node-to-workspace 3']
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'TickTick'
+if.app-name-regex-substring = 'Mail'
 run = ['move-node-to-workspace 6']
 
 [[on-window-detected]]
