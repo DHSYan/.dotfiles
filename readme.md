@@ -47,6 +47,9 @@ here.
       created inside a file. Basically, inherit backlink's tag
 - [ ] Create a better backup system
 
+- [ ] create a hint displayed via the prompt that tells you if you have a 
+background text.
+
 <!-- #### DWM TODO -->
 <!-- - [x] better dwm bar or rice dwm in general? -->
 <!-- - [x] make window manager rules for wezterm, google browser. -->
@@ -61,3 +64,4 @@ here.
 
 
 # Other
+
