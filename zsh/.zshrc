@@ -75,6 +75,10 @@ bindkey '^y' autosuggest-accept
 bindkey '^p' history-search-backward
 bindkey '^n' history-search-forward
 
+fg_widget() { fg }
+zle -N fg_widget
+bindkey '^z' fg_widget
+
 # The following should be place last
 # [[ PromptSetup: Powerlevel10k ]]
 ## See .p10k.zsh for the actual configuration of the prompt
