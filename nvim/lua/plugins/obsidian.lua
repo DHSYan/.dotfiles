@@ -38,7 +38,8 @@ local opts = {
     },
 
 
-    new_notes_location = "notes_subdir",
+    -- new_notes_location = "notes_subdir",
+    new_notes_location = "zettelkasten",
 
     note_id_func = function(title)
         return title
@@ -83,10 +84,8 @@ local opts = {
         date_format = "%m-%d-%Y",
         time_format = "%H:%M:%S",
     },
-    disable_frontmatter = true,
+    disable_frontmatter = false,
 }
-
-local concept_note_name = "Concept-Notes";
 
 return {
     "epwalsh/obsidian.nvim",
