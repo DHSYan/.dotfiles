@@ -1,7 +1,7 @@
 Host *
     ControlMaster auto
     ControlPath ~/.ssh/S.%r@%h:%p
-    ControlPersist 15m
+    ControlPersist 120m
 
 Host waterloo
     Hostname ubuntu2004-002.student.cs.uwaterloo.ca
