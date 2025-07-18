@@ -49,6 +49,8 @@ here.
 
 - [ ] create a hint displayed via the prompt that tells you if you have a 
 background text.
+- [ ] create a macro or keybind that CDs to the current directory that oil is looking at, the 
+     the current's buffer root directory
 
 <!-- #### DWM TODO -->
 <!-- - [x] better dwm bar or rice dwm in general? -->
