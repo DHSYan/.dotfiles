@@ -22,3 +22,9 @@ Host unsw
 Host ubc
     Hostname remote.students.cs.ubc.ca
     User dhsyan
+
+Host bitbucketwork
+    Hostname bitbucket.org
+    IdentityFile ~/.ssh/work.pub
+    IdentitiesOnly yes
+    AddKeysToAgent yes
