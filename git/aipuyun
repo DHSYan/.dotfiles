@@ -1,5 +1,6 @@
 [core]
     editor = nvim
+    sshCommand = ssh -T -i ~/.ssh/work
 
 [user]
     email = dhseanyan@gmail.com
