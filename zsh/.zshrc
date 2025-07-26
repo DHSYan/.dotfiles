@@ -26,7 +26,7 @@ alias smv="mv -n"
 alias g="lazygit"
 
 # [[ PATH ]]
-export PATH=$PATH:$HOME/.dotfiles/bin:/opt/homebrew
+export PATH=$PATH:$HOME/.dotfiles/bin:/opt/homebrew:$HOME/.local/share/nvim/mason/bin
 
 
 # [[ History ]] 
