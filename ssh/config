@@ -15,6 +15,7 @@ Host git
     Hostname github.com
     IdentityFile ~/.ssh/yubikey
     IdentitiesOnly yes
+    AddKeysToAgent yes
 
 Host unsw
     User z5521807
