@@ -1,6 +1,5 @@
 Host *
     ControlMaster auto
-    ControlPath ~/.ssh/S.%r@%h:%p
     ControlPersist 120m
 
 Host waterloo
@@ -12,19 +11,23 @@ Host waterloo1804
     User s2yan
 
 Host git
-    Hostname github.com
     User git
+    Hostname github.com
+    IdentityFile ~/.ssh/yubikey
+    IdentitiesOnly yes
 
 Host unsw
-    Hostname login.cse.unsw.edu.au
     User z5521807
+    Hostname login.cse.unsw.edu.au
 
 Host ubc
-    Hostname remote.students.cs.ubc.ca
     User dhsyan
+    Hostname remote.students.cs.ubc.ca
+    IdentityFile ~/.ssh/yubikey
 
-Host bitbucketwork
+Host bitbucket
+    User git
     Hostname bitbucket.org
-    IdentityFile ~/.ssh/work.pub
+    IdentityFile ~/.ssh/work
     IdentitiesOnly yes
     AddKeysToAgent yes

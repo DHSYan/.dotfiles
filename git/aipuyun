@@ -1,11 +1,10 @@
 [core]
     editor = nvim
-    excludesfile = ~/.config/git/.gitignore_global
 
 [user]
-    email = sean@dhsy.me
+    email = dhseanyan@gmail.com
     name = Ding-Han Sean Yan
-    signingkey = ~/.ssh/yubikey
+    signingkey = ~/.ssh/work
 
 [alias]
     s = status
@@ -14,20 +13,10 @@
     ac = commit -am
     alllog = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(auto)%d%C(reset)' --all
 
-
-[filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
-
 [gpg]
 	format = ssh
 [commit]
 	gpgsign = true
 [pull]
 	rebase = false
-[push]
-    default = simple
-[safe]
-	directory = /home/tzen/mnt
+

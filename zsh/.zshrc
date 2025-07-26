@@ -86,5 +86,6 @@ bindkey '^z' fg_widget
 
 
 # [[ FZF Shell Integration ]]
+eval "$(ssh-agent)" &
 eval "$(fzf --zsh)"
 

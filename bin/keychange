@@ -12,9 +12,9 @@ for file in id_ed25519*; do
   if [[ -f $file ]]; then
       ext="${file##*.}"
       if [[ ${ext} != "pub" ]]; then 
-          new_name="id_ed25519"
+          new_name="yubikey"
       else 
-          new_name="id_ed25519.${ext}"
+          new_name="yubikey.${ext}"
 
       fi
       read -p "Do you want to rename '$file' to '$new_name'? (y/n): " confirm
