@@ -8,6 +8,6 @@ opacity = 0.9
 [font]
 # normal = { family = "Hurmit Nerd Font", style = "Regular" }
 # normal = { family = "ZedMono Nerd Font Mono", style = "Regular" }
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
-size = 24
+normal = { family = "JetBrains Mono Nerd Font", style = "Regular" }
+size = 16
 

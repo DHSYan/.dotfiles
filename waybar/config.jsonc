@@ -8,6 +8,7 @@
     // "mode": "hide",
     "reload_style_on_change": true,
     // Choose the order of the modules
+    "font-family": "HurmitNerdFontMono",
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/mode"
