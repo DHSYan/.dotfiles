@@ -1,4 +1,4 @@
-[submodule "nvim.config"]
-	path = nvim.config
+[submodule "nvim"]
+	path = nvim
 	url = https://github.com/DHSYan/nvim.config
-    branch = master
+	branch = master
