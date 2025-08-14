@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+if [ ! -e ~/throw-away-code ]; then 
+    mkdir ~/throw-away-code
+fi
+    
+cd ~/throw-away-code
