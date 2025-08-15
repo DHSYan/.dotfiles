@@ -2,6 +2,10 @@
     editor = nvim
     excludesfile = ~/.config/git/.gitignore_global
     sshCommand = ssh -T -i ~/.ssh/yubikey
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
 
 [user]
     email = sean@dhsy.me
