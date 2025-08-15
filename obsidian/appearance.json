@@ -1,8 +1,8 @@
 {
   "accentColor": "#00afdb",
-  "interfaceFontFamily": "JetBrainsMono Nerd Font,3270 Nerd Font,Iosevka Nerd Font",
-  "textFontFamily": "Hurmit Nerd Font,3270 Nerd Font,Iosevka Nerd Font,JetbrainsMono Nerd Font",
-  "monospaceFontFamily": "JetbrainsMono Nerd Font,Hurmit Nerd Font,3270 Nerd Font",
+  "interfaceFontFamily": "Iosevka Nerd Font,JetBrainsMono Nerd Font,3270 Nerd Font",
+  "textFontFamily": "ZedMono Nerd Font,3270 Nerd Font,Iosevka Nerd Font,Hurmit Nerd Font,JetbrainsMono Nerd Font",
+  "monospaceFontFamily": "3270 Nerd Font,JetbrainsMono Nerd Font,Hurmit Nerd Font",
   "showViewHeader": true,
   "nativeMenus": false,
   "translucency": false,
