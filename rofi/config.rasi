@@ -21,7 +21,7 @@ configuration {
 /*	run-shell-command: "{terminal} -e {cmd}";*/
 /*	window-command: "wmctrl -i -R {window}";*/
 /*	window-match-fields: "all";*/
-/*	icon-theme: ;*/
+/*	icon-theme: "solarized"; */
 /*	drun-match-fields: "name,generic,exec,categories,keywords";*/
 /*	drun-categories: ;*/
 /*	drun-exclude-categories: ;*/
@@ -166,3 +166,5 @@ configuration {
       sorting-method:    "name";
   }
 }
+
+@theme "/nix/store/r0asjm168129bacs5ndh10y56y58sjly-rofi-1.7.9+wayland1/share/rofi/themes/material.rasi"
