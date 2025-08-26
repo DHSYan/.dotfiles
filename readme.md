@@ -63,6 +63,8 @@ background text.
 - [ ] Media Key support?
 <!-- - [ ] How to configure multiple screen with startx? -->
 - [ ] Learn how to setup a cron job in NIXOS
+- [ ] Everytime I run cd, try to evaulate if there's a flake.nix, if there are run 
+`nix develop` in it directory
 
 
 # Other
