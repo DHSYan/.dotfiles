@@ -28,9 +28,20 @@ Host ubc
     Hostname remote.students.cs.ubc.ca
     IdentityFile ~/.ssh/yubikey
 
+Host fs
+    User root
+    Hostname 192.168.1.115
+    IdentityFile ~/.ssh/yubikey
+
+Host dayone
+    User root
+    Hostname 192.168.1.101
+    IdentityFile ~/.ssh/yubikey
+
 Host bitbucket
     User git
     Hostname bitbucket.org
     IdentityFile ~/.ssh/work
     IdentitiesOnly yes
     AddKeysToAgent yes
+
