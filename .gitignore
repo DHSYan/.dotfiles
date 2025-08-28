@@ -4,7 +4,7 @@
 *.o
 
 .zsh_history
-.zcompdump
+.zcompdump*
 
 obsidian/bookmarks.json
 obsidian/workspace.json
