@@ -30,12 +30,22 @@ Host ubc
 
 Host fs
     User root
-    Hostname 192.168.1.115
+    Hostname 192.168.1.111
     IdentityFile ~/.ssh/yubikey
 
 Host dayone
     User root
     Hostname 192.168.1.101
+    IdentityFile ~/.ssh/yubikey
+
+Host pikvm
+    User root
+    Hostname 192.168.1.103
+    IdentityFile ~/.ssh/yubikey
+
+Host pivpn
+    User root
+    Hostname 192.168.1.110
     IdentityFile ~/.ssh/yubikey
 
 Host bitbucket
