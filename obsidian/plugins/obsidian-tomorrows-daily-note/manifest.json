@@ -1,0 +1,10 @@
+{
+	"id": "obsidian-tomorrows-daily-note",
+	"name": "Tomorrow's Daily Note",
+	"version": "1.4.0",
+	"minAppVersion": "1.1.0",
+	"description": "An obsidian plugin that creates tomorrow's daily note for preemtive planning.",
+	"author": "Will Olson",
+	"authorUrl": "https://willolson.io",
+	"isDesktopOnly": false
+}
