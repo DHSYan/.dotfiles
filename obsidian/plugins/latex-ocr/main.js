@@ -19164,87 +19164,6 @@ var fs2 = __toESM(require("fs"));
 
 // src/models/local_model.ts
 var import_child_process = require("child_process");
-
-// src/models/model.ts
-var StatusBar = class {
-  constructor(plugin) {
-    this.plugin = plugin;
-    this.span = plugin.addStatusBarItem();
-    this.span.createEl("span", { text: "LatexOCR \u274C" });
-    this.updateStatusBar();
-    if (!plugin.settings.showStatusBar) {
-      this.hide();
-    }
-    this.stopped = false;
-    this.startStatusBar();
-  }
-  // Update the status bar based on the connection to the LatexOCR server
-  // ✅: LatexOCR is up and accepting requests
-  // 🌐: LatexOCR is downloading the model from huggingface
-  // ⚙️: LatexOCR is loading the model
-  // ❌: LatexOCR isn't reachable
-  async updateStatusBar() {
-    const status = await this.plugin.model.status();
-    this.plugin.debug(`latex_ocr: sent status check to ${this.plugin.model.constructor.name}, got ${JSON.stringify(status)}`);
-    switch (status.status) {
-      case 0 /* Ready */:
-        this.span.setText("LatexOCR \u2705");
-        break;
-      case 2 /* Downloading */:
-        this.span.setText("LatexOCR \u{1F310}");
-        break;
-      case 1 /* Loading */:
-        this.span.setText("LatexOCR \u2699\uFE0F");
-        break;
-      case 4 /* Misconfigured */:
-        this.span.setText("LatexOCR \u{1F527}");
-        break;
-      case 3 /* Unreachable */:
-        this.span.setText("LatexOCR \u274C");
-        break;
-      default:
-        this.plugin.debug(status, true);
-        break;
-    }
-    return status;
-  }
-  // Call `updateStatusBar` periodically based on the returned status.
-  // This function halts when `this.stopped` is True.
-  //
-  // This function should only be called once.
-  async startStatusBar() {
-    let prevStatus = { status: 1 /* Loading */, msg: "" };
-    let loadingSleepTime = this.plugin.model.statusCheckIntervalReady;
-    while (!this.stopped) {
-      const status = await this.updateStatusBar();
-      prevStatus = status;
-      if (status.status === 0 /* Ready */) {
-        await sleep(this.plugin.model.statusCheckIntervalReady);
-      } else {
-        if (status.status === prevStatus.status && status.msg === prevStatus.msg) {
-          loadingSleepTime = Math.min(
-            loadingSleepTime * 2,
-            this.plugin.model.statusCheckIntervalReady * 2
-          );
-        } else {
-          loadingSleepTime = this.plugin.model.statusCheckIntervalLoading;
-        }
-        await sleep(loadingSleepTime);
-      }
-    }
-  }
-  hide() {
-    this.span.hide();
-  }
-  show() {
-    this.span.show();
-  }
-  stop() {
-    this.stopped = true;
-  }
-};
-
-// src/models/local_model.ts
 var path = __toESM(require("path"));
 
 // src/protos/latex_ocr.ts
@@ -19561,9 +19480,6 @@ var LocalModel = class {
   async load() {
     console.log(`latex_ocr: initializing RPC client at port ${this.plugin_settings.port}`);
     this.client = new LatexOCRClient(`localhost:${this.plugin_settings.port}`, grpc.credentials.createInsecure());
-    if (this.plugin_settings.startServerOnLoad) {
-      this.startServer();
-    }
   }
   unload() {
     if (this.serverProcess) {
@@ -19702,7 +19618,8 @@ ${this.plugin_settings.pythonPath, args}`);
     });
   }
   // Start the server process. If it fails, try to see if python is working.
-  async startServer() {
+  async start() {
+    console.log("latex_ocr_server: starting local server");
     try {
       this.serverProcess = await this.spawnLatexOcrServer(this.plugin_settings.port);
     } catch (err) {
@@ -19714,6 +19631,91 @@ ${this.plugin_settings.pythonPath, args}`);
         console.error(pythonErr);
       });
     }
+  }
+};
+
+// src/status_bar.ts
+var StatusBar = class {
+  constructor(plugin) {
+    this.plugin = plugin;
+    this.span = plugin.addStatusBarItem();
+    this.span.createEl("span", { text: "LatexOCR \u274C" });
+    this.updateStatusBar();
+    if (!plugin.settings.showStatusBar) {
+      this.hide();
+    }
+    this.should_stop = false;
+    this.startStatusBar();
+  }
+  // Update the status bar based on the connection to the LatexOCR server
+  // ✅: LatexOCR is up and accepting requests
+  // 🌐: LatexOCR is downloading the model from huggingface
+  // ⚙️: LatexOCR is loading the model
+  // ❌: LatexOCR isn't reachable
+  async updateStatusBar() {
+    const status = await this.plugin.model.status();
+    this.plugin.debug(`latex_ocr: sent status check to ${this.plugin.model.constructor.name}, got ${JSON.stringify(status)}`);
+    switch (status.status) {
+      case 0 /* Ready */:
+        this.span.setText("LatexOCR \u2705");
+        break;
+      case 2 /* Downloading */:
+        this.span.setText("LatexOCR \u{1F310}");
+        break;
+      case 1 /* Loading */:
+        this.span.setText("LatexOCR \u2699\uFE0F");
+        break;
+      case 4 /* Misconfigured */:
+        this.span.setText("LatexOCR \u{1F527}");
+        break;
+      case 3 /* Unreachable */:
+        this.span.setText("LatexOCR \u274C");
+        break;
+      default:
+        this.plugin.debug(status, true);
+        break;
+    }
+    return status;
+  }
+  // Call `updateStatusBar` periodically based on the returned status.
+  // This function halts when `this.stopped` is True.
+  //
+  // This function should only be called once.
+  async startStatusBar() {
+    if (this.started) {
+      console.error("Attempted to start status bar when already started");
+      return;
+    }
+    let prevStatus = { status: 1 /* Loading */, msg: "" };
+    let loadingSleepTime = this.plugin.model.statusCheckIntervalReady;
+    this.started = true;
+    while (!this.should_stop) {
+      const status = await this.updateStatusBar();
+      prevStatus = status;
+      if (status.status === 0 /* Ready */) {
+        await sleep(this.plugin.model.statusCheckIntervalReady);
+      } else {
+        if (status.status === prevStatus.status && status.msg === prevStatus.msg) {
+          loadingSleepTime = Math.min(
+            loadingSleepTime * 2,
+            this.plugin.model.statusCheckIntervalReady * 2
+          );
+        } else {
+          loadingSleepTime = this.plugin.model.statusCheckIntervalLoading;
+        }
+        await sleep(loadingSleepTime);
+      }
+    }
+    this.started = false;
+  }
+  hide() {
+    this.span.hide();
+  }
+  show() {
+    this.span.show();
+  }
+  stop() {
+    this.should_stop = true;
   }
 };
 
@@ -20557,6 +20559,8 @@ var ApiModel = class {
   load() {
     console.log("latex_ocr: API model loaded.");
   }
+  start() {
+  }
   unload() {
   }
   async imgfileToLatex(filepath) {
@@ -20750,6 +20754,8 @@ var LatexOCRSettingsTab = class extends import_obsidian4.PluginSettingTab {
       new import_obsidian4.Notice("\u2699\uFE0F Starting server...", 5e3);
       if (this.plugin.model) {
         this.plugin.model.unload();
+        this.plugin.model.load();
+        this.plugin.model.start();
       }
     }));
     const port = new import_obsidian4.Setting(containerEl).setName("Port").setDesc("Port to run the LatexOCR server on. Note that a server restart is required in order for this to take effect.").addText((text) => text.setValue(this.plugin.settings.port).onChange(async (value) => {
@@ -20815,6 +20821,9 @@ var LatexOCR = class extends import_obsidian5.Plugin {
       this.model = new ApiModel(this.settings);
     }
     this.model.load();
+    if (this.settings.startServerOnLoad) {
+      this.model.start();
+    }
     try {
       await fs2.promises.mkdir(path4.join(this.vaultPath, this.pluginPath, "/.clipboard_images/"));
     } catch (err) {
@@ -20856,6 +20865,18 @@ var LatexOCR = class extends import_obsidian5.Plugin {
           new import_obsidian5.Notice(`\u274C ${err.message}`);
           console.error(err.name, err.message);
         });
+      }
+    });
+    this.addCommand({
+      id: "restart-latexocr-server",
+      name: "(Re)start LatexOCR Server",
+      callback: async () => {
+        new import_obsidian5.Notice("\u2699\uFE0F Starting server...", 5e3);
+        if (this.model) {
+          this.model.unload();
+          this.model.load();
+          this.model.start();
+        }
       }
     });
     this.statusBar = new StatusBar(this);
