@@ -3,6 +3,7 @@
     excludesfile = ~/.config/git/.gitignore_global
     sshCommand = ssh -T -i ~/.ssh/yubikey
     pager = delta
+    fileMode = false
 
 [interactive]
     diffFilter = delta --color-only
