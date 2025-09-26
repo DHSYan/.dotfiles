@@ -11,6 +11,8 @@
   "headingsListCommand": "#",
   "bookmarksListCommand": "'",
   "commandListCommand": ">",
+  "recentCommandDisplayOrder": "desc",
+  "maxRecentCommands": 25,
   "vaultListCommand": "vault ",
   "relatedItemsListCommand": "~",
   "relatedItemsListActiveEditorCommand": "^ ",
@@ -60,6 +62,10 @@
     "outgoing-link"
   ],
   "showOptionalIndicatorIcons": true,
+  "isFileExtensionIndicatorsEnabled": true,
+  "excludeFileExtensionIndicators": [
+    "md"
+  ],
   "overrideStandardModeBehaviors": true,
   "overrideStandardModeRendering": true,
   "enabledRibbonCommands": [
@@ -363,6 +369,8 @@
   "escapeCmdChar": "!",
   "mobileLauncher": {
     "isEnabled": false,
+    "isMobileButtonEnabled": true,
+    "isEmptyTabButtonEnabled": true,
     "modeString": "HeadingsList",
     "iconName": "",
     "coreLauncherButtonIconSelector": "span.clickable-icon",
@@ -421,5 +429,39 @@
       ],
       "key": "f"
     }
+  },
+  "openInBackground": {
+    "isEnabled": true,
+    "openKeys": [
+      {
+        "openType": "tab",
+        "hotkey": {
+          "modifiers": [
+            "Mod",
+            "Shift"
+          ],
+          "key": "t"
+        }
+      },
+      {
+        "openType": "vertical",
+        "hotkey": null
+      },
+      {
+        "openType": "horizontal",
+        "hotkey": null
+      },
+      {
+        "openType": "window",
+        "hotkey": null
+      }
+    ]
+  },
+  "saveWorkspaceAndSwitchKeys": {
+    "modifiers": [
+      "Mod",
+      "Shift"
+    ],
+    "key": "s"
   }
 }
