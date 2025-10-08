@@ -24,7 +24,9 @@
     "tagsToReview": [
       "#review",
       "#cpsc221",
-      "#math200"
+      "#math200",
+      "#stat200",
+      "#phys119"
     ],
     "noteFoldersToIgnore": [
       "**/*.excalidraw.md"
