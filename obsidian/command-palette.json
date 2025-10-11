@@ -1,6 +1,7 @@
 {
   "pinned": [
-    "omnisearch:show-modal",
-    "workspaces:load"
+    "daily-notes:goto-prev",
+    "daily-notes:goto-next",
+    "sync:open-sync-log"
   ]
 }
