@@ -1,5 +1,5 @@
 {
-  "tagPageDir": "tags/",
+  "tagPageDir": "zettelkasten/",
   "frontmatterQueryProperty": "tag-page-query",
   "sortByDate": "desc",
   "nestedSeparator": "-",
