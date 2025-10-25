@@ -89,3 +89,9 @@ bindkey '^z' fg_widget
 # eval "$(ssh-agent)" &
 eval "$(fzf --zsh)"
 
+
+function prompt_example(){
+    if [ -n "$IN_NIX_SHELL" ]; then
+      p10k segment -f 208 -i '🔥' -t "nix"
+    fi
+  }
