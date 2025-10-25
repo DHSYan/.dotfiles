@@ -17,7 +17,7 @@
   "buffer_font_size": 16,
   "theme": {
     "mode": "system",
-    "light": "One Light",
+    "light": "Gruvbox Dark Hard",
     "dark": "Gruvbox Dark Soft"
   }
 }
