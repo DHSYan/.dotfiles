@@ -3,7 +3,8 @@ local config = {}
 
 
 config.font = wezterm.font 'JetBrainsMono Nerd Font'
-config.font_size = 14.0
+-- config.font = wezterm.font 'ZedMono Nerd Font'
+config.font_size = 12.0
 
 config.use_fancy_tab_bar = true
 config.tab_bar_at_bottom = true
