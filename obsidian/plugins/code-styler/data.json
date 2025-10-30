@@ -301,11 +301,11 @@
       "codeblock": {
         "lineNumbers": true,
         "unwrapLines": true,
-        "wrapLinesActive": false,
-        "curvature": 4
+        "wrapLinesActive": true,
+        "curvature": 25
       },
       "gutter": {
-        "highlight": true,
+        "highlight": false,
         "activeLine": false
       },
       "header": {
@@ -349,8 +349,8 @@
       "advanced": {
         "gradientHighlights": false,
         "gradientHighlightsColourStop": "70%",
-        "languageBorderColour": false,
-        "languageBorderWidth": 5,
+        "languageBorderColour": true,
+        "languageBorderWidth": 2,
         "iconSize": 28
       }
     },
