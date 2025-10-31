@@ -15,10 +15,10 @@
   "userIgnoreFilters": null,
   "pdfExportSettings": {
     "includeName": false,
-    "pageSize": "A4",
+    "pageSize": "Letter",
     "landscape": true,
     "margin": "2",
-    "downscalePercent": 49
+    "downscalePercent": 70
   },
   "propertiesInDocument": "hidden",
   "readableLineLength": false,
