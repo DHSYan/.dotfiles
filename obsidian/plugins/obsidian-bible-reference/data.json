@@ -7,13 +7,16 @@
   "collapsibleVerses": false,
   "enableHyperlinking": true,
   "showVerseTranslation": true,
-  "bookTagging": false,
+  "bookTagging": true,
   "chapterTagging": false,
   "enableBibleVerseLookupRibbon": false,
   "optOutToEvents": false,
-  "bookBacklinking": "None",
+  "bookBacklinking": "Bottom",
   "chapterBacklinking": "None",
   "bibleVersionStatusIndicator": "Hide",
   "displayBibleIconPrefixAtHeader": false,
+  "internalLinkingFormat": "None",
+  "enableInternalLinking": "None",
+  "versionCodeBLB": "",
   "advancedSettings": true
 }
