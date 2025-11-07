@@ -2,12 +2,12 @@
 live_config_reload = true
 
 [window]
-blur = true
-opacity = 0.9
+blur = false
+opacity = 1.0
 
 [font]
-# normal = { family = "Hurmit Nerd Font", style = "Regular" }
-normal = { family = "ZedMono Nerd Font Mono", style = "Regular" }
+normal = { family = "Hurmit Nerd Font", style = "Regular" }
+# normal = { family = "ZedMono Nerd Font Mono", style = "Regular" }
 # normal = { family = "JetBrains Mono Nerd Font", style = "Regular" }
-size = 16
+size = 12
 
