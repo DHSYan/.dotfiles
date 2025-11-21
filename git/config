@@ -9,8 +9,8 @@
     diffFilter = delta --color-only
 
 [user]
-    email = sean@dhsy.me
-    name = Ding-Han Sean Yan
+    email = sean@dhsy.dev
+    name = DH Sean Yan
     signingkey = ~/.ssh/yubikey
 
 [alias]
