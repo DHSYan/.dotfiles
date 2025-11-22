@@ -1,5 +1,5 @@
 {
-  description = "Dev Shells";
+  description = "Dev Shells for general use cases";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -15,7 +15,6 @@
         };
       in {
         devShells = {
-
           typst = pkgs.mkShell {
             buildInputs = with pkgs; [
               typst
@@ -26,7 +25,10 @@
             ];
 
           };
-
+          cpp = {};
+          python = {};
+          ts = {};
+          rust = {};
         };
       });
 }
