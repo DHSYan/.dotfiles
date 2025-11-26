@@ -29,13 +29,15 @@ Host ubc
     IdentityFile ~/.ssh/yubikey
 
 Host fs
-    User root
-    Hostname 192.168.1.111
+    Hostname factorysecond
     IdentityFile ~/.ssh/yubikey
 
 Host dayone
-    User root
-    Hostname 192.168.1.101
+    Hostname dayone
+    IdentityFile ~/.ssh/yubikey
+
+Host newton
+    Hostname newton
     IdentityFile ~/.ssh/yubikey
 
 Host pikvm
