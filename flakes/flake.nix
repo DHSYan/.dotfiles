@@ -19,9 +19,6 @@
             buildInputs = with pkgs; [
               typst
               tinymist
-              # typst-lsp
-              typst-preview
-              typst-fmt
             ];
 
           };
