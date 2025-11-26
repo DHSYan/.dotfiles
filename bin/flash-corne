@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# CD downloads
+# unzip firmware.zip
+# mount /dev/sda with proper guards
+# if input says L, flash the "left"
+# if input says R, flash the "Right"
+
