@@ -3,13 +3,14 @@ local keys = {}
 
 keys = {
     {
-        key = 'd', 
+        key = 'd',
         mods = 'CMD',
         action = wezterm.action.SpawnCommandInNewTab {
             args = { 'nvim' },
         },
     }
 }
+
 
 
 return keys

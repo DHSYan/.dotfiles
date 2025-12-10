@@ -15,7 +15,7 @@ config.color_scheme = 'Gruvbox Dark (Gogh)'
 config.enable_wayland = true
 
 config.keys = require 'keys'
-config.enable_csi_u_key_encoding = true
+-- config.enable_csi_u_key_encoding = true
 
 local sessions = wezterm.plugin.require("https://github.com/abidibo/wezterm-sessions")
 sessions.apply_to_config(config)
