@@ -50,10 +50,4 @@ Host pivpn
     Hostname 192.168.1.110
     IdentityFile ~/.ssh/yubikey
 
-Host bitbucket
-    User git
-    Hostname bitbucket.org
-    IdentityFile ~/.ssh/work
-    IdentitiesOnly yes
-    AddKeysToAgent yes
 
