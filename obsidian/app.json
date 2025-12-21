@@ -18,7 +18,7 @@
     "pageSize": "Letter",
     "landscape": true,
     "margin": "2",
-    "downscalePercent": 70
+    "downscalePercent": 76
   },
   "propertiesInDocument": "hidden",
   "readableLineLength": false,

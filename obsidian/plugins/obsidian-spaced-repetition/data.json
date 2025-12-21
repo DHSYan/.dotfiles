@@ -22,11 +22,7 @@
     "editLaterTag": "#edit-later",
     "enableNoteReviewPaneOnStartup": true,
     "tagsToReview": [
-      "#review",
-      "#cpsc221",
-      "#math200",
-      "#stat200",
-      "#phys119"
+      "#review"
     ],
     "noteFoldersToIgnore": [
       "**/*.excalidraw.md"

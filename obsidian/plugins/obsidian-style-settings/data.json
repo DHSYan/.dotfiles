@@ -1,11 +1,14 @@
 {
-  "minimal-style@@italic-color@@dark": "#F7737D",
   "minimal-style@@bold-color@@dark": "#FF5AAA",
-  "minimal-style@@bold-weight": 800,
+  "minimal-style@@bold-weight": 900,
   "minimal-style@@file-header-visibility": "minimal-tab-title-visible",
   "minimal-style@@header-height": "25px",
   "minimal-style@@inline-title-size": "0",
   "minimal-style@@window-title-off": true,
   "minimal-style@@tabs-style": "tabs-plain-square",
-  "minimal-style@@active-line-on": true
+  "minimal-style@@active-line-on": true,
+  "minimal-style@@italic-color@@dark": "#EEA3A3",
+  "minimal-style@@italic-color@@light": "#FF0000",
+  "minimal-style@@bold-color@@light": "#BC10F1",
+  "minimal-style@@p-spacing": "0.75rem"
 }
