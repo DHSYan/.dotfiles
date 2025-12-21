@@ -33,6 +33,7 @@ Host fs
     IdentityFile ~/.ssh/yubikey
 
 Host dayone
+    user root
     Hostname dayone
     IdentityFile ~/.ssh/yubikey
 
