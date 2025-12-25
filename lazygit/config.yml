@@ -1,0 +1,5 @@
+git:
+  pagers:
+    - pager: delta --dark --paging=never
+  commit: 
+    signOff: true
