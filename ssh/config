@@ -52,3 +52,6 @@ Host pivpn
     IdentityFile ~/.ssh/yubikey
 
 
+Host razer
+    Hostname razer
+    IdentityFile ~/.ssh/yubikey
