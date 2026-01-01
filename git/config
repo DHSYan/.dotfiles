@@ -11,7 +11,6 @@
 [user]
     email = sean@dhsy.dev
     name = DH Sean Yan
-    signingkey = ~/.ssh/yubikey
 
 [alias]
     s = status
@@ -30,7 +29,6 @@
 [gpg]
 	format = ssh
 [commit]
-	gpgsign = true
 [pull]
 	rebase = false
 [push]
