@@ -1,21 +1,6 @@
 {
-  "siteId": "422626c6c7c3203738f8a35a6a51254e",
+  "siteId": "045c8db5b809d0534853a000f2f4ebd2",
   "host": "publish-01.obsidian.md",
-  "included": [
-    "job"
-  ],
-  "excluded": [
-    "zettelkasten",
-    "archive",
-    "area",
-    "daily-notes",
-    "assets",
-    "excalidraw-drawing",
-    "resources",
-    "script",
-    "tags",
-    "templates",
-    "project",
-    "code"
-  ]
+  "included": [],
+  "excluded": []
 }
