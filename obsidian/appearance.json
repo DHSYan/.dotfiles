@@ -7,7 +7,7 @@
   "nativeMenus": false,
   "translucency": false,
   "baseFontSize": 16,
-  "theme": "moonstone",
+  "theme": "obsidian",
   "cssTheme": "Minimal",
   "showRibbon": false
 }
