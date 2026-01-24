@@ -21,7 +21,7 @@
     "downscalePercent": 76
   },
   "propertiesInDocument": "hidden",
-  "readableLineLength": true,
+  "readableLineLength": false,
   "trashOption": "local",
   "useMarkdownLinks": false,
   "tabSize": 2,
