@@ -10,7 +10,8 @@ config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
 
 -- config.color_scheme = 'Teerb'
-config.color_scheme = 'Gruvbox Dark (Gogh)'
+-- config.color_scheme = 'Gruvbox Dark (Gogh)'
+config.color_scheme = 'Catppuccin Macchiato'
 
 config.enable_wayland = true
 
