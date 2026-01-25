@@ -1,7 +1,8 @@
 @import "mocha.css";
 
 * {
-  font-family: FantasqueSansMono Nerd Font;
+  /* font-family: FantasqueSansMono Nerd Font; */
+  font-family: HurmitNerdFontMono;
   font-size: 12px;
   min-height: 0;
 }
@@ -10,52 +11,47 @@
     /* background-color: shade(@base, 0.9); */
     background-color: transparent;
     color: @text;
-    margin: 3px 3px;
+    /* margin: 3px 3px; */
 }
 
 #workspaces {
   border-radius: 1rem;
-  margin: 3px;
+  /* margin: 3px; */
   /* background-color: @surface0; */
-    background-color: transparent;
-  margin-left: 1rem;
+  background-color: transparent;
+  /* margin-left: 1rem; */
 }
 
 #workspaces button {
   color: @lavender;
   border-radius: 1rem;
-  padding: 0.4rem;
+  /* padding: 0.4rem; */
 }
 
 #workspaces button.active {
   color: @sky;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
 }
 
 #workspaces button:hover {
   color: @sapphire;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
 }
 
-#custom-music,
-#tray,
-#backlight,
-#clock,
-#battery,
-#pulseaudio,
-#custom-lock,
-#custom-power,
 #network {
     /* background-color: @surface0; */
-    background-color: transparent;
+  background-color: transparent;
   padding: 0.5rem 1rem;
   margin: 5px 0;
 }
 
-#clock {
+#clock.1 {
   color: @blue;
-  border-radius: 0px 1rem 1rem 0px;
-  margin-right: 1rem;
+  /* border-radius: 0px 1rem 1rem 0px; */
+}
+#clock.2 {
+  color: @red;
+  /* border-radius: 0px 1rem 1rem 0px; */
 }
 
 #battery {
@@ -89,24 +85,12 @@
   margin-left: 1rem;
 }
 
-#custom-music {
-  color: @mauve;
-  border-radius: 1rem;
-}
-
-#custom-lock {
-    border-radius: 1rem 0px 0px 1rem;
-    color: @lavender;
-}
-
-#custom-power {
-    margin-right: 1rem;
-    border-radius: 0px 1rem 1rem 0px;
-    color: @red;
-}
-
 #tray {
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
   border-radius: 1rem;
 }
 
+
+#cpu {
+    margin-left: 1rem;
+}
