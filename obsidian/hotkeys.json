@@ -25,7 +25,6 @@
   "editor:open-search-replace": [],
   "editor:toggle-bold": [],
   "editor:toggle-checklist-status": [],
-  "editor:toggle-comments": [],
   "markdown:toggle-preview": [
     {
       "modifiers": [
@@ -83,22 +82,7 @@
       "key": "P"
     }
   ],
-  "workspace:next-tab": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "ArrowRight"
-    },
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "L"
-    }
-  ],
+  "workspace:next-tab": [],
   "daily-notes:goto-next": [
     {
       "modifiers": [
@@ -123,22 +107,7 @@
       "key": "ArrowDown"
     }
   ],
-  "workspace:previous-tab": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "ArrowLeft"
-    },
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "H"
-    }
-  ],
+  "workspace:previous-tab": [],
   "tab-navigator:search-tabs": [
     {
       "modifiers": [
@@ -155,15 +124,6 @@
         "Shift"
       ],
       "key": "K"
-    }
-  ],
-  "note-composer:split-file": [
-    {
-      "modifiers": [
-        "Mod",
-        "Shift"
-      ],
-      "key": "E"
     }
   ],
   "omnisearch:show-modal": [
@@ -264,5 +224,64 @@
     }
   ],
   "workspace:new-tab": [],
-  "editor:toggle-italics": []
+  "editor:toggle-italics": [],
+  "editor:toggle-comments": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "/"
+    }
+  ],
+  "obsidian-advanced-slides:reload-advanced-slides-preview": [],
+  "various-complements:reload-custom-dictionaries": [],
+  "obsidian-advanced-slides:open-advanced-slides-preview": [],
+  "obsidian-outliner:unfold": [
+    {
+      "modifiers": [
+        "Shift"
+      ],
+      "key": "ArrowRight"
+    }
+  ],
+  "obsidian-outliner:fold": [
+    {
+      "modifiers": [
+        "Shift"
+      ],
+      "key": "ArrowLeft"
+    }
+  ],
+  "editor:fold-all": [
+    {
+      "modifiers": [
+        "Shift"
+      ],
+      "key": "ArrowUp"
+    }
+  ],
+  "editor:unfold-all": [
+    {
+      "modifiers": [
+        "Shift"
+      ],
+      "key": "ArrowDown"
+    }
+  ],
+  "editor:cycle-list-checklist": [
+    {
+      "modifiers": [
+        "Shift"
+      ],
+      "key": "Enter"
+    }
+  ],
+  "workspace:goto-tab-1": [],
+  "workspace:goto-tab-2": [],
+  "workspace:goto-tab-3": [],
+  "workspace:goto-tab-4": [],
+  "workspace:goto-tab-5": [],
+  "workspace:goto-tab-6": [],
+  "workspace:goto-tab-7": [],
+  "workspace:goto-tab-8": []
 }
