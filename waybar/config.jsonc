@@ -9,7 +9,6 @@
         "cpu",
         "memory",
         "temperature",
-        "power-profiles-daemon",
         "custom/timer",
     ],
     "modules-center": [
@@ -57,6 +56,9 @@
     },
     "tray": {
         "spacing": 5,
+        "icons": {
+            "Fcitx": "",
+        },
     },
     "clock#1": {
         "interval": 1,
@@ -84,7 +86,8 @@
         },
     },
     "clock#2": {
-        "format": "{UTC:%m-%d %H:%M:%S}",
+        "interval": 1,
+        "format": "{:%m-%d %H:%M%S}",
         "timezone" : "Etc/UTC",
     },
 
