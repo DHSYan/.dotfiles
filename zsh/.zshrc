@@ -89,6 +89,8 @@ bindkey '^z' fg_widget
 # eval "$(ssh-agent)" &
 eval "$(fzf --zsh)"
 
+# [[ DIRENV ]]
+eval "$(direnv hook zsh)"
 
 function prompt_example(){
     if [ -n "$IN_NIX_SHELL" ]; then
