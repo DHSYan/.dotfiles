@@ -14,3 +14,5 @@ obsidian/plugins/readwise-official/data.json
 tmux/plugins
 gh/hosts.yml
 obsidian/plugins/various-complements/histories.json
+hypr/monitors.conf
+hypr/workspaces.conf
