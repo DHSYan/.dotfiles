@@ -27,7 +27,7 @@
   "tabSize": 2,
   "autoPairMarkdown": false,
   "smartIndentList": false,
-  "showInlineTitle": true,
+  "showInlineTitle": false,
   "mobilePullAction": "command-palette:open",
   "mobileQuickRibbonItem": "daily-notes:Open today's daily note"
 }

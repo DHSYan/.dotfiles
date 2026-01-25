@@ -1,5 +1,5 @@
 {
-  "accentColor": "#00afdb",
+  "accentColor": "",
   "interfaceFontFamily": "Iosevka Nerd Font,JetBrainsMono Nerd Font,3270 Nerd Font",
   "textFontFamily": "Iosevka Nerd Font,3270 Nerd Font,JetbrainsMono Nerd Font,ZedMono Nerd Font,Hurmit Nerd Font",
   "monospaceFontFamily": "Hurmit Nerd Font,3270 Nerd Font,JetbrainsMono Nerd Font",
@@ -8,6 +8,6 @@
   "translucency": false,
   "baseFontSize": 16,
   "theme": "obsidian",
-  "cssTheme": "Minimal",
+  "cssTheme": "Catppuccin",
   "showRibbon": false
 }

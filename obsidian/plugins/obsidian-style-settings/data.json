@@ -10,5 +10,8 @@
   "minimal-style@@italic-color@@dark": "#EEA3A3",
   "minimal-style@@italic-color@@light": "#FF0000",
   "minimal-style@@bold-color@@light": "#BC10F1",
-  "minimal-style@@p-spacing": "0.75rem"
+  "minimal-style@@p-spacing": "0.75rem",
+  "catppuccin-theme-settings@@catppuccin-theme-dark": "ctp-macchiato",
+  "catppuccin-interface-styles@@ctp-bold-folder-title": false,
+  "catppuccin-heading-settings@@ctp-page-title": "var(--ctp-accent)"
 }
