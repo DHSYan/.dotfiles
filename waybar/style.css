@@ -41,8 +41,8 @@
 #network {
     /* background-color: @surface0; */
   background-color: transparent;
-  padding: 0.5rem 1rem;
-  margin: 5px 0;
+  padding: 0.0rem 0rem;
+  margin: 0px 0;
 }
 
 #clock.1 {
@@ -81,8 +81,8 @@
 
 #pulseaudio {
   color: @maroon;
-  border-radius: 1rem 0px 0px 1rem;
-  margin-left: 1rem;
+  border-radius: 0rem 0px 0px 0rem;
+  margin-left: 0rem;
 }
 
 #tray {
