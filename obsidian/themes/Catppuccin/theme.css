@@ -72,7 +72,7 @@ body {
   --canvas-dot-pattern: var(--color-base-30);
   /* Checkboxes */
   --checkbox-radius: var(--radius-s);
-  --checkbox-size: 15px;
+  --checkbox-size: var(--font-text-size);
   --checkbox-marker-color: var(--background-primary);
   --checkbox-color: var(--interactive-accent);
   --checkbox-color-hover: var(--interactive-accent-hover);
@@ -129,7 +129,7 @@ body {
     var(--background-modifier-border),
     inset 0 0 0 1px var(--background-modifier-border);
   /* File layout */
-  --file-line-width: 65ch;
+  --file-line-width: 700px;
   --file-folding-offset: 24px;
   --file-margins: var(--size-4-8);
   --file-header-font-size: var(--font-ui-small);
@@ -487,8 +487,8 @@ body {
   --table-row-last-border-width: var(--table-border-width);
   /* Tags */
   --tag-size: max(var(--font-ui-medium), var(--font-small));
-  --tag-color: rgb(var(--ctp-accent));
-  --tag-color-hover: rgb(var(--ctp-accent));
+  --tag-color: rgb(var(--ctp-tag-pill-color, var(--ctp-accent)));
+  --tag-color-hover: rgb(var(--ctp-tag-pill-color, var(--ctp-accent)));
   --tag-decoration: none;
   --tag-decoration-hover: underline;
   --tag-background: transparent;
@@ -505,10 +505,7 @@ body {
   --tag-radius: 0.8em;
   /* Window frame */
   --titlebar-background: var(--background-secondary);
-  --titlebar-background-focused:
-    var(
-      --background-secondary-alt
-    );
+  --titlebar-background-focused: var(--background-secondary-alt);
   --titlebar-border-width: 0;
   --titlebar-border-color: var(--background-modifier-border);
   --titlebar-text-color: var(--text-muted);
@@ -573,7 +570,7 @@ body {
 }
 
 /* @settings
-name: Catppuccin Accents
+name: "Catppuccin: Catppuccin Accents"
 id: catppuccin-theme-settings
 settings:
   -
@@ -648,7 +645,7 @@ settings:
         value: ctp-accent-lavender
 */
 /* @settings
-name: Icon Styles
+name: "Catppuccin: Icon Styles"
 id: catppuccin-icon-styles
 settings:
   -
@@ -658,7 +655,7 @@ settings:
     type: class-toggle
 */
 /* @settings
-name: Interface Styles
+name: "Catppuccin: Interface Styles"
 id: catppuccin-interface-styles
 settings:
   -
@@ -668,7 +665,7 @@ settings:
     type: class-toggle
 */
 /* @settings
-name: Font Styles
+name: "Catppuccin: Font Styles"
 id: catppuccin-font-styles
 settings:
   -
@@ -907,7 +904,7 @@ settings:
   -
   */
 /* @settings
-name: File Name and Headings
+name: "Catppuccin: File Name and Headings"
 id: catppuccin-heading-settings
 settings:
   -
@@ -1325,8 +1322,97 @@ settings:
         value: var(--ctp-subtext0)
 */
 /* @settings
+name: "Catppuccin: PDF Settings"
+id: catppuccin-pdf
+settings:
+  -
+    id: ctp-seamless-pdf
+    title: Remove borders around PDF pages
+    description: View PDFs without borders, akin to the Minimal theme's "seamless" setting
+    type: class-toggle
+  -
+    id: ctp-pdf-darken
+    title: Darken PDF background
+    description: When using a dark flavor, inverts a PDF's background color. This might be helpful when using a PDF with a light background in dark mode Obsidian, depending on your preferences and the colors present in the PDF
+    type: class-toggle
+  -
+    id: ctp-pdf-blend
+    title: Blend PDF background
+    description: When using light mode, attempts to blend the theme's background color into the PDF
+    type: class-toggle
+*/
+/* @settings
+name: "Catppuccin: Tag Styles"
+id: catppuccin-tag-styles
+settings:
+  -
+    id: ctp-tag-pill
+    title: Pill-shaped tags
+    description: Make tags stand out with a pill-shaped appearance, reverts to Obsidian's default style
+    type: class-toggle
+  -
+    id: ctp-tag-pill-color
+    title: Tag text color
+    description: Select your tag text color
+    type: variable-select
+    allowEmpty: false
+    default: var(--ctp-accent)
+    options:
+      -
+        label: Accent
+        value: var(--ctp-accent)
+      -
+        label: Rosewater
+        value: var(--ctp-rosewater)
+      -
+        label: Flamingo
+        value: var(--ctp-flamingo)
+      -
+        label: Pink
+        value: var(--ctp-pink)
+      -
+        label: Mauve
+        value: var(--ctp-mauve)
+      -
+        label: Red
+        value: var(--ctp-red)
+      -
+        label: Maroon
+        value: var(--ctp-maroon)
+      -
+        label: Peach
+        value: var(--ctp-peach)
+      -
+        label: Yellow
+        value: var(--ctp-yellow)
+      -
+        label: Green
+        value: var(--ctp-green)
+      -
+        label: Teal
+        value: var(--ctp-teal)
+      -
+        label: Sky
+        value: var(--ctp-sky)
+      -
+        label: Sapphire
+        value: var(--ctp-sapphire)
+      -
+        label: Blue
+        value: var(--ctp-blue)
+      -
+        label: Lavender
+        value: var(--ctp-lavender)
+      -
+        label: White
+        value: var(--ctp-text)
+      -
+        label: Gray
+        value: var(--ctp-subtext0)
+*/
+/* @settings
 
-name: Credits and Source Code
+name: "Catppuccin: Credits and Source Code"
 id: source-code
 settings:
   -
@@ -1611,8 +1697,9 @@ settings:
   --text-error-hover: rgb(var(--ctp-red), 80%);
   --text-highlight-bg: rgb(var(--ctp-rosewater), 100%);
   --text-highlight-bg-active: rgb(var(--ctp-rosewater), 100%);
-  --text-selection: rgb(var(--ctp-rosewater), 100%);
-  --text-on-accent: rgb(var(--ctp-base));
+  --text-selection: rgb(var(--ctp-overlay2), 30%);
+  --text-on-accent: rgb(var(--ctp-mantle));
+  --text-on-accent-inverted: rgb(var(--ctp-mantle));
   --interactive-normal: rgb(var(--ctp-surface0));
   --interactive-hover: rgb(var(--ctp-surface1));
   --interactive-accent: rgb(var(--ctp-accent));
@@ -1684,8 +1771,11 @@ body {
 }
 
 strong,
-.cm-strong {
+.cm-strong,
+.cm-s-obsidian span.cm-formatting-strong,
+.cm-s-obsidian span.cm-strong {
   --bold-color: rgb(var(--ctp-bold, var(--ctp-sapphire)));
+  color: rgb(var(--ctp-bold, var(--ctp-sapphire)));
 }
 
 em,
@@ -1696,6 +1786,10 @@ em,
 del,
 .cm-strikethrough {
   color: rgb(var(--ctp-strikethrough, var(--ctp-maroon)));
+}
+
+.cm-s-obsidian .cm-link.cm-strikethrough {
+  text-decoration: line-through;
 }
 
 .markdown-rendered blockquote,
@@ -1817,10 +1911,6 @@ h6,
   color: var(--text-on-accent);
 }
 
-::selection {
-  color: var(--text-on-accent);
-}
-
 .cm-s-obsidian span.cm-error {
   color: rgb(var(--ctp-red));
 }
@@ -1838,8 +1928,13 @@ h6,
   border: 1px solid rgb(var(--ctp-rosewater), 60%);
 }
 
+/**
+* 1. Not sure when or why I added this, but it became an issue in
+https://github.com/catppuccin/obsidian/issues/60. I have set it to the value it
+should have. Hopefully it doesn't break anything!
+*/
 .tree-item-self.is-clickable.nav-file-title.has-focus[style] {
-  --background-modifier-border-focus: var(--background-modifier-border-focus);
+  --background-modifier-border-focus: var(--color-base-40);
 }
 
 /*
@@ -2139,6 +2234,10 @@ body {
   color: var(--text-on-accent);
 }
 
+.tree-item-self.is-being-renamed:focus-within {
+  color: currentcolor;
+}
+
 /*
 * Open folder
 */
@@ -2160,6 +2259,14 @@ body {
 .ctp-icon-hide .nav-folder .nav-folder-title .nav-folder-title-content::before,
 .ctp-icon-hide .nav-folder.is-collapsed .nav-folder-title .nav-folder-title-content::before {
   display: none;
+}
+
+/*
+* Bring block edit button in line with rest of button hovers
+*/
+.markdown-source-view.mod-cm6 .pdf-embed .edit-block-button:hover {
+  background-color: rgb(var(--ctp-pink));
+  color: var(--text-on-accent);
 }
 
 select:focus,
@@ -2208,6 +2315,31 @@ input[type=number]:focus-visible {
   background-color: rgb(var(--ctp-crust));
 }
 
+input[type=date]::-webkit-datetime-edit-month-field:active,
+input[type=datetime-local]::-webkit-datetime-edit-month-field:active,
+input[type=date]::-webkit-datetime-edit-month-field:focus,
+input[type=datetime-local]::-webkit-datetime-edit-month-field:focus,
+input[type=date]::-webkit-datetime-edit-day-field:active,
+input[type=datetime-local]::-webkit-datetime-edit-day-field:active,
+input[type=date]::-webkit-datetime-edit-day-field:focus,
+input[type=datetime-local]::-webkit-datetime-edit-day-field:focus,
+input[type=date]::-webkit-datetime-edit-year-field:active,
+input[type=datetime-local]::-webkit-datetime-edit-year-field:active,
+input[type=date]::-webkit-datetime-edit-year-field:focus,
+input[type=datetime-local]::-webkit-datetime-edit-year-field:focus {
+  color: var(--text-on-accent);
+}
+
+input[type=datetime-local]::-webkit-datetime-edit-minute-field:active,
+input[type=datetime-local]::-webkit-datetime-edit-minute-field:focus,
+input[type=datetime-local]::-webkit-datetime-edit-hour-field:active,
+input[type=datetime-local]::-webkit-datetime-edit-hour-field:focus,
+input[type=datetime-local]::-webkit-datetime-edit-second-field:active,
+input[type=datetime-local]::-webkit-datetime-edit-second-field:focus {
+  background-color: var(--text-selection);
+  color: var(--text-on-accent);
+}
+
 .cm-s-obsidian .cm-formatting-link.cm-url,
 .cm-s-obsidian .cm-url,
 .cm-s-obsidian .cm-link,
@@ -2236,22 +2368,41 @@ input[type=number]:focus-visible {
   color: var(--link-color);
 }
 
-.cm-hashtag.cm-hashtag-end {
+body:not(.ctp-tag-pill) .cm-hashtag.cm-hashtag-end {
   text-decoration-color: transparent;
   text-decoration-line: underline;
   text-decoration-style: solid;
   transition: var(--transition-text-decoration-color);
 }
-
-.cm-hashtag.cm-hashtag-end:hover {
-  text-decoration: underline 1px rgb(var(--ctp-accent));
+body:not(.ctp-tag-pill) .cm-hashtag.cm-hashtag-end:hover {
+  text-decoration: underline 1px rgb(var(--ctp-tag-pill-color, var(--ctp-accent)));
   text-underline-offset: 1px;
 }
-
-.cm-hashtag::selection {
-  text-shadow: 0.4px 0 0 rgb(var(--ctp-crust));
+body:not(.ctp-tag-pill) .cm-hashtag::selection {
+  text-shadow: 0.4px 0 0 rgb(var(--ctp-tag-pill-color, var(--ctp-accent)));
 }
 
+/**
+* 1. Restores default Obsidian settings to tags. See: #56
+*/
+.ctp-tag-pill {
+  --tag-size: var(--font-smaller);
+  --tag-decoration: none;
+  --tag-decoration-hover: none;
+  --tag-background: hsla(var(--interactive-accent-hsl), 0.1);
+  --tag-background-hover: hsla(var(--interactive-accent-hsl), 0.2);
+  --tag-border-color: hsla(var(--interactive-accent-hsl), 0.15);
+  --tag-border-color-hover: hsla(var(--interactive-accent-hsl), 0.15);
+  --tag-border-width: 0px;
+  --tag-padding-x: 0.65em;
+  --tag-padding-y: 0.25em;
+  --tag-radius: 2em;
+  --tag-weight: inherit;
+}
+
+/**
+* 1. Allow users to pick tag text color with Style Settings
+*/
 .markdown-source-view.mod-cm6 .is-unresolved .cm-underline {
   text-decoration-line: none;
 }
@@ -2269,8 +2420,8 @@ input[type=number]:focus-visible {
 }
 
 .empty-state-action {
-  transition: var(--transition-hover-bg), var(--transition-hover-color);
   border-radius: var(--radius-s);
+  transition: var(--transition-hover-bg), var(--transition-hover-color);
 }
 
 @media (hover: hover) {
@@ -2279,6 +2430,119 @@ input[type=number]:focus-visible {
     color: var(--text-on-accent);
   }
 }
+/**
+* 1. Fix #97 highlighted link contrast issues
+*/
+.cm-s-obsidian .cm-highlight.cm-link .cm-underline {
+  color: var(--text-on-accent);
+  text-decoration: var(--text-on-accent) solid underline;
+}
+.cm-s-obsidian .cm-highlight.cm-link .cm-underline:hover {
+  color: var(--text-on-accent);
+  text-decoration-color: var(--text-on-accent);
+}
+
+.cm-s-obsidian .cm-highlight.cm-link:hover,
+.cm-s-obsidian .cm-highlight.cm-url:hover {
+  color: var(--text-on-accent);
+}
+
+/**
+* 1. Compatibility for mermaid mindmaps #73
+* 2. CSS modified from obsidian forums post, !important seems to be req
+*/
+.theme-dark .mermaid .mindmap-node text {
+  fill: var(--text-on-accent) !important;
+}
+
+.theme-light .mermaid .mindmap-node text {
+  fill: var(--text-on-accent) !important;
+}
+
+/**
+* 1. Colors for the first eight nodes in a mindmap
+*/
+.mermaid .section-0 path,
+.mermaid .section-0 line,
+.mermaid .section-edge-0 {
+  fill: var(--color-orange) !important;
+  stroke: var(--color-orange) !important;
+}
+
+.mermaid .section-1 path,
+.mermaid .section-1 line,
+.mermaid .section-edge-1 {
+  fill: var(--color-yellow) !important;
+  stroke: var(--color-yellow) !important;
+}
+
+.mermaid .section-2 path,
+.mermaid .section-2 line,
+.mermaid .section-edge-3 {
+  fill: var(--color-green) !important;
+  stroke: var(--color-green) !important;
+}
+
+.mermaid .section-3 path,
+.mermaid .section-3 line,
+.mermaid .section-edge-3 {
+  fill: var(--color-red) !important;
+  stroke: var(--color-red) !important;
+}
+
+.mermaid .section-4 path,
+.mermaid .section-4 line,
+.mermaid .section-edge-4 {
+  fill: var(--color-blue) !important;
+  stroke: var(--color-blue) !important;
+}
+
+.mermaid .section-5 path,
+.mermaid .section-5 line,
+.mermaid .section-edge-5 {
+  fill: var(--color-purple) !important;
+  stroke: var(--color-purple) !important;
+}
+
+.mermaid .section-6 path,
+.mermaid .section-6 line,
+.mermaid .section-edge-6 {
+  fill: var(--color-pink) !important;
+  stroke: var(--color-pink) !important;
+}
+
+.mermaid .section-7 path,
+.mermaid .section-7 line,
+.mermaid .section-edge-7 {
+  fill: var(--color-cyan) !important;
+  stroke: var(--color-cyan) !important;
+}
+
+/**
+* 1. User requested integration with Style Settings plugin to replicate Minimal
+* and its treatment of PDFs. Credit/source of modified scss:
+* https://github.com/kepano/obsidian-minimal/blob/0b98cc8ec4576e148057ce6c0ff751ab4df1ece4/src/scss/content/pdf.scss
+*/
+.theme-light.ctp-seamless-pdf,
+.theme-dark.ctp-seamless-pdf {
+  --pdf-shadow: none;
+}
+.theme-light.ctp-seamless-pdf .pdfViewer .page,
+.theme-dark.ctp-seamless-pdf .pdfViewer .page {
+  border: 0;
+}
+
+.theme-dark.ctp-pdf-darken .pdfViewer .canvasWrapper,
+.theme-dark.ctp-pdf-darken .pdf-thumbnail-view .thumbnailImage {
+  filter: invert(1) hue-rotate(180deg);
+  mix-blend-mode: screen;
+}
+
+.theme-light.ctp-pdf-blend .pdfViewer .canvasWrapper,
+.theme-light.ctp-pdf-blend .pdf-thumbnail-view .thumbnailImage {
+  mix-blend-mode: multiply;
+}
+
 /* TODO Add to Style Settings instead */
 .cm-s-obsidian span.obsidian-search-match-highlight {
   background-color: rgb(var(--ctp-rosewater));
@@ -2457,12 +2721,16 @@ input[type=number]:focus-visible {
   color: var(--text-muted);
 }
 
-.tree-item-self:hover .tree-item-flair,
-.backlink-pane > .tree-item-self.is-collapsed:hover,
-.outgoing-link-pane > .tree-item-self.is-collapsed:hover {
+.tree-item-self:hover .tree-item-flair {
   color: var(--text-on-accent);
 }
 
+@media (hover: hover) {
+  .backlink-pane > .tree-item-self.is-clickable.is-collapsed:hover,
+  .outgoing-link-pane > .tree-item-self.is-clickable.is-collapsed:hover {
+    color: var(--text-on-accent);
+  }
+}
 .nav-file-tag {
   background-color: rgb(var(--ctp-surface0));
   color: var(--text-normal);
@@ -2681,8 +2949,8 @@ button.mod-cta:hover {
   text-transform: lowercase;
 }
 
-/*
-* TODO: Some tweaks for the light/Catppuccin Latte theme.
+/**
+* Some tweaks for the light/Catppuccin Latte theme.
 */
 .theme-dark:not(.css-settings-manager),
 .theme-light:not(.css-settings-manager),
@@ -2718,7 +2986,7 @@ button.mod-cta:hover {
   * Checkboxes
   */
   /*
-  ? I think !important is necessary to overwrite app.css's
+  ? I think !important is necessary to overwrite app.css
   */
   /*
   *  settings slider
@@ -2999,25 +3267,109 @@ button.mod-cta:hover {
 .ctp-full-palette input[type=checkbox]:not(:checked) {
   border-color: rgb(var(--ctp-maroon));
   background-color: rgb(var(--ctp-red));
-  box-shadow: inset 4px 4px 12px rgb(var(--ctp-mantle)), inset -4px -4px 12px rgb(var(--ctp-mantle));
+  box-shadow: inset 2px 2px 24px rgb(var(--ctp-mantle)), inset -2px -2px 24px rgb(var(--ctp-mantle));
 }
 .theme-dark:not(.css-settings-manager) input[type=checkbox]:not(:checked):hover,
 .theme-light:not(.css-settings-manager) input[type=checkbox]:not(:checked):hover,
 .ctp-full-palette input[type=checkbox]:not(:checked):hover {
   border-width: 2px;
 }
-.theme-dark:not(.css-settings-manager) input[type=checkbox]:checked,
-.theme-light:not(.css-settings-manager) input[type=checkbox]:checked,
-.ctp-full-palette input[type=checkbox]:checked {
+.theme-dark:not(.css-settings-manager) input[type=checkbox]:not([data-task=">"],
+[data-task="!"],
+[data-task="-"],
+[data-task="<"],
+[data-task=l],
+[data-task="*"],
+[data-task=I],
+[data-task=p],
+[data-task=f],
+[data-task=k],
+[data-task=u],
+[data-task=w],
+[data-task=c],
+[data-task=d],
+[data-task=b]):checked,
+.theme-light:not(.css-settings-manager) input[type=checkbox]:not([data-task=">"],
+[data-task="!"],
+[data-task="-"],
+[data-task="<"],
+[data-task=l],
+[data-task="*"],
+[data-task=I],
+[data-task=p],
+[data-task=f],
+[data-task=k],
+[data-task=u],
+[data-task=w],
+[data-task=c],
+[data-task=d],
+[data-task=b]):checked,
+.ctp-full-palette input[type=checkbox]:not([data-task=">"],
+[data-task="!"],
+[data-task="-"],
+[data-task="<"],
+[data-task=l],
+[data-task="*"],
+[data-task=I],
+[data-task=p],
+[data-task=f],
+[data-task=k],
+[data-task=u],
+[data-task=w],
+[data-task=c],
+[data-task=d],
+[data-task=b]):checked {
   border-color: transparent;
   background-color: rgb(var(--ctp-green));
   box-shadow: 0 0 0 1px rgb(var(--ctp-green), 40%);
 }
-.theme-dark:not(.css-settings-manager) input[type=checkbox]:checked:hover,
-.theme-light:not(.css-settings-manager) input[type=checkbox]:checked:hover,
-.ctp-full-palette input[type=checkbox]:checked:hover {
-  background-color: rgb(var(--ctp-maroon));
-  box-shadow: 0 0 0 1px rgb(var(--ctp-maroon), 40%);
+.theme-dark:not(.css-settings-manager) input[type=checkbox]:not([data-task=">"],
+[data-task="!"],
+[data-task="-"],
+[data-task="<"],
+[data-task=l],
+[data-task="*"],
+[data-task=I],
+[data-task=p],
+[data-task=f],
+[data-task=k],
+[data-task=u],
+[data-task=w],
+[data-task=c],
+[data-task=d],
+[data-task=b]):checked:hover,
+.theme-light:not(.css-settings-manager) input[type=checkbox]:not([data-task=">"],
+[data-task="!"],
+[data-task="-"],
+[data-task="<"],
+[data-task=l],
+[data-task="*"],
+[data-task=I],
+[data-task=p],
+[data-task=f],
+[data-task=k],
+[data-task=u],
+[data-task=w],
+[data-task=c],
+[data-task=d],
+[data-task=b]):checked:hover,
+.ctp-full-palette input[type=checkbox]:not([data-task=">"],
+[data-task="!"],
+[data-task="-"],
+[data-task="<"],
+[data-task=l],
+[data-task="*"],
+[data-task=I],
+[data-task=p],
+[data-task=f],
+[data-task=k],
+[data-task=u],
+[data-task=w],
+[data-task=c],
+[data-task=d],
+[data-task=b]):checked:hover {
+  background-color: rgb(var(--ctp-accent));
+  box-shadow: 0 0 0 1px rgb(var(--ctp-accent), 40%);
 }
 .theme-dark:not(.css-settings-manager) .horizontal-tab-nav-item:hover,
 .theme-dark:not(.css-settings-manager) .vertical-tab-nav-item:hover,
@@ -3160,6 +3512,16 @@ button.mod-cta:hover {
   background-color: rgb(var(--ctp-rosewater), 60%);
 }
 
+.omnisearch-result:not(.is-selected) .omnisearch-highlight.omnisearch-default-highlight {
+  background-color: rgb(var(--ctp-rosewater), 100%);
+}
+
+.omnisearch-result.is-selected .omnisearch-result__folder-path > span,
+.omnisearch-result.is-selected .omnisearch-result__extension,
+.omnisearch-result.is-selected .omnisearch-result__counter {
+  color: var(--text-faint);
+}
+
 /*
 * MAKE.md
 */
@@ -3292,6 +3654,358 @@ body:not(.is-grabbing .ctp-full-palette) .mk-sidebar {
   --nav-item-background-selected: rgb(var(--ctp-accent), 90%);
   --nav-item-color-active: var(--text-on-accent);
   --nav-item-color-selected: var(--text-on-accent);
+}
+
+/**
+* 1.  Folder Notes, issue #67
+*/
+body:not(.disable-folder-highlight) .tree-item-self.fn-is-active,
+body.ctp-full-palette:not(.disable-folder-highlight) .tree-item-self.fn-is-active {
+  --nav-item-background-active: rgb(var(--ctp-mauve));
+  --nav-item-background-selected: rgb(var(--ctp-mauve));
+  --nav-item-color-active: var(--text-on-accent);
+  --nav-item-color-selected: var(--text-on-accent);
+}
+
+body:not(.disable-folder-highlight) .tree-item-self.fn-is-active {
+  --nav-item-background-active: rgb(var(--ctp-accent));
+  --nav-item-background-selected: rgb(var(--ctp-accent));
+  --nav-item-color-active: var(--text-on-accent);
+  --nav-item-color-selected: var(--text-on-accent);
+}
+
+body:not(.is-grabbing) .tree-item-self.fn-is-active:hover {
+  --nav-item-background-active: rgb(var(--ctp-accent), 90%);
+  --nav-item-background-selected: rgb(var(--ctp-accent), 90%);
+  --nav-item-color-active: var(--text-on-accent);
+  --nav-item-color-selected: var(--text-on-accent);
+}
+
+/**
+* 1. Highlight active date in Calendar Plugin
+*/
+.active.svelte-q3wqg9, .day.svelte-q3wqg9:active,
+.active.today.svelte-q3wqg9 {
+  background-color: rgb(var(--ctp-green)) !important;
+  color: var(--text-on-accent) !important;
+}
+
+.today.svelte-q3wqg9 {
+  background-color: rgb(var(--ctp-accent)) !important;
+  color: var(--text-on-accent) !important;
+}
+
+/**
+* 1. Dataview
+* 2. Fix for #117
+*/
+.dataview.inline-field-standalone-value {
+  --nav-item-color-selected: var(--text-normal);
+  background-color: var(--background-primary);
+  font-size: var(--font-smaller);
+}
+
+/*
+* 1. Fix for #120
+* 2. Colors left side of dataview info
+* 3. Colors right side of dataview info
+*/
+.dataview.inline-field-key {
+  --nav-item-color-selected: var(--text-normal);
+  font-size: var(--font-smaller);
+}
+
+.dataview.inline-field-value {
+  --nav-item-color-selected: var(--text-normal);
+  font-size: var(--font-smaller);
+}
+
+/**
+* 1. Checklist icons implemented for #91. This scss is from Kepano's Minimal Theme under its MIT License. Thanks Kepano!
+*/
+.cm-formatting.cm-formatting-task.cm-property {
+  font-family: var(--font-monospace);
+}
+
+input[data-task=">"]:checked,
+input[data-task="!"]:checked,
+input[data-task="-"]:checked,
+input[data-task="<"]:checked,
+input[data-task=l]:checked,
+input[data-task="*"]:checked,
+input[data-task=I]:checked,
+input[data-task=p]:checked,
+input[data-task=f]:checked,
+input[data-task=k]:checked,
+input[data-task=u]:checked,
+input[data-task=w]:checked,
+input[data-task=c]:checked,
+input[data-task=d]:checked,
+input[data-task=b]:checked,
+li[data-task=">"] > input:checked,
+li[data-task="!"] > input:checked,
+li[data-task="-"] > input:checked,
+li[data-task="<"] > input:checked,
+li[data-task=l] > input:checked,
+li[data-task="*"] > input:checked,
+li[data-task=I] > input:checked,
+li[data-task=p] > input:checked,
+li[data-task=f] > input:checked,
+li[data-task=k] > input:checked,
+li[data-task=u] > input:checked,
+li[data-task=d] > input:checked,
+li[data-task=w] > input:checked,
+li[data-task=c] > input:checked,
+li[data-task=b] > input:checked,
+li[data-task=">"] > p > input:checked,
+li[data-task="!"] > p > input:checked,
+li[data-task="-"] > p > input:checked,
+li[data-task="<"] > p > input:checked,
+li[data-task=l] > p > input:checked,
+li[data-task="*"] > p > input:checked,
+li[data-task=I] > p > input:checked,
+li[data-task=p] > p > input:checked,
+li[data-task=f] > p > input:checked,
+li[data-task=k] > p > input:checked,
+li[data-task=u] > p > input:checked,
+li[data-task=d] > p > input:checked,
+li[data-task=w] > p > input:checked,
+li[data-task=c] > p > input:checked,
+li[data-task=b] > p > input:checked {
+  --checkbox-marker-color: transparent;
+  border: none;
+  border-radius: 0;
+  background-image: none;
+  background-color: currentColor;
+  -webkit-mask-size: var(--checkbox-icon);
+  -webkit-mask-position: 50% 50%;
+}
+
+/* [>] Forwarded */
+input[data-task=">"]:checked,
+li[data-task=">"] > input:checked,
+li[data-task=">"] > p > input:checked {
+  color: var(--text-faint);
+  transform: rotate(90deg);
+  -webkit-mask-position: 50% 100%;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath d='M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z' /%3E%3C/svg%3E");
+}
+
+/* [<] Schedule */
+input[data-task="<"]:checked,
+li[data-task="<"] > input:checked,
+li[data-task="<"] > p > input:checked {
+  color: var(--text-faint);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z' clip-rule='evenodd' /%3E%3C/svg%3E");
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* [?] Question */
+input[data-task="?"]:checked,
+li[data-task="?"] > input:checked,
+li[data-task="?"] > p > input:checked {
+  --checkbox-marker-color: transparent;
+  background-color: var(--color-yellow);
+  border-color: var(--color-yellow);
+  background-position: 50% 50%;
+  background-size: 200% 90%;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"%3E%3Cpath fill="white" fill-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215c0 1.344-.665 2.288-1.79 2.973c-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712c1.03-.632 1.397-1.135 1.397-2.028c0-.979-.758-1.698-1.926-1.698c-1.009 0-1.71.529-1.938 1.402c-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09c0-.618-.473-1.092-1.095-1.092c-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14Z"%2F%3E%3C%2Fsvg%3E');
+}
+.theme-dark input[data-task="?"]:checked,
+.theme-dark li[data-task="?"] > input:checked,
+.theme-dark li[data-task="?"] > p > input:checked {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"%3E%3Cpath fill="black" fill-opacity="0.8" fill-rule="evenodd" d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215c0 1.344-.665 2.288-1.79 2.973c-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712c1.03-.632 1.397-1.135 1.397-2.028c0-.979-.758-1.698-1.926-1.698c-1.009 0-1.71.529-1.938 1.402c-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09c0-.618-.473-1.092-1.095-1.092c-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14Z"%2F%3E%3C%2Fsvg%3E');
+}
+
+/* [/] Incomplete */
+input[data-task="/"]:checked,
+li[data-task="/"] > input:checked,
+li[data-task="/"] > p > input:checked {
+  background-image: none;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+input[data-task="/"]:checked:after,
+li[data-task="/"] > input:checked:after,
+li[data-task="/"] > p > input:checked:after {
+  top: 0;
+  left: 0;
+  content: " ";
+  display: block;
+  position: absolute;
+  background-color: var(--background-modifier-accent);
+  width: calc(50% - 0.5px);
+  height: 100%;
+  -webkit-mask-image: none;
+}
+
+/* [!] Important */
+input[data-task="!"]:checked,
+li[data-task="!"] > input:checked,
+li[data-task="!"] > p > input:checked {
+  color: var(--color-orange);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* ["] Quote */
+input[data-task=“]:checked,
+li[data-task=“] > input:checked,
+li[data-task=“] > p > input:checked,
+input[data-task='"']:checked,
+li[data-task='"'] > input:checked,
+li[data-task='"'] > p > input:checked {
+  --checkbox-marker-color: transparent;
+  background-position: 50% 50%;
+  background-color: var(--color-cyan);
+  border-color: var(--color-cyan);
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"%3E%3Cpath fill="white" d="M6.5 10c-.223 0-.437.034-.65.065c.069-.232.14-.468.254-.68c.114-.308.292-.575.469-.844c.148-.291.409-.488.601-.737c.201-.242.475-.403.692-.604c.213-.21.492-.315.714-.463c.232-.133.434-.28.65-.35l.539-.222l.474-.197l-.485-1.938l-.597.144c-.191.048-.424.104-.689.171c-.271.05-.56.187-.882.312c-.318.142-.686.238-1.028.466c-.344.218-.741.4-1.091.692c-.339.301-.748.562-1.05.945c-.33.358-.656.734-.909 1.162c-.293.408-.492.856-.702 1.299c-.19.443-.343.896-.468 1.336c-.237.882-.343 1.72-.384 2.437c-.034.718-.014 1.315.028 1.747c.015.204.043.402.063.539l.025.168l.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065c.069-.232.14-.468.254-.68c.114-.308.292-.575.469-.844c.148-.291.409-.488.601-.737c.201-.242.475-.403.692-.604c.213-.21.492-.315.714-.463c.232-.133.434-.28.65-.35l.539-.222l.474-.197l-.485-1.938l-.597.144c-.191.048-.424.104-.689.171c-.271.05-.56.187-.882.312c-.317.143-.686.238-1.028.467c-.344.218-.741.4-1.091.692c-.339.301-.748.562-1.05.944c-.33.358-.656.734-.909 1.162c-.293.408-.492.856-.702 1.299c-.19.443-.343.896-.468 1.336c-.237.882-.343 1.72-.384 2.437c-.034.718-.014 1.315.028 1.747c.015.204.043.402.063.539l.025.168l.026-.006A4.5 4.5 0 1 0 17.5 10z"%2F%3E%3C%2Fsvg%3E');
+}
+.theme-dark input[data-task=“]:checked,
+.theme-dark li[data-task=“] > input:checked,
+.theme-dark li[data-task=“] > p > input:checked,
+.theme-dark input[data-task='"']:checked,
+.theme-dark li[data-task='"'] > input:checked,
+.theme-dark li[data-task='"'] > p > input:checked {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"%3E%3Cpath fill="black" fill-opacity="0.7" d="M6.5 10c-.223 0-.437.034-.65.065c.069-.232.14-.468.254-.68c.114-.308.292-.575.469-.844c.148-.291.409-.488.601-.737c.201-.242.475-.403.692-.604c.213-.21.492-.315.714-.463c.232-.133.434-.28.65-.35l.539-.222l.474-.197l-.485-1.938l-.597.144c-.191.048-.424.104-.689.171c-.271.05-.56.187-.882.312c-.318.142-.686.238-1.028.466c-.344.218-.741.4-1.091.692c-.339.301-.748.562-1.05.945c-.33.358-.656.734-.909 1.162c-.293.408-.492.856-.702 1.299c-.19.443-.343.896-.468 1.336c-.237.882-.343 1.72-.384 2.437c-.034.718-.014 1.315.028 1.747c.015.204.043.402.063.539l.025.168l.026-.006A4.5 4.5 0 1 0 6.5 10zm11 0c-.223 0-.437.034-.65.065c.069-.232.14-.468.254-.68c.114-.308.292-.575.469-.844c.148-.291.409-.488.601-.737c.201-.242.475-.403.692-.604c.213-.21.492-.315.714-.463c.232-.133.434-.28.65-.35l.539-.222l.474-.197l-.485-1.938l-.597.144c-.191.048-.424.104-.689.171c-.271.05-.56.187-.882.312c-.317.143-.686.238-1.028.467c-.344.218-.741.4-1.091.692c-.339.301-.748.562-1.05.944c-.33.358-.656.734-.909 1.162c-.293.408-.492.856-.702 1.299c-.19.443-.343.896-.468 1.336c-.237.882-.343 1.72-.384 2.437c-.034.718-.014 1.315.028 1.747c.015.204.043.402.063.539l.025.168l.026-.006A4.5 4.5 0 1 0 17.5 10z"%2F%3E%3C%2Fsvg%3E');
+}
+
+/* [-] Canceled */
+input[data-task="-"]:checked,
+li[data-task="-"] > input:checked,
+li[data-task="-"] > p > input:checked {
+  color: var(--text-faint);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+body:not(.tasks) .markdown-source-view.mod-cm6 .HyperMD-task-line[data-task]:is([data-task="-"]),
+body:not(.tasks) .markdown-preview-view ul li[data-task="-"].task-list-item.is-checked,
+body:not(.tasks) li[data-task="-"].task-list-item.is-checked {
+  color: var(--text-faint);
+  text-decoration: line-through solid var(--text-faint) 1px;
+}
+
+/* [*] Star */
+input[data-task="*"]:checked,
+li[data-task="*"] > input:checked,
+li[data-task="*"] > p > input:checked {
+  color: var(--color-yellow);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath d='M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z' /%3E%3C/svg%3E");
+}
+
+/* [l] Location */
+input[data-task=l]:checked,
+li[data-task=l] > input:checked,
+li[data-task=l] > p > input:checked {
+  color: var(--color-red);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* [i] Info */
+input[data-task=i]:checked,
+li[data-task=i] > input:checked,
+li[data-task=i] > p > input:checked {
+  --checkbox-marker-color: transparent;
+  background-color: var(--color-blue);
+  border-color: var(--color-blue);
+  background-position: 50%;
+  background-size: 100%;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"%3E%3Cpath fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="40" d="M196 220h64v172"%2F%3E%3Cpath fill="none" stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="40" d="M187 396h138"%2F%3E%3Cpath fill="white" d="M256 160a32 32 0 1 1 32-32a32 32 0 0 1-32 32Z"%2F%3E%3C%2Fsvg%3E');
+}
+.theme-dark input[data-task=i]:checked,
+.theme-dark li[data-task=i] > input:checked,
+.theme-dark li[data-task=i] > p > input:checked {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"%3E%3Cpath fill="none" stroke="black" stroke-opacity="0.8" stroke-linecap="round" stroke-linejoin="round" stroke-width="40" d="M196 220h64v172"%2F%3E%3Cpath fill="none" stroke="black" stroke-opacity="0.8" stroke-linecap="round" stroke-miterlimit="10" stroke-width="40" d="M187 396h138"%2F%3E%3Cpath fill="black" fill-opacity="0.8" d="M256 160a32 32 0 1 1 32-32a32 32 0 0 1-32 32Z"%2F%3E%3C%2Fsvg%3E');
+}
+
+/* [S] Amount/savings/money */
+input[data-task=S]:checked,
+li[data-task=S] > input:checked,
+li[data-task=S] > p > input:checked {
+  --checkbox-marker-color: transparent;
+  border-color: var(--color-green);
+  background-color: var(--color-green);
+  background-size: 100%;
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 48 48"%3E%3Cpath fill="white" fill-rule="evenodd" d="M26 8a2 2 0 1 0-4 0v2a8 8 0 1 0 0 16v8a4.002 4.002 0 0 1-3.773-2.666a2 2 0 0 0-3.771 1.332A8.003 8.003 0 0 0 22 38v2a2 2 0 1 0 4 0v-2a8 8 0 1 0 0-16v-8a4.002 4.002 0 0 1 3.773 2.666a2 2 0 0 0 3.771-1.332A8.003 8.003 0 0 0 26 10V8Zm-4 6a4 4 0 0 0 0 8v-8Zm4 12v8a4 4 0 0 0 0-8Z" clip-rule="evenodd"%2F%3E%3C%2Fsvg%3E');
+}
+.theme-dark input[data-task=S]:checked,
+.theme-dark li[data-task=S] > input:checked,
+.theme-dark li[data-task=S] > p > input:checked {
+  background-image: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="20" height="20" preserveAspectRatio="xMidYMid meet" viewBox="0 0 48 48"%3E%3Cpath fill-opacity="0.8" fill="black" fill-rule="evenodd" d="M26 8a2 2 0 1 0-4 0v2a8 8 0 1 0 0 16v8a4.002 4.002 0 0 1-3.773-2.666a2 2 0 0 0-3.771 1.332A8.003 8.003 0 0 0 22 38v2a2 2 0 1 0 4 0v-2a8 8 0 1 0 0-16v-8a4.002 4.002 0 0 1 3.773 2.666a2 2 0 0 0 3.771-1.332A8.003 8.003 0 0 0 26 10V8Zm-4 6a4 4 0 0 0 0 8v-8Zm4 12v8a4 4 0 0 0 0-8Z" clip-rule="evenodd"%2F%3E%3C%2Fsvg%3E');
+}
+
+/* [I] Idea/lightbulb */
+input[data-task=I]:checked,
+li[data-task=I] > input:checked,
+li[data-task=I] > p > input:checked {
+  color: var(--color-yellow);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath d='M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z' /%3E%3C/svg%3E");
+}
+
+/* [f] Fire */
+input[data-task=f]:checked,
+li[data-task=f] > input:checked,
+li[data-task=f] > p > input:checked {
+  color: var(--color-red);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-4 1.25-4.5.5 1 .786 1.293 1.371 1.879A2.99 2.99 0 0113 13a2.99 2.99 0 01-.879 2.121z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* [k] Key */
+input[data-task=k]:checked,
+li[data-task=k] > input:checked,
+li[data-task=k] > p > input:checked {
+  color: var(--color-yellow);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* [u] Up */
+input[data-task=u]:checked,
+li[data-task=u] > input:checked,
+li[data-task=u] > p > input:checked {
+  color: var(--color-green);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* [d] Down */
+input[data-task=d]:checked,
+li[data-task=d] > input:checked,
+li[data-task=d] > p > input:checked {
+  color: var(--color-red);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M12 13a1 1 0 100 2h5a1 1 0 001-1V9a1 1 0 10-2 0v2.586l-4.293-4.293a1 1 0 00-1.414 0L8 9.586 3.707 5.293a1 1 0 00-1.414 1.414l5 5a1 1 0 001.414 0L11 9.414 14.586 13H12z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* [w] Win */
+input[data-task=w]:checked,
+li[data-task=w] > input:checked,
+li[data-task=w] > p > input:checked {
+  color: var(--color-purple);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M6 3a1 1 0 011-1h.01a1 1 0 010 2H7a1 1 0 01-1-1zm2 3a1 1 0 00-2 0v1a2 2 0 00-2 2v1a2 2 0 00-2 2v.683a3.7 3.7 0 011.055.485 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0 3.704 3.704 0 014.11 0 1.704 1.704 0 001.89 0A3.7 3.7 0 0118 12.683V12a2 2 0 00-2-2V9a2 2 0 00-2-2V6a1 1 0 10-2 0v1h-1V6a1 1 0 10-2 0v1H8V6zm10 8.868a3.704 3.704 0 01-4.055-.036 1.704 1.704 0 00-1.89 0 3.704 3.704 0 01-4.11 0 1.704 1.704 0 00-1.89 0A3.704 3.704 0 012 14.868V17a1 1 0 001 1h14a1 1 0 001-1v-2.132zM9 3a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1zm3 0a1 1 0 011-1h.01a1 1 0 110 2H13a1 1 0 01-1-1z' clip-rule='evenodd' /%3E%3C/svg%3E");
+}
+
+/* [p] Pros */
+input[data-task=p]:checked,
+li[data-task=p] > input:checked,
+li[data-task=p] > p > input:checked {
+  color: var(--color-green);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath d='M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z' /%3E%3C/svg%3E");
+}
+
+/* [c] Cons */
+input[data-task=c]:checked,
+li[data-task=c] > input:checked,
+li[data-task=c] > p > input:checked {
+  color: var(--color-orange);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath d='M18 9.5a1.5 1.5 0 11-3 0v-6a1.5 1.5 0 013 0v6zM14 9.667v-5.43a2 2 0 00-1.105-1.79l-.05-.025A4 4 0 0011.055 2H5.64a2 2 0 00-1.962 1.608l-1.2 6A2 2 0 004.44 12H8v4a2 2 0 002 2 1 1 0 001-1v-.667a4 4 0 01.8-2.4l1.4-1.866a4 4 0 00.8-2.4z' /%3E%3C/svg%3E");
+}
+
+/* [b] Bookmark */
+input[data-task=b]:checked,
+li[data-task=b] > input:checked,
+li[data-task=b] > p > input:checked {
+  color: var(--color-orange);
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='h-5 w-5' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath d='M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z' /%3E%3C/svg%3E");
 }
 
 /*
