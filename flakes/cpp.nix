@@ -1,8 +1,8 @@
 {
-  description = "Dev Shells for general use cases";
+  description = "CPP";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs#nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -15,17 +15,12 @@
         };
       in {
         devShells = {
-          typst = pkgs.mkShell {
+          default = pkgs.mkShell {
             buildInputs = with pkgs; [
-              typst
-              tinymist
+                clang-tools
             ];
 
           };
-          cpp = {};
-          python = {};
-          ts = {};
-          rust = {};
         };
       });
 }
