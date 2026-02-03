@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
-      "LiCode",
-      "📈",
-      "🧰",
-      "LiImages",
-      "LiArchive"
+      "👨‍💻",
+      "🧑‍🎨",
+      "🏦",
+      "🏗",
+      "📬"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -37,8 +37,11 @@
   "zettelkasten": "🗃",
   "area": "🗂",
   "daily-notes": "📔",
-  "archive": "LiArchive",
-  "assets": "LiImages",
+  "archive": "🏦",
+  "assets": "🖼",
   "resources": "🧰",
-  "script": "LiCode"
+  "script": "👨‍💻",
+  "fleet": "📬",
+  "templates": "🏗",
+  "excalidraw-drawing": "🧑‍🎨"
 }
