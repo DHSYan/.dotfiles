@@ -12,6 +12,7 @@ fi
 
 # [[ Aliases ]]
 alias v="nvim"
+alias y="yazi"
 alias ts="tmux-sessionizer"
 alias ta="tmux a"
 alias cf="source fuzzy_cd"
