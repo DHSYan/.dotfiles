@@ -37,5 +37,7 @@
   "various-complements",
   "obsidian-map-view",
   "obsidian-timestamper",
-  "better-search-views"
+  "better-search-views",
+  "obsidian-linter",
+  "safe-filename-linter"
 ]

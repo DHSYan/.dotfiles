@@ -42,7 +42,7 @@
   "syntaxHighlight": true,
   "copyButton": true,
   "version": "10.3.2",
-  "autoCollapse": true,
+  "autoCollapse": false,
   "defaultCollapseType": "closed",
   "injectColor": true,
   "parseTitles": true,

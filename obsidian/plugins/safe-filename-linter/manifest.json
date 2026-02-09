@@ -1,0 +1,10 @@
+{
+	"id": "safe-filename-linter",
+	"name": "Safe Filename Linter",
+	"version": "1.1.4",
+	"minAppVersion": "0.15.0",
+	"description": "Lints filenames for invalid or troublesome characters",
+	"author": "sneaky-foxes",
+	"authorUrl": "https://github.com/sneaky-foxes",
+	"isDesktopOnly": false
+}

@@ -1,0 +1,11 @@
+{
+  "squareBrackets": "hyphen",
+  "numberSign": "hyphen",
+  "caret": "hyphen",
+  "pipe": "hyphen",
+  "colon": "hyphen",
+  "asterisk": "hyphen",
+  "questionMark": "hyphen",
+  "doubleQuote": "hyphen",
+  "angleBrackets": "hyphen"
+}
